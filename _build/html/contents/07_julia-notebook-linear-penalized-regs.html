@@ -1,0 +1,668 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Penalized Linear Regressions: A Simulation Experiment &#8212; My sample book</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">My sample book</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome to your Jupyter Book
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="01_Julia_Notebook_Linear_Model_Overfitting.html">
+   Simple Exercise on Overfitting
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/contents/07_julia-notebook-linear-penalized-regs.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fcontents/07_julia-notebook-linear-penalized-regs.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/contents/07_julia-notebook-linear-penalized-regs.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-generating-process-approximately-sparse">
+   Data Generating Process: Approximately Sparse
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Penalized Linear Regressions: A Simulation Experiment</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-generating-process-approximately-sparse">
+   Data Generating Process: Approximately Sparse
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <ul class="simple">
+<li><p>Julia code replication of:
+” <a class="reference external" href="https://www.kaggle.com/victorchernozhukov/r-notebook-linear-penalized-regs">https://www.kaggle.com/victorchernozhukov/r-notebook-linear-penalized-regs</a> “</p></li>
+</ul>
+<p>This notebook contains an example for teaching.</p>
+<section class="tex2jax_ignore mathjax_ignore" id="penalized-linear-regressions-a-simulation-experiment">
+<h1>Penalized Linear Regressions: A Simulation Experiment<a class="headerlink" href="#penalized-linear-regressions-a-simulation-experiment" title="Permalink to this headline">#</a></h1>
+<section id="data-generating-process-approximately-sparse">
+<h2>Data Generating Process: Approximately Sparse<a class="headerlink" href="#data-generating-process-approximately-sparse" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># #Needed Packages and extra just in case</span>
+<span class="c"># Pkg.add( &quot;GLMNet&quot; )</span>
+<span class="c"># Pkg.add(&quot;Plots&quot;)</span>
+<span class="c"># Pkg.add(&quot;Lathe&quot;)</span>
+<span class="c"># Pkg.add(&quot;GLM&quot;)</span>
+<span class="c"># Pkg.add(&quot;StatsPlots&quot;)</span>
+<span class="c"># Pkg.add(&quot;MLBase&quot;)</span>
+<span class="c"># Pkg.add(&quot;CSV&quot;)</span>
+<span class="c"># Pkg.add(&quot;DataFrames&quot;)</span>
+<span class="c"># Pkg.add(&quot;Dates&quot;)</span>
+<span class="c"># Pkg.add(&quot;Plots&quot;)</span>
+<span class="c"># Pkg.add(&quot;Lasso&quot;)</span>
+<span class="c"># Pkg.add( &quot;Distributions&quot; )</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">Pkg</span>
+<span class="k">using</span> <span class="n">CSV</span>
+<span class="k">using</span> <span class="n">DataFrames</span>
+<span class="k">using</span> <span class="n">Dates</span>
+<span class="k">using</span> <span class="n">Plots</span>
+
+<span class="c"># Load the installed packages</span>
+<span class="k">using</span> <span class="n">DataFrames</span>
+<span class="k">using</span> <span class="n">CSV</span>
+<span class="k">using</span> <span class="n">Plots</span>
+<span class="k">using</span> <span class="n">Lathe</span>
+<span class="k">using</span> <span class="n">GLM</span>
+<span class="k">using</span> <span class="n">Statistics</span>
+<span class="k">using</span> <span class="n">StatsPlots</span>
+<span class="k">using</span> <span class="n">MLBase</span>
+
+<span class="k">using</span> <span class="n">Lasso</span>
+
+<span class="c"># Import functions</span>
+<span class="k">using</span> <span class="n">LinearAlgebra</span><span class="p">,</span> <span class="n">GLM</span><span class="p">,</span> <span class="n">DataFrames</span><span class="p">,</span> <span class="n">Statistics</span><span class="p">,</span> <span class="n">Random</span>
+
+<span class="k">using</span> <span class="n">Distributions</span>
+
+<span class="k">using</span> <span class="n">GLMNet</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>┌ Info: Precompiling Plots [91a5bcdd-55d7-5caf-9e0b-520d859cae80]
+└ @ Base loading.jl:1423
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Random</span><span class="o">.</span><span class="n">seed!</span><span class="p">(</span><span class="mi">1234</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>TaskLocalRNG()
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">p</span> <span class="o">=</span> <span class="mi">400</span>
+<span class="n">Z</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span> <span class="n">Uniform</span><span class="p">(</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span> <span class="p">),</span> <span class="n">n</span>  <span class="p">)</span> <span class="o">.-</span> <span class="mf">0.5</span>
+<span class="n">W</span> <span class="o">=</span> <span class="n">reshape</span><span class="p">(</span> <span class="n">rand</span><span class="p">(</span> <span class="n">Uniform</span><span class="p">(</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span> <span class="p">),</span> <span class="n">n</span> <span class="o">*</span> <span class="n">p</span>  <span class="p">),</span> <span class="n">n</span><span class="p">,</span> <span class="n">p</span> <span class="p">)</span>
+
+<span class="n">beta</span> <span class="o">=</span> <span class="p">(</span> <span class="mi">1</span> <span class="o">./</span> <span class="n">range</span><span class="p">(</span> <span class="mi">1</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">step</span> <span class="o">=</span> <span class="mi">1</span> <span class="p">)</span> <span class="p">)</span> <span class="o">.^</span> <span class="mi">2</span>
+
+<span class="n">gX</span> <span class="o">=</span> <span class="n">exp</span><span class="o">.</span><span class="p">(</span> <span class="n">Z</span> <span class="o">.*</span> <span class="mi">4</span>  <span class="p">)</span> <span class="o">+</span> <span class="n">W</span> <span class="o">*</span> <span class="n">beta</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">hcat</span><span class="p">(</span> <span class="n">Z</span><span class="p">,</span> <span class="n">Z</span> <span class="o">.^</span> <span class="mi">2</span><span class="p">,</span> <span class="n">Z</span> <span class="o">.^</span> <span class="mi">3</span><span class="p">,</span> <span class="n">W</span> <span class="p">)</span>
+
+<span class="n">mean</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">sd</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="n">Y</span> <span class="o">=</span> <span class="n">gX</span> <span class="o">+</span> <span class="n">randn</span><span class="p">(</span> <span class="n">n</span> <span class="p">)</span>
+
+<span class="n">print</span><span class="p">(</span> <span class="s">&quot;theoretical R2:&quot;</span><span class="p">,</span> <span class="n">var</span><span class="p">(</span><span class="n">gX</span><span class="p">)</span> <span class="o">/</span> <span class="n">var</span><span class="p">(</span> <span class="n">Y</span> <span class="p">)</span> <span class="p">)</span>
+
+<span class="n">plt</span> <span class="o">=</span> <span class="n">plot</span><span class="p">(</span> <span class="n">gX</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> 
+    <span class="n">seriestype</span> <span class="o">=</span> <span class="ss">:scatter</span><span class="p">,</span> 
+    <span class="n">title</span> <span class="o">=</span> <span class="s">&quot;Y vs g(X)&quot;</span><span class="p">,</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">,</span> 
+    <span class="n">lw</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">xlabel!</span><span class="p">(</span> <span class="s">&quot;g(X)&quot;</span> <span class="p">)</span>
+<span class="n">ylabel!</span><span class="p">(</span> <span class="s">&quot;Y&quot;</span> <span class="p">)</span>
+<span class="n">display</span><span class="p">(</span> <span class="n">plt</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/07_julia-notebook-linear-penalized-regs_7_0.svg" src="../_images/07_julia-notebook-linear-penalized-regs_7_0.svg" /><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>theoretical R2:0.9116449856603569
+</pre></div>
+</div>
+</div>
+</div>
+<p>We use package Glmnet to carry out predictions using cross-validated lasso, ridge, and elastic net</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">fit_lasso_cv</span> <span class="o">=</span> <span class="n">glmnetcv</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">fit_ridge</span>   <span class="o">=</span> <span class="n">glmnetcv</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">fit_elnet</span>   <span class="o">=</span> <span class="n">glmnetcv</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">)</span>
+
+<span class="n">yhat_lasso_cv</span> <span class="o">=</span> <span class="n">GLMNet</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span> <span class="n">fit_lasso_cv</span><span class="p">,</span> <span class="n">X</span> <span class="p">)</span>
+<span class="n">yhat_ridge</span> <span class="o">=</span> <span class="n">GLMNet</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span> <span class="n">fit_ridge</span><span class="p">,</span> <span class="n">X</span> <span class="p">)</span>
+<span class="n">yhat_elnet</span> <span class="o">=</span> <span class="n">GLMNet</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span> <span class="n">fit_elnet</span><span class="p">,</span> <span class="n">X</span> <span class="p">)</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">(</span> <span class="n">lasso_cv</span> <span class="o">=</span> <span class="p">(</span> <span class="n">gX</span> <span class="o">-</span> <span class="n">yhat_lasso_cv</span> <span class="p">)</span> <span class="o">.^</span> <span class="mi">2</span><span class="p">,</span> 
+                  <span class="n">ridge</span> <span class="o">=</span> <span class="p">(</span> <span class="n">gX</span> <span class="o">-</span> <span class="n">yhat_ridge</span> <span class="p">)</span> <span class="o">.^</span> <span class="mi">2</span><span class="p">,</span> 
+                <span class="n">elnet</span> <span class="o">=</span> <span class="p">(</span> <span class="n">gX</span> <span class="o">-</span> <span class="n">yhat_elnet</span> <span class="p">)</span> <span class="o">.^</span> <span class="mi">2</span> <span class="p">)</span>
+
+<span class="n">lasso_mse_fit</span> <span class="o">=</span> <span class="n">fit</span><span class="p">(</span> <span class="n">LinearModel</span><span class="p">,</span> <span class="nd">@formula</span><span class="p">(</span> <span class="n">lasso_cv</span> <span class="o">~</span> <span class="mi">1</span> <span class="p">),</span> <span class="n">data</span> <span class="p">)</span>
+<span class="n">ridge_mse_fit</span> <span class="o">=</span> <span class="n">fit</span><span class="p">(</span> <span class="n">LinearModel</span><span class="p">,</span> <span class="nd">@formula</span><span class="p">(</span> <span class="n">ridge</span> <span class="o">~</span> <span class="mi">1</span> <span class="p">),</span> <span class="n">data</span> <span class="p">)</span>
+<span class="n">elnet_mse_fit</span> <span class="o">=</span> <span class="n">fit</span><span class="p">(</span> <span class="n">LinearModel</span><span class="p">,</span> <span class="nd">@formula</span><span class="p">(</span> <span class="n">elnet</span> <span class="o">~</span> <span class="mi">1</span> <span class="p">),</span> <span class="n">data</span> <span class="p">)</span>
+
+<span class="n">MSE_lasso_cv</span>  <span class="o">=</span> <span class="p">[</span> <span class="n">GLM</span><span class="o">.</span><span class="n">coef</span><span class="p">(</span> <span class="n">lasso_mse_fit</span> <span class="p">)[</span> <span class="mi">1</span> <span class="p">],</span> <span class="n">stderror</span><span class="p">(</span> <span class="n">lasso_mse_fit</span> <span class="p">)[</span><span class="mi">1</span><span class="p">]</span> <span class="p">]</span>
+<span class="n">MSE_ridge</span>  <span class="o">=</span> <span class="p">[</span> <span class="n">GLM</span><span class="o">.</span><span class="n">coef</span><span class="p">(</span> <span class="n">ridge_mse_fit</span> <span class="p">)[</span> <span class="mi">1</span> <span class="p">],</span> <span class="n">stderror</span><span class="p">(</span> <span class="n">ridge_mse_fit</span> <span class="p">)[</span><span class="mi">1</span><span class="p">]</span> <span class="p">]</span>
+<span class="n">MSE_elnet</span>  <span class="o">=</span> <span class="p">[</span> <span class="n">GLM</span><span class="o">.</span><span class="n">coef</span><span class="p">(</span> <span class="n">elnet_mse_fit</span> <span class="p">)[</span> <span class="mi">1</span> <span class="p">],</span> <span class="n">stderror</span><span class="p">(</span> <span class="n">elnet_mse_fit</span> <span class="p">)[</span><span class="mi">1</span><span class="p">]</span> <span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here we compute the lasso and ols post lasso using plug-in choices for penalty levels, using package hdm</p>
+<p>Next we code up lava, which alternates the fitting of lasso and ridge</p>
+<p>There is no index in DataFrames in Julia. <a class="reference external" href="https://stackoverflow.com/questions/64689023/is-it-possible-to-set-a-chosen-column-as-index-in-a-julia-dataframe">Explanation here</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span> <span class="s">&quot;Latexify&quot;</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">   Resolving</span> package versions...
+<span class=" -Color -Color-Bold -Color-Bold-Green">    Updating</span> `C:\Users\Anzony\.julia\environments\v1.7\Project.toml`
+  [23fbe1c1] + Latexify v0.15.12
+<span class=" -Color -Color-Bold -Color-Bold-Green">  No Changes</span> to `C:\Users\Anzony\.julia\environments\v1.7\Manifest.toml`
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">Latexify</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span> <span class="kt">Float64</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span> <span class="p">)</span>
+<span class="n">table</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="o">:</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">MSE_lasso_cv</span>
+<span class="n">table</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="o">:</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">MSE_ridge</span>
+<span class="n">table</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="o">:</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">MSE_elnet</span>
+<span class="n">table</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="o">:</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">MSE_lasso</span>
+<span class="n">table</span><span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="o">:</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">MSE_lasso_post</span>
+<span class="n">table</span><span class="p">[</span><span class="mi">6</span><span class="p">,</span><span class="mi">1</span><span class="o">:</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">MSE_lava</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">(</span> <span class="n">hcat</span><span class="p">(</span> <span class="p">[</span> <span class="s">&quot;Cross-Validated Lasso&quot;</span><span class="p">,</span> 
+                        <span class="s">&quot;Cross-Validated ridge&quot;</span><span class="p">,</span> 
+                        <span class="s">&quot;Cross-Validated elnet&quot;</span><span class="p">,</span>
+                        <span class="s">&quot;Lasso&quot;</span><span class="p">,</span> 
+                        <span class="s">&quot;Post-Lasso&quot;</span><span class="p">,</span><span class="s">&quot;Lava&quot;</span> <span class="p">],</span> <span class="n">table</span> 
+                    <span class="p">)</span> <span class="p">,</span> 
+                <span class="p">[</span> <span class="s">&quot;Model&quot;</span><span class="p">,</span> <span class="s">&quot;MSA&quot;</span><span class="p">,</span> <span class="s">&quot;S.E. for MSA&quot;</span> <span class="p">]</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6×2 Matrix{Float64}:
+ 0.0  0.0
+ 0.0  0.0
+ 0.0  0.0
+ 0.0  0.0
+ 0.0  0.0
+ 0.0  0.0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Latexify</span><span class="o">.</span><span class="n">set_default</span><span class="p">(;</span> <span class="n">starred</span><span class="o">=</span><span class="nb">true</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>AssertionError: latexify does not support objects of type DataFrame.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">latexify</span><span class="p">(</span> <span class="n">df</span> <span class="p">,</span> <span class="n">env</span><span class="o">=</span> <span class="ss">:raw</span> <span class="p">)</span><span class="o">|&gt;</span> <span class="n">print</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">AssertionError</span>: latexify does not support objects of type DataFrame.
+
+<span class="ne">Stacktrace</span>:
+ <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">_latexraw</span><span class="p">(</span><span class="n">args</span><span class="p">::</span><span class="n">DataFrame</span><span class="p">;</span> <span class="n">kwargs</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">Pairs</span><span class="p">{</span><span class="n">Symbol</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">{</span><span class="n">Symbol</span><span class="p">,</span> <span class="n">Symbol</span><span class="p">},</span> <span class="n">NamedTuple</span><span class="p">{(:</span><span class="n">env</span><span class="p">,</span> <span class="p">:</span><span class="n">starred</span><span class="p">),</span> <span class="n">Tuple</span><span class="p">{</span><span class="n">Symbol</span><span class="p">,</span> <span class="n">Bool</span><span class="p">}}})</span>
+   <span class="o">@</span> <span class="n">Latexify</span> <span class="n">C</span><span class="p">:</span>\<span class="n">Users</span>\<span class="n">Anzony</span>\<span class="o">.</span><span class="n">julia</span>\<span class="n">packages</span>\<span class="n">Latexify</span>\<span class="n">v4lfi</span>\<span class="n">src</span>\<span class="n">latexraw</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">109</span>
+ <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">process_latexify</span><span class="p">(</span><span class="n">args</span><span class="p">::</span><span class="n">DataFrame</span><span class="p">;</span> <span class="n">kwargs</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">Pairs</span><span class="p">{</span><span class="n">Symbol</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">{</span><span class="n">Symbol</span><span class="p">,</span> <span class="n">Symbol</span><span class="p">},</span> <span class="n">NamedTuple</span><span class="p">{(:</span><span class="n">env</span><span class="p">,</span> <span class="p">:</span><span class="n">starred</span><span class="p">),</span> <span class="n">Tuple</span><span class="p">{</span><span class="n">Symbol</span><span class="p">,</span> <span class="n">Bool</span><span class="p">}}})</span>
+   <span class="o">@</span> <span class="n">Latexify</span> <span class="n">C</span><span class="p">:</span>\<span class="n">Users</span>\<span class="n">Anzony</span>\<span class="o">.</span><span class="n">julia</span>\<span class="n">packages</span>\<span class="n">Latexify</span>\<span class="n">v4lfi</span>\<span class="n">src</span>\<span class="n">latexify_function</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">25</span>
+ <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="n">latexify</span><span class="p">(</span><span class="n">args</span><span class="p">::</span><span class="n">DataFrame</span><span class="p">;</span> <span class="n">kwargs</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">Pairs</span><span class="p">{</span><span class="n">Symbol</span><span class="p">,</span> <span class="n">Symbol</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">{</span><span class="n">Symbol</span><span class="p">},</span> <span class="n">NamedTuple</span><span class="p">{(:</span><span class="n">env</span><span class="p">,),</span> <span class="n">Tuple</span><span class="p">{</span><span class="n">Symbol</span><span class="p">}}})</span>
+   <span class="o">@</span> <span class="n">Latexify</span> <span class="n">C</span><span class="p">:</span>\<span class="n">Users</span>\<span class="n">Anzony</span>\<span class="o">.</span><span class="n">julia</span>\<span class="n">packages</span>\<span class="n">Latexify</span>\<span class="n">v4lfi</span>\<span class="n">src</span>\<span class="n">latexify_function</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">3</span>
+ <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">268</span><span class="p">]:</span><span class="mi">1</span>
+ <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="nb">eval</span>
+   <span class="o">@</span> <span class="o">.</span>\<span class="n">boot</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">373</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="n">include_string</span><span class="p">(</span><span class="n">mapexpr</span><span class="p">::</span><span class="n">typeof</span><span class="p">(</span><span class="n">REPL</span><span class="o">.</span><span class="n">softscope</span><span class="p">),</span> <span class="n">mod</span><span class="p">::</span><span class="n">Module</span><span class="p">,</span> <span class="n">code</span><span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="n">filename</span><span class="p">::</span><span class="n">String</span><span class="p">)</span>
+   <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1196</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">DataFrame</span><span class="p">(</span><span class="n">grp</span><span class="o">=</span><span class="n">repeat</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">x</span><span class="o">=</span><span class="mi">6</span><span class="o">:-</span><span class="mi">1</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">4</span><span class="o">:</span><span class="mi">9</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="o">:</span><span class="mi">7</span><span class="p">;</span> <span class="nb">missing</span><span class="p">],</span> <span class="n">id</span><span class="o">=</span><span class="sc">&#39;a&#39;</span><span class="o">:</span><span class="sc">&#39;f&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div class="data-frame"><p>6 rows × 5 columns</p><table class="data-frame"><thead><tr><th></th><th>grp</th><th>x</th><th>y</th><th>z</th><th>id</th></tr><tr><th></th><th title="Int64">Int64</th><th title="Int64">Int64</th><th title="Int64">Int64</th><th title="Union{Missing, Int64}">Int64?</th><th title="Char">Char</th></tr></thead><tbody><tr><th>1</th><td>1</td><td>6</td><td>4</td><td>3</td><td>a</td></tr><tr><th>2</th><td>2</td><td>5</td><td>5</td><td>4</td><td>b</td></tr><tr><th>3</th><td>1</td><td>4</td><td>6</td><td>5</td><td>c</td></tr><tr><th>4</th><td>2</td><td>3</td><td>7</td><td>6</td><td>d</td></tr><tr><th>5</th><td>1</td><td>2</td><td>8</td><td>7</td><td>e</td></tr><tr><th>6</th><td>2</td><td>1</td><td>9</td><td><em>missing</em></td><td>f</td></tr></tbody></table></div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">methods</span><span class="p">(</span> <span class="n">df</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"># 0 methods:<ul></ul></div></div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "julia-1.7"
+        },
+        kernelOptions: {
+            kernelName: "julia-1.7",
+            path: "./contents"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'julia-1.7'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By The Jupyter Book Community<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

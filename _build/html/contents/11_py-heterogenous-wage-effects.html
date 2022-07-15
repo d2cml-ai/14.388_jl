@@ -1,0 +1,1576 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Application: Heterogeneous Effect of Gender on Wage Using Double Lasso &#8212; My sample book</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">My sample book</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome to your Jupyter Book
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="01_Julia_Notebook_Linear_Model_Overfitting.html">
+   Simple Exercise on Overfitting
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/contents/11_py-heterogenous-wage-effects.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fcontents/11_py-heterogenous-wage-effects.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/contents/11_py-heterogenous-wage-effects.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Application: Heterogeneous Effect of Gender on Wage Using Double Lasso
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hdm-package">
+   HDM package
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Application: Heterogeneous Effect of Gender on Wage Using Double Lasso</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Application: Heterogeneous Effect of Gender on Wage Using Double Lasso
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hdm-package">
+   HDM package
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="application-heterogeneous-effect-of-gender-on-wage-using-double-lasso">
+<h1>Application: Heterogeneous Effect of Gender on Wage Using Double Lasso<a class="headerlink" href="#application-heterogeneous-effect-of-gender-on-wage-using-double-lasso" title="Permalink to this headline">#</a></h1>
+<p>We use US census data from the year 2012 to analyse the effect of gender and interaction effects of other variables with gender on wage jointly. The dependent variable is the logarithm of the wage, the target variable is <em>female</em> (in combination with other variables). All other variables denote some other socio-economic characteristics, e.g. marital status, education, and experience.  For a detailed description of the variables we refer to the help page.</p>
+<p>This analysis allows a closer look how discrimination according to gender is related to other socio-economic variables.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">RData</span><span class="p">,</span> <span class="n">LinearAlgebra</span><span class="p">,</span> <span class="n">GLM</span><span class="p">,</span> <span class="n">DataFrames</span><span class="p">,</span> <span class="n">Statistics</span><span class="p">,</span> <span class="n">Random</span><span class="p">,</span> <span class="n">Distributions</span><span class="p">,</span> 
+<span class="n">DataStructures</span><span class="p">,</span> <span class="n">NamedArrays</span><span class="p">,</span> <span class="n">PrettyTables</span><span class="p">,</span> <span class="n">StatsModels</span><span class="p">,</span> <span class="n">Combinatorics</span><span class="p">,</span> <span class="n">Plots</span>
+
+<span class="k">import</span> <span class="n">CodecBzip2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>ArgumentError: Package DataStructures not found in current path:
+- Run `import Pkg; Pkg.add(&quot;DataStructures&quot;)` to install the DataStructures package.
+
+
+Stacktrace:
+ [1] require(into::Module, mod::Symbol)
+   @ Base .\loading.jl:967
+ [2] eval
+   @ .\boot.jl:373 [inlined]
+ [3] include_string(mapexpr::typeof(REPL.softscope), mod::Module, code::String, filename::String)
+   @ Base .\loading.jl:1196
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Importing .Rdata file</span>
+
+<span class="n">cps2012</span> <span class="o">=</span> <span class="n">load</span><span class="p">(</span><span class="s">&quot;../data/cps2012.RData&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dict{String, Any} with 1 entry:
+  &quot;data&quot; =&gt; <span class=" -Color -Color-Bold">29217×23 DataFrame</span>…
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">keys</span><span class="p">(</span><span class="n">cps2012</span><span class="p">)</span>   <span class="c"># get information from key</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>KeySet for a Dict{String, Any} with 1 entry. Keys:
+  &quot;data&quot;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">cps2012</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dict{String, Any} with 1 entry:
+  &quot;data&quot; =&gt; <span class=" -Color -Color-Bold">29217×23 DataFrame</span>…
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">cps2012</span> <span class="o">=</span> <span class="n">cps2012</span><span class="p">[</span><span class="s">&quot;data&quot;</span><span class="p">]</span>
+
+<span class="n">names</span><span class="p">(</span><span class="n">cps2012</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>23-element Vector{String}:
+ &quot;year&quot;
+ &quot;lnw&quot;
+ &quot;female&quot;
+ &quot;widowed&quot;
+ &quot;divorced&quot;
+ &quot;separated&quot;
+ &quot;nevermarried&quot;
+ &quot;hsd08&quot;
+ &quot;hsd911&quot;
+ &quot;hsg&quot;
+ &quot;cg&quot;
+ &quot;ad&quot;
+ &quot;mw&quot;
+ &quot;so&quot;
+ &quot;we&quot;
+ &quot;exp1&quot;
+ &quot;exp2&quot;
+ &quot;exp3&quot;
+ &quot;exp4&quot;
+ &quot;weight&quot;
+ &quot;married&quot;
+ &quot;ne&quot;
+ &quot;sc&quot;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span>    <span class="c"># couples variables combinations </span>
+    <span class="n">combinations_upto</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="o">=</span> <span class="n">Iterators</span><span class="o">.</span><span class="n">flatten</span><span class="p">(</span><span class="n">combinations</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="n">n</span><span class="p">)</span>
+
+    <span class="c"># combinations without same couple</span>
+    <span class="n">expand_exp</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">deg</span><span class="o">::</span><span class="kt">ConstantTerm</span><span class="p">)</span> <span class="o">=</span>
+        <span class="n">tuple</span><span class="p">(((</span><span class="o">&amp;</span><span class="p">)(</span><span class="n">terms</span><span class="o">...</span><span class="p">)</span> <span class="k">for</span> <span class="n">terms</span> <span class="k">in</span> <span class="n">combinations_upto</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">deg</span><span class="o">.</span><span class="n">n</span><span class="p">))</span><span class="o">...</span><span class="p">)</span>
+
+    <span class="n">StatsModels</span><span class="o">.</span><span class="n">apply_schema</span><span class="p">(</span><span class="n">t</span><span class="o">::</span><span class="kt">FunctionTerm</span><span class="p">{</span><span class="kt">typeof</span><span class="p">(</span><span class="o">^</span><span class="p">)},</span> <span class="n">sch</span><span class="o">::</span><span class="kt">StatsModels</span><span class="o">.</span><span class="n">Schema</span><span class="p">,</span> <span class="n">ctx</span><span class="o">::</span><span class="kt">Type</span><span class="p">)</span> <span class="o">=</span>
+        <span class="n">apply_schema</span><span class="o">.</span><span class="p">(</span><span class="n">expand_exp</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">args_parsed</span><span class="o">...</span><span class="p">),</span> <span class="kt">Ref</span><span class="p">(</span><span class="n">sch</span><span class="p">),</span> <span class="n">ctx</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Basic model </span>
+
+
+<span class="n">reg</span> <span class="o">=</span> <span class="nd">@formula</span><span class="p">(</span><span class="n">lnw</span> <span class="o">~</span> <span class="o">-</span><span class="mi">1</span> <span class="o">+</span> <span class="n">female</span> <span class="o">+</span> <span class="n">female</span><span class="o">&amp;</span><span class="p">(</span><span class="n">widowed</span> <span class="o">+</span> <span class="n">divorced</span> <span class="o">+</span> <span class="n">separated</span> <span class="o">+</span> <span class="n">nevermarried</span> <span class="o">+</span>
+<span class="n">hsd08</span> <span class="o">+</span> <span class="n">hsd911</span> <span class="o">+</span> <span class="n">hsg</span> <span class="o">+</span> <span class="n">cg</span> <span class="o">+</span> <span class="n">ad</span> <span class="o">+</span> <span class="n">mw</span> <span class="o">+</span> <span class="n">so</span> <span class="o">+</span> <span class="n">we</span> <span class="o">+</span> <span class="n">exp1</span> <span class="o">+</span> <span class="n">exp2</span> <span class="o">+</span> <span class="n">exp3</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">widowed</span> <span class="o">+</span>
+<span class="n">divorced</span> <span class="o">+</span> <span class="n">separated</span> <span class="o">+</span> <span class="n">nevermarried</span> <span class="o">+</span> <span class="n">hsd08</span> <span class="o">+</span> <span class="n">hsd911</span> <span class="o">+</span> <span class="n">hsg</span> <span class="o">+</span> <span class="n">cg</span> <span class="o">+</span> <span class="n">ad</span> <span class="o">+</span> <span class="n">mw</span> <span class="o">+</span> <span class="n">so</span> <span class="o">+</span>
+<span class="n">we</span> <span class="o">+</span> <span class="n">exp1</span> <span class="o">+</span> <span class="n">exp2</span> <span class="o">+</span> <span class="n">exp3</span><span class="p">)</span><span class="o">^</span><span class="mi">2</span> <span class="p">)</span>
+
+
+<span class="n">formula_basic</span> <span class="o">=</span> <span class="n">apply_schema</span><span class="p">(</span><span class="n">reg</span><span class="p">,</span> <span class="n">schema</span><span class="p">(</span><span class="n">reg</span><span class="p">,</span> <span class="n">cps2012</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>FormulaTerm
+Response:
+  lnw(continuous)
+Predictors:
+  0
+  female(continuous)
+  widowed(continuous)
+  divorced(continuous)
+  separated(continuous)
+  nevermarried(continuous)
+  hsd08(continuous)
+  hsd911(continuous)
+  hsg(continuous)
+  cg(continuous)
+  ad(continuous)
+  mw(continuous)
+  so(continuous)
+  we(continuous)
+  exp1(continuous)
+  exp2(continuous)
+  exp3(continuous)
+  widowed(continuous) &amp; divorced(continuous)
+  widowed(continuous) &amp; separated(continuous)
+  widowed(continuous) &amp; nevermarried(continuous)
+  widowed(continuous) &amp; hsd08(continuous)
+  widowed(continuous) &amp; hsd911(continuous)
+  widowed(continuous) &amp; hsg(continuous)
+  widowed(continuous) &amp; cg(continuous)
+  widowed(continuous) &amp; ad(continuous)
+  widowed(continuous) &amp; mw(continuous)
+  widowed(continuous) &amp; so(continuous)
+  widowed(continuous) &amp; we(continuous)
+  widowed(continuous) &amp; exp1(continuous)
+  widowed(continuous) &amp; exp2(continuous)
+  widowed(continuous) &amp; exp3(continuous)
+  divorced(continuous) &amp; separated(continuous)
+  divorced(continuous) &amp; nevermarried(continuous)
+  divorced(continuous) &amp; hsd08(continuous)
+  divorced(continuous) &amp; hsd911(continuous)
+  divorced(continuous) &amp; hsg(continuous)
+  divorced(continuous) &amp; cg(continuous)
+  divorced(continuous) &amp; ad(continuous)
+  divorced(continuous) &amp; mw(continuous)
+  divorced(continuous) &amp; so(continuous)
+  divorced(continuous) &amp; we(continuous)
+  divorced(continuous) &amp; exp1(continuous)
+  divorced(continuous) &amp; exp2(continuous)
+  divorced(continuous) &amp; exp3(continuous)
+  separated(continuous) &amp; nevermarried(continuous)
+  separated(continuous) &amp; hsd08(continuous)
+  separated(continuous) &amp; hsd911(continuous)
+  separated(continuous) &amp; hsg(continuous)
+  separated(continuous) &amp; cg(continuous)
+  separated(continuous) &amp; ad(continuous)
+  separated(continuous) &amp; mw(continuous)
+  separated(continuous) &amp; so(continuous)
+  separated(continuous) &amp; we(continuous)
+  separated(continuous) &amp; exp1(continuous)
+  separated(continuous) &amp; exp2(continuous)
+  separated(continuous) &amp; exp3(continuous)
+  nevermarried(continuous) &amp; hsd08(continuous)
+  nevermarried(continuous) &amp; hsd911(continuous)
+  nevermarried(continuous) &amp; hsg(continuous)
+  nevermarried(continuous) &amp; cg(continuous)
+  nevermarried(continuous) &amp; ad(continuous)
+  nevermarried(continuous) &amp; mw(continuous)
+  nevermarried(continuous) &amp; so(continuous)
+  nevermarried(continuous) &amp; we(continuous)
+  nevermarried(continuous) &amp; exp1(continuous)
+  nevermarried(continuous) &amp; exp2(continuous)
+  nevermarried(continuous) &amp; exp3(continuous)
+  hsd08(continuous) &amp; hsd911(continuous)
+  hsd08(continuous) &amp; hsg(continuous)
+  hsd08(continuous) &amp; cg(continuous)
+  hsd08(continuous) &amp; ad(continuous)
+  hsd08(continuous) &amp; mw(continuous)
+  hsd08(continuous) &amp; so(continuous)
+  hsd08(continuous) &amp; we(continuous)
+  hsd08(continuous) &amp; exp1(continuous)
+  hsd08(continuous) &amp; exp2(continuous)
+  hsd08(continuous) &amp; exp3(continuous)
+  hsd911(continuous) &amp; hsg(continuous)
+  hsd911(continuous) &amp; cg(continuous)
+  hsd911(continuous) &amp; ad(continuous)
+  hsd911(continuous) &amp; mw(continuous)
+  hsd911(continuous) &amp; so(continuous)
+  hsd911(continuous) &amp; we(continuous)
+  hsd911(continuous) &amp; exp1(continuous)
+  hsd911(continuous) &amp; exp2(continuous)
+  hsd911(continuous) &amp; exp3(continuous)
+  hsg(continuous) &amp; cg(continuous)
+  hsg(continuous) &amp; ad(continuous)
+  hsg(continuous) &amp; mw(continuous)
+  hsg(continuous) &amp; so(continuous)
+  hsg(continuous) &amp; we(continuous)
+  hsg(continuous) &amp; exp1(continuous)
+  hsg(continuous) &amp; exp2(continuous)
+  hsg(continuous) &amp; exp3(continuous)
+  cg(continuous) &amp; ad(continuous)
+  cg(continuous) &amp; mw(continuous)
+  cg(continuous) &amp; so(continuous)
+  cg(continuous) &amp; we(continuous)
+  cg(continuous) &amp; exp1(continuous)
+  cg(continuous) &amp; exp2(continuous)
+  cg(continuous) &amp; exp3(continuous)
+  ad(continuous) &amp; mw(continuous)
+  ad(continuous) &amp; so(continuous)
+  ad(continuous) &amp; we(continuous)
+  ad(continuous) &amp; exp1(continuous)
+  ad(continuous) &amp; exp2(continuous)
+  ad(continuous) &amp; exp3(continuous)
+  mw(continuous) &amp; so(continuous)
+  mw(continuous) &amp; we(continuous)
+  mw(continuous) &amp; exp1(continuous)
+  mw(continuous) &amp; exp2(continuous)
+  mw(continuous) &amp; exp3(continuous)
+  so(continuous) &amp; we(continuous)
+  so(continuous) &amp; exp1(continuous)
+  so(continuous) &amp; exp2(continuous)
+  so(continuous) &amp; exp3(continuous)
+  we(continuous) &amp; exp1(continuous)
+  we(continuous) &amp; exp2(continuous)
+  we(continuous) &amp; exp3(continuous)
+  exp1(continuous) &amp; exp2(continuous)
+  exp1(continuous) &amp; exp3(continuous)
+  exp2(continuous) &amp; exp3(continuous)
+  female(continuous) &amp; widowed(continuous)
+  female(continuous) &amp; divorced(continuous)
+  female(continuous) &amp; separated(continuous)
+  female(continuous) &amp; nevermarried(continuous)
+  female(continuous) &amp; hsd08(continuous)
+  female(continuous) &amp; hsd911(continuous)
+  female(continuous) &amp; hsg(continuous)
+  female(continuous) &amp; cg(continuous)
+  female(continuous) &amp; ad(continuous)
+  female(continuous) &amp; mw(continuous)
+  female(continuous) &amp; so(continuous)
+  female(continuous) &amp; we(continuous)
+  female(continuous) &amp; exp1(continuous)
+  female(continuous) &amp; exp2(continuous)
+  female(continuous) &amp; exp3(continuous)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">formula_basic</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>FormulaTerm
+Response:
+  lnw(continuous)
+Predictors:
+  0
+  female(continuous)
+  widowed(continuous)
+  divorced(continuous)
+  separated(continuous)
+  nevermarried(continuous)
+  hsd08(continuous)
+  hsd911(continuous)
+  hsg(continuous)
+  cg(continuous)
+  ad(continuous)
+  mw(continuous)
+  so(continuous)
+  we(continuous)
+  exp1(continuous)
+  exp2(continuous)
+  exp3(continuous)
+  widowed(continuous) &amp; divorced(continuous)
+  widowed(continuous) &amp; separated(continuous)
+  widowed(continuous) &amp; nevermarried(continuous)
+  widowed(continuous) &amp; hsd08(continuous)
+  widowed(continuous) &amp; hsd911(continuous)
+  widowed(continuous) &amp; hsg(continuous)
+  widowed(continuous) &amp; cg(continuous)
+  widowed(continuous) &amp; ad(continuous)
+  widowed(continuous) &amp; mw(continuous)
+  widowed(continuous) &amp; so(continuous)
+  widowed(continuous) &amp; we(continuous)
+  widowed(continuous) &amp; exp1(continuous)
+  widowed(continuous) &amp; exp2(continuous)
+  widowed(continuous) &amp; exp3(continuous)
+  divorced(continuous) &amp; separated(continuous)
+  divorced(continuous) &amp; nevermarried(continuous)
+  divorced(continuous) &amp; hsd08(continuous)
+  divorced(continuous) &amp; hsd911(continuous)
+  divorced(continuous) &amp; hsg(continuous)
+  divorced(continuous) &amp; cg(continuous)
+  divorced(continuous) &amp; ad(continuous)
+  divorced(continuous) &amp; mw(continuous)
+  divorced(continuous) &amp; so(continuous)
+  divorced(continuous) &amp; we(continuous)
+  divorced(continuous) &amp; exp1(continuous)
+  divorced(continuous) &amp; exp2(continuous)
+  divorced(continuous) &amp; exp3(continuous)
+  separated(continuous) &amp; nevermarried(continuous)
+  separated(continuous) &amp; hsd08(continuous)
+  separated(continuous) &amp; hsd911(continuous)
+  separated(continuous) &amp; hsg(continuous)
+  separated(continuous) &amp; cg(continuous)
+  separated(continuous) &amp; ad(continuous)
+  separated(continuous) &amp; mw(continuous)
+  separated(continuous) &amp; so(continuous)
+  separated(continuous) &amp; we(continuous)
+  separated(continuous) &amp; exp1(continuous)
+  separated(continuous) &amp; exp2(continuous)
+  separated(continuous) &amp; exp3(continuous)
+  nevermarried(continuous) &amp; hsd08(continuous)
+  nevermarried(continuous) &amp; hsd911(continuous)
+  nevermarried(continuous) &amp; hsg(continuous)
+  nevermarried(continuous) &amp; cg(continuous)
+  nevermarried(continuous) &amp; ad(continuous)
+  nevermarried(continuous) &amp; mw(continuous)
+  nevermarried(continuous) &amp; so(continuous)
+  nevermarried(continuous) &amp; we(continuous)
+  nevermarried(continuous) &amp; exp1(continuous)
+  nevermarried(continuous) &amp; exp2(continuous)
+  nevermarried(continuous) &amp; exp3(continuous)
+  hsd08(continuous) &amp; hsd911(continuous)
+  hsd08(continuous) &amp; hsg(continuous)
+  hsd08(continuous) &amp; cg(continuous)
+  hsd08(continuous) &amp; ad(continuous)
+  hsd08(continuous) &amp; mw(continuous)
+  hsd08(continuous) &amp; so(continuous)
+  hsd08(continuous) &amp; we(continuous)
+  hsd08(continuous) &amp; exp1(continuous)
+  hsd08(continuous) &amp; exp2(continuous)
+  hsd08(continuous) &amp; exp3(continuous)
+  hsd911(continuous) &amp; hsg(continuous)
+  hsd911(continuous) &amp; cg(continuous)
+  hsd911(continuous) &amp; ad(continuous)
+  hsd911(continuous) &amp; mw(continuous)
+  hsd911(continuous) &amp; so(continuous)
+  hsd911(continuous) &amp; we(continuous)
+  hsd911(continuous) &amp; exp1(continuous)
+  hsd911(continuous) &amp; exp2(continuous)
+  hsd911(continuous) &amp; exp3(continuous)
+  hsg(continuous) &amp; cg(continuous)
+  hsg(continuous) &amp; ad(continuous)
+  hsg(continuous) &amp; mw(continuous)
+  hsg(continuous) &amp; so(continuous)
+  hsg(continuous) &amp; we(continuous)
+  hsg(continuous) &amp; exp1(continuous)
+  hsg(continuous) &amp; exp2(continuous)
+  hsg(continuous) &amp; exp3(continuous)
+  cg(continuous) &amp; ad(continuous)
+  cg(continuous) &amp; mw(continuous)
+  cg(continuous) &amp; so(continuous)
+  cg(continuous) &amp; we(continuous)
+  cg(continuous) &amp; exp1(continuous)
+  cg(continuous) &amp; exp2(continuous)
+  cg(continuous) &amp; exp3(continuous)
+  ad(continuous) &amp; mw(continuous)
+  ad(continuous) &amp; so(continuous)
+  ad(continuous) &amp; we(continuous)
+  ad(continuous) &amp; exp1(continuous)
+  ad(continuous) &amp; exp2(continuous)
+  ad(continuous) &amp; exp3(continuous)
+  mw(continuous) &amp; so(continuous)
+  mw(continuous) &amp; we(continuous)
+  mw(continuous) &amp; exp1(continuous)
+  mw(continuous) &amp; exp2(continuous)
+  mw(continuous) &amp; exp3(continuous)
+  so(continuous) &amp; we(continuous)
+  so(continuous) &amp; exp1(continuous)
+  so(continuous) &amp; exp2(continuous)
+  so(continuous) &amp; exp3(continuous)
+  we(continuous) &amp; exp1(continuous)
+  we(continuous) &amp; exp2(continuous)
+  we(continuous) &amp; exp3(continuous)
+  exp1(continuous) &amp; exp2(continuous)
+  exp1(continuous) &amp; exp3(continuous)
+  exp2(continuous) &amp; exp3(continuous)
+  female(continuous) &amp; widowed(continuous)
+  female(continuous) &amp; divorced(continuous)
+  female(continuous) &amp; separated(continuous)
+  female(continuous) &amp; nevermarried(continuous)
+  female(continuous) &amp; hsd08(continuous)
+  female(continuous) &amp; hsd911(continuous)
+  female(continuous) &amp; hsg(continuous)
+  female(continuous) &amp; cg(continuous)
+  female(continuous) &amp; ad(continuous)
+  female(continuous) &amp; mw(continuous)
+  female(continuous) &amp; so(continuous)
+  female(continuous) &amp; we(continuous)
+  female(continuous) &amp; exp1(continuous)
+  female(continuous) &amp; exp2(continuous)
+  female(continuous) &amp; exp3(continuous)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># get variabl&#39;es name</span>
+
+<span class="n">coefnames</span><span class="p">(</span><span class="n">formula_basic</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&quot;lnw&quot;, Any[&quot;female&quot;, &quot;widowed&quot;, &quot;divorced&quot;, &quot;separated&quot;, &quot;nevermarried&quot;, &quot;hsd08&quot;, &quot;hsd911&quot;, &quot;hsg&quot;, &quot;cg&quot;, &quot;ad&quot;  …  &quot;female &amp; hsd911&quot;, &quot;female &amp; hsg&quot;, &quot;female &amp; cg&quot;, &quot;female &amp; ad&quot;, &quot;female &amp; mw&quot;, &quot;female &amp; so&quot;, &quot;female &amp; we&quot;, &quot;female &amp; exp1&quot;, &quot;female &amp; exp2&quot;, &quot;female &amp; exp3&quot;])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Y</span> <span class="o">=</span> <span class="n">select</span><span class="p">(</span><span class="n">cps2012</span><span class="p">,</span><span class="ss">:lnw</span><span class="p">)</span>  <span class="c"># uptcome variable</span>
+<span class="n">control</span> <span class="o">=</span> <span class="n">coefnames</span><span class="p">(</span><span class="n">formula_basic</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span>  <span class="c"># regresors control </span>
+<span class="n">names_col</span> <span class="o">=</span> <span class="kt">Symbol</span><span class="o">.</span><span class="p">(</span><span class="n">control</span><span class="p">)</span>  <span class="c"># string to Symbol to create varaible&#39;s name </span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>136-element Vector{Symbol}:
+ :female
+ :widowed
+ :divorced
+ :separated
+ :nevermarried
+ :hsd08
+ :hsd911
+ :hsg
+ :cg
+ :ad
+ :mw
+ :so
+ :we
+ ⋮
+ Symbol(&quot;female &amp; nevermarried&quot;)
+ Symbol(&quot;female &amp; hsd08&quot;)
+ Symbol(&quot;female &amp; hsd911&quot;)
+ Symbol(&quot;female &amp; hsg&quot;)
+ Symbol(&quot;female &amp; cg&quot;)
+ Symbol(&quot;female &amp; ad&quot;)
+ Symbol(&quot;female &amp; mw&quot;)
+ Symbol(&quot;female &amp; so&quot;)
+ Symbol(&quot;female &amp; we&quot;)
+ Symbol(&quot;female &amp; exp1&quot;)
+ Symbol(&quot;female &amp; exp2&quot;)
+ Symbol(&quot;female &amp; exp3&quot;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">StatsModels</span><span class="o">.</span><span class="n">modelmatrix</span><span class="p">(</span><span class="n">formula_basic</span><span class="p">,</span><span class="n">cps2012</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>29217×136 Matrix{Float64}:
+ 1.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  …  0.0  0.0  22.0  4.84    10.648
+ 1.0  0.0  0.0  0.0  0.0  0.0  1.0  0.0     0.0  0.0  30.0  9.0     27.0
+ 0.0  0.0  0.0  0.0  0.0  0.0  0.0  1.0     0.0  0.0   0.0  0.0      0.0
+ 1.0  0.0  0.0  0.0  0.0  0.0  0.0  1.0     0.0  0.0  14.0  1.96     2.744
+ 0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0     0.0  0.0   0.0  0.0      0.0
+ 0.0  0.0  0.0  0.0  0.0  0.0  0.0  1.0  …  0.0  0.0   0.0  0.0      0.0
+ 0.0  0.0  0.0  0.0  1.0  0.0  0.0  1.0     0.0  0.0   0.0  0.0      0.0
+ 0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0     0.0  0.0   0.0  0.0      0.0
+ 0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0     0.0  0.0   0.0  0.0      0.0
+ 1.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0     0.0  0.0  15.5  2.4025   3.72388
+ 0.0  0.0  0.0  0.0  0.0  0.0  0.0  1.0  …  0.0  0.0   0.0  0.0      0.0
+ 1.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0     0.0  0.0   7.0  0.49     0.343
+ 0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0     0.0  0.0   0.0  0.0      0.0
+ ⋮                        ⋮              ⋱                           ⋮
+ 1.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  …  0.0  1.0  15.0  2.25     3.375
+ 0.0  0.0  0.0  0.0  1.0  0.0  0.0  1.0     0.0  0.0   0.0  0.0      0.0
+ 1.0  0.0  0.0  0.0  1.0  0.0  0.0  0.0     0.0  1.0  18.0  3.24     5.832
+ 1.0  0.0  0.0  0.0  1.0  0.0  0.0  0.0     0.0  1.0   5.0  0.25     0.125
+ 0.0  0.0  0.0  0.0  0.0  0.0  0.0  1.0     0.0  0.0   0.0  0.0      0.0
+ 0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  …  0.0  0.0   0.0  0.0      0.0
+ 1.0  0.0  0.0  0.0  0.0  0.0  0.0  1.0     0.0  1.0  16.0  2.56     4.096
+ 0.0  0.0  0.0  0.0  1.0  0.0  0.0  0.0     0.0  0.0   0.0  0.0      0.0
+ 1.0  0.0  0.0  0.0  1.0  0.0  0.0  0.0     0.0  1.0  16.0  2.56     4.096
+ 1.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0     0.0  1.0  21.0  4.41     9.261
+ 0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  …  0.0  0.0   0.0  0.0      0.0
+ 1.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0     0.0  1.0   2.0  0.04     0.008
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">names_col</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div class="data-frame"><p>29,217 rows × 136 columns (omitted printing of 128 columns)</p><table class="data-frame"><thead><tr><th></th><th>female</th><th>widowed</th><th>divorced</th><th>separated</th><th>nevermarried</th><th>hsd08</th><th>hsd911</th><th>hsg</th></tr><tr><th></th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th></tr></thead><tbody><tr><th>1</th><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>2</th><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td></tr><tr><th>3</th><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td></tr><tr><th>4</th><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td></tr><tr><th>5</th><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>6</th><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td></tr><tr><th>7</th><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>1.0</td></tr><tr><th>8</th><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>9</th><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>10</th><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>11</th><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td></tr><tr><th>12</th><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>13</th><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>14</th><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>15</th><td>1.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>16</th><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>17</th><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>18</th><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>19</th><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>20</th><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>21</th><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td></tr><tr><th>22</th><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>23</th><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>24</th><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>25</th><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>26</th><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>27</th><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td></tr><tr><th>28</th><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>29</th><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>30</th><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>&vellip;</th><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td></tr></tbody></table></div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Function to get index of constant columns   </span>
+
+<span class="n">cons_column</span> <span class="o">=</span> <span class="p">[]</span>
+
+
+<span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="n">size</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">var</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="o">!</span><span class="p">,</span><span class="n">i</span><span class="p">])</span> <span class="o">==</span> <span class="mi">0</span>
+        <span class="n">append!</span><span class="p">(</span><span class="n">cons_column</span>  <span class="p">,</span> <span class="n">i</span><span class="p">)</span>      
+    <span class="k">end</span>       
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Drop constant columns </span>
+
+<span class="n">names</span><span class="p">(</span><span class="n">X</span><span class="p">)[</span><span class="n">cons_column</span><span class="p">]</span>
+<span class="n">select!</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Not</span><span class="p">(</span><span class="n">names</span><span class="p">(</span><span class="n">X</span><span class="p">)[</span><span class="n">cons_column</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div class="data-frame"><p>29,217 rows × 116 columns (omitted printing of 108 columns)</p><table class="data-frame"><thead><tr><th></th><th>female</th><th>widowed</th><th>divorced</th><th>separated</th><th>nevermarried</th><th>hsd08</th><th>hsd911</th><th>hsg</th></tr><tr><th></th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th></tr></thead><tbody><tr><th>1</th><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>2</th><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td></tr><tr><th>3</th><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td></tr><tr><th>4</th><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td></tr><tr><th>5</th><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>6</th><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td></tr><tr><th>7</th><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>1.0</td></tr><tr><th>8</th><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>9</th><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>10</th><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>11</th><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td></tr><tr><th>12</th><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>13</th><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>14</th><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>15</th><td>1.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>16</th><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>17</th><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>18</th><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>19</th><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>20</th><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>21</th><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td></tr><tr><th>22</th><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>23</th><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>24</th><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>25</th><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>26</th><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>27</th><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td></tr><tr><th>28</th><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>29</th><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>30</th><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>&vellip;</th><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td></tr></tbody></table></div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># demean function</span>
+<span class="k">function</span> <span class="n">desv_mean</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="kt">Matrix</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>   <span class="c"># dataframe to matrix </span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">mean</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">dims</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="kt">Float64</span><span class="p">,</span> <span class="n">size</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">size</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="n">size</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+          <span class="n">M</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="n">i</span><span class="p">]</span> <span class="o">.-</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="k">end</span>
+    
+    <span class="k">return</span> <span class="n">M</span>
+<span class="k">end</span>    
+
+
+<span class="c"># Matrix Model &amp; demean</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">(</span><span class="n">desv_mean</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="n">names</span><span class="p">(</span><span class="n">X</span><span class="p">))</span> <span class="c"># Dataframe and names </span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div class="data-frame"><p>29,217 rows × 116 columns (omitted printing of 109 columns)</p><table class="data-frame"><thead><tr><th></th><th>female</th><th>widowed</th><th>divorced</th><th>separated</th><th>nevermarried</th><th>hsd08</th><th>hsd911</th></tr><tr><th></th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th></tr></thead><tbody><tr><th>1</th><td>0.571243</td><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>-0.156347</td><td>-0.0041072</td><td>-0.0221789</td></tr><tr><th>2</th><td>0.571243</td><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>-0.156347</td><td>-0.0041072</td><td>0.977821</td></tr><tr><th>3</th><td>-0.428757</td><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>-0.156347</td><td>-0.0041072</td><td>-0.0221789</td></tr><tr><th>4</th><td>0.571243</td><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>-0.156347</td><td>-0.0041072</td><td>-0.0221789</td></tr><tr><th>5</th><td>-0.428757</td><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>-0.156347</td><td>-0.0041072</td><td>-0.0221789</td></tr><tr><th>6</th><td>-0.428757</td><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>-0.156347</td><td>-0.0041072</td><td>-0.0221789</td></tr><tr><th>7</th><td>-0.428757</td><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>0.843653</td><td>-0.0041072</td><td>-0.0221789</td></tr><tr><th>8</th><td>-0.428757</td><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>-0.156347</td><td>-0.0041072</td><td>-0.0221789</td></tr><tr><th>9</th><td>-0.428757</td><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>-0.156347</td><td>-0.0041072</td><td>-0.0221789</td></tr><tr><th>10</th><td>0.571243</td><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>-0.156347</td><td>-0.0041072</td><td>-0.0221789</td></tr><tr><th>11</th><td>-0.428757</td><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>-0.156347</td><td>-0.0041072</td><td>-0.0221789</td></tr><tr><th>12</th><td>0.571243</td><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>-0.156347</td><td>-0.0041072</td><td>-0.0221789</td></tr><tr><th>13</th><td>-0.428757</td><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>-0.156347</td><td>-0.0041072</td><td>-0.0221789</td></tr><tr><th>14</th><td>-0.428757</td><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>0.843653</td><td>-0.0041072</td><td>-0.0221789</td></tr><tr><th>15</th><td>0.571243</td><td>-0.00797481</td><td>0.886607</td><td>-0.0165999</td><td>-0.156347</td><td>-0.0041072</td><td>-0.0221789</td></tr><tr><th>16</th><td>-0.428757</td><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>0.843653</td><td>-0.0041072</td><td>-0.0221789</td></tr><tr><th>17</th><td>-0.428757</td><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>-0.156347</td><td>-0.0041072</td><td>-0.0221789</td></tr><tr><th>18</th><td>-0.428757</td><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>0.843653</td><td>-0.0041072</td><td>-0.0221789</td></tr><tr><th>19</th><td>-0.428757</td><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>-0.156347</td><td>-0.0041072</td><td>-0.0221789</td></tr><tr><th>20</th><td>0.571243</td><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>0.843653</td><td>-0.0041072</td><td>-0.0221789</td></tr><tr><th>21</th><td>-0.428757</td><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>-0.156347</td><td>-0.0041072</td><td>-0.0221789</td></tr><tr><th>22</th><td>0.571243</td><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>-0.156347</td><td>-0.0041072</td><td>-0.0221789</td></tr><tr><th>23</th><td>-0.428757</td><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>-0.156347</td><td>-0.0041072</td><td>-0.0221789</td></tr><tr><th>24</th><td>-0.428757</td><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>0.843653</td><td>-0.0041072</td><td>-0.0221789</td></tr><tr><th>25</th><td>0.571243</td><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>0.843653</td><td>-0.0041072</td><td>-0.0221789</td></tr><tr><th>26</th><td>-0.428757</td><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>-0.156347</td><td>-0.0041072</td><td>-0.0221789</td></tr><tr><th>27</th><td>-0.428757</td><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>-0.156347</td><td>-0.0041072</td><td>-0.0221789</td></tr><tr><th>28</th><td>0.571243</td><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>-0.156347</td><td>-0.0041072</td><td>-0.0221789</td></tr><tr><th>29</th><td>0.571243</td><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>-0.156347</td><td>-0.0041072</td><td>-0.0221789</td></tr><tr><th>30</th><td>-0.428757</td><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>-0.156347</td><td>-0.0041072</td><td>-0.0221789</td></tr><tr><th>&vellip;</th><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td></tr></tbody></table></div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># index to get columns that contains female</span>
+
+<span class="n">index</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="n">size</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>  
+        <span class="k">if</span> <span class="n">contains</span><span class="p">(</span> <span class="n">names</span><span class="p">(</span><span class="n">X</span><span class="p">)[</span><span class="n">i</span><span class="p">]</span> <span class="p">,</span> <span class="s">&quot;female&quot;</span><span class="p">)</span>
+            <span class="n">append!</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+        <span class="k">end</span>  
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">index</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>16-element Vector{Any}:
+   1
+ 102
+ 103
+ 104
+ 105
+ 106
+ 107
+ 108
+ 109
+ 110
+ 111
+ 112
+ 113
+ 114
+ 115
+ 116
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Control variables </span>
+
+<span class="n">W</span> <span class="o">=</span> <span class="n">select</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Not</span><span class="p">(</span><span class="n">names</span><span class="p">(</span><span class="n">X</span><span class="p">)[</span><span class="n">index</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div class="data-frame"><p>29,217 rows × 100 columns (omitted printing of 93 columns)</p><table class="data-frame"><thead><tr><th></th><th>widowed</th><th>divorced</th><th>separated</th><th>nevermarried</th><th>hsd08</th><th>hsd911</th><th>hsg</th></tr><tr><th></th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th></tr></thead><tbody><tr><th>1</th><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>-0.156347</td><td>-0.0041072</td><td>-0.0221789</td><td>-0.247288</td></tr><tr><th>2</th><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>-0.156347</td><td>-0.0041072</td><td>0.977821</td><td>-0.247288</td></tr><tr><th>3</th><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>-0.156347</td><td>-0.0041072</td><td>-0.0221789</td><td>0.752712</td></tr><tr><th>4</th><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>-0.156347</td><td>-0.0041072</td><td>-0.0221789</td><td>0.752712</td></tr><tr><th>5</th><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>-0.156347</td><td>-0.0041072</td><td>-0.0221789</td><td>-0.247288</td></tr><tr><th>6</th><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>-0.156347</td><td>-0.0041072</td><td>-0.0221789</td><td>0.752712</td></tr><tr><th>7</th><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>0.843653</td><td>-0.0041072</td><td>-0.0221789</td><td>0.752712</td></tr><tr><th>8</th><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>-0.156347</td><td>-0.0041072</td><td>-0.0221789</td><td>-0.247288</td></tr><tr><th>9</th><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>-0.156347</td><td>-0.0041072</td><td>-0.0221789</td><td>-0.247288</td></tr><tr><th>10</th><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>-0.156347</td><td>-0.0041072</td><td>-0.0221789</td><td>-0.247288</td></tr><tr><th>11</th><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>-0.156347</td><td>-0.0041072</td><td>-0.0221789</td><td>0.752712</td></tr><tr><th>12</th><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>-0.156347</td><td>-0.0041072</td><td>-0.0221789</td><td>-0.247288</td></tr><tr><th>13</th><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>-0.156347</td><td>-0.0041072</td><td>-0.0221789</td><td>-0.247288</td></tr><tr><th>14</th><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>0.843653</td><td>-0.0041072</td><td>-0.0221789</td><td>-0.247288</td></tr><tr><th>15</th><td>-0.00797481</td><td>0.886607</td><td>-0.0165999</td><td>-0.156347</td><td>-0.0041072</td><td>-0.0221789</td><td>-0.247288</td></tr><tr><th>16</th><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>0.843653</td><td>-0.0041072</td><td>-0.0221789</td><td>-0.247288</td></tr><tr><th>17</th><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>-0.156347</td><td>-0.0041072</td><td>-0.0221789</td><td>-0.247288</td></tr><tr><th>18</th><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>0.843653</td><td>-0.0041072</td><td>-0.0221789</td><td>-0.247288</td></tr><tr><th>19</th><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>-0.156347</td><td>-0.0041072</td><td>-0.0221789</td><td>-0.247288</td></tr><tr><th>20</th><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>0.843653</td><td>-0.0041072</td><td>-0.0221789</td><td>-0.247288</td></tr><tr><th>21</th><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>-0.156347</td><td>-0.0041072</td><td>-0.0221789</td><td>0.752712</td></tr><tr><th>22</th><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>-0.156347</td><td>-0.0041072</td><td>-0.0221789</td><td>-0.247288</td></tr><tr><th>23</th><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>-0.156347</td><td>-0.0041072</td><td>-0.0221789</td><td>-0.247288</td></tr><tr><th>24</th><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>0.843653</td><td>-0.0041072</td><td>-0.0221789</td><td>-0.247288</td></tr><tr><th>25</th><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>0.843653</td><td>-0.0041072</td><td>-0.0221789</td><td>-0.247288</td></tr><tr><th>26</th><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>-0.156347</td><td>-0.0041072</td><td>-0.0221789</td><td>-0.247288</td></tr><tr><th>27</th><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>-0.156347</td><td>-0.0041072</td><td>-0.0221789</td><td>0.752712</td></tr><tr><th>28</th><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>-0.156347</td><td>-0.0041072</td><td>-0.0221789</td><td>-0.247288</td></tr><tr><th>29</th><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>-0.156347</td><td>-0.0041072</td><td>-0.0221789</td><td>-0.247288</td></tr><tr><th>30</th><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>-0.156347</td><td>-0.0041072</td><td>-0.0221789</td><td>-0.247288</td></tr><tr><th>&vellip;</th><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td></tr></tbody></table></div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># load HDM package</span>
+
+<span class="n">include</span><span class="p">(</span><span class="s">&quot;hdmjl/hdmjl.jl&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="n">index</span>
+    <span class="n">print</span><span class="p">(</span><span class="n">names</span><span class="p">(</span><span class="n">X</span><span class="p">)[</span><span class="n">i</span><span class="p">],</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>female
+female &amp; widowed
+female &amp; divorced
+female &amp; separated
+female &amp; nevermarried
+female &amp; hsd08
+female &amp; hsd911
+female &amp; hsg
+female &amp; cg
+female &amp; ad
+female &amp; mw
+female &amp; so
+female &amp; we
+female &amp; exp1
+female &amp; exp2
+female &amp; exp3
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="hdm-package">
+<h1>HDM package<a class="headerlink" href="#hdm-package" title="Permalink to this headline">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">NamedArray</span><span class="p">(</span><span class="n">zeros</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+
+<span class="n">j</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">X_resid</span> <span class="o">=</span> <span class="kt">Vector</span><span class="p">{</span><span class="kt">Float64</span><span class="p">}()</span>  <span class="c"># empty vector - float </span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="n">index</span>
+
+<span class="n">j</span> <span class="o">=</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span>
+    
+<span class="c">#first step</span>
+<span class="n">D</span> <span class="o">=</span> <span class="n">select</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">names</span><span class="p">(</span><span class="n">X</span><span class="p">)[</span><span class="n">i</span><span class="p">])</span>
+    
+<span class="n">D_reg_0</span>  <span class="o">=</span> <span class="n">rlasso_arg</span><span class="p">(</span> <span class="n">W</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="nb">nothing</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> 
+                    <span class="nb">nothing</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="nb">nothing</span><span class="p">,</span> <span class="mi">5000</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="o">^</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">),</span> <span class="o">-</span><span class="nb">Inf</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="nb">Inf</span><span class="p">,</span> <span class="nb">true</span> <span class="p">)</span>
+
+<span class="n">D_resid</span> <span class="o">=</span>  <span class="n">rlasso</span><span class="p">(</span><span class="n">D_reg_0</span><span class="p">)[</span><span class="s">&quot;residuals&quot;</span><span class="p">]</span>
+
+    
+<span class="n">append!</span><span class="p">(</span> <span class="n">X_resid</span><span class="p">,</span> <span class="n">D_resid</span> <span class="p">)</span>
+
+    
+<span class="k">end</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">W</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div class="data-frame"><p>29,217 rows × 100 columns (omitted printing of 93 columns)</p><table class="data-frame"><thead><tr><th></th><th>widowed</th><th>divorced</th><th>separated</th><th>nevermarried</th><th>hsd08</th><th>hsd911</th><th>hsg</th></tr><tr><th></th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th></tr></thead><tbody><tr><th>1</th><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>-0.156347</td><td>-0.0041072</td><td>-0.0221789</td><td>-0.247288</td></tr><tr><th>2</th><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>-0.156347</td><td>-0.0041072</td><td>0.977821</td><td>-0.247288</td></tr><tr><th>3</th><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>-0.156347</td><td>-0.0041072</td><td>-0.0221789</td><td>0.752712</td></tr><tr><th>4</th><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>-0.156347</td><td>-0.0041072</td><td>-0.0221789</td><td>0.752712</td></tr><tr><th>5</th><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>-0.156347</td><td>-0.0041072</td><td>-0.0221789</td><td>-0.247288</td></tr><tr><th>6</th><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>-0.156347</td><td>-0.0041072</td><td>-0.0221789</td><td>0.752712</td></tr><tr><th>7</th><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>0.843653</td><td>-0.0041072</td><td>-0.0221789</td><td>0.752712</td></tr><tr><th>8</th><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>-0.156347</td><td>-0.0041072</td><td>-0.0221789</td><td>-0.247288</td></tr><tr><th>9</th><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>-0.156347</td><td>-0.0041072</td><td>-0.0221789</td><td>-0.247288</td></tr><tr><th>10</th><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>-0.156347</td><td>-0.0041072</td><td>-0.0221789</td><td>-0.247288</td></tr><tr><th>11</th><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>-0.156347</td><td>-0.0041072</td><td>-0.0221789</td><td>0.752712</td></tr><tr><th>12</th><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>-0.156347</td><td>-0.0041072</td><td>-0.0221789</td><td>-0.247288</td></tr><tr><th>13</th><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>-0.156347</td><td>-0.0041072</td><td>-0.0221789</td><td>-0.247288</td></tr><tr><th>14</th><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>0.843653</td><td>-0.0041072</td><td>-0.0221789</td><td>-0.247288</td></tr><tr><th>15</th><td>-0.00797481</td><td>0.886607</td><td>-0.0165999</td><td>-0.156347</td><td>-0.0041072</td><td>-0.0221789</td><td>-0.247288</td></tr><tr><th>16</th><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>0.843653</td><td>-0.0041072</td><td>-0.0221789</td><td>-0.247288</td></tr><tr><th>17</th><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>-0.156347</td><td>-0.0041072</td><td>-0.0221789</td><td>-0.247288</td></tr><tr><th>18</th><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>0.843653</td><td>-0.0041072</td><td>-0.0221789</td><td>-0.247288</td></tr><tr><th>19</th><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>-0.156347</td><td>-0.0041072</td><td>-0.0221789</td><td>-0.247288</td></tr><tr><th>20</th><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>0.843653</td><td>-0.0041072</td><td>-0.0221789</td><td>-0.247288</td></tr><tr><th>21</th><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>-0.156347</td><td>-0.0041072</td><td>-0.0221789</td><td>0.752712</td></tr><tr><th>22</th><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>-0.156347</td><td>-0.0041072</td><td>-0.0221789</td><td>-0.247288</td></tr><tr><th>23</th><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>-0.156347</td><td>-0.0041072</td><td>-0.0221789</td><td>-0.247288</td></tr><tr><th>24</th><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>0.843653</td><td>-0.0041072</td><td>-0.0221789</td><td>-0.247288</td></tr><tr><th>25</th><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>0.843653</td><td>-0.0041072</td><td>-0.0221789</td><td>-0.247288</td></tr><tr><th>26</th><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>-0.156347</td><td>-0.0041072</td><td>-0.0221789</td><td>-0.247288</td></tr><tr><th>27</th><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>-0.156347</td><td>-0.0041072</td><td>-0.0221789</td><td>0.752712</td></tr><tr><th>28</th><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>-0.156347</td><td>-0.0041072</td><td>-0.0221789</td><td>-0.247288</td></tr><tr><th>29</th><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>-0.156347</td><td>-0.0041072</td><td>-0.0221789</td><td>-0.247288</td></tr><tr><th>30</th><td>-0.00797481</td><td>-0.113393</td><td>-0.0165999</td><td>-0.156347</td><td>-0.0041072</td><td>-0.0221789</td><td>-0.247288</td></tr><tr><th>&vellip;</th><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td></tr></tbody></table></div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c">#second step</span>
+
+<span class="n">Y_reg_0</span>  <span class="o">=</span> <span class="n">rlasso_arg</span><span class="p">(</span> <span class="n">W</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="nb">nothing</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> 
+                    <span class="nb">nothing</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="nb">nothing</span><span class="p">,</span> <span class="mi">5000</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="o">^</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">),</span> <span class="o">-</span><span class="nb">Inf</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="nb">Inf</span><span class="p">,</span> <span class="nb">true</span> <span class="p">)</span>
+
+<span class="n">Y_resid</span> <span class="o">=</span> <span class="n">rlasso</span><span class="p">(</span><span class="n">Y_reg_0</span><span class="p">)[</span><span class="s">&quot;residuals&quot;</span><span class="p">]</span>
+
+<span class="n">X_resid</span> <span class="o">=</span> <span class="n">reshape</span><span class="p">(</span><span class="n">X_resid</span><span class="p">,</span> <span class="n">length</span><span class="p">(</span><span class="n">Y_resid</span><span class="p">),</span> <span class="n">length</span><span class="p">(</span><span class="n">index</span><span class="p">))</span>  <span class="c"># reshape stacked vector to mattrix </span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>29217×16 Matrix{Float64}:
+  0.567918  4.2067e-16  -4.16334e-15  …   12.8248     2.8194       6.32254
+  0.745968  4.2067e-16  -4.16334e-15      21.3128     6.2255      18.6011
+ -0.353627  4.2067e-16  -1.62648e-14      -6.61143   -1.23522     -2.79376
+  0.646373  4.2067e-16  -1.62648e-14       9.46843    1.40668      1.63816
+ -0.432082  4.2067e-16  -4.16334e-15      -6.26339   -0.951552    -1.36754
+ -0.353627  4.2067e-16  -1.62648e-14  …   -8.27531   -1.92782     -4.93616
+ -0.353627  4.2067e-16  -1.62648e-14     -12.435     -4.23126    -14.3806
+ -0.432082  4.2067e-16  -4.16334e-15      -9.79914   -2.30178     -5.26157
+ -0.432082  4.2067e-16  -4.16334e-15      -6.26339   -0.951552    -1.36754
+  0.567918  4.2067e-16  -4.16334e-15       9.02862    1.38786      2.21225
+ -0.353627  4.2067e-16  -1.62648e-14  …   -5.77949   -0.937951    -2.00022
+  0.567918  4.2067e-16  -4.16334e-15       4.06438    0.269973     0.261467
+ -0.432082  4.2067e-16  -4.16334e-15      -4.80749   -0.567165    -0.592691
+  ⋮                                   ⋱                            ⋮
+  0.60337   4.2067e-16  -4.16334e-15  …    8.73661    1.29845      2.00746
+ -0.318174  4.2067e-16  -1.62648e-14      -4.53157   -0.553323    -1.10584
+  0.60337   4.2067e-16  -4.16334e-15      10.4887     1.87931      3.45626
+  0.60337   4.2067e-16   1.09079e-14       2.89632    0.131146     0.144754
+ -0.318174  4.2067e-16  -1.62648e-14      -3.28366   -0.242232    -0.511979
+ -0.39663   4.2067e-16  -4.16334e-15  …  -10.4231    -2.60133     -6.32142
+  0.681826  4.2067e-16  -1.62648e-14      10.6365     1.75843      2.43109
+ -0.39663   4.2067e-16   1.09079e-14     -11.255     -3.02934     -7.9403
+  0.42866   4.2067e-16   3.15026e-15       7.474      1.1796       2.43109
+  0.60337   4.2067e-16  -4.16334e-15      12.2408     2.56663      5.49466
+ -0.39663   4.2067e-16  -4.16334e-15  …   -0.855768  -0.0283752    0.0804272
+  0.60337   4.2067e-16  -4.16334e-15       1.14423    0.0116248    0.0884272
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># third step</span>
+    
+<span class="n">Lasso_HDM</span> <span class="o">=</span> <span class="n">lm</span><span class="p">(</span><span class="n">X_resid</span><span class="p">,</span> <span class="n">Y_resid</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LinearModel{GLM.LmResp{Vector{Float64}}, GLM.DensePredChol{Float64, CholeskyPivoted{Float64, Matrix{Float64}}}}:
+
+Coefficients:
+──────────────────────────────────────────────────────────────────────
+           Coef.  Std. Error      t  Pr(&gt;|t|)   Lower 95%    Upper 95%
+──────────────────────────────────────────────────────────────────────
+x1   -0.16132     0.0389166   -4.15    &lt;1e-04  -0.237598   -0.0850416
+x2    0.144424    0.0906545    1.59    0.1111  -0.0332626   0.322111
+x3    0.140591    0.0221825    6.34    &lt;1e-09   0.097112    0.184069
+x4    0.0524948   0.0532334    0.99    0.3241  -0.0518451   0.156835
+x5    0.171391    0.0202072    8.48    &lt;1e-16   0.131784    0.210998
+x6   -0.0492215   0.121268    -0.41    0.6848  -0.286911    0.188468
+x7   -0.142358    0.051854    -2.75    0.0060  -0.243994   -0.0407218
+x8   -0.0219008   0.0192306   -1.14    0.2548  -0.0595936   0.015792
+x9    0.00682406  0.0183583    0.37    0.7101  -0.029159    0.0428071
+x10  -0.0200885   0.021893    -0.92    0.3588  -0.0629997   0.0228228
+x11  -0.00863306  0.0191642   -0.45    0.6524  -0.0461957   0.0289296
+x12  -0.0128353   0.0193493   -0.66    0.5071  -0.0507609   0.0250902
+x13  -0.0121789   0.0211715   -0.58    0.5651  -0.053676    0.0293182
+x14  -0.0162911   0.00544778  -2.99    0.0028  -0.026969   -0.00561323
+x15   0.0499694   0.030783     1.62    0.1045  -0.0103666   0.110305
+x16  -0.0050863   0.00564104  -0.90    0.3672  -0.016143    0.00597039
+──────────────────────────────────────────────────────────────────────
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">GLM</span><span class="o">.</span><span class="n">coeftable</span><span class="p">(</span><span class="n">Lasso_HDM</span><span class="p">)</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>16-element Vector{Float64}:
+ 0.03891662545709848
+ 0.09065446052022239
+ 0.022182461582127274
+ 0.05323343595493935
+ 0.020207233641098263
+ 0.12126752927087239
+ 0.05185404453444545
+ 0.019230576835849073
+ 0.01835826460817478
+ 0.02189298580728155
+ 0.019164165017004423
+ 0.01934931573728643
+ 0.021171497665474364
+ 0.005447781678636488
+ 0.0307829839579737
+ 0.00564103524020854
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">NamedArray</span><span class="p">(</span><span class="n">zeros</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>16×7 Named Matrix{Float64}
+A ╲ B │   1    2    3    4    5    6    7
+──────┼──────────────────────────────────
+1     │ 0.0  0.0  0.0  0.0  0.0  0.0  0.0
+2     │ 0.0  0.0  0.0  0.0  0.0  0.0  0.0
+3     │ 0.0  0.0  0.0  0.0  0.0  0.0  0.0
+4     │ 0.0  0.0  0.0  0.0  0.0  0.0  0.0
+5     │ 0.0  0.0  0.0  0.0  0.0  0.0  0.0
+6     │ 0.0  0.0  0.0  0.0  0.0  0.0  0.0
+7     │ 0.0  0.0  0.0  0.0  0.0  0.0  0.0
+8     │ 0.0  0.0  0.0  0.0  0.0  0.0  0.0
+9     │ 0.0  0.0  0.0  0.0  0.0  0.0  0.0
+10    │ 0.0  0.0  0.0  0.0  0.0  0.0  0.0
+11    │ 0.0  0.0  0.0  0.0  0.0  0.0  0.0
+12    │ 0.0  0.0  0.0  0.0  0.0  0.0  0.0
+13    │ 0.0  0.0  0.0  0.0  0.0  0.0  0.0
+14    │ 0.0  0.0  0.0  0.0  0.0  0.0  0.0
+15    │ 0.0  0.0  0.0  0.0  0.0  0.0  0.0
+16    │ 0.0  0.0  0.0  0.0  0.0  0.0  0.0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">typeof</span><span class="p">(</span><span class="n">names</span><span class="p">(</span><span class="n">X</span><span class="p">)[</span><span class="n">index</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>String
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="mi">16</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="mi">6</span>
+        <span class="n">table</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">GLM</span><span class="o">.</span><span class="n">coeftable</span><span class="p">(</span><span class="n">Lasso_HDM</span><span class="p">)</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="n">T</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="p">[</span> <span class="o">:</span><span class="s">&quot;Variable&quot;</span><span class="p">,</span> <span class="o">:</span><span class="s">&quot;Estimate&quot;</span><span class="p">,</span> <span class="o">:</span><span class="s">&quot;Std.error&quot;</span><span class="p">,</span> <span class="o">:</span><span class="s">&quot;t&quot;</span><span class="p">,</span> <span class="o">:</span><span class="s">&quot;P-value&quot;</span><span class="p">,</span> <span class="o">:</span><span class="s">&quot;Lower-bound&quot;</span><span class="p">,</span> <span class="o">:</span><span class="s">&quot;Upper-bound&quot;</span><span class="p">])</span>
+
+<span class="n">T</span><span class="p">[</span><span class="o">!</span><span class="p">,</span><span class="ss">:Variable</span><span class="p">]</span> <span class="o">=</span> <span class="n">string</span><span class="o">.</span><span class="p">(</span><span class="n">T</span><span class="p">[</span><span class="o">!</span><span class="p">,</span><span class="ss">:Variable</span><span class="p">])</span>  <span class="c"># string - first column </span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="mi">16</span>
+
+<span class="n">T</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">names</span><span class="p">(</span><span class="n">X</span><span class="p">)[</span><span class="n">index</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+
+<span class="k">end</span>
+
+
+<span class="n">header</span> <span class="o">=</span> <span class="p">([</span><span class="s">&quot;Variable&quot;</span><span class="p">,</span> <span class="s">&quot;Estimate&quot;</span><span class="p">,</span> <span class="s">&quot;Std.error&quot;</span><span class="p">,</span> <span class="s">&quot;t-value&quot;</span><span class="p">,</span> <span class="s">&quot;P-value&quot;</span><span class="p">,</span> <span class="s">&quot;Lower-bound&quot;</span><span class="p">,</span> <span class="s">&quot;Upper-bound&quot;</span><span class="p">])</span>
+
+<span class="n">pretty_table</span><span class="p">(</span><span class="n">T</span><span class="p">;</span> <span class="n">backend</span> <span class="o">=</span> <span class="kt">Val</span><span class="p">(</span><span class="ss">:html</span><span class="p">),</span> <span class="n">header</span> <span class="o">=</span> <span class="n">header</span><span class="p">,</span> <span class="n">formatters</span><span class="o">=</span><span class="n">ft_round</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="n">alignment</span><span class="o">=</span><span class="ss">:c</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<style>
+  table, td, th {
+      border-collapse: collapse;
+      font-family: sans-serif;
+  }
+
+  td, th {
+      border-bottom: 0;
+      padding: 4px
+  }
+
+  tr:nth-child(odd) {
+      background: #eee;
+  }
+
+  tr:nth-child(even) {
+      background: #fff;
+  }
+
+  tr.header {
+      background: navy !important;
+      color: white;
+      font-weight: bold;
+  }
+
+  tr.subheader {
+      background: lightgray !important;
+      color: black;
+  }
+
+  tr.headerLastRow {
+      border-bottom: 2px solid black;
+  }
+
+  th.rowNumber, td.rowNumber {
+      text-align: right;
+  }
+
+</style>
+<body>
+<table>
+  <thead>
+    <tr class = "header headerLastRow">
+      <th style = "text-align: center;">Variable</th>
+      <th style = "text-align: center;">Estimate</th>
+      <th style = "text-align: center;">Std.error</th>
+      <th style = "text-align: center;">t-value</th>
+      <th style = "text-align: center;">P-value</th>
+      <th style = "text-align: center;">Lower-bound</th>
+      <th style = "text-align: center;">Upper-bound</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style = "text-align: center;">female</td>
+      <td style = "text-align: center;">-0.16132</td>
+      <td style = "text-align: center;">0.03892</td>
+      <td style = "text-align: center;">-4.14527</td>
+      <td style = "text-align: center;">3.0e-5</td>
+      <td style = "text-align: center;">-0.2376</td>
+      <td style = "text-align: center;">-0.08504</td>
+    </tr>
+    <tr>
+      <td style = "text-align: center;">female &amp; widowed</td>
+      <td style = "text-align: center;">0.14442</td>
+      <td style = "text-align: center;">0.09065</td>
+      <td style = "text-align: center;">1.59313</td>
+      <td style = "text-align: center;">0.11114</td>
+      <td style = "text-align: center;">-0.03326</td>
+      <td style = "text-align: center;">0.32211</td>
+    </tr>
+    <tr>
+      <td style = "text-align: center;">female &amp; divorced</td>
+      <td style = "text-align: center;">0.14059</td>
+      <td style = "text-align: center;">0.02218</td>
+      <td style = "text-align: center;">6.33792</td>
+      <td style = "text-align: center;">0.0</td>
+      <td style = "text-align: center;">0.09711</td>
+      <td style = "text-align: center;">0.18407</td>
+    </tr>
+    <tr>
+      <td style = "text-align: center;">female &amp; separated</td>
+      <td style = "text-align: center;">0.05249</td>
+      <td style = "text-align: center;">0.05323</td>
+      <td style = "text-align: center;">0.98612</td>
+      <td style = "text-align: center;">0.32408</td>
+      <td style = "text-align: center;">-0.05185</td>
+      <td style = "text-align: center;">0.15683</td>
+    </tr>
+    <tr>
+      <td style = "text-align: center;">female &amp; nevermarried</td>
+      <td style = "text-align: center;">0.17139</td>
+      <td style = "text-align: center;">0.02021</td>
+      <td style = "text-align: center;">8.48165</td>
+      <td style = "text-align: center;">0.0</td>
+      <td style = "text-align: center;">0.13178</td>
+      <td style = "text-align: center;">0.211</td>
+    </tr>
+    <tr>
+      <td style = "text-align: center;">female &amp; hsd08</td>
+      <td style = "text-align: center;">-0.04922</td>
+      <td style = "text-align: center;">0.12127</td>
+      <td style = "text-align: center;">-0.40589</td>
+      <td style = "text-align: center;">0.68482</td>
+      <td style = "text-align: center;">-0.28691</td>
+      <td style = "text-align: center;">0.18847</td>
+    </tr>
+    <tr>
+      <td style = "text-align: center;">female &amp; hsd911</td>
+      <td style = "text-align: center;">-0.14236</td>
+      <td style = "text-align: center;">0.05185</td>
+      <td style = "text-align: center;">-2.74536</td>
+      <td style = "text-align: center;">0.00605</td>
+      <td style = "text-align: center;">-0.24399</td>
+      <td style = "text-align: center;">-0.04072</td>
+    </tr>
+    <tr>
+      <td style = "text-align: center;">female &amp; hsg</td>
+      <td style = "text-align: center;">-0.0219</td>
+      <td style = "text-align: center;">0.01923</td>
+      <td style = "text-align: center;">-1.13885</td>
+      <td style = "text-align: center;">0.25477</td>
+      <td style = "text-align: center;">-0.05959</td>
+      <td style = "text-align: center;">0.01579</td>
+    </tr>
+    <tr>
+      <td style = "text-align: center;">female &amp; cg</td>
+      <td style = "text-align: center;">0.00682</td>
+      <td style = "text-align: center;">0.01836</td>
+      <td style = "text-align: center;">0.37172</td>
+      <td style = "text-align: center;">0.71011</td>
+      <td style = "text-align: center;">-0.02916</td>
+      <td style = "text-align: center;">0.04281</td>
+    </tr>
+    <tr>
+      <td style = "text-align: center;">female &amp; ad</td>
+      <td style = "text-align: center;">-0.02009</td>
+      <td style = "text-align: center;">0.02189</td>
+      <td style = "text-align: center;">-0.91758</td>
+      <td style = "text-align: center;">0.35885</td>
+      <td style = "text-align: center;">-0.063</td>
+      <td style = "text-align: center;">0.02282</td>
+    </tr>
+    <tr>
+      <td style = "text-align: center;">female &amp; mw</td>
+      <td style = "text-align: center;">-0.00863</td>
+      <td style = "text-align: center;">0.01916</td>
+      <td style = "text-align: center;">-0.45048</td>
+      <td style = "text-align: center;">0.65237</td>
+      <td style = "text-align: center;">-0.0462</td>
+      <td style = "text-align: center;">0.02893</td>
+    </tr>
+    <tr>
+      <td style = "text-align: center;">female &amp; so</td>
+      <td style = "text-align: center;">-0.01284</td>
+      <td style = "text-align: center;">0.01935</td>
+      <td style = "text-align: center;">-0.66335</td>
+      <td style = "text-align: center;">0.50711</td>
+      <td style = "text-align: center;">-0.05076</td>
+      <td style = "text-align: center;">0.02509</td>
+    </tr>
+    <tr>
+      <td style = "text-align: center;">female &amp; we</td>
+      <td style = "text-align: center;">-0.01218</td>
+      <td style = "text-align: center;">0.02117</td>
+      <td style = "text-align: center;">-0.57525</td>
+      <td style = "text-align: center;">0.56513</td>
+      <td style = "text-align: center;">-0.05368</td>
+      <td style = "text-align: center;">0.02932</td>
+    </tr>
+    <tr>
+      <td style = "text-align: center;">female &amp; exp1</td>
+      <td style = "text-align: center;">-0.01629</td>
+      <td style = "text-align: center;">0.00545</td>
+      <td style = "text-align: center;">-2.99042</td>
+      <td style = "text-align: center;">0.00279</td>
+      <td style = "text-align: center;">-0.02697</td>
+      <td style = "text-align: center;">-0.00561</td>
+    </tr>
+    <tr>
+      <td style = "text-align: center;">female &amp; exp2</td>
+      <td style = "text-align: center;">0.04997</td>
+      <td style = "text-align: center;">0.03078</td>
+      <td style = "text-align: center;">1.62328</td>
+      <td style = "text-align: center;">0.10454</td>
+      <td style = "text-align: center;">-0.01037</td>
+      <td style = "text-align: center;">0.11031</td>
+    </tr>
+    <tr>
+      <td style = "text-align: center;">female &amp; exp3</td>
+      <td style = "text-align: center;">-0.00509</td>
+      <td style = "text-align: center;">0.00564</td>
+      <td style = "text-align: center;">-0.90166</td>
+      <td style = "text-align: center;">0.36724</td>
+      <td style = "text-align: center;">-0.01614</td>
+      <td style = "text-align: center;">0.00597</td>
+    </tr>
+  </tbody>
+</table>
+</body>
+</html>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">xerror</span> <span class="o">=</span> <span class="n">T</span><span class="p">[</span><span class="o">!</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span> <span class="o">.-</span> <span class="n">T</span><span class="p">[</span><span class="o">!</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>16-element Named Vector{Float64}
+A  │ 
+───┼──────────
+1  │ 0.0762783
+2  │  0.177687
+3  │ 0.0434786
+4  │   0.10434
+5  │ 0.0396071
+6  │   0.23769
+7  │  0.101636
+8  │ 0.0376928
+9  │  0.035983
+10 │ 0.0429112
+11 │ 0.0375626
+12 │ 0.0379255
+13 │ 0.0414971
+14 │ 0.0106779
+15 │  0.060336
+16 │ 0.0110567
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">scatter</span><span class="p">(</span><span class="n">names</span><span class="p">(</span><span class="n">X</span><span class="p">)[</span><span class="n">index</span><span class="p">],</span> <span class="n">T</span><span class="p">[</span><span class="o">!</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span> <span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">&quot;Estimator&quot;</span><span class="p">,</span> <span class="n">yerrors</span> <span class="o">=</span> <span class="n">xerror</span><span class="p">,</span> 
+        <span class="n">ytick</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span><span class="o">:</span><span class="mf">0.05</span><span class="o">:</span><span class="mi">2</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="ss">:dash</span><span class="p">,</span> <span class="n">seriescolor</span><span class="o">=</span><span class="ss">:blue</span><span class="p">)</span>
+<span class="n">plot!</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">800</span><span class="p">,</span><span class="mi">650</span><span class="p">),</span> <span class="n">title</span><span class="o">=</span><span class="s">&quot;Heterogeneous wage effects - CI&quot;</span><span class="p">,</span> <span class="n">xrotation</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
+<span class="n">hline!</span><span class="p">(</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="ss">:dash</span> <span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">&quot;line&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/11_py-heterogenous-wage-effects_31_0.svg" src="../_images/11_py-heterogenous-wage-effects_31_0.svg" /></div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "julia-1.7"
+        },
+        kernelOptions: {
+            kernelName: "julia-1.7",
+            path: "./contents"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'julia-1.7'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By The Jupyter Book Community<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
