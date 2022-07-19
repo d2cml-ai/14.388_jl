@@ -1,0 +1,2445 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Author: Roberto Mendoza &#8212; My sample book</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Penalized Linear Regressions: A Simulation Experiment" href="07_julia-notebook-linear-penalized-regs.html" />
+    <link rel="prev" title="Analyzing RCT with Precision by Adjusting for Baseline Covariates" href="05_Julia_Analyzing_RCT_with_Precision.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">My sample book</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome to your Jupyter Book
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="01_Julia_Notebook_Linear_Model_Overfitting.html">
+   Simple Exercise on Overfitting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02_PM1_Notebook1_Prediction_newdata.html">
+   Chapter 2: Predictive Inference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03_PM1_Notebook_Inference.html">
+   An inferential problem: The Gender Wage Gap
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04_Juli_Notebook_RCT-polio.html">
+   Author: Roberto Mendoza
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05_Julia_Analyzing_RCT_with_Precision.html">
+   Analyzing RCT with Precision by Adjusting for Baseline Covariates
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Author: Roberto Mendoza
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07_julia-notebook-linear-penalized-regs.html">
+   Penalized Linear Regressions: A Simulation Experiment
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="09_Julia_OrthogonalLearning_lab4.html">
+   Orthogonal Learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="10_Julia_pm2_notebook_jannis.html">
+   Testing the Convergence Hypothesis
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="11_py-heterogenous-wage-effects.html">
+   Application: Heterogeneous Effect of Gender on Wage Using Double Lasso
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="14_Julia_pm3_notebook_newdata_nn.html">
+   A Simple Case Study using Wage Data from 2015 - proceeding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="16_Functional-aproximation-by-nn-and-rf.html">
+   Functional Approximations by Trees and Neural Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="17_Notebook_DAGitty.html">
+   Causal identification in DAGs using Backdoor and Swigs, Equivalence Classes, Falsiability Tests
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="19_Julia_pm3_notebook_inference_clustering.html">
+   A Case Study: The Effect of Gun Ownership on Gun-Homicide Rates
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="20_Julia-pm3-newdata-nn.html">
+   The Effect of Gun Ownership on Gun-Homicide Rates - proceeding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="23_Julia_debiased-ml-for-partially-linear-model.html">
+   Double/Debiased Machine Learning for the Partially Linear Regression Model.
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="25_debiased-ml-for-partially-linear-iv-model-in-julia.html">
+   Double/Debiased ML for Partially Linear IV Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="27_Julia_weak_iv_experiments.html">
+   A Simple Example of Properties of IV estimator when Instruments are Weak
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/contents/06_RCT_Precision_Adjustment.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fcontents/06_RCT_Precision_Adjustment.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/contents/06_RCT_Precision_Adjustment.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Author: Roberto Mendoza
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#analyzing-rct-reemployment-experiment">
+   Analyzing RCT reemployment experiment
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#model">
+     Model
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#analysis">
+       Analysis
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#carry-out-covariate-balance-check">
+   2.0 Carry out covariate balance check
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#model-specification">
+     3.0 Model specification
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#using-hdmjl">
+   Using HDMJL
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Author: Roberto Mendoza</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Author: Roberto Mendoza
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#analyzing-rct-reemployment-experiment">
+   Analyzing RCT reemployment experiment
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#model">
+     Model
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#analysis">
+       Analysis
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#carry-out-covariate-balance-check">
+   2.0 Carry out covariate balance check
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#model-specification">
+     3.0 Model specification
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#using-hdmjl">
+   Using HDMJL
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section id="author-roberto-mendoza">
+<h1>Author: Roberto Mendoza<a class="headerlink" href="#author-roberto-mendoza" title="Permalink to this headline">#</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="analyzing-rct-reemployment-experiment">
+<h1>Analyzing RCT reemployment experiment<a class="headerlink" href="#analyzing-rct-reemployment-experiment" title="Permalink to this headline">#</a></h1>
+<p>Data
+In this lab, we analyze the Pennsylvania re-employment bonus experiment, which was previously studied in “Sequential testing of duration data: the case of the Pennsylvania ‘reemployment bonus’ experiment” (Bilias, 2000), among others. These experiments were conducted in the 1980s by the U.S. Department of Labor to test the incentive effects of alternative compensation schemes for unemployment insurance (UI).</p>
+<p>In these experiments, UI claimants were randomly assigned either to a control group or one of five treatment groups. Actually, there are six treatment groups in the experiments. Here we focus on treatment group 4, but feel free to explore other treatment groups. In the control group the current rules of the UI applied. Individuals in the treatment groups were offered a cash bonus if they found a job within some pre-specified period of time (qualification period), provided that the job was retained for a specified duration. The treatments differed in the level of the bonus, the length of the qualification period, and whether the bonus was declining over time in the qualification period; see <a class="reference external" href="http://qed.econ.queensu.ca/jae/2000-v15.6/bilias/readme.b.txt">http://qed.econ.queensu.ca/jae/2000-v15.6/bilias/readme.b.txt</a> for further details on data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c">#import Pkg</span>
+
+
+<span class="c">#Pkg.add(&quot;DataFrames&quot;)</span>
+<span class="c">#Pkg.add(&quot;FilePaths&quot;)</span>
+<span class="c">#Pkg.add(&quot;Queryverse&quot;)</span>
+<span class="c">#Pkg.add(&quot;GLM&quot;)</span>
+<span class="c">#Pkg.add(&quot;StatsModels&quot;)</span>
+<span class="c">#Pkg.add(&quot;Combinatorics&quot;)</span>
+<span class="c">#Pkg.add(&quot;Iterators&quot;)</span>
+<span class="c">#Pkg.add(&quot;CategoricalArrays&quot;)</span>
+<span class="c">#Pkg.add(&quot;StatsBase&quot;)</span>
+<span class="c">#Pkg.add(&quot;Lasso&quot;)</span>
+<span class="c">#Pkg.add(&quot;TypedTables&quot;)</span>
+<span class="c">#Pkg.add(&quot;MacroTools&quot;)</span>
+<span class="c">#Pkg.add(&quot;NamedArrays&quot;)</span>
+<span class="c">#Pkg.add(&quot;DataTables&quot;)</span>
+<span class="c">#Pkg.add(&quot;Latexify&quot;)</span>
+<span class="c">#Pkg.add(&quot;PrettyTables&quot;)</span>
+<span class="c">#Pkg.add(&quot;TypedTables&quot;)</span>
+<span class="c">#Pkg.add(&quot;TexTables&quot;)</span>
+<span class="c">#Pkg.add(&quot;StatsModels&quot;)</span>
+<span class="c">#Pkg.add(&quot;DataTables&quot;)</span>
+<span class="c">#Pkg.add(&quot;FilePaths&quot;)</span>
+<span class="c">#Pkg.add(&quot;Combinatorics&quot;)</span>
+<span class="c">#Pkg.add(&quot;CategoricalArrays&quot;)</span>
+<span class="c">#Pkg.add(&quot;TypedTables&quot;)</span>
+<span class="c">#Pkg.add(&quot;MacroTools&quot;)</span>
+
+<span class="k">using</span> <span class="n">GLM</span><span class="p">,</span> <span class="n">StatsModels</span>
+<span class="k">using</span> <span class="n">DataTables</span>
+<span class="k">using</span> <span class="n">DelimitedFiles</span><span class="p">,</span> <span class="n">DataFrames</span><span class="p">,</span> <span class="n">Lasso</span>
+<span class="k">using</span> <span class="n">FilePaths</span>
+<span class="k">using</span> <span class="n">StatsModels</span><span class="p">,</span> <span class="n">Combinatorics</span>
+<span class="k">using</span> <span class="n">CategoricalArrays</span>
+<span class="k">using</span> <span class="n">StatsBase</span><span class="p">,</span> <span class="n">Statistics</span>
+<span class="k">using</span> <span class="n">TypedTables</span>
+<span class="k">using</span> <span class="n">MacroTools</span>
+<span class="k">using</span> <span class="n">NamedArrays</span>
+<span class="k">using</span> <span class="n">PrettyTables</span> <span class="c"># Dataframe or Datatable to latex</span>
+<span class="k">using</span> <span class="n">TexTables</span> <span class="c"># pretty regression table and tex outcome</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>ArgumentError: Package DataTables not found in current path:
+- Run `import Pkg; Pkg.add(&quot;DataTables&quot;)` to install the DataTables package.
+
+
+Stacktrace:
+ [1] require(into::Module, mod::Symbol)
+   @ Base .\loading.jl:967
+ [2] eval
+   @ .\boot.jl:373 [inlined]
+ [3] include_string(mapexpr::typeof(REPL.softscope), mod::Module, code::String, filename::String)
+   @ Base .\loading.jl:1196
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Loading data</span>
+
+<span class="n">mat</span><span class="p">,</span> <span class="n">head</span> <span class="o">=</span> <span class="n">readdlm</span><span class="p">(</span><span class="s">&quot;../data/penn_jae.dat&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="nb">true</span><span class="p">,</span> <span class="kt">Float64</span><span class="p">)</span>
+<span class="n">mat</span>
+<span class="n">df</span> <span class="o">=</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">mat</span><span class="p">,</span> <span class="n">vec</span><span class="p">(</span><span class="n">head</span><span class="p">))</span>
+<span class="n">describe</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div class="data-frame"><p>23 rows × 7 columns</p><table class="data-frame"><thead><tr><th></th><th>variable</th><th>mean</th><th>min</th><th>median</th><th>max</th><th>nmissing</th><th>eltype</th></tr><tr><th></th><th title="Symbol">Symbol</th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Int64">Int64</th><th title="DataType">DataType</th></tr></thead><tbody><tr><th>1</th><td>abdt</td><td>10693.6</td><td>10404.0</td><td>10691.0</td><td>10880.0</td><td>0</td><td>Float64</td></tr><tr><th>2</th><td>tg</td><td>2.56889</td><td>0.0</td><td>2.0</td><td>6.0</td><td>0</td><td>Float64</td></tr><tr><th>3</th><td>inuidur1</td><td>12.9148</td><td>1.0</td><td>10.0</td><td>52.0</td><td>0</td><td>Float64</td></tr><tr><th>4</th><td>inuidur2</td><td>12.1938</td><td>0.0</td><td>9.0</td><td>52.0</td><td>0</td><td>Float64</td></tr><tr><th>5</th><td>female</td><td>0.402142</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0</td><td>Float64</td></tr><tr><th>6</th><td>black</td><td>0.116653</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0</td><td>Float64</td></tr><tr><th>7</th><td>hispanic</td><td>0.0363689</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0</td><td>Float64</td></tr><tr><th>8</th><td>othrace</td><td>0.00575002</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0</td><td>Float64</td></tr><tr><th>9</th><td>dep</td><td>0.444045</td><td>0.0</td><td>0.0</td><td>2.0</td><td>0</td><td>Float64</td></tr><tr><th>10</th><td>q1</td><td>0.0136563</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0</td><td>Float64</td></tr><tr><th>11</th><td>q2</td><td>0.206498</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0</td><td>Float64</td></tr><tr><th>12</th><td>q3</td><td>0.237691</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0</td><td>Float64</td></tr><tr><th>13</th><td>q4</td><td>0.232229</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0</td><td>Float64</td></tr><tr><th>14</th><td>q5</td><td>0.232948</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0</td><td>Float64</td></tr><tr><th>15</th><td>q6</td><td>0.0769784</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0</td><td>Float64</td></tr><tr><th>16</th><td>recall</td><td>0.108675</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0</td><td>Float64</td></tr><tr><th>17</th><td>agelt35</td><td>0.543089</td><td>0.0</td><td>1.0</td><td>1.0</td><td>0</td><td>Float64</td></tr><tr><th>18</th><td>agegt54</td><td>0.106735</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0</td><td>Float64</td></tr><tr><th>19</th><td>durable</td><td>0.148638</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0</td><td>Float64</td></tr><tr><th>20</th><td>nondurable</td><td>0.10961</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0</td><td>Float64</td></tr><tr><th>21</th><td>lusd</td><td>0.265435</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0</td><td>Float64</td></tr><tr><th>22</th><td>husd</td><td>0.221807</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0</td><td>Float64</td></tr><tr><th>23</th><td>muld</td><td>0.438008</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0</td><td>Float64</td></tr></tbody></table></div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c">#dimenntions of dataframe </span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="n">size</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span>  <span class="n">size</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>23
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Filter control group and just treatment group number 4</span>
+
+<span class="n">penn</span> <span class="o">=</span> <span class="n">filter</span><span class="p">(</span><span class="n">row</span> <span class="o">-&gt;</span> <span class="n">row</span><span class="p">[</span><span class="ss">:tg</span><span class="p">]</span> <span class="k">in</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">df</span><span class="p">)</span>
+
+<span class="n">first</span><span class="p">(</span><span class="n">penn</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div class="data-frame"><p>20 rows × 23 columns (omitted printing of 14 columns)</p><table class="data-frame"><thead><tr><th></th><th>abdt</th><th>tg</th><th>inuidur1</th><th>inuidur2</th><th>female</th><th>black</th><th>hispanic</th><th>othrace</th><th>dep</th></tr><tr><th></th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th></tr></thead><tbody><tr><th>1</th><td>10824.0</td><td>0.0</td><td>18.0</td><td>18.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>2.0</td></tr><tr><th>2</th><td>10824.0</td><td>0.0</td><td>1.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>3</th><td>10747.0</td><td>0.0</td><td>27.0</td><td>27.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>4</th><td>10607.0</td><td>4.0</td><td>9.0</td><td>9.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>5</th><td>10831.0</td><td>0.0</td><td>27.0</td><td>27.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td></tr><tr><th>6</th><td>10845.0</td><td>0.0</td><td>27.0</td><td>27.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>7</th><td>10831.0</td><td>0.0</td><td>9.0</td><td>9.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td></tr><tr><th>8</th><td>10859.0</td><td>0.0</td><td>27.0</td><td>27.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td></tr><tr><th>9</th><td>10516.0</td><td>0.0</td><td>15.0</td><td>15.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>10</th><td>10663.0</td><td>0.0</td><td>28.0</td><td>11.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>11</th><td>10747.0</td><td>0.0</td><td>12.0</td><td>12.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>2.0</td></tr><tr><th>12</th><td>10551.0</td><td>4.0</td><td>22.0</td><td>22.0</td><td>1.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>2.0</td></tr><tr><th>13</th><td>10768.0</td><td>0.0</td><td>18.0</td><td>18.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>14</th><td>10537.0</td><td>0.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>2.0</td></tr><tr><th>15</th><td>10600.0</td><td>4.0</td><td>7.0</td><td>7.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>16</th><td>10866.0</td><td>0.0</td><td>18.0</td><td>18.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>17</th><td>10572.0</td><td>0.0</td><td>14.0</td><td>14.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>2.0</td></tr><tr><th>18</th><td>10663.0</td><td>0.0</td><td>5.0</td><td>5.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>19</th><td>10789.0</td><td>0.0</td><td>9.0</td><td>9.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>20</th><td>10768.0</td><td>0.0</td><td>3.0</td><td>3.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr></tbody></table></div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Treatment group n°4</span>
+<span class="n">replace!</span><span class="p">(</span><span class="n">penn</span><span class="o">.</span><span class="n">tg</span><span class="p">,</span> <span class="mi">4</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">)</span>
+
+
+<span class="n">rename!</span><span class="p">(</span><span class="n">penn</span><span class="p">,</span> <span class="s">&quot;tg&quot;</span> <span class="o">=&gt;</span> <span class="s">&quot;T4&quot;</span><span class="p">)</span>
+
+
+<span class="c"># from float to string</span>
+<span class="n">penn</span><span class="p">[</span><span class="o">!</span><span class="p">,</span><span class="ss">:dep</span><span class="p">]</span> <span class="o">=</span> <span class="n">string</span><span class="o">.</span><span class="p">(</span><span class="n">penn</span><span class="p">[</span><span class="o">!</span><span class="p">,</span><span class="ss">:dep</span><span class="p">])</span> 
+
+<span class="c"># dep varaible in categorical format </span>
+<span class="n">penn</span><span class="p">[</span><span class="o">!</span><span class="p">,</span><span class="ss">:dep</span><span class="p">]</span> <span class="o">=</span> <span class="n">categorical</span><span class="p">(</span><span class="n">penn</span><span class="p">[</span><span class="o">!</span><span class="p">,</span><span class="ss">:dep</span><span class="p">])</span>
+
+<span class="n">describe</span><span class="p">(</span><span class="n">penn</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div class="data-frame"><p>23 rows × 7 columns</p><table class="data-frame"><thead><tr><th></th><th>variable</th><th>mean</th><th>min</th><th>median</th><th>max</th><th>nmissing</th><th>eltype</th></tr><tr><th></th><th title="Symbol">Symbol</th><th title="Union{Nothing, Float64}">Union…</th><th title="Any">Any</th><th title="Union{Nothing, Float64}">Union…</th><th title="Any">Any</th><th title="Int64">Int64</th><th title="DataType">DataType</th></tr></thead><tbody><tr><th>1</th><td>abdt</td><td>10695.4</td><td>10404.0</td><td>10698.0</td><td>10880.0</td><td>0</td><td>Float64</td></tr><tr><th>2</th><td>T4</td><td>0.342224</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0</td><td>Float64</td></tr><tr><th>3</th><td>inuidur1</td><td>13.053</td><td>1.0</td><td>11.0</td><td>52.0</td><td>0</td><td>Float64</td></tr><tr><th>4</th><td>inuidur2</td><td>12.2812</td><td>0.0</td><td>10.0</td><td>52.0</td><td>0</td><td>Float64</td></tr><tr><th>5</th><td>female</td><td>0.404001</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0</td><td>Float64</td></tr><tr><th>6</th><td>black</td><td>0.121985</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0</td><td>Float64</td></tr><tr><th>7</th><td>hispanic</td><td>0.0325554</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0</td><td>Float64</td></tr><tr><th>8</th><td>othrace</td><td>0.00725632</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0</td><td>Float64</td></tr><tr><th>9</th><td>dep</td><td></td><td>0.0</td><td></td><td>2.0</td><td>0</td><td>CategoricalValue{String, UInt32}</td></tr><tr><th>10</th><td>q1</td><td>0.0127476</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0</td><td>Float64</td></tr><tr><th>11</th><td>q2</td><td>0.203765</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0</td><td>Float64</td></tr><tr><th>12</th><td>q3</td><td>0.235536</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0</td><td>Float64</td></tr><tr><th>13</th><td>q4</td><td>0.225927</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0</td><td>Float64</td></tr><tr><th>14</th><td>q5</td><td>0.25907</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0</td><td>Float64</td></tr><tr><th>15</th><td>q6</td><td>0.0629535</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0</td><td>Float64</td></tr><tr><th>16</th><td>recall</td><td>0.110414</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0</td><td>Float64</td></tr><tr><th>17</th><td>agelt35</td><td>0.545009</td><td>0.0</td><td>1.0</td><td>1.0</td><td>0</td><td>Float64</td></tr><tr><th>18</th><td>agegt54</td><td>0.109433</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0</td><td>Float64</td></tr><tr><th>19</th><td>durable</td><td>0.148068</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0</td><td>Float64</td></tr><tr><th>20</th><td>nondurable</td><td>0.109237</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0</td><td>Float64</td></tr><tr><th>21</th><td>lusd</td><td>0.261032</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0</td><td>Float64</td></tr><tr><th>22</th><td>husd</td><td>0.21867</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0</td><td>Float64</td></tr><tr><th>23</th><td>muld</td><td>0.444205</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0</td><td>Float64</td></tr></tbody></table></div></div></div>
+</div>
+<section id="model">
+<h2>Model<a class="headerlink" href="#model" title="Permalink to this headline">#</a></h2>
+<p>To evaluate the impact of the treatments on unemployment duration, we consider the linear regression model:</p>
+<div class="math notranslate nohighlight">
+\[
+Y =  D \beta_1 + W'\beta_2 + \varepsilon, \quad E \varepsilon (D,W')' = 0,
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(Y\)</span> is  the  log of duration of unemployment, <span class="math notranslate nohighlight">\(D\)</span> is a treatment  indicators,  and <span class="math notranslate nohighlight">\(W\)</span> is a set of controls including age group dummies, gender, race, number of dependents, quarter of the experiment, location within the state, existence of recall expectations, and type of occupation.   Here <span class="math notranslate nohighlight">\(\beta_1\)</span> is the ATE, if the RCT assumptions hold rigorously.</p>
+<p>We also consider interactive regression model:</p>
+<div class="math notranslate nohighlight">
+\[
+Y =  D \alpha_1 + D W' \alpha_2 + W'\beta_2 + \varepsilon, \quad E \varepsilon (D,W', DW')' = 0,
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(W\)</span>’s are demeaned (apart from the intercept), so that <span class="math notranslate nohighlight">\(\alpha_1\)</span> is the ATE, if the RCT assumptions hold rigorously.</p>
+<p>Under RCT, the projection coefficient <span class="math notranslate nohighlight">\(\beta_1\)</span> has
+the interpretation of the causal effect of the treatment on
+the average outcome. We thus refer to <span class="math notranslate nohighlight">\(\beta_1\)</span> as the average
+treatment effect (ATE). Note that the covariates, here are
+independent of the treatment <span class="math notranslate nohighlight">\(D\)</span>, so we can identify <span class="math notranslate nohighlight">\(\beta_1\)</span> by
+just linear regression of <span class="math notranslate nohighlight">\(Y\)</span> on <span class="math notranslate nohighlight">\(D\)</span>, without adding covariates.
+However we do add covariates in an effort to improve the
+precision of our estimates of the average treatment effect.</p>
+<section id="analysis">
+<h3>Analysis<a class="headerlink" href="#analysis" title="Permalink to this headline">#</a></h3>
+<p>We consider</p>
+<ul class="simple">
+<li><p>classical 2-sample approach, no adjustment (CL)</p></li>
+<li><p>classical linear regression adjustment (CRA)</p></li>
+<li><p>interactive regression adjusment (IRA)</p></li>
+</ul>
+<p>and carry out robust inference using the <em>estimatr</em> R packages.</p>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="carry-out-covariate-balance-check">
+<h1>2.0 Carry out covariate balance check<a class="headerlink" href="#carry-out-covariate-balance-check" title="Permalink to this headline">#</a></h1>
+<p>This is done using “lm_robust” command which unlike “lm” in the base command automatically does the correct Eicher-Huber-White standard errors, instead othe classical non-robus formula based on the homoscdedasticity command.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># couples variables combinations </span>
+<span class="n">combinations_upto</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="o">=</span> <span class="n">Iterators</span><span class="o">.</span><span class="n">flatten</span><span class="p">(</span><span class="n">combinations</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="n">n</span><span class="p">)</span>
+
+<span class="c"># combinations without same couple</span>
+<span class="n">expand_exp</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">deg</span><span class="o">::</span><span class="kt">ConstantTerm</span><span class="p">)</span> <span class="o">=</span>
+    <span class="n">tuple</span><span class="p">(((</span><span class="o">&amp;</span><span class="p">)(</span><span class="n">terms</span><span class="o">...</span><span class="p">)</span> <span class="k">for</span> <span class="n">terms</span> <span class="k">in</span> <span class="n">combinations_upto</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">deg</span><span class="o">.</span><span class="n">n</span><span class="p">))</span><span class="o">...</span><span class="p">)</span>
+
+<span class="n">StatsModels</span><span class="o">.</span><span class="n">apply_schema</span><span class="p">(</span><span class="n">t</span><span class="o">::</span><span class="kt">FunctionTerm</span><span class="p">{</span><span class="kt">typeof</span><span class="p">(</span><span class="o">^</span><span class="p">)},</span> <span class="n">sch</span><span class="o">::</span><span class="kt">StatsModels</span><span class="o">.</span><span class="n">Schema</span><span class="p">,</span> <span class="n">ctx</span><span class="o">::</span><span class="kt">Type</span><span class="p">)</span> <span class="o">=</span>
+    <span class="n">apply_schema</span><span class="o">.</span><span class="p">(</span><span class="n">expand_exp</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">args_parsed</span><span class="o">...</span><span class="p">),</span> <span class="kt">Ref</span><span class="p">(</span><span class="n">sch</span><span class="p">),</span> <span class="n">ctx</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># linear regression</span>
+
+<span class="n">reg1</span> <span class="o">=</span> <span class="nd">@formula</span><span class="p">(</span><span class="n">T4</span> <span class="o">~</span> <span class="p">(</span><span class="n">female</span><span class="o">+</span><span class="n">black</span><span class="o">+</span><span class="n">othrace</span><span class="o">+</span><span class="n">dep</span><span class="o">+</span><span class="n">q2</span><span class="o">+</span><span class="n">q3</span><span class="o">+</span><span class="n">q4</span><span class="o">+</span><span class="n">q5</span><span class="o">+</span><span class="n">q6</span><span class="o">+</span><span class="n">agelt35</span><span class="o">+</span><span class="n">agegt54</span><span class="o">+</span><span class="n">durable</span><span class="o">+</span><span class="n">lusd</span><span class="o">+</span><span class="n">husd</span><span class="p">)</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">reg1</span> <span class="o">=</span> <span class="n">apply_schema</span><span class="p">(</span><span class="n">reg1</span><span class="p">,</span> <span class="n">schema</span><span class="p">(</span><span class="n">reg1</span><span class="p">,</span> <span class="n">penn</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>FormulaTerm
+Response:
+  T4(continuous)
+Predictors:
+  female(continuous)
+  black(continuous)
+  othrace(continuous)
+  dep(DummyCoding:3→2)
+  q2(continuous)
+  q3(continuous)
+  q4(continuous)
+  q5(continuous)
+  q6(continuous)
+  agelt35(continuous)
+  agegt54(continuous)
+  durable(continuous)
+  lusd(continuous)
+  husd(continuous)
+  female(continuous) &amp; black(continuous)
+  female(continuous) &amp; othrace(continuous)
+  female(continuous) &amp; dep(DummyCoding:3→2)
+  female(continuous) &amp; q2(continuous)
+  female(continuous) &amp; q3(continuous)
+  female(continuous) &amp; q4(continuous)
+  female(continuous) &amp; q5(continuous)
+  female(continuous) &amp; q6(continuous)
+  female(continuous) &amp; agelt35(continuous)
+  female(continuous) &amp; agegt54(continuous)
+  female(continuous) &amp; durable(continuous)
+  female(continuous) &amp; lusd(continuous)
+  female(continuous) &amp; husd(continuous)
+  black(continuous) &amp; othrace(continuous)
+  black(continuous) &amp; dep(DummyCoding:3→2)
+  black(continuous) &amp; q2(continuous)
+  black(continuous) &amp; q3(continuous)
+  black(continuous) &amp; q4(continuous)
+  black(continuous) &amp; q5(continuous)
+  black(continuous) &amp; q6(continuous)
+  black(continuous) &amp; agelt35(continuous)
+  black(continuous) &amp; agegt54(continuous)
+  black(continuous) &amp; durable(continuous)
+  black(continuous) &amp; lusd(continuous)
+  black(continuous) &amp; husd(continuous)
+  othrace(continuous) &amp; dep(DummyCoding:3→2)
+  othrace(continuous) &amp; q2(continuous)
+  othrace(continuous) &amp; q3(continuous)
+  othrace(continuous) &amp; q4(continuous)
+  othrace(continuous) &amp; q5(continuous)
+  othrace(continuous) &amp; q6(continuous)
+  othrace(continuous) &amp; agelt35(continuous)
+  othrace(continuous) &amp; agegt54(continuous)
+  othrace(continuous) &amp; durable(continuous)
+  othrace(continuous) &amp; lusd(continuous)
+  othrace(continuous) &amp; husd(continuous)
+  dep(DummyCoding:3→2) &amp; q2(continuous)
+  dep(DummyCoding:3→2) &amp; q3(continuous)
+  dep(DummyCoding:3→2) &amp; q4(continuous)
+  dep(DummyCoding:3→2) &amp; q5(continuous)
+  dep(DummyCoding:3→2) &amp; q6(continuous)
+  dep(DummyCoding:3→2) &amp; agelt35(continuous)
+  dep(DummyCoding:3→2) &amp; agegt54(continuous)
+  dep(DummyCoding:3→2) &amp; durable(continuous)
+  dep(DummyCoding:3→2) &amp; lusd(continuous)
+  dep(DummyCoding:3→2) &amp; husd(continuous)
+  q2(continuous) &amp; q3(continuous)
+  q2(continuous) &amp; q4(continuous)
+  q2(continuous) &amp; q5(continuous)
+  q2(continuous) &amp; q6(continuous)
+  q2(continuous) &amp; agelt35(continuous)
+  q2(continuous) &amp; agegt54(continuous)
+  q2(continuous) &amp; durable(continuous)
+  q2(continuous) &amp; lusd(continuous)
+  q2(continuous) &amp; husd(continuous)
+  q3(continuous) &amp; q4(continuous)
+  q3(continuous) &amp; q5(continuous)
+  q3(continuous) &amp; q6(continuous)
+  q3(continuous) &amp; agelt35(continuous)
+  q3(continuous) &amp; agegt54(continuous)
+  q3(continuous) &amp; durable(continuous)
+  q3(continuous) &amp; lusd(continuous)
+  q3(continuous) &amp; husd(continuous)
+  q4(continuous) &amp; q5(continuous)
+  q4(continuous) &amp; q6(continuous)
+  q4(continuous) &amp; agelt35(continuous)
+  q4(continuous) &amp; agegt54(continuous)
+  q4(continuous) &amp; durable(continuous)
+  q4(continuous) &amp; lusd(continuous)
+  q4(continuous) &amp; husd(continuous)
+  q5(continuous) &amp; q6(continuous)
+  q5(continuous) &amp; agelt35(continuous)
+  q5(continuous) &amp; agegt54(continuous)
+  q5(continuous) &amp; durable(continuous)
+  q5(continuous) &amp; lusd(continuous)
+  q5(continuous) &amp; husd(continuous)
+  q6(continuous) &amp; agelt35(continuous)
+  q6(continuous) &amp; agegt54(continuous)
+  q6(continuous) &amp; durable(continuous)
+  q6(continuous) &amp; lusd(continuous)
+  q6(continuous) &amp; husd(continuous)
+  agelt35(continuous) &amp; agegt54(continuous)
+  agelt35(continuous) &amp; durable(continuous)
+  agelt35(continuous) &amp; lusd(continuous)
+  agelt35(continuous) &amp; husd(continuous)
+  agegt54(continuous) &amp; durable(continuous)
+  agegt54(continuous) &amp; lusd(continuous)
+  agegt54(continuous) &amp; husd(continuous)
+  durable(continuous) &amp; lusd(continuous)
+  durable(continuous) &amp; husd(continuous)
+  lusd(continuous) &amp; husd(continuous)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">m1</span> <span class="o">=</span> <span class="n">lm</span><span class="p">(</span><span class="n">reg1</span><span class="p">,</span> <span class="n">penn</span><span class="p">)</span>
+<span class="n">table</span> <span class="o">=</span> <span class="n">regtable</span><span class="p">(</span> <span class="s">&quot;Covariate Balance Check&quot;</span> <span class="o">=&gt;</span> <span class="n">m1</span><span class="p">)</span> <span class="c"># coeficientes, standar error, squared R, N (sample size )</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                   | Covariate Balance Check 
+                   |           (1)           
+---------------------------------------------
+       (Intercept) |                  0.321* 
+                   |                 (0.167) 
+            female |                   0.104 
+                   |                 (0.138) 
+             black |                   0.072 
+                   |                 (0.087) 
+           othrace |                  -0.345 
+                   |                 (0.294) 
+          dep: 1.0 |                  -0.074 
+                   |                 (0.218) 
+          dep: 2.0 |                  -0.109 
+                   |                 (0.165) 
+                q2 |                  -0.027 
+                   |                 (0.168) 
+                q3 |                  -0.006 
+                   |                 (0.167) 
+                q4 |                   0.043 
+                   |                 (0.168) 
+                q5 |                   0.094 
+                   |                 (0.167) 
+                q6 |                  -0.222 
+                   |                 (0.167) 
+           agelt35 |                  -0.109 
+                   |                 (0.135) 
+           agegt54 |                  -0.437 
+                   |                 (0.302) 
+           durable |                  -0.125 
+                   |                 (0.192) 
+              lusd |                   0.038 
+                   |                 (0.047) 
+              husd |                   0.095 
+                   |                 (0.080) 
+    female &amp; black |                 0.089** 
+                   |                 (0.044) 
+  female &amp; othrace |                -0.414** 
+                   |                 (0.201) 
+ female &amp; dep: 1.0 |                   0.055 
+                   |                 (0.047) 
+ female &amp; dep: 2.0 |                   0.045 
+                   |                 (0.041) 
+       female &amp; q2 |                  -0.189 
+                   |                 (0.137) 
+       female &amp; q3 |                  -0.165 
+                   |                 (0.137) 
+       female &amp; q4 |                  -0.176 
+                   |                 (0.137) 
+       female &amp; q5 |                  -0.203 
+                   |                 (0.136) 
+       female &amp; q6 |                  -0.043 
+                   |                 (0.145) 
+  female &amp; agelt35 |                 0.073** 
+                   |                 (0.030) 
+  female &amp; agegt54 |                   0.026 
+                   |                 (0.051) 
+  female &amp; durable |                   0.020 
+                   |                 (0.044) 
+     female &amp; lusd |                   0.002 
+                   |                 (0.034) 
+     female &amp; husd |                   0.012 
+                   |                 (0.037) 
+   black &amp; othrace |                   0.000 
+                   |                   (NaN) 
+  black &amp; dep: 1.0 |                  -0.117 
+                   |                 (0.071) 
+  black &amp; dep: 2.0 |                  -0.022 
+                   |                 (0.063) 
+        black &amp; q2 |                  -0.033 
+                   |                 (0.092) 
+        black &amp; q3 |                -0.197** 
+                   |                 (0.089) 
+        black &amp; q4 |                  -0.125 
+                   |                 (0.088) 
+        black &amp; q5 |                -0.210** 
+                   |                 (0.087) 
+        black &amp; q6 |                   0.000 
+                   |                   (NaN) 
+   black &amp; agelt35 |                   0.062 
+                   |                 (0.046) 
+   black &amp; agegt54 |                   0.051 
+                   |                 (0.082) 
+   black &amp; durable |                   0.105 
+                   |                 (0.067) 
+      black &amp; lusd |                  -0.021 
+                   |                 (0.055) 
+      black &amp; husd |                   0.250 
+                   |                 (0.173) 
+othrace &amp; dep: 1.0 |                  -0.858 
+                   |                 (0.615) 
+othrace &amp; dep: 2.0 |                   0.242 
+                   |                 (0.212) 
+      othrace &amp; q2 |                 0.811** 
+                   |                 (0.371) 
+      othrace &amp; q3 |                   0.000 
+                   |                   (NaN) 
+      othrace &amp; q4 |                0.789*** 
+                   |                 (0.296) 
+      othrace &amp; q5 |                   0.379 
+                   |                 (0.286) 
+      othrace &amp; q6 |                   0.373 
+                   |                 (0.353) 
+ othrace &amp; agelt35 |                   0.316 
+                   |                 (0.217) 
+ othrace &amp; agegt54 |                   0.309 
+                   |                 (0.254) 
+ othrace &amp; durable |                  -0.191 
+                   |                 (0.230) 
+    othrace &amp; lusd |                  -0.091 
+                   |                 (0.215) 
+    othrace &amp; husd |                   0.005 
+                   |                 (0.329) 
+     dep: 1.0 &amp; q2 |                   0.166 
+                   |                 (0.217) 
+     dep: 2.0 &amp; q2 |                   0.087 
+                   |                 (0.165) 
+     dep: 1.0 &amp; q3 |                   0.121 
+                   |                 (0.217) 
+     dep: 2.0 &amp; q3 |                   0.140 
+                   |                 (0.165) 
+     dep: 1.0 &amp; q4 |                   0.085 
+                   |                 (0.216) 
+     dep: 2.0 &amp; q4 |                   0.091 
+                   |                 (0.166) 
+     dep: 1.0 &amp; q5 |                   0.110 
+                   |                 (0.215) 
+     dep: 2.0 &amp; q5 |                   0.096 
+                   |                 (0.164) 
+     dep: 1.0 &amp; q6 |                   0.101 
+                   |                 (0.229) 
+     dep: 2.0 &amp; q6 |                   0.048 
+                   |                 (0.175) 
+dep: 1.0 &amp; agelt35 |                  -0.074 
+                   |                 (0.048) 
+dep: 2.0 &amp; agelt35 |                  -0.024 
+                   |                 (0.038) 
+dep: 1.0 &amp; agegt54 |                  -0.081 
+                   |                 (0.070) 
+dep: 2.0 &amp; agegt54 |                   0.028 
+                   |                 (0.144) 
+dep: 1.0 &amp; durable |                  -0.060 
+                   |                 (0.063) 
+dep: 2.0 &amp; durable |                 0.125** 
+                   |                 (0.050) 
+   dep: 1.0 &amp; lusd |                   0.059 
+                   |                 (0.052) 
+   dep: 2.0 &amp; lusd |                   0.052 
+                   |                 (0.046) 
+   dep: 1.0 &amp; husd |                  -0.043 
+                   |                 (0.057) 
+   dep: 2.0 &amp; husd |                 -0.088* 
+                   |                 (0.050) 
+           q2 &amp; q3 |                   0.000 
+                   |                   (NaN) 
+           q2 &amp; q4 |                   0.000 
+                   |                   (NaN) 
+           q2 &amp; q5 |                   0.000 
+                   |                   (NaN) 
+           q2 &amp; q6 |                   0.000 
+                   |                   (NaN) 
+      q2 &amp; agelt35 |                   0.128 
+                   |                 (0.135) 
+      q2 &amp; agegt54 |                  0.530* 
+                   |                 (0.302) 
+      q2 &amp; durable |                   0.126 
+                   |                 (0.190) 
+         q2 &amp; lusd |                   0.000 
+                   |                   (NaN) 
+         q2 &amp; husd |                  -0.019 
+                   |                 (0.080) 
+           q3 &amp; q4 |                   0.000 
+                   |                   (NaN) 
+           q3 &amp; q5 |                   0.000 
+                   |                   (NaN) 
+           q3 &amp; q6 |                   0.000 
+                   |                   (NaN) 
+      q3 &amp; agelt35 |                   0.131 
+                   |                 (0.135) 
+      q3 &amp; agegt54 |                   0.478 
+                   |                 (0.301) 
+      q3 &amp; durable |                   0.054 
+                   |                 (0.190) 
+         q3 &amp; lusd |                   0.022 
+                   |                 (0.048) 
+         q3 &amp; husd |                  -0.060 
+                   |                 (0.079) 
+           q4 &amp; q5 |                   0.000 
+                   |                   (NaN) 
+           q4 &amp; q6 |                   0.000 
+                   |                   (NaN) 
+      q4 &amp; agelt35 |                   0.131 
+                   |                 (0.135) 
+      q4 &amp; agegt54 |                  0.540* 
+                   |                 (0.300) 
+      q4 &amp; durable |                   0.096 
+                   |                 (0.191) 
+         q4 &amp; lusd |                  -0.027 
+                   |                 (0.049) 
+         q4 &amp; husd |                -0.172** 
+                   |                 (0.080) 
+           q5 &amp; q6 |                   0.000 
+                   |                   (NaN) 
+      q5 &amp; agelt35 |                   0.071 
+                   |                 (0.134) 
+      q5 &amp; agegt54 |                   0.444 
+                   |                 (0.300) 
+      q5 &amp; durable |                   0.075 
+                   |                 (0.189) 
+         q5 &amp; lusd |               5.906e-05 
+                   |                 (0.048) 
+         q5 &amp; husd |                -0.162** 
+                   |                 (0.078) 
+      q6 &amp; agelt35 |                   0.170 
+                   |                 (0.143) 
+      q6 &amp; agegt54 |                  0.566* 
+                   |                 (0.311) 
+      q6 &amp; durable |                   0.256 
+                   |                 (0.199) 
+         q6 &amp; lusd |                   0.076 
+                   |                 (0.075) 
+         q6 &amp; husd |                   0.000 
+                   |                   (NaN) 
+ agelt35 &amp; agegt54 |                   0.000 
+                   |                   (NaN) 
+ agelt35 &amp; durable |                   0.009 
+                   |                 (0.041) 
+    agelt35 &amp; lusd |                  -0.026 
+                   |                 (0.035) 
+    agelt35 &amp; husd |                   0.035 
+                   |                 (0.041) 
+ agegt54 &amp; durable |                  -0.062 
+                   |                 (0.068) 
+    agegt54 &amp; lusd |                  -0.037 
+                   |                 (0.057) 
+    agegt54 &amp; husd |                  -0.074 
+                   |                 (0.063) 
+    durable &amp; lusd |                  -0.055 
+                   |                 (0.044) 
+    durable &amp; husd |              -1.692e-04 
+                   |                 (0.054) 
+       lusd &amp; husd |                   0.000 
+                   |                   (NaN) 
+---------------------------------------------
+                 N |                    5099 
+             $R^2$ |                   0.029 
+</pre></div>
+</div>
+</div>
+</div>
+<section id="model-specification">
+<h2>3.0 Model specification<a class="headerlink" href="#model-specification" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># No adjustment (2-sample approach)</span>
+
+<span class="n">ols_cl</span> <span class="o">=</span> <span class="n">lm</span><span class="p">(</span><span class="nd">@formula</span><span class="p">(</span><span class="n">log</span><span class="p">(</span><span class="n">inuidur1</span><span class="p">)</span> <span class="o">~</span> <span class="n">T4</span><span class="p">),</span> <span class="n">penn</span><span class="p">)</span>
+
+<span class="n">table1</span> <span class="o">=</span> <span class="n">regtable</span><span class="p">(</span> <span class="s">&quot;No adjustment model&quot;</span> <span class="o">=&gt;</span> <span class="n">ols_cl</span><span class="p">)</span>   <span class="c"># </span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>            | No adjustment model 
+            |         (1)         
+----------------------------------
+(Intercept) |            2.057*** 
+            |             (0.021) 
+         T4 |            -0.085** 
+            |             (0.036) 
+----------------------------------
+          N |                5099 
+      $R^2$ |               0.001 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># adding controls</span>
+<span class="c"># Omitted dummies: q1, nondurable, muld</span>
+
+<span class="n">reg2</span> <span class="o">=</span> <span class="nd">@formula</span><span class="p">(</span><span class="n">log</span><span class="p">(</span><span class="n">inuidur1</span><span class="p">)</span> <span class="o">~</span> <span class="n">T4</span> <span class="o">+</span> <span class="p">(</span><span class="n">female</span><span class="o">+</span><span class="n">black</span><span class="o">+</span><span class="n">othrace</span><span class="o">+</span><span class="n">dep</span><span class="o">+</span><span class="n">q2</span><span class="o">+</span><span class="n">q3</span><span class="o">+</span><span class="n">q4</span><span class="o">+</span><span class="n">q5</span><span class="o">+</span><span class="n">q6</span><span class="o">+</span><span class="n">agelt35</span><span class="o">+</span><span class="n">agegt54</span><span class="o">+</span><span class="n">durable</span><span class="o">+</span><span class="n">lusd</span><span class="o">+</span><span class="n">husd</span><span class="p">)</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">reg2</span> <span class="o">=</span> <span class="n">apply_schema</span><span class="p">(</span><span class="n">reg2</span><span class="p">,</span> <span class="n">schema</span><span class="p">(</span><span class="n">reg2</span><span class="p">,</span> <span class="n">penn</span><span class="p">))</span>
+
+<span class="n">ols_cra</span> <span class="o">=</span> <span class="n">lm</span><span class="p">(</span><span class="n">reg2</span><span class="p">,</span> <span class="n">penn</span><span class="p">)</span>
+<span class="n">table2</span> <span class="o">=</span> <span class="n">regtable</span><span class="p">(</span><span class="s">&quot;CRA model&quot;</span> <span class="o">=&gt;</span> <span class="n">ols_cra</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                   | CRA model 
+                   |    (1)    
+-------------------------------
+       (Intercept) |  2.633*** 
+                   |   (0.420) 
+                T4 |  -0.080** 
+                   |   (0.036) 
+            female |    -0.115 
+                   |   (0.347) 
+             black | -0.441*** 
+                   |   (0.158) 
+           othrace |    -0.883 
+                   |   (0.903) 
+          dep: 1.0 |    -0.720 
+                   |   (0.550) 
+          dep: 2.0 |    -0.041 
+                   |   (0.417) 
+                q2 |    -0.160 
+                   |   (0.423) 
+                q3 |    -0.540 
+                   |   (0.422) 
+                q4 |    -0.433 
+                   |   (0.422) 
+                q5 |    -0.345 
+                   |   (0.420) 
+                q6 |    -0.494 
+                   |   (0.420) 
+           agelt35 |   -0.626* 
+                   |   (0.340) 
+           agegt54 |    -0.361 
+                   |   (0.760) 
+           durable |    -0.279 
+                   |   (0.483) 
+              lusd |    -0.223 
+                   |   (0.184) 
+              husd |    -0.170 
+                   |   (0.201) 
+    female &amp; black |    -0.155 
+                   |   (0.111) 
+  female &amp; othrace |     0.310 
+                   |   (0.507) 
+ female &amp; dep: 1.0 |    -0.028 
+                   |   (0.118) 
+ female &amp; dep: 2.0 |     0.148 
+                   |   (0.103) 
+       female &amp; q2 |    -0.087 
+                   |   (0.346) 
+       female &amp; q3 |     0.205 
+                   |   (0.345) 
+       female &amp; q4 |     0.273 
+                   |   (0.345) 
+       female &amp; q5 |     0.061 
+                   |   (0.344) 
+       female &amp; q6 |     0.287 
+                   |   (0.366) 
+  female &amp; agelt35 |    0.126* 
+                   |   (0.076) 
+  female &amp; agegt54 |     0.040 
+                   |   (0.128) 
+  female &amp; durable |     0.068 
+                   |   (0.112) 
+     female &amp; lusd |     0.084 
+                   |   (0.085) 
+     female &amp; husd |     0.062 
+                   |   (0.094) 
+   black &amp; othrace |     0.000 
+                   |     (NaN) 
+  black &amp; dep: 1.0 |     0.157 
+                   |   (0.180) 
+  black &amp; dep: 2.0 |    -0.104 
+                   |   (0.160) 
+        black &amp; q2 |     0.000 
+                   |     (NaN) 
+        black &amp; q3 |    -0.042 
+                   |   (0.168) 
+        black &amp; q4 |     0.090 
+                   |   (0.165) 
+        black &amp; q5 |    0.276* 
+                   |   (0.162) 
+        black &amp; q6 |  -0.459** 
+                   |   (0.233) 
+   black &amp; agelt35 |     0.015 
+                   |   (0.115) 
+   black &amp; agegt54 |   0.444** 
+                   |   (0.207) 
+   black &amp; durable |     0.244 
+                   |   (0.168) 
+      black &amp; lusd |   0.291** 
+                   |   (0.139) 
+      black &amp; husd |  1.315*** 
+                   |   (0.437) 
+othrace &amp; dep: 1.0 |     1.074 
+                   |   (1.549) 
+othrace &amp; dep: 2.0 |     0.007 
+                   |   (0.533) 
+      othrace &amp; q2 |     0.000 
+                   |     (NaN) 
+      othrace &amp; q3 |    -0.387 
+                   |   (0.935) 
+      othrace &amp; q4 |    -0.301 
+                   |   (0.789) 
+      othrace &amp; q5 |    -0.319 
+                   |   (0.751) 
+      othrace &amp; q6 |   -1.744* 
+                   |   (0.929) 
+ othrace &amp; agelt35 |   1.185** 
+                   |   (0.547) 
+ othrace &amp; agegt54 |    -0.222 
+                   |   (0.640) 
+ othrace &amp; durable |  1.628*** 
+                   |   (0.579) 
+    othrace &amp; lusd |    -0.071 
+                   |   (0.541) 
+    othrace &amp; husd |    -0.771 
+                   |   (0.830) 
+     dep: 1.0 &amp; q2 |     0.640 
+                   |   (0.548) 
+     dep: 2.0 &amp; q2 |    -0.044 
+                   |   (0.415) 
+     dep: 1.0 &amp; q3 |     0.698 
+                   |   (0.546) 
+     dep: 2.0 &amp; q3 |    -0.030 
+                   |   (0.415) 
+     dep: 1.0 &amp; q4 |     0.504 
+                   |   (0.544) 
+     dep: 2.0 &amp; q4 |     0.139 
+                   |   (0.417) 
+     dep: 1.0 &amp; q5 |     0.528 
+                   |   (0.542) 
+     dep: 2.0 &amp; q5 |    -0.170 
+                   |   (0.413) 
+     dep: 1.0 &amp; q6 |    1.095* 
+                   |   (0.578) 
+     dep: 2.0 &amp; q6 |     0.341 
+                   |   (0.441) 
+dep: 1.0 &amp; agelt35 |     0.075 
+                   |   (0.122) 
+dep: 2.0 &amp; agelt35 |     0.033 
+                   |   (0.096) 
+dep: 1.0 &amp; agegt54 |     0.072 
+                   |   (0.175) 
+dep: 2.0 &amp; agegt54 |     0.157 
+                   |   (0.362) 
+dep: 1.0 &amp; durable |    0.295* 
+                   |   (0.158) 
+dep: 2.0 &amp; durable |     0.045 
+                   |   (0.126) 
+   dep: 1.0 &amp; lusd |     0.150 
+                   |   (0.131) 
+   dep: 2.0 &amp; lusd |     0.183 
+                   |   (0.116) 
+   dep: 1.0 &amp; husd |     0.081 
+                   |   (0.143) 
+   dep: 2.0 &amp; husd |     0.152 
+                   |   (0.125) 
+           q2 &amp; q3 |     0.000 
+                   |     (NaN) 
+           q2 &amp; q4 |     0.000 
+                   |     (NaN) 
+           q2 &amp; q5 |     0.000 
+                   |     (NaN) 
+           q2 &amp; q6 |     0.000 
+                   |     (NaN) 
+      q2 &amp; agelt35 |     0.430 
+                   |   (0.340) 
+      q2 &amp; agegt54 |     0.671 
+                   |   (0.762) 
+      q2 &amp; durable |    -0.106 
+                   |   (0.479) 
+         q2 &amp; lusd |    -0.043 
+                   |   (0.190) 
+         q2 &amp; husd |    -0.042 
+                   |   (0.202) 
+           q3 &amp; q4 |     0.000 
+                   |     (NaN) 
+           q3 &amp; q5 |     0.000 
+                   |     (NaN) 
+           q3 &amp; q6 |     0.000 
+                   |     (NaN) 
+      q3 &amp; agelt35 |     0.454 
+                   |   (0.340) 
+      q3 &amp; agegt54 |     0.866 
+                   |   (0.759) 
+      q3 &amp; durable |     0.245 
+                   |   (0.479) 
+         q3 &amp; lusd |     0.086 
+                   |   (0.187) 
+         q3 &amp; husd |     0.170 
+                   |   (0.200) 
+           q4 &amp; q5 |     0.000 
+                   |     (NaN) 
+           q4 &amp; q6 |     0.000 
+                   |     (NaN) 
+      q4 &amp; agelt35 |     0.388 
+                   |   (0.339) 
+      q4 &amp; agegt54 |     0.555 
+                   |   (0.757) 
+      q4 &amp; durable |     0.217 
+                   |   (0.481) 
+         q4 &amp; lusd |    -0.095 
+                   |   (0.188) 
+         q4 &amp; husd |    -0.121 
+                   |   (0.201) 
+           q5 &amp; q6 |     0.000 
+                   |     (NaN) 
+      q5 &amp; agelt35 |     0.278 
+                   |   (0.337) 
+      q5 &amp; agegt54 |     0.451 
+                   |   (0.755) 
+      q5 &amp; durable |     0.288 
+                   |   (0.477) 
+         q5 &amp; lusd |    -0.104 
+                   |   (0.186) 
+         q5 &amp; husd |    -0.152 
+                   |   (0.197) 
+      q6 &amp; agelt35 |     0.338 
+                   |   (0.361) 
+      q6 &amp; agegt54 |     0.949 
+                   |   (0.783) 
+      q6 &amp; durable |     0.409 
+                   |   (0.503) 
+         q6 &amp; lusd |     0.000 
+                   |     (NaN) 
+         q6 &amp; husd |     0.000 
+                   |     (NaN) 
+ agelt35 &amp; agegt54 |     0.000 
+                   |     (NaN) 
+ agelt35 &amp; durable |     0.025 
+                   |   (0.104) 
+    agelt35 &amp; lusd |    -0.065 
+                   |   (0.089) 
+    agelt35 &amp; husd |     0.058 
+                   |   (0.102) 
+ agegt54 &amp; durable |     0.032 
+                   |   (0.170) 
+    agegt54 &amp; lusd |    -0.148 
+                   |   (0.143) 
+    agegt54 &amp; husd |   -0.302* 
+                   |   (0.158) 
+    durable &amp; lusd |     0.116 
+                   |   (0.110) 
+    durable &amp; husd |    0.238* 
+                   |   (0.136) 
+       lusd &amp; husd |     0.000 
+                   |     (NaN) 
+-------------------------------
+                 N |      5099 
+             $R^2$ |     0.060 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># demean function</span>
+
+<span class="k">function</span> <span class="n">desv_mean</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">mean</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">dims</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="kt">Float64</span><span class="p">,</span> <span class="n">size</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">size</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="n">size</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+          <span class="n">M</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="n">i</span><span class="p">]</span> <span class="o">.-</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="k">end</span>
+    <span class="k">return</span> <span class="n">M</span>
+<span class="k">end</span>    
+
+
+
+<span class="c"># Matrix Model &amp; demean</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">StatsModels</span><span class="o">.</span><span class="n">modelmatrix</span><span class="p">(</span><span class="n">reg1</span><span class="o">.</span><span class="n">rhs</span><span class="p">,</span><span class="n">penn</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">desv_mean</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="c"># matrix format </span>
+ 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5099×119 Matrix{Float64}:
+ -0.404001  -0.121985  -0.00725632  -0.112179  …  -0.0543244  -0.0280447  0.0
+ -0.404001  -0.121985  -0.00725632  -0.112179     -0.0543244  -0.0280447  0.0
+ -0.404001  -0.121985  -0.00725632  -0.112179     -0.0543244  -0.0280447  0.0
+ -0.404001  -0.121985  -0.00725632  -0.112179     -0.0543244  -0.0280447  0.0
+ -0.404001  -0.121985  -0.00725632   0.887821      0.945676   -0.0280447  0.0
+  0.595999  -0.121985  -0.00725632  -0.112179  …  -0.0543244  -0.0280447  0.0
+  0.595999  -0.121985  -0.00725632   0.887821     -0.0543244  -0.0280447  0.0
+  0.595999  -0.121985  -0.00725632   0.887821     -0.0543244  -0.0280447  0.0
+  0.595999  -0.121985  -0.00725632  -0.112179     -0.0543244  -0.0280447  0.0
+  0.595999  -0.121985  -0.00725632  -0.112179     -0.0543244  -0.0280447  0.0
+  0.595999  -0.121985  -0.00725632  -0.112179  …  -0.0543244  -0.0280447  0.0
+  0.595999  -0.121985  -0.00725632  -0.112179     -0.0543244  -0.0280447  0.0
+  0.595999  -0.121985  -0.00725632  -0.112179     -0.0543244  -0.0280447  0.0
+  ⋮                                            ⋱                          
+  0.595999  -0.121985   0.992744    -0.112179      0.945676   -0.0280447  0.0
+  0.595999  -0.121985   0.992744    -0.112179      0.945676   -0.0280447  0.0
+ -0.404001  -0.121985   0.992744    -0.112179     -0.0543244  -0.0280447  0.0
+  0.595999  -0.121985   0.992744    -0.112179  …  -0.0543244  -0.0280447  0.0
+ -0.404001   0.878015  -0.00725632  -0.112179     -0.0543244  -0.0280447  0.0
+  0.595999   0.878015  -0.00725632  -0.112179     -0.0543244  -0.0280447  0.0
+  0.595999  -0.121985   0.992744    -0.112179     -0.0543244  -0.0280447  0.0
+ -0.404001  -0.121985  -0.00725632  -0.112179     -0.0543244  -0.0280447  0.0
+ -0.404001  -0.121985  -0.00725632  -0.112179  …  -0.0543244  -0.0280447  0.0
+ -0.404001  -0.121985  -0.00725632  -0.112179     -0.0543244  -0.0280447  0.0
+ -0.404001  -0.121985  -0.00725632  -0.112179     -0.0543244  -0.0280447  0.0
+ -0.404001  -0.121985  -0.00725632  -0.112179      0.945676   -0.0280447  0.0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Y</span> <span class="o">=</span> <span class="n">select</span><span class="p">(</span><span class="n">penn</span><span class="p">,</span> <span class="p">[</span><span class="ss">:inuidur1</span><span class="p">,</span><span class="ss">:T4</span><span class="p">])</span> <span class="c"># select inuidur1 y T4</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">(</span><span class="n">hcat</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="kt">Matrix</span><span class="p">(</span><span class="n">select</span><span class="p">(</span><span class="n">penn</span><span class="p">,</span> <span class="p">[</span><span class="ss">:T4</span><span class="p">]))</span><span class="o">.*</span><span class="n">X</span><span class="p">),</span> <span class="ss">:auto</span><span class="p">)</span>  <span class="c"># Joint X, (T4*X)</span>
+
+<span class="n">base</span> <span class="o">=</span> <span class="n">hcat</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span> <span class="c"># Joint inuidur1, T4, X y (T4*X)</span>
+
+<span class="n">base</span><span class="o">.</span><span class="n">inuidur1</span> <span class="o">=</span> <span class="n">log</span><span class="o">.</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">inuidur1</span><span class="p">)</span>  <span class="c"># log(inuidur1)</span>
+
+<span class="n">terms</span> <span class="o">=</span> <span class="n">term</span><span class="o">.</span><span class="p">(</span><span class="n">names</span><span class="p">(</span><span class="n">base</span><span class="p">))</span> <span class="c"># term.() let us to get all variables as objects</span>
+
+<span class="c">#interactive regression model</span>
+
+<span class="n">ols_ira</span>  <span class="o">=</span> <span class="n">lm</span><span class="p">(</span><span class="n">terms</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">~</span> <span class="n">sum</span><span class="p">(</span><span class="n">terms</span><span class="p">[</span><span class="mi">2</span><span class="o">:</span><span class="k">end</span><span class="p">]),</span> <span class="n">base</span><span class="p">)</span>
+
+
+<span class="n">table3</span> <span class="o">=</span> <span class="n">regtable</span><span class="p">(</span><span class="s">&quot;Interactive model&quot;</span> <span class="o">=&gt;</span> <span class="n">ols_ira</span><span class="p">)</span>
+
+<span class="c">#terms[1] : select first variable. In this case, oucome of interest </span>
+<span class="c">#sum(terms[2:end]) : independent variables as regresors in the linear regression   </span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>            | Interactive model 
+            |        (1)        
+--------------------------------
+(Intercept) |          2.058*** 
+            |           (0.021) 
+         T4 |          -0.076** 
+            |           (0.036) 
+         x1 |            -0.666 
+            |           (0.443) 
+         x2 |          -0.437** 
+            |           (0.196) 
+         x3 |            -1.735 
+            |           (2.163) 
+         x4 |             0.036 
+            |           (0.682) 
+         x5 |             0.212 
+            |           (0.495) 
+         x6 |            -0.255 
+            |           (0.525) 
+         x7 |            -0.621 
+            |           (0.523) 
+         x8 |            -0.480 
+            |           (0.524) 
+         x9 |            -0.372 
+            |           (0.522) 
+        x10 |            -0.677 
+            |           (0.519) 
+        x11 |            -0.678 
+            |           (0.433) 
+        x12 |            -0.304 
+            |           (0.811) 
+        x13 |            -0.838 
+            |           (0.586) 
+        x14 |            -0.099 
+            |           (0.220) 
+        x15 |            -0.063 
+            |           (0.237) 
+        x16 |            -0.215 
+            |           (0.138) 
+        x17 |             0.599 
+            |           (0.889) 
+        x18 |            -0.173 
+            |           (0.145) 
+        x19 |            0.217* 
+            |           (0.127) 
+        x20 |             0.392 
+            |           (0.442) 
+        x21 |             0.685 
+            |           (0.441) 
+        x22 |             0.721 
+            |           (0.440) 
+        x23 |             0.566 
+            |           (0.439) 
+        x24 |            0.908* 
+            |           (0.465) 
+        x25 |            0.170* 
+            |           (0.094) 
+        x26 |             0.236 
+            |           (0.160) 
+        x27 |             0.097 
+            |           (0.138) 
+        x28 |             0.072 
+            |           (0.106) 
+        x29 |             0.061 
+            |           (0.117) 
+        x30 |             0.000 
+            |             (NaN) 
+        x31 |             0.109 
+            |           (0.218) 
+        x32 |            -0.201 
+            |           (0.201) 
+        x33 |             0.000 
+            |             (NaN) 
+        x34 |            -0.097 
+            |           (0.210) 
+        x35 |             0.118 
+            |           (0.215) 
+        x36 |             0.233 
+            |           (0.206) 
+        x37 |            -0.427 
+            |           (0.295) 
+        x38 |             0.083 
+            |           (0.142) 
+        x39 |             0.423 
+            |           (0.266) 
+        x40 |           0.468** 
+            |           (0.216) 
+        x41 |            0.309* 
+            |           (0.176) 
+        x42 |             0.550 
+            |           (0.712) 
+        x43 |             2.520 
+            |           (2.711) 
+        x44 |             1.189 
+            |           (1.465) 
+        x45 |             0.000 
+            |             (NaN) 
+        x46 |            -1.145 
+            |           (1.896) 
+        x47 |             1.777 
+            |           (2.120) 
+        x48 |            -1.111 
+            |           (1.398) 
+        x49 |            -2.083 
+            |           (1.521) 
+        x50 |             2.248 
+            |           (1.395) 
+        x51 |             0.820 
+            |           (2.421) 
+        x52 |           1.751** 
+            |           (0.848) 
+        x53 |            -0.694 
+            |           (0.855) 
+        x54 |            -0.180 
+            |           (1.322) 
+        x55 |             0.234 
+            |           (0.682) 
+        x56 |            -0.218 
+            |           (0.492) 
+        x57 |             0.154 
+            |           (0.678) 
+        x58 |            -0.254 
+            |           (0.493) 
+        x59 |            -0.024 
+            |           (0.676) 
+        x60 |            -0.162 
+            |           (0.494) 
+        x61 |             0.140 
+            |           (0.674) 
+        x62 |            -0.563 
+            |           (0.489) 
+        x63 |             0.483 
+            |           (0.711) 
+        x64 |            -0.005 
+            |           (0.521) 
+        x65 |             0.051 
+            |           (0.151) 
+        x66 |             0.119 
+            |           (0.118) 
+        x67 |             0.037 
+            |           (0.213) 
+        x68 |             0.223 
+            |           (0.492) 
+        x69 |            0.340* 
+            |           (0.190) 
+        x70 |             0.115 
+            |           (0.162) 
+        x71 |            -0.260 
+            |           (0.166) 
+        x72 |             0.115 
+            |           (0.150) 
+        x73 |            -0.043 
+            |           (0.173) 
+        x74 |             0.018 
+            |           (0.151) 
+        x75 |             0.000 
+            |             (NaN) 
+        x76 |             0.000 
+            |             (NaN) 
+        x77 |             0.000 
+            |             (NaN) 
+        x78 |             0.000 
+            |             (NaN) 
+        x79 |             0.501 
+            |           (0.433) 
+        x80 |             0.432 
+            |           (0.813) 
+        x81 |             0.262 
+            |           (0.582) 
+        x82 |            -0.068 
+            |           (0.230) 
+        x83 |            -0.182 
+            |           (0.242) 
+        x84 |             0.000 
+            |             (NaN) 
+        x85 |             0.000 
+            |             (NaN) 
+        x86 |             0.000 
+            |             (NaN) 
+        x87 |             0.514 
+            |           (0.432) 
+        x88 |             0.725 
+            |           (0.808) 
+        x89 |             0.722 
+            |           (0.582) 
+        x90 |            -0.001 
+            |           (0.226) 
+        x91 |             0.099 
+            |           (0.240) 
+        x92 |             0.000 
+            |             (NaN) 
+        x93 |             0.000 
+            |             (NaN) 
+        x94 |             0.405 
+            |           (0.431) 
+        x95 |             0.247 
+            |           (0.804) 
+        x96 |             0.594 
+            |           (0.584) 
+        x97 |            -0.169 
+            |           (0.229) 
+        x98 |            -0.145 
+            |           (0.240) 
+        x99 |             0.000 
+            |             (NaN) 
+       x100 |             0.216 
+            |           (0.429) 
+       x101 |             0.100 
+            |           (0.802) 
+       x102 |             0.854 
+            |           (0.577) 
+       x103 |            -0.259 
+            |           (0.227) 
+       x104 |            -0.174 
+            |           (0.234) 
+       x105 |             0.382 
+            |           (0.454) 
+       x106 |             0.836 
+            |           (0.838) 
+       x107 |            1.029* 
+            |           (0.610) 
+       x108 |             0.000 
+            |             (NaN) 
+       x109 |             0.000 
+            |             (NaN) 
+       x110 |             0.000 
+            |             (NaN) 
+       x111 |            -0.003 
+            |           (0.128) 
+       x112 |            -0.057 
+            |           (0.111) 
+       x113 |             0.055 
+            |           (0.124) 
+       x114 |            -0.124 
+            |           (0.207) 
+       x115 |             0.091 
+            |           (0.184) 
+       x116 |            -0.315 
+            |           (0.192) 
+       x117 |            0.263* 
+            |           (0.136) 
+       x118 |            0.314* 
+            |           (0.167) 
+       x119 |             0.000 
+            |             (NaN) 
+       x120 |           1.569** 
+            |           (0.756) 
+       x121 |            -0.168 
+            |           (0.492) 
+       x122 |             2.572 
+            |           (2.328) 
+       x123 |          -2.333** 
+            |           (1.182) 
+       x124 |            -0.562 
+            |           (0.967) 
+       x125 |             0.343 
+            |           (0.935) 
+       x126 |             0.292 
+            |           (0.933) 
+       x127 |             0.176 
+            |           (0.933) 
+       x128 |             0.104 
+            |           (0.928) 
+       x129 |             0.596 
+            |           (0.942) 
+       x130 |             0.184 
+            |           (0.726) 
+       x131 |             0.227 
+            |           (0.580) 
+       x132 |             1.159 
+            |           (1.134) 
+       x133 |            -0.138 
+            |           (0.234) 
+       x134 |            -0.447 
+            |           (0.474) 
+       x135 |             0.138 
+            |           (0.237) 
+       x136 |            -0.559 
+            |           (1.301) 
+       x137 |             0.396 
+            |           (0.255) 
+       x138 |            -0.108 
+            |           (0.220) 
+       x139 |           -1.329* 
+            |           (0.753) 
+       x140 |           -1.334* 
+            |           (0.752) 
+       x141 |           -1.268* 
+            |           (0.753) 
+       x142 |           -1.412* 
+            |           (0.750) 
+       x143 |          -1.709** 
+            |           (0.805) 
+       x144 |            -0.089 
+            |           (0.166) 
+       x145 |           -0.477* 
+            |           (0.277) 
+       x146 |            -0.077 
+            |           (0.245) 
+       x147 |            -0.037 
+            |           (0.181) 
+       x148 |            -0.152 
+            |           (0.203) 
+       x149 |             0.000 
+            |             (NaN) 
+       x150 |             0.190 
+            |           (0.407) 
+       x151 |             0.290 
+            |           (0.338) 
+       x152 |             0.149 
+            |           (0.505) 
+       x153 |             0.309 
+            |           (0.497) 
+       x154 |             0.061 
+            |           (0.484) 
+       x155 |             0.303 
+            |           (0.483) 
+       x156 |             0.000 
+            |             (NaN) 
+       x157 |            -0.170 
+            |           (0.251) 
+       x158 |             0.107 
+            |           (0.435) 
+       x159 |          -0.733** 
+            |           (0.359) 
+       x160 |             0.011 
+            |           (0.294) 
+       x161 |             1.364 
+            |           (0.912) 
+       x162 |             0.000 
+            |             (NaN) 
+       x163 |            -1.402 
+            |           (1.662) 
+       x164 |            -2.175 
+            |           (2.743) 
+       x165 |             0.000 
+            |             (NaN) 
+       x166 |           -4.744* 
+            |           (2.577) 
+       x167 |            -0.444 
+            |           (1.955) 
+       x168 |            -1.039 
+            |           (2.548) 
+       x169 |            -0.775 
+            |           (1.813) 
+       x170 |            -0.570 
+            |           (2.814) 
+       x171 |             0.378 
+            |           (1.467) 
+       x172 |             1.213 
+            |           (1.265) 
+       x173 |             0.000 
+            |             (NaN) 
+       x174 |             1.434 
+            |           (1.173) 
+       x175 |             0.225 
+            |           (0.967) 
+       x176 |             1.720 
+            |           (1.172) 
+       x177 |             0.441 
+            |           (0.965) 
+       x178 |             1.661 
+            |           (1.166) 
+       x179 |             0.707 
+            |           (0.974) 
+       x180 |             1.155 
+            |           (1.162) 
+       x181 |             0.900 
+            |           (0.965) 
+       x182 |             1.945 
+            |           (1.260) 
+       x183 |             0.984 
+            |           (1.038) 
+       x184 |             0.038 
+            |           (0.261) 
+       x185 |            -0.268 
+            |           (0.206) 
+       x186 |             0.331 
+            |           (0.384) 
+       x187 |            -0.317 
+            |           (0.755) 
+       x188 |            -0.394 
+            |           (0.359) 
+       x189 |            -0.234 
+            |           (0.271) 
+       x190 |          1.135*** 
+            |           (0.275) 
+       x191 |             0.178 
+            |           (0.243) 
+       x192 |             0.374 
+            |           (0.312) 
+       x193 |            0.515* 
+            |           (0.278) 
+       x194 |             0.000 
+            |             (NaN) 
+       x195 |             0.000 
+            |             (NaN) 
+       x196 |             0.000 
+            |             (NaN) 
+       x197 |             0.000 
+            |             (NaN) 
+       x198 |            -0.302 
+            |           (0.724) 
+       x199 |             0.115 
+            |           (0.610) 
+       x200 |            -0.517 
+            |           (1.121) 
+       x201 |            -0.149 
+            |           (0.260) 
+       x202 |             0.532 
+            |           (0.469) 
+       x203 |             0.000 
+            |             (NaN) 
+       x204 |             0.000 
+            |             (NaN) 
+       x205 |             0.000 
+            |             (NaN) 
+       x206 |            -0.226 
+            |           (0.724) 
+       x207 |            -0.194 
+            |           (0.608) 
+       x208 |            -0.849 
+            |           (1.123) 
+       x209 |             0.000 
+            |             (NaN) 
+       x210 |             0.311 
+            |           (0.466) 
+       x211 |             0.000 
+            |             (NaN) 
+       x212 |             0.000 
+            |             (NaN) 
+       x213 |            -0.135 
+            |           (0.724) 
+       x214 |             0.353 
+            |           (0.584) 
+       x215 |            -0.628 
+            |           (1.127) 
+       x216 |            -0.012 
+            |           (0.247) 
+       x217 |             0.303 
+            |           (0.470) 
+       x218 |             0.000 
+            |             (NaN) 
+       x219 |             0.097 
+            |           (0.720) 
+       x220 |             0.482 
+            |           (0.580) 
+       x221 |            -1.240 
+            |           (1.120) 
+       x222 |             0.301 
+            |           (0.244) 
+       x223 |             0.295 
+            |           (0.462) 
+       x224 |            -0.001 
+            |           (0.794) 
+       x225 |             0.000 
+            |             (NaN) 
+       x226 |            -1.365 
+            |           (1.178) 
+       x227 |            -0.315 
+            |           (0.428) 
+       x228 |             0.000 
+            |             (NaN) 
+       x229 |             0.000 
+            |             (NaN) 
+       x230 |             0.144 
+            |           (0.227) 
+       x231 |            -0.014 
+            |           (0.189) 
+       x232 |             0.029 
+            |           (0.224) 
+       x233 |             0.545 
+            |           (0.389) 
+       x234 |           -0.579* 
+            |           (0.302) 
+       x235 |             0.191 
+            |           (0.350) 
+       x236 |            -0.374 
+            |           (0.239) 
+       x237 |            -0.338 
+            |           (0.297) 
+       x238 |             0.000 
+            |             (NaN) 
+--------------------------------
+          N |              5099 
+      $R^2$ |             0.079 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">StatsModels</span><span class="o">.</span><span class="n">modelmatrix</span><span class="p">(</span><span class="n">reg2</span><span class="o">.</span><span class="n">rhs</span><span class="p">,</span><span class="n">penn</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">desv_mean</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+
+<span class="n">D</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">([</span><span class="n">X</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="mi">1</span><span class="p">]],</span> <span class="ss">:auto</span><span class="p">)</span>  <span class="c"># Treatment varaible</span>
+
+<span class="n">rename!</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="kt">Dict</span><span class="p">(</span><span class="ss">:x1</span> <span class="o">=&gt;</span> <span class="ss">:T4</span><span class="p">))</span> <span class="c">#rename x1 -&gt; T4</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">(</span><span class="n">hcat</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="mi">2</span><span class="o">:</span><span class="k">end</span><span class="p">],</span> <span class="n">X</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.*</span><span class="n">X</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="mi">2</span><span class="o">:</span><span class="k">end</span><span class="p">]),</span> <span class="ss">:auto</span><span class="p">)</span>  <span class="c"># Join Controls (X) + T4*X &quot;interactive&quot;</span>
+
+<span class="n">Y</span> <span class="o">=</span> <span class="n">select</span><span class="p">(</span><span class="n">penn</span><span class="p">,</span> <span class="p">[</span><span class="ss">:inuidur1</span><span class="p">])</span> <span class="c">#select just inuidur1</span>
+
+<span class="n">Y</span><span class="o">.</span><span class="n">inuidur1</span> <span class="o">=</span> <span class="n">log</span><span class="o">.</span><span class="p">(</span><span class="n">Y</span><span class="o">.</span><span class="n">inuidur1</span><span class="p">)</span>  <span class="c"># log(inuidur1)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5099-element Vector{Float64}:
+ 2.8903717578961645
+ 0.0
+ 3.295836866004329
+ 2.1972245773362196
+ 3.295836866004329
+ 3.295836866004329
+ 2.1972245773362196
+ 3.295836866004329
+ 2.70805020110221
+ 3.332204510175204
+ 2.4849066497880004
+ 3.091042453358316
+ 2.8903717578961645
+ ⋮
+ 3.295836866004329
+ 2.70805020110221
+ 2.995732273553991
+ 0.0
+ 3.1354942159291497
+ 2.5649493574615367
+ 1.791759469228055
+ 2.302585092994046
+ 1.3862943611198906
+ 2.1972245773362196
+ 1.3862943611198906
+ 3.295836866004329
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="using-hdmjl">
+<h1>Using HDMJL<a class="headerlink" href="#using-hdmjl" title="Permalink to this headline">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">include</span><span class="p">(</span><span class="s">&quot;hdmjl/hdmjl.jl&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">D_reg_0</span>  <span class="o">=</span> <span class="n">rlasso_arg</span><span class="p">(</span> <span class="n">X</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="nb">nothing</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> 
+                    <span class="nb">nothing</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="nb">nothing</span><span class="p">,</span> <span class="mi">5000</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="o">^</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">),</span> <span class="o">-</span><span class="nb">Inf</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="nb">Inf</span><span class="p">,</span> <span class="nb">true</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>rlasso_arg(<span class=" -Color -Color-Bold">5099×238 DataFrame</span>
+<span class=" -Color -Color-Bold">  Row </span>│<span class=" -Color -Color-Bold"> x1         x2         x3           x4         x5         x6         x7</span> ⋯
+<span class=" -Color -Color-Bold">      </span>│ Float64    Float64    Float64      Float64    Float64    Float64    Fl ⋯
+──────┼─────────────────────────────────────────────────────────────────────────
+    1 │ -0.404001  -0.121985  -0.00725632  -0.112179   0.836242  -0.203765  -0 ⋯
+    2 │ -0.404001  -0.121985  -0.00725632  -0.112179  -0.163758  -0.203765  -0
+    3 │ -0.404001  -0.121985  -0.00725632  -0.112179  -0.163758  -0.203765  -0
+    4 │ -0.404001  -0.121985  -0.00725632  -0.112179  -0.163758  -0.203765   0
+    5 │ -0.404001  -0.121985  -0.00725632   0.887821  -0.163758  -0.203765  -0 ⋯
+    6 │  0.595999  -0.121985  -0.00725632  -0.112179  -0.163758  -0.203765  -0
+    7 │  0.595999  -0.121985  -0.00725632   0.887821  -0.163758  -0.203765  -0
+    8 │  0.595999  -0.121985  -0.00725632   0.887821  -0.163758  -0.203765  -0
+    9 │  0.595999  -0.121985  -0.00725632  -0.112179  -0.163758   0.796235  -0 ⋯
+   10 │  0.595999  -0.121985  -0.00725632  -0.112179  -0.163758  -0.203765   0
+   11 │  0.595999  -0.121985  -0.00725632  -0.112179   0.836242  -0.203765  -0
+  ⋮   │     ⋮          ⋮           ⋮           ⋮          ⋮          ⋮         ⋱
+ 5090 │ -0.404001  -0.121985   0.992744    -0.112179  -0.163758  -0.203765   0
+ 5091 │  0.595999  -0.121985   0.992744    -0.112179  -0.163758  -0.203765  -0 ⋯
+ 5092 │ -0.404001   0.878015  -0.00725632  -0.112179  -0.163758  -0.203765  -0
+ 5093 │  0.595999   0.878015  -0.00725632  -0.112179  -0.163758  -0.203765  -0
+ 5094 │  0.595999  -0.121985   0.992744    -0.112179   0.836242  -0.203765  -0
+ 5095 │ -0.404001  -0.121985  -0.00725632  -0.112179  -0.163758  -0.203765   0 ⋯
+ 5096 │ -0.404001  -0.121985  -0.00725632  -0.112179   0.836242   0.796235  -0
+ 5097 │ -0.404001  -0.121985  -0.00725632  -0.112179   0.836242   0.796235  -0
+ 5098 │ -0.404001  -0.121985  -0.00725632  -0.112179  -0.163758  -0.203765  -0
+ 5099 │ -0.404001  -0.121985  -0.00725632  -0.112179  -0.163758  -0.203765  -0 ⋯
+<span class=" -Color -Color-Cyan">                                               232 columns and 5078 rows omitted</span>, <span class=" -Color -Color-Bold">5099×1 DataFrame</span>
+<span class=" -Color -Color-Bold">  Row </span>│<span class=" -Color -Color-Bold"> T4        </span>
+<span class=" -Color -Color-Bold">      </span>│ Float64   
+──────┼───────────
+    1 │ -0.342224
+    2 │ -0.342224
+    3 │ -0.342224
+    4 │  0.657776
+    5 │ -0.342224
+    6 │ -0.342224
+    7 │ -0.342224
+    8 │ -0.342224
+    9 │ -0.342224
+   10 │ -0.342224
+   11 │ -0.342224
+  ⋮   │     ⋮
+ 5090 │  0.657776
+ 5091 │ -0.342224
+ 5092 │ -0.342224
+ 5093 │  0.657776
+ 5094 │ -0.342224
+ 5095 │  0.657776
+ 5096 │  0.657776
+ 5097 │ -0.342224
+ 5098 │  0.657776
+ 5099 │ -0.342224
+<span class=" -Color -Color-Cyan"> 5078 rows omitted</span>, nothing, true, true, true, false, false, nothing, 1.1, nothing, 5000, 15, 1.0000000000000003e-5, -Inf, true, Inf, true)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Outcome HDM model</span>
+
+<span class="n">D_resid</span> <span class="o">=</span> <span class="n">rlasso</span><span class="p">(</span><span class="n">D_reg_0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dict{String, Any} with 19 entries:
+  &quot;tss&quot;          =&gt; 1147.82
+  &quot;dev&quot;          =&gt; [-0.342224, -0.342224, -0.342224, 0.657776, -0.342224, -0.3…
+  &quot;model&quot;        =&gt; [-0.404001 -0.121985 … 0.0101738 0.0; -0.404001 -0.121985 ……
+  &quot;loadings&quot;     =&gt; [0.232712 0.155595 … 0.0435631 0.0]
+  &quot;sigma&quot;        =&gt; [0.474501]
+  &quot;lambda0&quot;      =&gt; 637.701
+  &quot;lambda&quot;       =&gt; <span class=" -Color -Color-Bold">238×2 DataFrame</span>…
+  &quot;intercept&quot;    =&gt; 1.82896e-17
+  &quot;Xy&quot;           =&gt; [-3.98137, 2.13669, 5.33771, -1.75211, 3.24299, -3.5707, -4…
+  &quot;iter&quot;         =&gt; 4
+  &quot;residuals&quot;    =&gt; [-0.342224, -0.342224, -0.342224, 0.657776, -0.342224, -0.3…
+  &quot;rss&quot;          =&gt; 1147.82
+  &quot;index&quot;        =&gt; [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0  …  0.0, …
+  &quot;beta&quot;         =&gt; <span class=" -Color -Color-Bold">238×2 DataFrame</span>…
+  &quot;options&quot;      =&gt; Dict{String, Any}(&quot;intercept&quot;=&gt;true, &quot;post&quot;=&gt;true, &quot;meanx&quot;=…
+  &quot;x1&quot;           =&gt; Matrix{Float64}(undef, 5099, 0)
+  &quot;pen&quot;          =&gt; Dict{String, Any}(&quot;lambda0&quot;=&gt;637.701, &quot;lambda&quot;=&gt;[148.401; 9…
+  &quot;startingval&quot;  =&gt; [-0.342224, -0.342224, -0.342224, 0.657776, -0.342224, -0.3…
+  &quot;coefficients&quot; =&gt; <span class=" -Color -Color-Bold">239×2 DataFrame</span>…
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">D_resid</span> <span class="o">=</span> <span class="n">rlasso</span><span class="p">(</span><span class="n">D_reg_0</span><span class="p">)[</span><span class="s">&quot;residuals&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5099-element Vector{Float64}:
+ -0.34222396548342815
+ -0.34222396548342815
+ -0.34222396548342815
+  0.6577760345165719
+ -0.34222396548342815
+ -0.34222396548342815
+ -0.34222396548342815
+ -0.34222396548342815
+ -0.34222396548342815
+ -0.34222396548342815
+ -0.34222396548342815
+  0.6577760345165719
+ -0.34222396548342815
+  ⋮
+ -0.34222396548342815
+ -0.34222396548342815
+  0.6577760345165719
+ -0.34222396548342815
+ -0.34222396548342815
+  0.6577760345165719
+ -0.34222396548342815
+  0.6577760345165719
+  0.6577760345165719
+ -0.34222396548342815
+  0.6577760345165719
+ -0.34222396548342815
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Y_reg_0</span>  <span class="o">=</span> <span class="n">rlasso_arg</span><span class="p">(</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="nb">nothing</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> 
+                    <span class="nb">nothing</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="nb">nothing</span><span class="p">,</span> <span class="mi">5000</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="o">^</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">),</span> <span class="o">-</span><span class="nb">Inf</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="nb">Inf</span><span class="p">,</span> <span class="nb">true</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>rlasso_arg(<span class=" -Color -Color-Bold">5099×238 DataFrame</span>
+<span class=" -Color -Color-Bold">  Row </span>│<span class=" -Color -Color-Bold"> x1         x2         x3           x4         x5         x6         x7</span> ⋯
+<span class=" -Color -Color-Bold">      </span>│ Float64    Float64    Float64      Float64    Float64    Float64    Fl ⋯
+──────┼─────────────────────────────────────────────────────────────────────────
+    1 │ -0.404001  -0.121985  -0.00725632  -0.112179   0.836242  -0.203765  -0 ⋯
+    2 │ -0.404001  -0.121985  -0.00725632  -0.112179  -0.163758  -0.203765  -0
+    3 │ -0.404001  -0.121985  -0.00725632  -0.112179  -0.163758  -0.203765  -0
+    4 │ -0.404001  -0.121985  -0.00725632  -0.112179  -0.163758  -0.203765   0
+    5 │ -0.404001  -0.121985  -0.00725632   0.887821  -0.163758  -0.203765  -0 ⋯
+    6 │  0.595999  -0.121985  -0.00725632  -0.112179  -0.163758  -0.203765  -0
+    7 │  0.595999  -0.121985  -0.00725632   0.887821  -0.163758  -0.203765  -0
+    8 │  0.595999  -0.121985  -0.00725632   0.887821  -0.163758  -0.203765  -0
+    9 │  0.595999  -0.121985  -0.00725632  -0.112179  -0.163758   0.796235  -0 ⋯
+   10 │  0.595999  -0.121985  -0.00725632  -0.112179  -0.163758  -0.203765   0
+   11 │  0.595999  -0.121985  -0.00725632  -0.112179   0.836242  -0.203765  -0
+  ⋮   │     ⋮          ⋮           ⋮           ⋮          ⋮          ⋮         ⋱
+ 5090 │ -0.404001  -0.121985   0.992744    -0.112179  -0.163758  -0.203765   0
+ 5091 │  0.595999  -0.121985   0.992744    -0.112179  -0.163758  -0.203765  -0 ⋯
+ 5092 │ -0.404001   0.878015  -0.00725632  -0.112179  -0.163758  -0.203765  -0
+ 5093 │  0.595999   0.878015  -0.00725632  -0.112179  -0.163758  -0.203765  -0
+ 5094 │  0.595999  -0.121985   0.992744    -0.112179   0.836242  -0.203765  -0
+ 5095 │ -0.404001  -0.121985  -0.00725632  -0.112179  -0.163758  -0.203765   0 ⋯
+ 5096 │ -0.404001  -0.121985  -0.00725632  -0.112179   0.836242   0.796235  -0
+ 5097 │ -0.404001  -0.121985  -0.00725632  -0.112179   0.836242   0.796235  -0
+ 5098 │ -0.404001  -0.121985  -0.00725632  -0.112179  -0.163758  -0.203765  -0
+ 5099 │ -0.404001  -0.121985  -0.00725632  -0.112179  -0.163758  -0.203765  -0 ⋯
+<span class=" -Color -Color-Cyan">                                               232 columns and 5078 rows omitted</span>, <span class=" -Color -Color-Bold">5099×1 DataFrame</span>
+<span class=" -Color -Color-Bold">  Row </span>│<span class=" -Color -Color-Bold"> inuidur1 </span>
+<span class=" -Color -Color-Bold">      </span>│ Float64  
+──────┼──────────
+    1 │  2.89037
+    2 │  0.0
+    3 │  3.29584
+    4 │  2.19722
+    5 │  3.29584
+    6 │  3.29584
+    7 │  2.19722
+    8 │  3.29584
+    9 │  2.70805
+   10 │  3.3322
+   11 │  2.48491
+  ⋮   │    ⋮
+ 5090 │  2.99573
+ 5091 │  0.0
+ 5092 │  3.13549
+ 5093 │  2.56495
+ 5094 │  1.79176
+ 5095 │  2.30259
+ 5096 │  1.38629
+ 5097 │  2.19722
+ 5098 │  1.38629
+ 5099 │  3.29584
+<span class=" -Color -Color-Cyan">5078 rows omitted</span>, nothing, true, true, true, false, false, nothing, 1.1, nothing, 5000, 15, 1.0000000000000003e-5, -Inf, true, Inf, true)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Y_resid</span> <span class="o">=</span> <span class="n">rlasso</span><span class="p">(</span><span class="n">Y_reg_0</span><span class="p">)[</span><span class="s">&quot;residuals&quot;</span><span class="p">]</span>
+
+<span class="n">D_resid</span> <span class="o">=</span> <span class="n">reshape</span><span class="p">(</span><span class="n">D_resid</span><span class="p">,</span> <span class="n">length</span><span class="p">(</span><span class="n">D_resid</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">Lasso_ira</span> <span class="o">=</span> <span class="n">lm</span><span class="p">(</span><span class="n">D_resid</span><span class="p">,</span> <span class="n">Y_resid</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LinearModel{GLM.LmResp{Vector{Float64}}, GLM.DensePredChol{Float64, CholeskyPivoted{Float64, Matrix{Float64}}}}:
+
+Coefficients:
+───────────────────────────────────────────────────────────────────
+         Coef.  Std. Error      t  Pr(&gt;|t|)  Lower 95%    Upper 95%
+───────────────────────────────────────────────────────────────────
+x1  -0.0788861   0.0355478  -2.22    0.0265  -0.148575  -0.00919709
+───────────────────────────────────────────────────────────────────
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Comparative ATE estimation</span>
+
+<span class="n">table</span> <span class="o">=</span> <span class="n">NamedArray</span><span class="p">(</span><span class="n">zeros</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="n">table</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">GLM</span><span class="o">.</span><span class="n">coeftable</span><span class="p">(</span><span class="n">ols_cl</span><span class="p">)</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">table</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">GLM</span><span class="o">.</span><span class="n">coeftable</span><span class="p">(</span><span class="n">ols_cl</span><span class="p">)</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">table</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">GLM</span><span class="o">.</span><span class="n">coeftable</span><span class="p">(</span><span class="n">ols_cl</span><span class="p">)</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="mi">5</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">table</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">GLM</span><span class="o">.</span><span class="n">coeftable</span><span class="p">(</span><span class="n">ols_cl</span><span class="p">)</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="mi">6</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">table</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">GLM</span><span class="o">.</span><span class="n">coeftable</span><span class="p">(</span><span class="n">ols_cra</span><span class="p">)</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">table</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">GLM</span><span class="o">.</span><span class="n">coeftable</span><span class="p">(</span><span class="n">ols_cra</span><span class="p">)</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">table</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">GLM</span><span class="o">.</span><span class="n">coeftable</span><span class="p">(</span><span class="n">ols_cra</span><span class="p">)</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="mi">5</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">table</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">GLM</span><span class="o">.</span><span class="n">coeftable</span><span class="p">(</span><span class="n">ols_cra</span><span class="p">)</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="mi">6</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">table</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="n">GLM</span><span class="o">.</span><span class="n">coeftable</span><span class="p">(</span><span class="n">ols_ira</span><span class="p">)</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">table</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="n">GLM</span><span class="o">.</span><span class="n">coeftable</span><span class="p">(</span><span class="n">ols_ira</span><span class="p">)</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">table</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="n">GLM</span><span class="o">.</span><span class="n">coeftable</span><span class="p">(</span><span class="n">ols_ira</span><span class="p">)</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="mi">5</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">table</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="n">GLM</span><span class="o">.</span><span class="n">coeftable</span><span class="p">(</span><span class="n">ols_ira</span><span class="p">)</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="mi">6</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">table</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="n">GLM</span><span class="o">.</span><span class="n">coeftable</span><span class="p">(</span><span class="n">Lasso_ira</span><span class="p">)</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">table</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="n">GLM</span><span class="o">.</span><span class="n">coeftable</span><span class="p">(</span><span class="n">Lasso_ira</span><span class="p">)</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">table</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="n">GLM</span><span class="o">.</span><span class="n">coeftable</span><span class="p">(</span><span class="n">Lasso_ira</span><span class="p">)</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="mi">5</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">table</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="n">GLM</span><span class="o">.</span><span class="n">coeftable</span><span class="p">(</span><span class="n">Lasso_ira</span><span class="p">)</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="mi">6</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="n">T</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="p">[</span> <span class="o">:</span><span class="s">&quot;Outcome&quot;</span><span class="p">,</span> <span class="o">:</span><span class="s">&quot;CL&quot;</span><span class="p">,</span> <span class="o">:</span><span class="s">&quot;CRA&quot;</span><span class="p">,</span> <span class="o">:</span><span class="s">&quot;IRA&quot;</span><span class="p">,</span> <span class="o">:</span><span class="s">&quot;IRA W Lasso&quot;</span><span class="p">])</span>  <span class="c"># table to dataframe </span>
+<span class="n">T</span><span class="p">[</span><span class="o">!</span><span class="p">,</span><span class="ss">:Outcome</span><span class="p">]</span> <span class="o">=</span> <span class="n">string</span><span class="o">.</span><span class="p">(</span><span class="n">T</span><span class="p">[</span><span class="o">!</span><span class="p">,</span><span class="ss">:Outcome</span><span class="p">])</span>  <span class="c"># string - first column </span>
+
+<span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;Estimation&quot;</span>
+<span class="n">T</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;Standar error&quot;</span>
+<span class="n">T</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;Lower bound CI&quot;</span>
+<span class="n">T</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;Upper bound CI&quot;</span>
+
+<span class="n">header</span> <span class="o">=</span> <span class="p">([</span><span class="s">&quot;Outcome&quot;</span><span class="p">,</span> <span class="s">&quot;CL&quot;</span><span class="p">,</span> <span class="s">&quot;CRA&quot;</span><span class="p">,</span> <span class="s">&quot;IRA&quot;</span><span class="p">,</span> <span class="s">&quot;IRA W Lasso&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<style>
+  table, td, th {
+      border-collapse: collapse;
+      font-family: sans-serif;
+  }
+
+  td, th {
+      border-bottom: 0;
+      padding: 4px
+  }
+
+  tr:nth-child(odd) {
+      background: #eee;
+  }
+
+  tr:nth-child(even) {
+      background: #fff;
+  }
+
+  tr.header {
+      background: navy !important;
+      color: white;
+      font-weight: bold;
+  }
+
+  tr.subheader {
+      background: lightgray !important;
+      color: black;
+  }
+
+  tr.headerLastRow {
+      border-bottom: 2px solid black;
+  }
+
+  th.rowNumber, td.rowNumber {
+      text-align: right;
+  }
+
+</style>
+<body>
+<table>
+  <thead>
+    <tr class = "header headerLastRow">
+      <th style = "text-align: center;">Outcome</th>
+      <th style = "text-align: center;">CL</th>
+      <th style = "text-align: center;">CRA</th>
+      <th style = "text-align: center;">IRA</th>
+      <th style = "text-align: center;">IRA W Lasso</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style = "text-align: center;">Estimation</td>
+      <td style = "text-align: center;">-0.0855</td>
+      <td style = "text-align: center;">-0.0797</td>
+      <td style = "text-align: center;">-0.0755</td>
+      <td style = "text-align: center;">-0.0789</td>
+    </tr>
+    <tr>
+      <td style = "text-align: center;">Standar error</td>
+      <td style = "text-align: center;">0.0358</td>
+      <td style = "text-align: center;">0.0356</td>
+      <td style = "text-align: center;">0.0361</td>
+      <td style = "text-align: center;">0.0355</td>
+    </tr>
+    <tr>
+      <td style = "text-align: center;">Lower bound CI</td>
+      <td style = "text-align: center;">-0.1557</td>
+      <td style = "text-align: center;">-0.1496</td>
+      <td style = "text-align: center;">-0.1462</td>
+      <td style = "text-align: center;">-0.1486</td>
+    </tr>
+    <tr>
+      <td style = "text-align: center;">Upper bound CI</td>
+      <td style = "text-align: center;">-0.0152</td>
+      <td style = "text-align: center;">-0.0098</td>
+      <td style = "text-align: center;">-0.0048</td>
+      <td style = "text-align: center;">-0.0092</td>
+    </tr>
+  </tbody>
+</table>
+</body>
+</html>
+</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>\begin{table}
+  \begin{tabular}{ccccc}
+    \hline\hline
+    \textbf{Outcome} &amp; \textbf{CL} &amp; \textbf{CRA} &amp; \textbf{IRA} &amp; \textbf{IRA W Lasso} \\\hline
+    Estimation &amp; -0.0855 &amp; -0.0797 &amp; -0.0755 &amp; -0.0789 \\
+    Standar error &amp; 0.0358 &amp; 0.0356 &amp; 0.0361 &amp; 0.0355 \\
+    Lower bound CI &amp; -0.1557 &amp; -0.1496 &amp; -0.1462 &amp; -0.1486 \\
+    Upper bound CI &amp; -0.0152 &amp; -0.0098 &amp; -0.0048 &amp; -0.0092 \\\hline\hline
+  \end{tabular}
+\end{table}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "julia-1.7"
+        },
+        kernelOptions: {
+            kernelName: "julia-1.7",
+            path: "./contents"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'julia-1.7'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="05_Julia_Analyzing_RCT_with_Precision.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Analyzing RCT with Precision by Adjusting for Baseline Covariates</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="07_julia-notebook-linear-penalized-regs.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Penalized Linear Regressions: A Simulation Experiment</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By The Jupyter Book Community<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
