@@ -32,14 +32,13 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-using Pkg
-Pkg.add("CSV")
-Pkg.add("DataFrames")
-Pkg.add("Dates")
-Pkg.add("Plots")
+# to_install = ["CSV", "DataFrames", "Dates", "Plots"]
+# using Pkg 
+# Pkg.add(to_install)
+
 using CSV
 using DataFrames
 using Dates
-using Plots
+using Plots, Lathe
 -------------------
 

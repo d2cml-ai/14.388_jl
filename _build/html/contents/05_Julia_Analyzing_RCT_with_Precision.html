@@ -54,6 +54,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Author: Roberto Mendoza" href="06_RCT_Precision_Adjustment.html" />
+    <link rel="prev" title="Author: Roberto Mendoza" href="04_Juli_Notebook_RCT-polio.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -113,10 +115,95 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="01_Julia_Notebook_Linear_Model_Overfitting.html">
    Simple Exercise on Overfitting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02_PM1_Notebook1_Prediction_newdata.html">
+   Chapter 2: Predictive Inference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03_PM1_Notebook_Inference.html">
+   An inferential problem: The Gender Wage Gap
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04_Juli_Notebook_RCT-polio.html">
+   Author: Roberto Mendoza
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Analyzing RCT with Precision by Adjusting for Baseline Covariates
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06_RCT_Precision_Adjustment.html">
+   Author: Roberto Mendoza
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07_julia-notebook-linear-penalized-regs.html">
+   Penalized Linear Regressions: A Simulation Experiment
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="09_Julia_OrthogonalLearning_lab4.html">
+   Orthogonal Learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="10_Julia_pm2_notebook_jannis.html">
+   Testing the Convergence Hypothesis
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="11_py-heterogenous-wage-effects.html">
+   Application: Heterogeneous Effect of Gender on Wage Using Double Lasso
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="14_Julia_pm3_notebook_newdata_nn.html">
+   A Simple Case Study using Wage Data from 2015 - proceeding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="16_Functional-aproximation-by-nn-and-rf.html">
+   Functional Approximations by Trees and Neural Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="17_Notebook_DAGitty.html">
+   Causal identification in DAGs using Backdoor and Swigs, Equivalence Classes, Falsiability Tests
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="19_Julia_pm3_notebook_inference_clustering.html">
+   A Case Study: The Effect of Gun Ownership on Gun-Homicide Rates
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="20_Julia-pm3-newdata-nn.html">
+   The Effect of Gun Ownership on Gun-Homicide Rates - proceeding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="23_Julia_debiased-ml-for-partially-linear-model.html">
+   Double/Debiased Machine Learning for the Partially Linear Regression Model.
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="25_debiased-ml-for-partially-linear-iv-model-in-julia.html">
+   Double/Debiased ML for Partially Linear IV Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="27_Julia_weak_iv_experiments.html">
+   A Simple Example of Properties of IV estimator when Instruments are Weak
   </a>
  </li>
 </ul>
@@ -341,6 +428,11 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#using-classical-standard-errors-non-robust-is-misleading-here">
+   Using classical standard errors (non-robust) is misleading here.
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#verify-asymptotic-approximations-hold-in-finite-sample-simulation-experiment">
    Verify Asymptotic Approximations Hold in Finite-Sample Simulation Experiment
   </a>
@@ -377,6 +469,11 @@ title="Print to PDF"
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#analyze-the-rct-data-with-precision-adjustment">
    Analyze the RCT data with Precision Adjustment
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#using-classical-standard-errors-non-robust-is-misleading-here">
+   Using classical standard errors (non-robust) is misleading here.
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
@@ -466,15 +563,6 @@ Stacktrace:
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.189
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># column = rand(5);</span>
-
-<span class="c"># DataFrame([column], [:col1])</span>
 </pre></div>
 </div>
 </div>
@@ -584,9 +672,18 @@ Predictors:
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">CL_model</span> <span class="o">=</span> <span class="n">lm</span><span class="p">(</span><span class="n">fm_1</span><span class="p">,</span> <span class="n">data_aux</span><span class="p">)</span>
 <span class="n">CRA_model</span> <span class="o">=</span> <span class="n">lm</span><span class="p">(</span><span class="n">fm_2</span><span class="p">,</span> <span class="n">data_aux</span><span class="p">)</span>  <span class="c">#classical</span>
 <span class="n">IRA_model</span> <span class="o">=</span> <span class="n">lm</span><span class="p">(</span><span class="n">fm_3</span><span class="p">,</span> <span class="n">data_aux</span><span class="p">)</span>  <span class="c">#interactive approach</span>
-<span class="nd">@show</span> <span class="n">CL_model</span>
-<span class="nd">@show</span> <span class="n">CRA_model</span>
-<span class="nd">@show</span> <span class="n">IRA_model</span>
+<span class="c"># Standard deviations for estimators</span>
+<span class="n">CL</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">sum</span><span class="p">((</span><span class="n">Y</span> <span class="o">-</span> <span class="n">predict</span><span class="p">(</span><span class="n">CL_model</span><span class="p">))</span><span class="o">.*</span><span class="p">(</span><span class="n">Y</span> <span class="o">-</span> <span class="n">predict</span><span class="p">(</span><span class="n">CL_model</span><span class="p">)))</span><span class="o">./</span><span class="n">length</span><span class="p">(</span><span class="n">Y</span><span class="p">))</span>
+<span class="n">CRA</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">sum</span><span class="p">((</span><span class="n">Y</span> <span class="o">-</span> <span class="n">predict</span><span class="p">(</span><span class="n">CRA_model</span><span class="p">))</span><span class="o">.*</span><span class="p">(</span><span class="n">Y</span> <span class="o">-</span> <span class="n">predict</span><span class="p">(</span><span class="n">CRA_model</span><span class="p">)))</span><span class="o">./</span><span class="n">length</span><span class="p">(</span><span class="n">Y</span><span class="p">))</span>
+<span class="n">IRA</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">sum</span><span class="p">((</span><span class="n">Y</span> <span class="o">-</span> <span class="n">predict</span><span class="p">(</span><span class="n">IRA_model</span><span class="p">))</span><span class="o">.*</span><span class="p">(</span><span class="n">Y</span> <span class="o">-</span> <span class="n">predict</span><span class="p">(</span><span class="n">IRA_model</span><span class="p">)))</span><span class="o">./</span><span class="n">length</span><span class="p">(</span><span class="n">Y</span><span class="p">))</span>
+<span class="nd">@show</span> <span class="n">CL</span>
+<span class="nd">@show</span> <span class="n">CRA</span>
+<span class="nd">@show</span> <span class="n">IRA</span>
+
+<span class="c"># Check t values of regressors </span>
+<span class="nd">@show</span> <span class="n">coeftable</span><span class="p">(</span><span class="n">CL_model</span><span class="p">)</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+<span class="nd">@show</span> <span class="n">coeftable</span><span class="p">(</span><span class="n">CRA_model</span><span class="p">)</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+<span class="nd">@show</span> <span class="n">coeftable</span><span class="p">(</span><span class="n">IRA_model</span><span class="p">)</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -666,94 +763,19 @@ Z_times_D     1.98389     0.0920421   21.55    &lt;1e-84   1.80327    2.16451
 </div>
 </div>
 </div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="using-classical-standard-errors-non-robust-is-misleading-here">
+<h1>Using classical standard errors (non-robust) is misleading here.<a class="headerlink" href="#using-classical-standard-errors-non-robust-is-misleading-here" title="Permalink to this headline">#</a></h1>
+<p>We don’t teach non-robust standard errors in econometrics courses, but the default statistical inference for lm() procedure in R, summary.lm(), still uses 100-year old concepts, perhaps in part due to historical legacy.</p>
+<p>Here the non-robust standard errors suggest that there is not much difference between the different approaches, contrary to the conclusions reached using the robust standard errors.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Standard deviations for estimators</span>
-<span class="n">CL</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">sum</span><span class="p">((</span><span class="n">Y</span> <span class="o">-</span> <span class="n">predict</span><span class="p">(</span><span class="n">CL_model</span><span class="p">))</span><span class="o">.*</span><span class="p">(</span><span class="n">Y</span> <span class="o">-</span> <span class="n">predict</span><span class="p">(</span><span class="n">CL_model</span><span class="p">)))</span><span class="o">./</span><span class="n">length</span><span class="p">(</span><span class="n">Y</span><span class="p">))</span>
-<span class="n">CRA</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">sum</span><span class="p">((</span><span class="n">Y</span> <span class="o">-</span> <span class="n">predict</span><span class="p">(</span><span class="n">CRA_model</span><span class="p">))</span><span class="o">.*</span><span class="p">(</span><span class="n">Y</span> <span class="o">-</span> <span class="n">predict</span><span class="p">(</span><span class="n">CRA_model</span><span class="p">)))</span><span class="o">./</span><span class="n">length</span><span class="p">(</span><span class="n">Y</span><span class="p">))</span>
-<span class="n">IRA</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">sum</span><span class="p">((</span><span class="n">Y</span> <span class="o">-</span> <span class="n">predict</span><span class="p">(</span><span class="n">IRA_model</span><span class="p">))</span><span class="o">.*</span><span class="p">(</span><span class="n">Y</span> <span class="o">-</span> <span class="n">predict</span><span class="p">(</span><span class="n">IRA_model</span><span class="p">)))</span><span class="o">./</span><span class="n">length</span><span class="p">(</span><span class="n">Y</span><span class="p">))</span>
-<span class="nd">@show</span> <span class="n">CL</span>
-<span class="nd">@show</span> <span class="n">CRA</span>
-<span class="nd">@show</span> <span class="n">IRA</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@show</span> <span class="n">CL_model</span>
+<span class="nd">@show</span> <span class="n">CRA_model</span>
+<span class="nd">@show</span> <span class="n">IRA_model</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CL = 1.7564066279325194
-CRA = 1.3846481535483826
-IRA = 1.1434211887694885
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.1434211887694885
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Check t values of regressors </span>
-<span class="nd">@show</span> <span class="n">coeftable</span><span class="p">(</span><span class="n">CL_model</span><span class="p">)</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
-<span class="nd">@show</span> <span class="n">coeftable</span><span class="p">(</span><span class="n">CRA_model</span><span class="p">)</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
-<span class="nd">@show</span> <span class="n">coeftable</span><span class="p">(</span><span class="n">IRA_model</span><span class="p">)</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(coeftable(CL_model)).cols[4] = [0.41782338381116035, 0.6763122421522593]
-(coeftable(CRA_model)).cols[4] = [0.3043671673148393, 0.29054696200357666, 4.334610690849673e-105]
-(coeftable(IRA_model)).cols[4] = [0.4423490653757651, 0.6107715088805379, 5.1192582434572607e-135, 7.0769019608122e-85]
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4-element Vector{Float64}:
- 0.4423490653757651
- 0.6107715088805379
- 5.1192582434572607e-135
- 7.0769019608122e-85
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">linearFit</span> <span class="o">=</span> <span class="n">predict</span><span class="p">(</span><span class="n">CL_model</span><span class="p">)</span>
-<span class="n">plt_yhat</span> <span class="o">=</span> <span class="n">plot</span><span class="p">([</span><span class="n">linearFit</span> <span class="n">Y</span><span class="p">],</span> <span class="n">xlabel</span><span class="o">=</span><span class="s">&quot;Observación&quot;</span><span class="p">,</span> <span class="n">ylabel</span> <span class="o">=</span> <span class="s">&quot;y&quot;</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s">&quot;CL_model&quot;</span><span class="p">,</span> 
-                  <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="ss">:blue</span> <span class="ss">:red</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="p">[</span><span class="s">&quot;Observado&quot;</span> <span class="s">&quot;Ajustado&quot;</span><span class="p">],</span> <span class="n">legend</span> <span class="o">=</span> <span class="nb">true</span><span class="p">,</span> 
-                  <span class="n">linewidth</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="p">[</span><span class="ss">:circle</span> <span class="ss">:diamond</span><span class="p">],</span> <span class="n">grid</span> <span class="o">=</span> <span class="nb">true</span><span class="p">)</span>
-<span class="n">plot!</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="mi">500</span><span class="p">))</span>
-<span class="n">display</span><span class="p">(</span><span class="n">plt_yhat</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/05_Julia_Analyzing_RCT_with_Precision_16_0.svg" src="../_images/05_Julia_Analyzing_RCT_with_Precision_16_0.svg" /></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">linearFit</span> <span class="o">=</span> <span class="n">predict</span><span class="p">(</span><span class="n">CRA_model</span><span class="p">)</span>
-<span class="n">plt_yhat</span> <span class="o">=</span> <span class="n">plot</span><span class="p">([</span><span class="n">linearFit</span> <span class="n">Y</span><span class="p">],</span> <span class="n">xlabel</span><span class="o">=</span><span class="s">&quot;Observación&quot;</span><span class="p">,</span> <span class="n">ylabel</span> <span class="o">=</span> <span class="s">&quot;y&quot;</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s">&quot;CL_model&quot;</span><span class="p">,</span> 
-                  <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="ss">:blue</span> <span class="ss">:red</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="p">[</span><span class="s">&quot;Observado&quot;</span> <span class="s">&quot;Ajustado&quot;</span><span class="p">],</span> <span class="n">legend</span> <span class="o">=</span> <span class="nb">true</span><span class="p">,</span> 
-                  <span class="n">linewidth</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="p">[</span><span class="ss">:circle</span> <span class="ss">:diamond</span><span class="p">],</span> <span class="n">grid</span> <span class="o">=</span> <span class="nb">true</span><span class="p">)</span>
-<span class="n">plot!</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="mi">500</span><span class="p">))</span>
-<span class="n">display</span><span class="p">(</span><span class="n">plt_yhat</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/05_Julia_Analyzing_RCT_with_Precision_17_0.svg" src="../_images/05_Julia_Analyzing_RCT_with_Precision_17_0.svg" /></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">linearFit</span> <span class="o">=</span> <span class="n">predict</span><span class="p">(</span><span class="n">IRA_model</span><span class="p">)</span>
-<span class="n">plt_yhat</span> <span class="o">=</span> <span class="n">plot</span><span class="p">([</span><span class="n">linearFit</span> <span class="n">Y</span><span class="p">],</span> <span class="n">xlabel</span><span class="o">=</span><span class="s">&quot;Observación&quot;</span><span class="p">,</span> <span class="n">ylabel</span> <span class="o">=</span> <span class="s">&quot;y&quot;</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s">&quot;CL_model&quot;</span><span class="p">,</span> 
-                  <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="ss">:blue</span> <span class="ss">:red</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="p">[</span><span class="s">&quot;Observado&quot;</span> <span class="s">&quot;Ajustado&quot;</span><span class="p">],</span> <span class="n">legend</span> <span class="o">=</span> <span class="nb">true</span><span class="p">,</span> 
-                  <span class="n">linewidth</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="p">[</span><span class="ss">:circle</span> <span class="ss">:diamond</span><span class="p">],</span> <span class="n">grid</span> <span class="o">=</span> <span class="nb">true</span><span class="p">)</span>
-<span class="n">plot!</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="mi">500</span><span class="p">))</span>
-<span class="n">display</span><span class="p">(</span><span class="n">plt_yhat</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/05_Julia_Analyzing_RCT_with_Precision_18_0.svg" src="../_images/05_Julia_Analyzing_RCT_with_Precision_18_0.svg" /></div>
 </div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="verify-asymptotic-approximations-hold-in-finite-sample-simulation-experiment">
@@ -851,6 +873,20 @@ IRA model: 1.0235301183486727
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="04_Juli_Notebook_RCT-polio.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Author: Roberto Mendoza</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="06_RCT_Precision_Adjustment.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Author: Roberto Mendoza</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
 </div>
             </footer>
         </div>

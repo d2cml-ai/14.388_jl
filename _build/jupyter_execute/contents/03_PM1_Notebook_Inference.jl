@@ -1,9 +1,9 @@
-using Pkg
-Pkg.add("CSV")
-Pkg.add("DataFrames")
-Pkg.add("Dates")
-Pkg.add("Plots")
-Pkg.add("GLMNet")
+# using Pkg
+# Pkg.add("CSV")
+# Pkg.add("DataFrames")
+# Pkg.add("Dates")
+# Pkg.add("Plots")
+# Pkg.add("GLMNet")
 using GLMNet
 using CSV
 using DataFrames
@@ -15,15 +15,6 @@ rdata_read = load("../data/wage2015_subsample_inference.RData")
 data = rdata_read["data"]
 names(data)
 println("Number of Rows : ", size(data)[1],"\n","Number of Columns : ", size(data)[2],) #rows and columns
-
-describe(data)
-
-#we have to verify that all the columns has the appropiate data type because we use some categorical variable in this julia_notebooks
-[eltype(col) for col = eachcol(data)]
-
-# we can notice that some categorical features now are string so we have to change this 
-categorical!(data, [:occ,:occ2,:ind,:ind2])
-[eltype(col) for col = eachcol(data)]
 
 Z = select(data, ["lwage","sex","shs","hsg","scl","clg","ad","ne","mw","so","we","exp1"])
 
@@ -39,12 +30,12 @@ means = DataFrame( variables = names(Z), All = describe(Z, :mean)[!,2], Men = de
 mean(Z_female[:,:lwage]) - mean(Z_male[:,:lwage])
 
 #install all the package that we can need
-Pkg.add("Plots")
-Pkg.add("Lathe")
-Pkg.add("GLM")
-Pkg.add("StatsPlots")
-Pkg.add("MLBase")
-Pkg.add("Tables")
+# Pkg.add("Plots")
+# Pkg.add("Lathe")
+# Pkg.add("GLM")
+# Pkg.add("StatsPlots")
+# Pkg.add("MLBase")
+# Pkg.add("Tables")
 
 # Load the installed packages
 using DataFrames
@@ -68,8 +59,6 @@ control_est = GLM.coef(control_model)[2]
 control_se = GLM.coeftable(control_model).cols[2][2]
 println(control_model)
 println("Coefficient for OLS with controls " , control_est)
-
-
 
 # models
 # model for Y
@@ -102,9 +91,8 @@ flex_y = @formula(lwage ~  (exp1+exp2+exp3+exp4) * (shs+hsg+scl+clg+occ2+ind2+mw
 # model for D
 flex_d = @formula(sex ~ (exp1+exp2+exp3+exp4) * (shs+hsg+scl+clg+occ2+ind2+mw+so+we));
 
-Pkg.add("Lasso")
+# Pkg.add("Lasso")
 using Lasso
-
 
 lasso_y = fit(LassoModel, flex_y, data,  α = 0.1)
 t_y = residuals(lasso_y)
@@ -120,16 +108,14 @@ partial_lasso_se = GLM.coeftable(partial_lasso_fit).cols[2][2]
 
 println("Coefficient for D via partialling-out using lasso ", partial_lasso_est)
 
-
-
 DataFrame(modelos = [ "Without controls", "full reg", "partial reg", "partial reg via lasso" ], 
 Estimate = [nocontrol_est,control_est,partial_est, partial_lasso_est], 
 StdError = [nocontrol_se,control_se, partial_se, partial_lasso_se])
 
-import Pkg
-Pkg.add("StatsModels")
-Pkg.add("Combinatorics")
-Pkg.add("IterTools")
+# import Pkg
+# Pkg.add("StatsModels")
+# Pkg.add("Combinatorics")
+# Pkg.add("IterTools")
 # we have to configure the package internaly with the itertools package, this because 
 #julia dont iunderstand (a formula) ^2, it takes as an entire term not as interactions 
 #between variables
@@ -183,8 +169,3 @@ partial_lasso_se = GLM.stderror(partial_lasso_fit)[2];
 tabla3 = DataFrame(modelos = [ "Full reg", "partial reg via lasso" ], 
 Estimate = [control_est,partial_lasso_est], 
 StdError = [control_se,partial_lasso_se])
-
-#the table in latex
-show(stdout, MIME("text/latex"), DataFrame(modelos = [ "Full reg", "partial reg via lasso" ], 
-Estimate = [control_est,partial_lasso_extraflex_est], 
-StdError = [control_se,partial_lasso_extraflex_se]))

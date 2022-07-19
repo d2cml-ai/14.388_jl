@@ -54,6 +54,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Author: Roberto Mendoza" href="04_Juli_Notebook_RCT-polio.html" />
+    <link rel="prev" title="Chapter 2: Predictive Inference" href="02_PM1_Notebook1_Prediction_newdata.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -113,10 +115,95 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="01_Julia_Notebook_Linear_Model_Overfitting.html">
    Simple Exercise on Overfitting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02_PM1_Notebook1_Prediction_newdata.html">
+   Chapter 2: Predictive Inference
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   An inferential problem: The Gender Wage Gap
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04_Juli_Notebook_RCT-polio.html">
+   Author: Roberto Mendoza
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05_Julia_Analyzing_RCT_with_Precision.html">
+   Analyzing RCT with Precision by Adjusting for Baseline Covariates
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06_RCT_Precision_Adjustment.html">
+   Author: Roberto Mendoza
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07_julia-notebook-linear-penalized-regs.html">
+   Penalized Linear Regressions: A Simulation Experiment
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="09_Julia_OrthogonalLearning_lab4.html">
+   Orthogonal Learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="10_Julia_pm2_notebook_jannis.html">
+   Testing the Convergence Hypothesis
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="11_py-heterogenous-wage-effects.html">
+   Application: Heterogeneous Effect of Gender on Wage Using Double Lasso
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="14_Julia_pm3_notebook_newdata_nn.html">
+   A Simple Case Study using Wage Data from 2015 - proceeding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="16_Functional-aproximation-by-nn-and-rf.html">
+   Functional Approximations by Trees and Neural Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="17_Notebook_DAGitty.html">
+   Causal identification in DAGs using Backdoor and Swigs, Equivalence Classes, Falsiability Tests
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="19_Julia_pm3_notebook_inference_clustering.html">
+   A Case Study: The Effect of Gun Ownership on Gun-Homicide Rates
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="20_Julia-pm3-newdata-nn.html">
+   The Effect of Gun Ownership on Gun-Homicide Rates - proceeding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="23_Julia_debiased-ml-for-partially-linear-model.html">
+   Double/Debiased Machine Learning for the Partially Linear Regression Model.
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="25_debiased-ml-for-partially-linear-iv-model-in-julia.html">
+   Double/Debiased ML for Partially Linear IV Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="27_Julia_weak_iv_experiments.html">
+   A Simple Example of Properties of IV estimator when Instruments are Weak
   </a>
  </li>
 </ul>
@@ -470,12 +557,12 @@ title="Print to PDF"
 <p>We consider the same subsample of the U.S. Current Population Survey (2015) as in the previous lab. Let us load the data set.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">Pkg</span>
-<span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;CSV&quot;</span><span class="p">)</span>
-<span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;DataFrames&quot;</span><span class="p">)</span>
-<span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;Dates&quot;</span><span class="p">)</span>
-<span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;Plots&quot;</span><span class="p">)</span>
-<span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;GLMNet&quot;</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># using Pkg</span>
+<span class="c"># Pkg.add(&quot;CSV&quot;)</span>
+<span class="c"># Pkg.add(&quot;DataFrames&quot;)</span>
+<span class="c"># Pkg.add(&quot;Dates&quot;)</span>
+<span class="c"># Pkg.add(&quot;Plots&quot;)</span>
+<span class="c"># Pkg.add(&quot;GLMNet&quot;)</span>
 <span class="k">using</span> <span class="n">GLMNet</span>
 <span class="k">using</span> <span class="n">CSV</span>
 <span class="k">using</span> <span class="n">DataFrames</span>
@@ -486,24 +573,8 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">    Updating</span> registry at `C:\Users\Work\.julia\registries\General.toml`
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">   Resolving</span> package versions...
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">  No Changes</span> to `C:\Users\Work\.julia\environments\v1.7\Project.toml`
-<span class=" -Color -Color-Bold -Color-Bold-Green">  No Changes</span> to `C:\Users\Work\.julia\environments\v1.7\Manifest.toml`
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">   Resolving</span> package versions...
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">  No Changes</span> to `C:\Users\Work\.julia\environments\v1.7\Project.toml`
-<span class=" -Color -Color-Bold -Color-Bold-Green">  No Changes</span> to `C:\Users\Work\.julia\environments\v1.7\Manifest.toml`
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Interrupted: Exiting precompilation...
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>┌ Info: Precompiling Plots [91a5bcdd-55d7-5caf-9e0b-520d859cae80]
+└ @ Base loading.jl:1423
 </pre></div>
 </div>
 </div>
@@ -520,82 +591,6 @@ title="Print to PDF"
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of Rows : 5150
 Number of Columns : 20
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">describe</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><table class="data-frame"><thead><tr><th></th><th>variable</th><th>mean</th><th>min</th><th>median</th><th>max</th><th>nmissing</th><th>eltype</th></tr><tr><th></th><th>Symbol</th><th>Union…</th><th>Any</th><th>Union…</th><th>Any</th><th>Int64</th><th>DataType</th></tr></thead><tbody><p>20 rows × 7 columns</p><tr><th>1</th><td>wage</td><td>23.4104</td><td>3.02198</td><td>19.2308</td><td>528.846</td><td>0</td><td>Float64</td></tr><tr><th>2</th><td>lwage</td><td>2.97079</td><td>1.10591</td><td>2.95651</td><td>6.2707</td><td>0</td><td>Float64</td></tr><tr><th>3</th><td>sex</td><td>0.444466</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0</td><td>Float64</td></tr><tr><th>4</th><td>shs</td><td>0.023301</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0</td><td>Float64</td></tr><tr><th>5</th><td>hsg</td><td>0.243883</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0</td><td>Float64</td></tr><tr><th>6</th><td>scl</td><td>0.278058</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0</td><td>Float64</td></tr><tr><th>7</th><td>clg</td><td>0.31767</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0</td><td>Float64</td></tr><tr><th>8</th><td>ad</td><td>0.137087</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0</td><td>Float64</td></tr><tr><th>9</th><td>mw</td><td>0.259612</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0</td><td>Float64</td></tr><tr><th>10</th><td>so</td><td>0.296505</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0</td><td>Float64</td></tr><tr><th>11</th><td>we</td><td>0.216117</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0</td><td>Float64</td></tr><tr><th>12</th><td>ne</td><td>0.227767</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0</td><td>Float64</td></tr><tr><th>13</th><td>exp1</td><td>13.7606</td><td>0.0</td><td>10.0</td><td>47.0</td><td>0</td><td>Float64</td></tr><tr><th>14</th><td>exp2</td><td>3.01893</td><td>0.0</td><td>1.0</td><td>22.09</td><td>0</td><td>Float64</td></tr><tr><th>15</th><td>exp3</td><td>8.23587</td><td>0.0</td><td>1.0</td><td>103.823</td><td>0</td><td>Float64</td></tr><tr><th>16</th><td>exp4</td><td>25.118</td><td>0.0</td><td>1.0</td><td>487.968</td><td>0</td><td>Float64</td></tr><tr><th>17</th><td>occ</td><td></td><td>10</td><td></td><td>1e+05</td><td>0</td><td>CategoricalValue{String, UInt16}</td></tr><tr><th>18</th><td>occ2</td><td></td><td>1</td><td></td><td>22</td><td>0</td><td>CategoricalValue{String, UInt8}</td></tr><tr><th>19</th><td>ind</td><td></td><td>370</td><td></td><td>1e+05</td><td>0</td><td>CategoricalValue{String, UInt8}</td></tr><tr><th>20</th><td>ind2</td><td></td><td>2</td><td></td><td>22</td><td>0</td><td>CategoricalValue{String, UInt8}</td></tr></tbody></table></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c">#we have to verify that all the columns has the appropiate data type because we use some categorical variable in this julia_notebooks</span>
-<span class="p">[</span><span class="n">eltype</span><span class="p">(</span><span class="n">col</span><span class="p">)</span> <span class="k">for</span> <span class="n">col</span> <span class="o">=</span> <span class="n">eachcol</span><span class="p">(</span><span class="n">data</span><span class="p">)]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20-element Vector{DataType}:
- Float64
- Float64
- Float64
- Float64
- Float64
- Float64
- Float64
- Float64
- Float64
- Float64
- Float64
- Float64
- Float64
- Float64
- Float64
- Float64
- CategoricalArrays.CategoricalValue{String, UInt16}
- CategoricalArrays.CategoricalValue{String, UInt8}
- CategoricalArrays.CategoricalValue{String, UInt8}
- CategoricalArrays.CategoricalValue{String, UInt8}
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># we can notice that some categorical features now are string so we have to change this </span>
-<span class="n">categorical!</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="p">[</span><span class="ss">:occ</span><span class="p">,</span><span class="ss">:occ2</span><span class="p">,</span><span class="ss">:ind</span><span class="p">,</span><span class="ss">:ind2</span><span class="p">])</span>
-<span class="p">[</span><span class="n">eltype</span><span class="p">(</span><span class="n">col</span><span class="p">)</span> <span class="k">for</span> <span class="n">col</span> <span class="o">=</span> <span class="n">eachcol</span><span class="p">(</span><span class="n">data</span><span class="p">)]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20-element Vector{DataType}:
- Float64
- Float64
- Float64
- Float64
- Float64
- Float64
- Float64
- Float64
- Float64
- Float64
- Float64
- Float64
- Float64
- Float64
- Float64
- Float64
- CategoricalArrays.CategoricalValue{String, UInt16}
- CategoricalArrays.CategoricalValue{String, UInt8}
- CategoricalArrays.CategoricalValue{String, UInt8}
- CategoricalArrays.CategoricalValue{String, UInt8}
 </pre></div>
 </div>
 </div>
@@ -640,12 +635,12 @@ Number of Columns : 20
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c">#install all the package that we can need</span>
-<span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;Plots&quot;</span><span class="p">)</span>
-<span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;Lathe&quot;</span><span class="p">)</span>
-<span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;GLM&quot;</span><span class="p">)</span>
-<span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;StatsPlots&quot;</span><span class="p">)</span>
-<span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;MLBase&quot;</span><span class="p">)</span>
-<span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;Tables&quot;</span><span class="p">)</span>
+<span class="c"># Pkg.add(&quot;Plots&quot;)</span>
+<span class="c"># Pkg.add(&quot;Lathe&quot;)</span>
+<span class="c"># Pkg.add(&quot;GLM&quot;)</span>
+<span class="c"># Pkg.add(&quot;StatsPlots&quot;)</span>
+<span class="c"># Pkg.add(&quot;MLBase&quot;)</span>
+<span class="c"># Pkg.add(&quot;Tables&quot;)</span>
 
 <span class="c"># Load the installed packages</span>
 <span class="k">using</span> <span class="n">DataFrames</span>
@@ -1046,7 +1041,7 @@ or penalization for regularization purposes.</p>
 <h3>With the Lasso package<a class="headerlink" href="#with-the-lasso-package" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;Lasso&quot;</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Pkg.add(&quot;Lasso&quot;)</span>
 <span class="k">using</span> <span class="n">Lasso</span>
 </pre></div>
 </div>
@@ -1109,10 +1104,10 @@ selection effects of unobserved differences in covariates between men and women 
 <h2>“Extra” flexible model<a class="headerlink" href="#extra-flexible-model" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">import</span> <span class="n">Pkg</span>
-<span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;StatsModels&quot;</span><span class="p">)</span>
-<span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;Combinatorics&quot;</span><span class="p">)</span>
-<span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;IterTools&quot;</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># import Pkg</span>
+<span class="c"># Pkg.add(&quot;StatsModels&quot;)</span>
+<span class="c"># Pkg.add(&quot;Combinatorics&quot;)</span>
+<span class="c"># Pkg.add(&quot;IterTools&quot;)</span>
 <span class="c"># we have to configure the package internaly with the itertools package, this because </span>
 <span class="c">#julia dont iunderstand (a formula) ^2, it takes as an entire term not as interactions </span>
 <span class="c">#between variables</span>
@@ -1222,31 +1217,6 @@ Coefficient for OLS with extra flex controls -0.06127046379432059
 <div class="cell_output docutils container">
 <div class="output text_html"><table class="data-frame"><thead><tr><th></th><th>modelos</th><th>Estimate</th><th>StdError</th></tr><tr><th></th><th>String</th><th>Float64</th><th>Float64</th></tr></thead><tbody><p>2 rows × 3 columns</p><tr><th>1</th><td>Full reg</td><td>-0.0612705</td><td>0.0159811</td></tr><tr><th>2</th><td>partial reg via lasso</td><td>-0.0587647</td><td>0.0133701</td></tr></tbody></table></div></div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c">#the table in latex</span>
-<span class="n">show</span><span class="p">(</span><span class="nb">stdout</span><span class="p">,</span> <span class="kt">MIME</span><span class="p">(</span><span class="s">&quot;text/latex&quot;</span><span class="p">),</span> <span class="n">DataFrame</span><span class="p">(</span><span class="n">modelos</span> <span class="o">=</span> <span class="p">[</span> <span class="s">&quot;Full reg&quot;</span><span class="p">,</span> <span class="s">&quot;partial reg via lasso&quot;</span> <span class="p">],</span> 
-<span class="n">Estimate</span> <span class="o">=</span> <span class="p">[</span><span class="n">control_est</span><span class="p">,</span><span class="n">partial_lasso_extraflex_est</span><span class="p">],</span> 
-<span class="n">StdError</span> <span class="o">=</span> <span class="p">[</span><span class="n">control_se</span><span class="p">,</span><span class="n">partial_lasso_extraflex_se</span><span class="p">]))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>\begin{tabular}{r|ccc}
-	&amp; modelos &amp; Estimate &amp; StdError\\
-	\hline
-	&amp; String &amp; Float64 &amp; Float64\\
-	\hline
-	1 &amp; Full reg &amp; -0.0612705 &amp; 0.0159811 \\
-	2 &amp; partial reg via lasso &amp; -0.0587759 &amp; 0.0135038 \\
-\end{tabular}
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>14
-</pre></div>
-</div>
-</div>
-</div>
 <p>In this case p/n = 20%, that is <span class="math notranslate nohighlight">\(p/n\)</span> is no longer small and we start seeing the differences between
 unregularized partialling out and regularized partialling out with lasso (double lasso).  The results based on
 double lasso have rigorous guarantees in this non-small p/n regime under approximate sparsity. The results based on OLS still
@@ -1282,6 +1252,20 @@ sparsity, although other regularity conditions are needed.</p>
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="02_PM1_Notebook1_Prediction_newdata.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Chapter 2: Predictive Inference</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="04_Juli_Notebook_RCT-polio.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Author: Roberto Mendoza</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
 </div>
             </footer>
         </div>

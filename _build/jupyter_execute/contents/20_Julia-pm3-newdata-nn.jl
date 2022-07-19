@@ -181,23 +181,3 @@ first(DataFrame(logghomr = y,logfssl = d,CountyCode = clu ),6)
 
 ##
 DML2_for_NN(z,d,y,10,clu,100)
-
-z
-
-dt = StatsBase.fit(ZScoreTransform, z; dims=nothing, center=true, scale=true)
-StatsBase.transform(dt, z)
-
-mean_1 = mean.(eachcol(Z))
-    mean_1 = [names(Z) mean_1]
-
-    std_1 = std.(eachcol(Z))
-    std_1 = [names(Z) std_1]
-
-    df = DataFrame()
-    for i in 1:size(Z)[2]
-        p = (Z[!, i] .- mean_1[i,2]) / std_1[i,2]
-        colname = names(Z)[i]
-        df[!,colname] = p
-    end
-    Z = df
-    z = Matrix(Z);

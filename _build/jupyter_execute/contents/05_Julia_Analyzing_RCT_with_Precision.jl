@@ -20,10 +20,6 @@ D = Int.(rand(Uniform(), n, 1) .< 0.2)   # treatment indicator; only 23% get tre
 length(D[D .== 1])*100/length(D[D .== 0])  # treatment indicator; only 23% get treated
 mean(D)
 
-# column = rand(5);
-
-# DataFrame([column], [:col1])
-
 Y = (Y1.*D) + (Y0.*(ones(n,1)-D))    # observed Y
 D = D - fill(mean(D),n,1)            # demean D
 Z = Z - fill(mean(Z),n,1)            # demean Z
@@ -45,13 +41,6 @@ fm_3 = @formula(Y ~ D + Z + Z_times_D)
 CL_model = lm(fm_1, data_aux)
 CRA_model = lm(fm_2, data_aux)  #classical
 IRA_model = lm(fm_3, data_aux)  #interactive approach
-@show CL_model
-@show CRA_model
-@show IRA_model
-
-# Comparing models
-ftest(CL_model.model, CRA_model.model, IRA_model.model)
-
 # Standard deviations for estimators
 CL = sqrt(sum((Y - predict(CL_model)).*(Y - predict(CL_model)))./length(Y))
 CRA = sqrt(sum((Y - predict(CRA_model)).*(Y - predict(CRA_model)))./length(Y))
@@ -65,26 +54,12 @@ IRA = sqrt(sum((Y - predict(IRA_model)).*(Y - predict(IRA_model)))./length(Y))
 @show coeftable(CRA_model).cols[4]
 @show coeftable(IRA_model).cols[4]
 
-linearFit = predict(CL_model)
-plt_yhat = plot([linearFit Y], xlabel="Observación", ylabel = "y", title = "CL_model", 
-                  color=[:blue :red], label=["Observado" "Ajustado"], legend = true, 
-                  linewidth = 0.5, shape = [:circle :diamond], grid = true)
-plot!(size=(1000,500))
-display(plt_yhat)
+# Comparing models
+ftest(CL_model.model, CRA_model.model, IRA_model.model)
 
-linearFit = predict(CRA_model)
-plt_yhat = plot([linearFit Y], xlabel="Observación", ylabel = "y", title = "CL_model", 
-                  color=[:blue :red], label=["Observado" "Ajustado"], legend = true, 
-                  linewidth = 0.5, shape = [:circle :diamond], grid = true)
-plot!(size=(1000,500))
-display(plt_yhat)
-
-linearFit = predict(IRA_model)
-plt_yhat = plot([linearFit Y], xlabel="Observación", ylabel = "y", title = "CL_model", 
-                  color=[:blue :red], label=["Observado" "Ajustado"], legend = true, 
-                  linewidth = 0.5, shape = [:circle :diamond], grid = true)
-plot!(size=(1000,500))
-display(plt_yhat)
+@show CL_model
+@show CRA_model
+@show IRA_model
 
 Random.seed!(12345676)     # set MC seed
 n = 1000

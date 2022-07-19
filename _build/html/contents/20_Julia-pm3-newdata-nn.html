@@ -54,6 +54,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Double/Debiased Machine Learning for the Partially Linear Regression Model." href="23_Julia_debiased-ml-for-partially-linear-model.html" />
+    <link rel="prev" title="A Case Study: The Effect of Gun Ownership on Gun-Homicide Rates" href="19_Julia_pm3_notebook_inference_clustering.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -113,10 +115,95 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="01_Julia_Notebook_Linear_Model_Overfitting.html">
    Simple Exercise on Overfitting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02_PM1_Notebook1_Prediction_newdata.html">
+   Chapter 2: Predictive Inference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03_PM1_Notebook_Inference.html">
+   An inferential problem: The Gender Wage Gap
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04_Juli_Notebook_RCT-polio.html">
+   Author: Roberto Mendoza
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05_Julia_Analyzing_RCT_with_Precision.html">
+   Analyzing RCT with Precision by Adjusting for Baseline Covariates
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06_RCT_Precision_Adjustment.html">
+   Author: Roberto Mendoza
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07_julia-notebook-linear-penalized-regs.html">
+   Penalized Linear Regressions: A Simulation Experiment
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="09_Julia_OrthogonalLearning_lab4.html">
+   Orthogonal Learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="10_Julia_pm2_notebook_jannis.html">
+   Testing the Convergence Hypothesis
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="11_py-heterogenous-wage-effects.html">
+   Application: Heterogeneous Effect of Gender on Wage Using Double Lasso
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="14_Julia_pm3_notebook_newdata_nn.html">
+   A Simple Case Study using Wage Data from 2015 - proceeding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="16_Functional-aproximation-by-nn-and-rf.html">
+   Functional Approximations by Trees and Neural Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="17_Notebook_DAGitty.html">
+   Causal identification in DAGs using Backdoor and Swigs, Equivalence Classes, Falsiability Tests
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="19_Julia_pm3_notebook_inference_clustering.html">
+   A Case Study: The Effect of Gun Ownership on Gun-Homicide Rates
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   The Effect of Gun Ownership on Gun-Homicide Rates - proceeding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="23_Julia_debiased-ml-for-partially-linear-model.html">
+   Double/Debiased Machine Learning for the Partially Linear Regression Model.
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="25_debiased-ml-for-partially-linear-iv-model-in-julia.html">
+   Double/Debiased ML for Partially Linear IV Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="27_Julia_weak_iv_experiments.html">
+   A Simple Example of Properties of IV estimator when Instruments are Weak
   </a>
  </li>
 </ul>
@@ -178,7 +265,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/contents/Julia-pm3-newdata-nn.ipynb"
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/contents/20_Julia-pm3-newdata-nn.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -238,7 +325,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fcontents/Julia-pm3-newdata-nn.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fcontents/20_Julia-pm3-newdata-nn.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -266,7 +353,7 @@ title="Open an issue"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/contents/Julia-pm3-newdata-nn.ipynb"
+        <a href="../_sources/contents/20_Julia-pm3-newdata-nn.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -805,105 +892,6 @@ Stacktrace:
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">z</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3900×195 Matrix{Float64}:
-  0.150893    -0.124395    0.0104613   …  -0.0407038     0.0771421
-  0.0401683   -0.134781    0.0104613      -0.0407038     0.0771421
- -0.017679    -0.167909    0.0104613      -0.0407038     0.0771421
- -0.00963344  -0.22925     0.0104613      -0.0407038     0.0771421
- -0.0267151   -0.176635    0.00324793     -0.0407038     0.0771421
- -0.151487    -0.189069    0.0104613   …  -0.0407038    -0.00455962
- -0.166729    -0.117739    0.0104613      -0.0407038    -0.00455962
- -0.0996453   -0.0833094   0.00448964     -0.0407038    -0.00455962
-  0.151557     0.319282   -0.0448348      -0.0407038    -0.00455962
-  0.0476034   -0.0144728  -0.00233214     -0.0407038    -0.00455962
-  0.00814297  -0.0349694   0.0104613   …  -0.0407038    -0.0582924
- -0.0811847    0.0441466   0.00848568     -0.00658305   -0.0555275
- -0.153504     0.393015   -0.0484441       0.0712472    -0.0626049
-  ⋮                                    ⋱                
- -0.118829     0.299746   -0.0582989       0.0076064     0.00366817
- -0.0220176    0.137069   -0.0293128       0.0076064     0.00366817
-  0.0786474    0.13458    -0.0205879   …   0.0076064    -0.0431013
-  0.0561803    0.134567   -0.0219353      -0.000598067  -0.039556
-  0.209323     0.390146   -0.0607604       0.0225559    -0.0432888
- -0.0858534    0.15756    -0.0216791       0.0869503    -0.0454663
- -0.0983204    0.126737   -0.0231042       0.0118609    -0.0225373
-  0.0182247    0.107714   -0.0302751   …   0.0475733    -0.0153273
-  0.251402     0.151313   -0.0308606      -0.0525011    -0.00924835
-  0.179985     0.116497   -0.0237122      -0.0779322    -0.00817572
- -1.3754      -3.02227     0.530429       -0.0534209    -0.0175252
-  0.336788     0.171876   -0.036207       -0.0681585     0.00139592
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">dt</span> <span class="o">=</span> <span class="n">StatsBase</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">ZScoreTransform</span><span class="p">,</span> <span class="n">z</span><span class="p">;</span> <span class="n">dims</span><span class="o">=</span><span class="nb">nothing</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="nb">true</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="nb">true</span><span class="p">)</span>
-<span class="n">StatsBase</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3900×195 Matrix{Float64}:
-  0.626873     -0.927658   -0.166134   …  -0.0740911   -0.45506     0.210407
-  0.00698385   -0.981708   -0.160899      -0.0687846   -0.450048    0.215934
- -0.312889     -1.16055    -0.15411       -0.0621398   -0.442805    0.222132
- -0.262996     -1.49855    -0.149943      -0.0582416   -0.437796    0.225201
- -0.339114     -1.18638    -0.169779      -0.0368954   -0.41817     0.247832
- -1.17873      -1.41447    -0.162871   …  -0.0606275   -0.483817   -0.257094
- -1.39615      -1.07197    -0.223608      -0.115746    -0.562189   -0.323008
- -0.947603     -0.839608   -0.259183      -0.111951    -0.55795    -0.319006
-  0.69435       1.77281    -0.568437      -0.10808     -0.541874   -0.30947
-  0.0457575    -0.341392   -0.265674      -0.0842298   -0.504986   -0.279566
-  0.330759      0.0549454   0.345591   …   0.449869     0.0182593  -0.0942651
- -0.2482        0.575504    0.341133       0.219963     0.242098   -0.0795752
- -0.724473      2.75162    -0.0562459      0.115523     0.705042   -0.146315
-  ⋮                                    ⋱                           
- -1.72149       4.64881    -0.800284       0.0445457    0.202729    0.142794
- -0.297537      2.20752    -0.412411       0.00526928   0.168935    0.106922
-  1.10953       1.93379    -0.35288    …  -0.0905586    0.062613   -0.684655
-  0.714862      1.81819    -0.384656       0.0650147   -0.0843239  -0.632678
-  2.14674       4.1588     -0.858553      -0.0428847    0.0685291  -0.664142
- -1.25083       1.78149    -0.451382      -0.142416     0.901868   -0.747712
- -1.4067        1.39244    -0.471199      -0.122584    -0.0363232  -0.464149
-  0.0459499     1.15501    -0.555119   …  -0.219705     0.409674   -0.369867
-  2.84173       1.63375    -0.564923      -0.0841515   -0.826104   -0.304082
-  1.98046       1.21949    -0.46109       -0.136939    -1.11098    -0.274867
- -5.30551     -11.6741      2.06455       -0.0131074   -0.193259   -0.0544458
-  3.40556       1.685      -0.485979      -0.131183    -0.819337   -0.0936586
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">mean_1</span> <span class="o">=</span> <span class="n">mean</span><span class="o">.</span><span class="p">(</span><span class="n">eachcol</span><span class="p">(</span><span class="n">Z</span><span class="p">))</span>
-    <span class="n">mean_1</span> <span class="o">=</span> <span class="p">[</span><span class="n">names</span><span class="p">(</span><span class="n">Z</span><span class="p">)</span> <span class="n">mean_1</span><span class="p">]</span>
-
-    <span class="n">std_1</span> <span class="o">=</span> <span class="n">std</span><span class="o">.</span><span class="p">(</span><span class="n">eachcol</span><span class="p">(</span><span class="n">Z</span><span class="p">))</span>
-    <span class="n">std_1</span> <span class="o">=</span> <span class="p">[</span><span class="n">names</span><span class="p">(</span><span class="n">Z</span><span class="p">)</span> <span class="n">std_1</span><span class="p">]</span>
-
-    <span class="n">df</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">()</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="n">size</span><span class="p">(</span><span class="n">Z</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span>
-        <span class="n">p</span> <span class="o">=</span> <span class="p">(</span><span class="n">Z</span><span class="p">[</span><span class="o">!</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">.-</span> <span class="n">mean_1</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span> <span class="o">/</span> <span class="n">std_1</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
-        <span class="n">colname</span> <span class="o">=</span> <span class="n">names</span><span class="p">(</span><span class="n">Z</span><span class="p">)[</span><span class="n">i</span><span class="p">]</span>
-        <span class="n">df</span><span class="p">[</span><span class="o">!</span><span class="p">,</span><span class="n">colname</span><span class="p">]</span> <span class="o">=</span> <span class="n">p</span>
-    <span class="k">end</span>
-    <span class="n">Z</span> <span class="o">=</span> <span class="n">df</span>
-    <span class="n">z</span> <span class="o">=</span> <span class="kt">Matrix</span><span class="p">(</span><span class="n">Z</span><span class="p">);</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><table class="data-frame"><thead><tr><th></th><th>logrobr</th><th>logburg</th><th>burg_missing</th><th>robrate_missing</th><th>newblack</th><th>newfhh</th></tr><tr><th></th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th></tr></thead><tbody><p>3,900 rows × 195 columns (omitted printing of 189 columns)</p><tr><th>1</th><td>0.150893</td><td>-0.124395</td><td>0.0104613</td><td>-0.021229</td><td>0.0309471</td><td>-0.0204832</td></tr><tr><th>2</th><td>0.0401683</td><td>-0.134781</td><td>0.0104613</td><td>-0.0194181</td><td>0.0309471</td><td>-0.0204832</td></tr><tr><th>3</th><td>-0.017679</td><td>-0.167909</td><td>0.0104613</td><td>-0.0220374</td><td>0.0309471</td><td>-0.0204832</td></tr><tr><th>4</th><td>-0.00963344</td><td>-0.22925</td><td>0.0104613</td><td>-0.0194181</td><td>0.0309471</td><td>-0.0204832</td></tr><tr><th>5</th><td>-0.0267151</td><td>-0.176635</td><td>0.00324793</td><td>-0.0208037</td><td>0.0309471</td><td>-0.0204832</td></tr><tr><th>6</th><td>-0.151487</td><td>-0.189069</td><td>0.0104613</td><td>0.016953</td><td>0.0309471</td><td>-0.0204832</td></tr><tr><th>7</th><td>-0.166729</td><td>-0.117739</td><td>0.0104613</td><td>0.0245505</td><td>0.0309471</td><td>-0.0204832</td></tr><tr><th>8</th><td>-0.0996453</td><td>-0.0833094</td><td>0.00448964</td><td>0.021457</td><td>0.0309471</td><td>-0.0204832</td></tr><tr><th>9</th><td>0.151557</td><td>0.319282</td><td>-0.0448348</td><td>-0.0366629</td><td>0.0309471</td><td>-0.0204832</td></tr><tr><th>10</th><td>0.0476034</td><td>-0.0144728</td><td>-0.00233214</td><td>0.00765442</td><td>0.0309471</td><td>-0.0204832</td></tr><tr><th>11</th><td>0.00814297</td><td>-0.0349694</td><td>0.0104613</td><td>0.0101673</td><td>-0.0309471</td><td>0.0204832</td></tr><tr><th>12</th><td>-0.0811847</td><td>0.0441466</td><td>0.00848568</td><td>0.0169169</td><td>-0.0309471</td><td>0.0204832</td></tr><tr><th>13</th><td>-0.153504</td><td>0.393015</td><td>-0.0484441</td><td>0.0230577</td><td>-0.0309471</td><td>0.0204832</td></tr><tr><th>14</th><td>-0.148069</td><td>-0.0146316</td><td>0.00886135</td><td>0.0161103</td><td>-0.0309471</td><td>0.0204832</td></tr><tr><th>15</th><td>0.0247091</td><td>0.0531618</td><td>0.00677168</td><td>0.0155368</td><td>-0.0309471</td><td>0.0204832</td></tr><tr><th>16</th><td>0.235093</td><td>0.178299</td><td>-0.00374318</td><td>0.000594213</td><td>-0.0309471</td><td>0.0204832</td></tr><tr><th>17</th><td>0.294984</td><td>0.146047</td><td>-0.00460173</td><td>-0.0205562</td><td>-0.0309471</td><td>0.0204832</td></tr><tr><th>18</th><td>0.0237644</td><td>0.0162414</td><td>0.00588019</td><td>0.00584345</td><td>-0.0309471</td><td>0.0204832</td></tr><tr><th>19</th><td>-0.116843</td><td>-0.0173146</td><td>0.00543154</td><td>0.0053948</td><td>-0.0309471</td><td>0.0204832</td></tr><tr><th>20</th><td>-0.00542654</td><td>0.154285</td><td>-0.0124411</td><td>-0.00411101</td><td>-0.0309471</td><td>0.0204832</td></tr><tr><th>21</th><td>0.106903</td><td>-0.117615</td><td>0.00797198</td><td>-0.0161775</td><td>0.0425486</td><td>-0.0222253</td></tr><tr><th>22</th><td>0.0906478</td><td>-0.0953381</td><td>0.00797198</td><td>-0.0147974</td><td>0.0425486</td><td>-0.0222253</td></tr><tr><th>23</th><td>0.0844482</td><td>-0.115481</td><td>0.00797198</td><td>-0.0167935</td><td>0.0425486</td><td>-0.0222253</td></tr><tr><th>24</th><td>0.0297359</td><td>-0.187202</td><td>0.00797198</td><td>-0.0147974</td><td>0.0425486</td><td>-0.0222253</td></tr><tr><th>25</th><td>-0.0270093</td><td>-0.187794</td><td>0.00247507</td><td>-0.0158534</td><td>0.0425486</td><td>-0.0222253</td></tr><tr><th>26</th><td>-0.220044</td><td>-0.148477</td><td>0.00797198</td><td>0.0129189</td><td>0.0425486</td><td>-0.0222253</td></tr><tr><th>27</th><td>-0.2442</td><td>-0.0289042</td><td>0.00797198</td><td>0.0187086</td><td>0.0425486</td><td>-0.0222253</td></tr><tr><th>28</th><td>-0.217045</td><td>0.127496</td><td>0.00342131</td><td>0.0163512</td><td>0.0425486</td><td>-0.0222253</td></tr><tr><th>29</th><td>0.10424</td><td>0.393619</td><td>-0.0341662</td><td>-0.0279388</td><td>0.0425486</td><td>-0.0222253</td></tr><tr><th>30</th><td>-0.172381</td><td>-0.00919521</td><td>-0.0017772</td><td>0.00583301</td><td>0.0425486</td><td>-0.0222253</td></tr><tr><th>&vellip;</th><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td></tr></tbody></table></div></div>
-</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -933,6 +921,20 @@ Stacktrace:
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="19_Julia_pm3_notebook_inference_clustering.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">A Case Study: The Effect of Gun Ownership on Gun-Homicide Rates</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="23_Julia_debiased-ml-for-partially-linear-model.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Double/Debiased Machine Learning for the Partially Linear Regression Model.</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
 </div>
             </footer>
         </div>

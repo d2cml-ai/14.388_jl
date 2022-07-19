@@ -54,6 +54,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Analyzing RCT with Precision by Adjusting for Baseline Covariates" href="05_Julia_Analyzing_RCT_with_Precision.html" />
+    <link rel="prev" title="An inferential problem: The Gender Wage Gap" href="03_PM1_Notebook_Inference.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -113,10 +115,95 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="01_Julia_Notebook_Linear_Model_Overfitting.html">
    Simple Exercise on Overfitting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02_PM1_Notebook1_Prediction_newdata.html">
+   Chapter 2: Predictive Inference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03_PM1_Notebook_Inference.html">
+   An inferential problem: The Gender Wage Gap
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Author: Roberto Mendoza
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05_Julia_Analyzing_RCT_with_Precision.html">
+   Analyzing RCT with Precision by Adjusting for Baseline Covariates
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06_RCT_Precision_Adjustment.html">
+   Author: Roberto Mendoza
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07_julia-notebook-linear-penalized-regs.html">
+   Penalized Linear Regressions: A Simulation Experiment
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="09_Julia_OrthogonalLearning_lab4.html">
+   Orthogonal Learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="10_Julia_pm2_notebook_jannis.html">
+   Testing the Convergence Hypothesis
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="11_py-heterogenous-wage-effects.html">
+   Application: Heterogeneous Effect of Gender on Wage Using Double Lasso
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="14_Julia_pm3_notebook_newdata_nn.html">
+   A Simple Case Study using Wage Data from 2015 - proceeding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="16_Functional-aproximation-by-nn-and-rf.html">
+   Functional Approximations by Trees and Neural Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="17_Notebook_DAGitty.html">
+   Causal identification in DAGs using Backdoor and Swigs, Equivalence Classes, Falsiability Tests
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="19_Julia_pm3_notebook_inference_clustering.html">
+   A Case Study: The Effect of Gun Ownership on Gun-Homicide Rates
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="20_Julia-pm3-newdata-nn.html">
+   The Effect of Gun Ownership on Gun-Homicide Rates - proceeding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="23_Julia_debiased-ml-for-partially-linear-model.html">
+   Double/Debiased Machine Learning for the Partially Linear Regression Model.
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="25_debiased-ml-for-partially-linear-iv-model-in-julia.html">
+   Double/Debiased ML for Partially Linear IV Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="27_Julia_weak_iv_experiments.html">
+   A Simple Example of Properties of IV estimator when Instruments are Weak
   </a>
  </li>
 </ul>
@@ -332,41 +419,17 @@ title="Print to PDF"
  </li>
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#rct-application-polio-vaccination">
-   1.0 RCT application Polio  vaccination
+   RCT application Polio  vaccination
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#pfizer-bntx-covid-19-rct-application">
-   2.0 Pfizer/BNTX Covid-19 RCT application
+   Pfizer/BNTX Covid-19 RCT application
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#approximate-bootstrap-to-find-the-ve-confidence-interval">
-     2.1 Approximate bootstrap to find the VE confidence interval
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#overall-effectiveness-of-the-vaccine-for-the-two-groups-treatment-and-control-that-are-65-or-older">
-   3.0 Overall effectiveness of the vaccine for the two groups (treatment and control) that are 65 or older
-  </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id1">
-     3.1  Approximate bootstrap to find the VE confidence interval
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#let-s-try-the-parametric-boostrap-next-using-the-fact-that-the-outcome-is-bernouli">
-     Let’s try the parametric boostrap next, using the fact that the outcome is Bernouli.
-    </a>
-   </li>
-  </ul>
  </li>
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#exact-binomial-test-inversion">
-   4.0 Exact Binomial Test Inversion
+   Exact Binomial Test Inversion
   </a>
  </li>
 </ul>
@@ -395,41 +458,17 @@ title="Print to PDF"
  </li>
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#rct-application-polio-vaccination">
-   1.0 RCT application Polio  vaccination
+   RCT application Polio  vaccination
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#pfizer-bntx-covid-19-rct-application">
-   2.0 Pfizer/BNTX Covid-19 RCT application
+   Pfizer/BNTX Covid-19 RCT application
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#approximate-bootstrap-to-find-the-ve-confidence-interval">
-     2.1 Approximate bootstrap to find the VE confidence interval
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#overall-effectiveness-of-the-vaccine-for-the-two-groups-treatment-and-control-that-are-65-or-older">
-   3.0 Overall effectiveness of the vaccine for the two groups (treatment and control) that are 65 or older
-  </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id1">
-     3.1  Approximate bootstrap to find the VE confidence interval
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#let-s-try-the-parametric-boostrap-next-using-the-fact-that-the-outcome-is-bernouli">
-     Let’s try the parametric boostrap next, using the fact that the outcome is Bernouli.
-    </a>
-   </li>
-  </ul>
  </li>
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#exact-binomial-test-inversion">
-   4.0 Exact Binomial Test Inversion
+   Exact Binomial Test Inversion
   </a>
  </li>
 </ul>
@@ -488,7 +527,7 @@ Stacktrace:
 </div>
 </section>
 <section id="rct-application-polio-vaccination">
-<h1>1.0 RCT application Polio  vaccination<a class="headerlink" href="#rct-application-polio-vaccination" title="Permalink to this headline">#</a></h1>
+<h1>RCT application Polio  vaccination<a class="headerlink" href="#rct-application-polio-vaccination" title="Permalink to this headline">#</a></h1>
 <p>One of the earliest randomized experiments were the Polio vaccination trias conducted by the Public Health Service in 1954. The question was whether Salk vaccine prevented polio. Children in the study were randomly assigned either a treatment (polio vaccine shot) or a placebo (saline solution shot), without knowing which one they received. The doctors in the study, making the diagnosis, did not know whether a child received a vaccine or not. In other words, the trial was a double-blind, randomized control trial. The trial had to be large, because the rate at which Polio occured in the population was 50 per 100,000. The treatment group saw 33 polio cases per 200,745; the control group saw 115 cases per 201,229. The estimated avearage treatment effect is about</p>
 <div class="math notranslate nohighlight">
 \[-40\]</div>
@@ -662,8 +701,8 @@ Overall VE is: 0.7124
 </div>
 </div>
 </section>
-<section id="pfizer-bntx-covid-19-rct-application">
-<h1>2.0 Pfizer/BNTX Covid-19 RCT application<a class="headerlink" href="#pfizer-bntx-covid-19-rct-application" title="Permalink to this headline">#</a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="pfizer-bntx-covid-19-rct-application">
+<h1>Pfizer/BNTX Covid-19 RCT application<a class="headerlink" href="#pfizer-bntx-covid-19-rct-application" title="Permalink to this headline">#</a></h1>
 <p>Pfizer/BNTX was the first vaccine approved for emergency use to reduce the risk of Covid-19 decease. In studies to assess vaccine efficacy, volunteers were randomly assigned to receive either a treatment (2-dose vaccination) or a placebo, without knowing which they recieved. The doctors making the diagnoses did not know now whether a given volunteer received a vaccination or not. The results of the study are given in the following table.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -709,20 +748,8 @@ Overall VE is: 0.7124
 <span class="n">println</span><span class="p">(</span><span class="s">&quot;Incidence per 100000 among untreated: &quot;</span><span class="p">,</span> <span class="n">round</span><span class="p">(</span><span class="n">IncidenceRU</span><span class="p">;</span> <span class="n">digits</span> <span class="o">=</span><span class="mi">4</span><span class="p">))</span>
 
 <span class="n">println</span><span class="p">(</span><span class="s">&quot;Estimated ATE of occurances per 100 000 is: &quot;</span><span class="p">,</span> <span class="n">round</span><span class="p">(</span><span class="n">ATE_hat</span><span class="p">;</span> <span class="n">digits</span> <span class="o">=</span><span class="mi">4</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Incidence per 100000 among treated: 45.0789
-Incidence per 100000 among untreated: 837.795
-Estimated ATE of occurances per 100 000 is: -792.7161
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># outcomes (RV, RU) are Bernoulli</span>
+
+<span class="c"># outcomes (RV, RU) are Bernoulli</span>
 <span class="c"># variance, standard deviation and confidence interval of ATE </span>
 
 <span class="n">var_RV</span> <span class="o">=</span> <span class="n">RV</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">RV</span><span class="p">)</span><span class="o">/</span><span class="n">NV</span>
@@ -733,18 +760,9 @@ Estimated ATE of occurances per 100 000 is: -792.7161
 <span class="n">std_ATE_hat</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">var_ATE_hat</span><span class="p">)</span>
 
 <span class="n">println</span><span class="p">(</span><span class="s">&quot;Standard deviation for ATE is:  &quot;</span><span class="p">,</span> <span class="n">round</span><span class="p">(</span><span class="n">std_ATE_hat</span><span class="p">;</span> <span class="n">digits</span> <span class="o">=</span><span class="mi">4</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Standard deviation for ATE is:  65.9102
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Confidence interval </span>
+
+
+<span class="c"># Confidence interval </span>
 
 <span class="n">CI_ATE_hat</span> <span class="o">=</span><span class="p">[</span> <span class="n">round</span><span class="p">(</span><span class="n">ATE_hat</span> <span class="o">-</span> <span class="mf">1.96</span><span class="o">*</span><span class="n">std_ATE_hat</span><span class="p">;</span> <span class="n">digits</span> <span class="o">=</span> <span class="mi">4</span><span class="p">),</span> <span class="n">round</span><span class="p">(</span><span class="n">ATE_hat</span> <span class="o">+</span> <span class="mf">1.96</span><span class="o">*</span><span class="n">std_ATE_hat</span><span class="p">;</span> <span class="n">digits</span> <span class="o">=</span> <span class="mi">4</span><span class="p">)]</span>
 
@@ -754,15 +772,7 @@ Estimated ATE of occurances per 100 000 is: -792.7161
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>95% confidence interval of ATE is [-921.9, -663.5322]
-Overall VE is: 0.9462
-</pre></div>
 </div>
-</div>
-</div>
-<section id="approximate-bootstrap-to-find-the-ve-confidence-interval">
-<h2>2.1 Approximate bootstrap to find the VE confidence interval<a class="headerlink" href="#approximate-bootstrap-to-find-the-ve-confidence-interval" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Random</span><span class="o">.</span><span class="n">seed!</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
@@ -771,44 +781,9 @@ Overall VE is: 0.9462
 <span class="n">RVs</span> <span class="o">=</span> <span class="n">RV</span><span class="o">*</span><span class="n">ones</span><span class="p">(</span><span class="kt">Float16</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span>  <span class="o">+</span> <span class="n">randn</span><span class="p">(</span><span class="n">B</span><span class="p">)</span><span class="o">*</span><span class="n">sqrt</span><span class="p">(</span><span class="n">var_RV</span><span class="p">)</span>
 <span class="n">RUs</span> <span class="o">=</span> <span class="n">RU</span><span class="o">*</span><span class="n">ones</span><span class="p">(</span><span class="kt">Float16</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span>  <span class="o">+</span> <span class="n">randn</span><span class="p">(</span><span class="n">B</span><span class="p">)</span><span class="o">*</span><span class="n">sqrt</span><span class="p">(</span><span class="n">var_RU</span><span class="p">)</span>
 <span class="n">VEs</span><span class="o">=</span> <span class="p">(</span><span class="n">RUs</span> <span class="o">-</span> <span class="n">RVs</span><span class="p">)</span><span class="o">./</span><span class="n">RUs</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10000-element Vector{Float64}:
- 0.9408814093514811
- 0.9407141481447149
- 0.9583954955606354
- 0.9418011045721292
- 0.9195806666751577
- 0.9735151090522808
- 0.9324119521198911
- 0.9283966354436475
- 0.9959369160363154
- 0.9806489086264251
- 0.9399270593044702
- 0.9558969100456748
- 0.9398759241059838
- ⋮
- 0.9572265468704411
- 0.9589555046200413
- 0.9254816573864182
- 0.9433292399034574
- 0.9494612927672281
- 0.9006061197052284
- 0.9342904269034605
- 0.9500620084283901
- 0.9592797266834576
- 0.9541960000272378
- 0.9499975261585338
- 0.9728994198085604
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c">## Confidence interval of VEs</span>
+
+
+<span class="c">## Confidence interval of VEs</span>
 
 <span class="n">CI_VE</span> <span class="o">=</span> <span class="p">[</span><span class="n">round</span><span class="p">(</span><span class="n">quantile!</span><span class="p">(</span><span class="n">VEs</span><span class="p">,</span> <span class="mf">0.025</span><span class="p">);</span> <span class="n">digits</span> <span class="o">=</span> <span class="mi">4</span> <span class="p">),</span> <span class="n">round</span><span class="p">(</span><span class="n">quantile!</span><span class="p">(</span><span class="n">VEs</span><span class="p">,</span> <span class="mf">0.975</span><span class="p">);</span> <span class="n">digits</span> <span class="o">=</span> <span class="mi">4</span><span class="p">)]</span>
 
@@ -825,17 +800,8 @@ Overall VE is: 0.9462
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>two-sided 95% confidence interval of VE is [0.9081, 0.9817]
-</pre></div>
 </div>
-<img alt="../_images/04_Juli_Notebook_RCT-polio_21_1.png" src="../_images/04_Juli_Notebook_RCT-polio_21_1.png" />
-</div>
-</div>
-</section>
-</section>
-<section id="overall-effectiveness-of-the-vaccine-for-the-two-groups-treatment-and-control-that-are-65-or-older">
-<h1>3.0 Overall effectiveness of the vaccine for the two groups (treatment and control) that are 65 or older<a class="headerlink" href="#overall-effectiveness-of-the-vaccine-for-the-two-groups-treatment-and-control-that-are-65-or-older" title="Permalink to this headline">#</a></h1>
+<p>In the code cell below  we calculate the effectiveness of the vaccine for the two groups that are 65 or older</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">NV</span> <span class="o">=</span>  <span class="mi">3239</span><span class="o">+</span><span class="mi">805</span><span class="p">;</span>
@@ -860,8 +826,6 @@ Overall VE is: 0.9462
 </div>
 </div>
 </div>
-<section id="id1">
-<h2>3.1  Approximate bootstrap to find the VE confidence interval<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Random</span><span class="o">.</span><span class="n">seed!</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
@@ -871,44 +835,10 @@ Overall VE is: 0.9462
 <span class="n">RVs</span> <span class="o">=</span> <span class="n">RV</span><span class="o">*</span><span class="n">ones</span><span class="p">(</span><span class="kt">Float16</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span>  <span class="o">+</span> <span class="n">randn</span><span class="p">(</span><span class="n">B</span><span class="p">)</span><span class="o">*</span><span class="n">sqrt</span><span class="p">(</span><span class="n">var_RV</span><span class="p">)</span> <span class="o">+</span> <span class="mi">10</span><span class="o">^</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">)</span><span class="o">*</span><span class="n">ones</span><span class="p">(</span><span class="kt">Float16</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span> 
 <span class="n">RUs</span> <span class="o">=</span> <span class="n">RU</span><span class="o">*</span><span class="n">ones</span><span class="p">(</span><span class="kt">Float16</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span>  <span class="o">+</span> <span class="n">randn</span><span class="p">(</span><span class="n">B</span><span class="p">)</span><span class="o">*</span><span class="n">sqrt</span><span class="p">(</span><span class="n">var_RU</span><span class="p">)</span> <span class="o">+</span> <span class="mi">10</span><span class="o">^</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">)</span><span class="o">*</span><span class="n">ones</span><span class="p">(</span><span class="kt">Float16</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span> 
 <span class="n">VEs</span><span class="o">=</span> <span class="p">(</span><span class="n">RUs</span> <span class="o">-</span> <span class="n">RVs</span><span class="p">)</span><span class="o">./</span><span class="n">RUs</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10000-element Vector{Float64}:
- 0.9286374701019094
- 0.9306318821603504
- 0.9807062047067295
- 0.932227928439073
- 0.8497213956232972
- 1.0341633458705015
- 0.8826086276184276
- 0.8908920202231071
- 1.1204683874016654
- 1.0436392904285337
- 0.9269669930323389
- 0.978832510418485
- 0.9274269094457963
- ⋮
- 0.9941031787120717
- 0.9865853448694472
- 0.8630160479950865
- 0.939002630393595
- 0.9561668577648301
- 0.8166249965881008
- 0.9157406832836444
- 0.9583524341261762
- 0.983253521851282
- 0.9668034744043027
- 0.9578251425652174
- 1.0144231014448826
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c">## Confidence interval of VEs</span>
+
+
+
+<span class="c">## Confidence interval of VEs</span>
 
 <span class="n">CI_VE</span> <span class="o">=</span> <span class="p">[</span><span class="n">round</span><span class="p">(</span><span class="n">quantile!</span><span class="p">(</span><span class="n">VEs</span><span class="p">,</span> <span class="mf">0.025</span><span class="p">);</span> <span class="n">digits</span> <span class="o">=</span> <span class="mi">4</span> <span class="p">),</span> <span class="n">round</span><span class="p">(</span><span class="n">quantile!</span><span class="p">(</span><span class="n">VEs</span><span class="p">,</span> <span class="mf">0.975</span><span class="p">);</span> <span class="n">digits</span> <span class="o">=</span> <span class="mi">4</span><span class="p">)]</span>
 
@@ -929,17 +859,8 @@ Overall VE is: 0.9462
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>two-sided  95% confidence interval of VE is [0.8162, 1.0532]
-one side 95% confidence interval of VE is [0.8422, 1.0]
-</pre></div>
 </div>
-<img alt="../_images/04_Juli_Notebook_RCT-polio_26_1.png" src="../_images/04_Juli_Notebook_RCT-polio_26_1.png" />
-</div>
-</div>
-</section>
-<section id="let-s-try-the-parametric-boostrap-next-using-the-fact-that-the-outcome-is-bernouli">
-<h2>Let’s try the parametric boostrap next, using the fact that the outcome is Bernouli.<a class="headerlink" href="#let-s-try-the-parametric-boostrap-next-using-the-fact-that-the-outcome-is-bernouli" title="Permalink to this headline">#</a></h2>
+<p>Let’s try the parametric boostrap next, using the fact that the outcome is Bernouli.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">NV</span> <span class="o">=</span>  <span class="mi">3239</span><span class="o">+</span><span class="mi">805</span><span class="p">;</span>
@@ -968,44 +889,8 @@ one side 95% confidence interval of VE is [0.8422, 1.0]
 <span class="n">RVs</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="n">Binomial</span><span class="p">(</span><span class="n">NV</span><span class="p">,</span><span class="n">RV</span><span class="p">),</span> <span class="n">B</span><span class="p">)</span>
 <span class="n">RUs</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="n">Binomial</span><span class="p">(</span><span class="n">NU</span><span class="p">,</span><span class="n">RU</span><span class="p">),</span> <span class="n">B</span><span class="p">)</span>
 <span class="n">VEs</span><span class="o">=</span> <span class="p">(</span><span class="n">RUs</span> <span class="o">-</span> <span class="n">RVs</span><span class="p">)</span><span class="o">./</span><span class="n">RUs</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10000-element Vector{Float64}:
- 0.95
- 1.0
- 1.0
- 1.0
- 0.9375
- 1.0
- 0.8333333333333334
- 0.8666666666666667
- 0.9473684210526315
- 0.8235294117647058
- 1.0
- 0.9375
- 0.95
- ⋮
- 0.7857142857142857
- 0.9
- 0.95
- 0.9444444444444444
- 0.9230769230769231
- 1.0
- 0.9333333333333333
- 0.8947368421052632
- 0.8888888888888888
- 1.0
- 0.9473684210526315
- 0.8888888888888888
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c">## Confidence interval of VEs</span>
+
+<span class="c">## Confidence interval of VEs</span>
 
 <span class="n">CI_VE</span> <span class="o">=</span> <span class="p">[</span><span class="n">round</span><span class="p">(</span><span class="n">quantile!</span><span class="p">(</span><span class="n">VEs</span><span class="p">,</span> <span class="mf">0.025</span><span class="p">);</span> <span class="n">digits</span> <span class="o">=</span> <span class="mi">4</span> <span class="p">),</span> <span class="n">round</span><span class="p">(</span><span class="n">quantile!</span><span class="p">(</span><span class="n">VEs</span><span class="p">,</span> <span class="mf">0.975</span><span class="p">);</span> <span class="n">digits</span> <span class="o">=</span> <span class="mi">4</span><span class="p">)]</span>
 
@@ -1026,18 +911,11 @@ one side 95% confidence interval of VE is [0.8422, 1.0]
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>two-sided 95% confidence interval of VE is [0.8, 1.0]
-one sided 95% confidence interval of VE is [0.8333, 1.0]
-</pre></div>
-</div>
-<img alt="../_images/04_Juli_Notebook_RCT-polio_30_1.png" src="../_images/04_Juli_Notebook_RCT-polio_30_1.png" />
-</div>
 </div>
 </section>
-</section>
-<section id="exact-binomial-test-inversion">
-<h1>4.0 Exact Binomial Test Inversion<a class="headerlink" href="#exact-binomial-test-inversion" title="Permalink to this headline">#</a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="exact-binomial-test-inversion">
+<h1>Exact Binomial Test Inversion<a class="headerlink" href="#exact-binomial-test-inversion" title="Permalink to this headline">#</a></h1>
+<p>It is possible to use exact inference by inverting tests based on the exact binomial nature of the outcome variable. Here, we perform the Cornfield Procedure to find the exact confidence interval on the estimate of vaccine efficacy.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Exact CI exploiting Bernoulli outcome using the Cornfield Procedure</span>
@@ -1072,10 +950,7 @@ one sided 95% confidence interval of VE is [0.8333, 1.0]
 </div>
 </div>
 </div>
-<ul class="simple">
-<li><p>Note that this exactly recovers the result in the FDA table (first row).</p></li>
-<li><p>Next we repeat the cornfield procedure to find the exact confidence interval on vaccine effectiveness for the two groups that are 65 or older. Here we see a big discrepancy between various asymptotic approaches and the exact finite-sample inference. This occurs because the binomial counts are too low for central limit theorems to work successfully.</p></li>
-</ul>
+<p>Note that this exactly recovers the result in the FDA table (first row).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Exact CI exploiting Bernoulli outcome for the two groups that are 65 or older</span>
@@ -1096,6 +971,7 @@ one sided 95% confidence interval of VE is [0.8333, 1.0]
 </div>
 </div>
 </div>
+<p>Next we repeat the cornfield procedure to find the exact confidence interval on vaccine effectiveness for the two groups that are 65 or older. Here we see a big discrepancy between various asymptotic approaches and the exact finite-sample inference. This occurs because the binomial counts are too low for central limit theorems to work successfully.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">l</span><span class="o">=</span><span class="mi">1</span><span class="o">-</span><span class="mf">0.00896277602085047</span>
@@ -1139,6 +1015,20 @@ one sided 95% confidence interval of VE is [0.8333, 1.0]
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="03_PM1_Notebook_Inference.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">An inferential problem: The Gender Wage Gap</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="05_Julia_Analyzing_RCT_with_Precision.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Analyzing RCT with Precision by Adjusting for Baseline Covariates</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
 </div>
             </footer>
         </div>

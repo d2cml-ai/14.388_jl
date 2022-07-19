@@ -51,8 +51,6 @@ std_ATE_hat = sqrt(var_ATE_hat)
 
 println("Standard deviation for ATE is:  ", round(std_ATE_hat; digits =4))
 
-
-
 # Confidence interval 
 
 CI_ATE_hat =[ round(ATE_hat - 1.96*std_ATE_hat; digits = 4), round(ATE_hat + 1.96*std_ATE_hat; digits = 4)]

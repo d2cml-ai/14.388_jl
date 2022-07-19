@@ -1,9 +1,9 @@
 using Pkg
-Pkg.add("CSV"), using CSV
-Pkg.add("DataFrames"), using DataFrames
-Pkg.add("StatsModels"), using StatsModels
-Pkg.add("GLM"), using GLM
-Pkg.add("Random"), using Random
+# Pkg.add("CSV"), using CSV
+# Pkg.add("DataFrames"), using DataFrames
+# Pkg.add("StatsModels"), using StatsModels
+# Pkg.add("GLM"), using GLM
+# Pkg.add("Random"), using Random
 
 using Pkg, CSV, DataFrames, StatsModels, GLM, Random
 
@@ -92,13 +92,6 @@ end
 
 for col in column_names
     result = sum(data_1[!,col] .== rdata[!,col])
-
-    if result .== 3900
-        println("Column ", col,  " are equal at 6 decimals")
-    else
-        println("Column ", col,  " are not equal at 6 decimals")
-    end
-
 end
 
 # Treatment variable
@@ -412,8 +405,3 @@ DML2_best_std = GLM.coeftable(DML2_best).cols[2][1];
 tabla = DataFrame(modelos = ["Baseline OLS", "Least Squares with controls", "Lasso", "CV Lasso", "CV Elnet", "CV Ridge", "Random Forest", "Best"], 
 Estimate = [ols_coef, control_ols_coef, lasso_coef, DML2_lasso_cv_1_coef, DML2_elnet_coef, DML2_ridge_coef, DML2_RF_1_coef, DML2_best_coef], 
 StdError = [ols_std, control_ols_std, lasso_std, DML2_lasso_cv_1_std, DML2_elnet_std, DML2_ridge_std, DML2_RF_1_std, DML2_best_std])
-
-# The table in latex
-show(stdout, MIME("text/latex"), DataFrame(modelos = ["Baseline OLS", "Least Squares with controls", "Lasso", "CV Lasso", "CV Elnet", "CV Ridge"], 
-Estimate = [ols_coef, control_ols_coef, lasso_coef, DML2_lasso_cv_1_coef, DML2_elnet_coef, DML2_ridge_coef], 
-StdError = [ols_std, control_ols_std, lasso_std, DML2_lasso_cv_1_std, DML2_elnet_std, DML2_ridge_std]))

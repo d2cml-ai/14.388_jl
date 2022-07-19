@@ -16,7 +16,6 @@ haskey(growth_read, "GrowthData")
 
 # Now we save that dataframe with a new name
 growth = growth_read["GrowthData"]
-names(growth)
 
 typeof(growth), size(growth)
 
@@ -30,8 +29,6 @@ size(X)
 typeof(y), typeof(X)
 
 data = [y X]
-
-names(data)
 
 # OLS regression
 reg_ols  = lm(term(:Outcome) ~ sum(term.(names(growth[!, Not(["Outcome", "intercept"])]))), growth, dropcollinear=false)
@@ -171,7 +168,3 @@ res_D = rlasso(res_D_0)["residuals"]
 res_D = reshape(res_D, length(res_D), 1)
 
 lm(res_D, res_Y)
-
-
-
-

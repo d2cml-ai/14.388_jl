@@ -50,8 +50,12 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Penalized Linear Regressions: A Simulation Experiment" href="07_julia-notebook-linear-penalized-regs.html" />
+    <link rel="prev" title="Analyzing RCT with Precision by Adjusting for Baseline Covariates" href="05_Julia_Analyzing_RCT_with_Precision.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -111,10 +115,95 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="01_Julia_Notebook_Linear_Model_Overfitting.html">
    Simple Exercise on Overfitting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02_PM1_Notebook1_Prediction_newdata.html">
+   Chapter 2: Predictive Inference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03_PM1_Notebook_Inference.html">
+   An inferential problem: The Gender Wage Gap
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04_Juli_Notebook_RCT-polio.html">
+   Author: Roberto Mendoza
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05_Julia_Analyzing_RCT_with_Precision.html">
+   Analyzing RCT with Precision by Adjusting for Baseline Covariates
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Author: Roberto Mendoza
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07_julia-notebook-linear-penalized-regs.html">
+   Penalized Linear Regressions: A Simulation Experiment
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="09_Julia_OrthogonalLearning_lab4.html">
+   Orthogonal Learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="10_Julia_pm2_notebook_jannis.html">
+   Testing the Convergence Hypothesis
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="11_py-heterogenous-wage-effects.html">
+   Application: Heterogeneous Effect of Gender on Wage Using Double Lasso
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="14_Julia_pm3_notebook_newdata_nn.html">
+   A Simple Case Study using Wage Data from 2015 - proceeding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="16_Functional-aproximation-by-nn-and-rf.html">
+   Functional Approximations by Trees and Neural Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="17_Notebook_DAGitty.html">
+   Causal identification in DAGs using Backdoor and Swigs, Equivalence Classes, Falsiability Tests
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="19_Julia_pm3_notebook_inference_clustering.html">
+   A Case Study: The Effect of Gun Ownership on Gun-Homicide Rates
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="20_Julia-pm3-newdata-nn.html">
+   The Effect of Gun Ownership on Gun-Homicide Rates - proceeding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="23_Julia_debiased-ml-for-partially-linear-model.html">
+   Double/Debiased Machine Learning for the Partially Linear Regression Model.
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="25_debiased-ml-for-partially-linear-iv-model-in-julia.html">
+   Double/Debiased ML for Partially Linear IV Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="27_Julia_weak_iv_experiments.html">
+   A Simple Example of Properties of IV estimator when Instruments are Weak
   </a>
  </li>
 </ul>
@@ -332,16 +421,32 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#analyzing-rct-reemployment-experiment">
    Analyzing RCT reemployment experiment
   </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#model">
+     Model
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#analysis">
+       Analysis
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
  </li>
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#carry-out-covariate-balance-check">
    2.0 Carry out covariate balance check
   </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#model-specification">
-   3.0 Model specification
-  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#model-specification">
+     3.0 Model specification
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#using-hdmjl">
@@ -376,16 +481,32 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#analyzing-rct-reemployment-experiment">
    Analyzing RCT reemployment experiment
   </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#model">
+     Model
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#analysis">
+       Analysis
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
  </li>
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#carry-out-covariate-balance-check">
    2.0 Carry out covariate balance check
   </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#model-specification">
-   3.0 Model specification
-  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#model-specification">
+     3.0 Model specification
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#using-hdmjl">
@@ -405,7 +526,7 @@ title="Print to PDF"
   <section id="author-roberto-mendoza">
 <h1>Author: Roberto Mendoza<a class="headerlink" href="#author-roberto-mendoza" title="Permalink to this headline">#</a></h1>
 </section>
-<section id="analyzing-rct-reemployment-experiment">
+<section class="tex2jax_ignore mathjax_ignore" id="analyzing-rct-reemployment-experiment">
 <h1>Analyzing RCT reemployment experiment<a class="headerlink" href="#analyzing-rct-reemployment-experiment" title="Permalink to this headline">#</a></h1>
 <p>Data
 In this lab, we analyze the Pennsylvania re-employment bonus experiment, which was previously studied in “Sequential testing of duration data: the case of the Pennsylvania ‘reemployment bonus’ experiment” (Bilias, 2000), among others. These experiments were conducted in the 1980s by the U.S. Department of Labor to test the incentive effects of alternative compensation schemes for unemployment insurance (UI).</p>
@@ -536,20 +657,54 @@ Stacktrace:
 <div class="cell_output docutils container">
 <div class="output text_html"><div class="data-frame"><p>23 rows × 7 columns</p><table class="data-frame"><thead><tr><th></th><th>variable</th><th>mean</th><th>min</th><th>median</th><th>max</th><th>nmissing</th><th>eltype</th></tr><tr><th></th><th title="Symbol">Symbol</th><th title="Union{Nothing, Float64}">Union…</th><th title="Any">Any</th><th title="Union{Nothing, Float64}">Union…</th><th title="Any">Any</th><th title="Int64">Int64</th><th title="DataType">DataType</th></tr></thead><tbody><tr><th>1</th><td>abdt</td><td>10695.4</td><td>10404.0</td><td>10698.0</td><td>10880.0</td><td>0</td><td>Float64</td></tr><tr><th>2</th><td>T4</td><td>0.342224</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0</td><td>Float64</td></tr><tr><th>3</th><td>inuidur1</td><td>13.053</td><td>1.0</td><td>11.0</td><td>52.0</td><td>0</td><td>Float64</td></tr><tr><th>4</th><td>inuidur2</td><td>12.2812</td><td>0.0</td><td>10.0</td><td>52.0</td><td>0</td><td>Float64</td></tr><tr><th>5</th><td>female</td><td>0.404001</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0</td><td>Float64</td></tr><tr><th>6</th><td>black</td><td>0.121985</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0</td><td>Float64</td></tr><tr><th>7</th><td>hispanic</td><td>0.0325554</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0</td><td>Float64</td></tr><tr><th>8</th><td>othrace</td><td>0.00725632</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0</td><td>Float64</td></tr><tr><th>9</th><td>dep</td><td></td><td>0.0</td><td></td><td>2.0</td><td>0</td><td>CategoricalValue{String, UInt32}</td></tr><tr><th>10</th><td>q1</td><td>0.0127476</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0</td><td>Float64</td></tr><tr><th>11</th><td>q2</td><td>0.203765</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0</td><td>Float64</td></tr><tr><th>12</th><td>q3</td><td>0.235536</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0</td><td>Float64</td></tr><tr><th>13</th><td>q4</td><td>0.225927</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0</td><td>Float64</td></tr><tr><th>14</th><td>q5</td><td>0.25907</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0</td><td>Float64</td></tr><tr><th>15</th><td>q6</td><td>0.0629535</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0</td><td>Float64</td></tr><tr><th>16</th><td>recall</td><td>0.110414</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0</td><td>Float64</td></tr><tr><th>17</th><td>agelt35</td><td>0.545009</td><td>0.0</td><td>1.0</td><td>1.0</td><td>0</td><td>Float64</td></tr><tr><th>18</th><td>agegt54</td><td>0.109433</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0</td><td>Float64</td></tr><tr><th>19</th><td>durable</td><td>0.148068</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0</td><td>Float64</td></tr><tr><th>20</th><td>nondurable</td><td>0.109237</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0</td><td>Float64</td></tr><tr><th>21</th><td>lusd</td><td>0.261032</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0</td><td>Float64</td></tr><tr><th>22</th><td>husd</td><td>0.21867</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0</td><td>Float64</td></tr><tr><th>23</th><td>muld</td><td>0.444205</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0</td><td>Float64</td></tr></tbody></table></div></div></div>
 </div>
+<section id="model">
+<h2>Model<a class="headerlink" href="#model" title="Permalink to this headline">#</a></h2>
+<p>To evaluate the impact of the treatments on unemployment duration, we consider the linear regression model:</p>
+<div class="math notranslate nohighlight">
+\[
+Y =  D \beta_1 + W'\beta_2 + \varepsilon, \quad E \varepsilon (D,W')' = 0,
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(Y\)</span> is  the  log of duration of unemployment, <span class="math notranslate nohighlight">\(D\)</span> is a treatment  indicators,  and <span class="math notranslate nohighlight">\(W\)</span> is a set of controls including age group dummies, gender, race, number of dependents, quarter of the experiment, location within the state, existence of recall expectations, and type of occupation.   Here <span class="math notranslate nohighlight">\(\beta_1\)</span> is the ATE, if the RCT assumptions hold rigorously.</p>
+<p>We also consider interactive regression model:</p>
+<div class="math notranslate nohighlight">
+\[
+Y =  D \alpha_1 + D W' \alpha_2 + W'\beta_2 + \varepsilon, \quad E \varepsilon (D,W', DW')' = 0,
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(W\)</span>’s are demeaned (apart from the intercept), so that <span class="math notranslate nohighlight">\(\alpha_1\)</span> is the ATE, if the RCT assumptions hold rigorously.</p>
+<p>Under RCT, the projection coefficient <span class="math notranslate nohighlight">\(\beta_1\)</span> has
+the interpretation of the causal effect of the treatment on
+the average outcome. We thus refer to <span class="math notranslate nohighlight">\(\beta_1\)</span> as the average
+treatment effect (ATE). Note that the covariates, here are
+independent of the treatment <span class="math notranslate nohighlight">\(D\)</span>, so we can identify <span class="math notranslate nohighlight">\(\beta_1\)</span> by
+just linear regression of <span class="math notranslate nohighlight">\(Y\)</span> on <span class="math notranslate nohighlight">\(D\)</span>, without adding covariates.
+However we do add covariates in an effort to improve the
+precision of our estimates of the average treatment effect.</p>
+<section id="analysis">
+<h3>Analysis<a class="headerlink" href="#analysis" title="Permalink to this headline">#</a></h3>
+<p>We consider</p>
+<ul class="simple">
+<li><p>classical 2-sample approach, no adjustment (CL)</p></li>
+<li><p>classical linear regression adjustment (CRA)</p></li>
+<li><p>interactive regression adjusment (IRA)</p></li>
+</ul>
+<p>and carry out robust inference using the <em>estimatr</em> R packages.</p>
 </section>
-<section id="carry-out-covariate-balance-check">
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="carry-out-covariate-balance-check">
 <h1>2.0 Carry out covariate balance check<a class="headerlink" href="#carry-out-covariate-balance-check" title="Permalink to this headline">#</a></h1>
+<p>This is done using “lm_robust” command which unlike “lm” in the base command automatically does the correct Eicher-Huber-White standard errors, instead othe classical non-robus formula based on the homoscdedasticity command.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span>    <span class="c"># couples variables combinations </span>
-    <span class="n">combinations_upto</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="o">=</span> <span class="n">Iterators</span><span class="o">.</span><span class="n">flatten</span><span class="p">(</span><span class="n">combinations</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="n">n</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># couples variables combinations </span>
+<span class="n">combinations_upto</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="o">=</span> <span class="n">Iterators</span><span class="o">.</span><span class="n">flatten</span><span class="p">(</span><span class="n">combinations</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="n">n</span><span class="p">)</span>
 
-    <span class="c"># combinations without same couple</span>
-    <span class="n">expand_exp</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">deg</span><span class="o">::</span><span class="kt">ConstantTerm</span><span class="p">)</span> <span class="o">=</span>
-        <span class="n">tuple</span><span class="p">(((</span><span class="o">&amp;</span><span class="p">)(</span><span class="n">terms</span><span class="o">...</span><span class="p">)</span> <span class="k">for</span> <span class="n">terms</span> <span class="k">in</span> <span class="n">combinations_upto</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">deg</span><span class="o">.</span><span class="n">n</span><span class="p">))</span><span class="o">...</span><span class="p">)</span>
+<span class="c"># combinations without same couple</span>
+<span class="n">expand_exp</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">deg</span><span class="o">::</span><span class="kt">ConstantTerm</span><span class="p">)</span> <span class="o">=</span>
+    <span class="n">tuple</span><span class="p">(((</span><span class="o">&amp;</span><span class="p">)(</span><span class="n">terms</span><span class="o">...</span><span class="p">)</span> <span class="k">for</span> <span class="n">terms</span> <span class="k">in</span> <span class="n">combinations_upto</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">deg</span><span class="o">.</span><span class="n">n</span><span class="p">))</span><span class="o">...</span><span class="p">)</span>
 
-    <span class="n">StatsModels</span><span class="o">.</span><span class="n">apply_schema</span><span class="p">(</span><span class="n">t</span><span class="o">::</span><span class="kt">FunctionTerm</span><span class="p">{</span><span class="kt">typeof</span><span class="p">(</span><span class="o">^</span><span class="p">)},</span> <span class="n">sch</span><span class="o">::</span><span class="kt">StatsModels</span><span class="o">.</span><span class="n">Schema</span><span class="p">,</span> <span class="n">ctx</span><span class="o">::</span><span class="kt">Type</span><span class="p">)</span> <span class="o">=</span>
-        <span class="n">apply_schema</span><span class="o">.</span><span class="p">(</span><span class="n">expand_exp</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">args_parsed</span><span class="o">...</span><span class="p">),</span> <span class="kt">Ref</span><span class="p">(</span><span class="n">sch</span><span class="p">),</span> <span class="n">ctx</span><span class="p">)</span>
+<span class="n">StatsModels</span><span class="o">.</span><span class="n">apply_schema</span><span class="p">(</span><span class="n">t</span><span class="o">::</span><span class="kt">FunctionTerm</span><span class="p">{</span><span class="kt">typeof</span><span class="p">(</span><span class="o">^</span><span class="p">)},</span> <span class="n">sch</span><span class="o">::</span><span class="kt">StatsModels</span><span class="o">.</span><span class="n">Schema</span><span class="p">,</span> <span class="n">ctx</span><span class="o">::</span><span class="kt">Type</span><span class="p">)</span> <span class="o">=</span>
+    <span class="n">apply_schema</span><span class="o">.</span><span class="p">(</span><span class="n">expand_exp</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">args_parsed</span><span class="o">...</span><span class="p">),</span> <span class="kt">Ref</span><span class="p">(</span><span class="n">sch</span><span class="p">),</span> <span class="n">ctx</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -935,9 +1090,8 @@ dep: 2.0 &amp; durable |                 0.125**
 </div>
 </div>
 </div>
-</section>
 <section id="model-specification">
-<h1>3.0 Model specification<a class="headerlink" href="#model-specification" title="Permalink to this headline">#</a></h1>
+<h2>3.0 Model specification<a class="headerlink" href="#model-specification" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># No adjustment (2-sample approach)</span>
@@ -1850,6 +2004,7 @@ dep: 2.0 &amp; durable |     0.045
 </div>
 </div>
 </section>
+</section>
 <section class="tex2jax_ignore mathjax_ignore" id="using-hdmjl">
 <h1>Using HDMJL<a class="headerlink" href="#using-hdmjl" title="Permalink to this headline">#</a></h1>
 <div class="cell docutils container">
@@ -2115,12 +2270,6 @@ x1  -0.0788861   0.0355478  -2.22    0.0265  -0.148575  -0.00919709
 <span class="n">T</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;Upper bound CI&quot;</span>
 
 <span class="n">header</span> <span class="o">=</span> <span class="p">([</span><span class="s">&quot;Outcome&quot;</span><span class="p">,</span> <span class="s">&quot;CL&quot;</span><span class="p">,</span> <span class="s">&quot;CRA&quot;</span><span class="p">,</span> <span class="s">&quot;IRA&quot;</span><span class="p">,</span> <span class="s">&quot;IRA W Lasso&quot;</span><span class="p">])</span>
-
-<span class="n">pretty_table</span><span class="p">(</span><span class="n">T</span><span class="p">;</span> <span class="n">backend</span> <span class="o">=</span> <span class="kt">Val</span><span class="p">(</span><span class="ss">:html</span><span class="p">),</span> <span class="n">header</span> <span class="o">=</span> <span class="n">header</span><span class="p">,</span> <span class="n">formatters</span><span class="o">=</span><span class="n">ft_round</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="n">alignment</span><span class="o">=</span><span class="ss">:c</span><span class="p">)</span>
-
-<span class="c">#Val(:latex) to tex format (Dataframe or DataTable, table , etc)</span>
-
-<span class="n">pretty_table</span><span class="p">(</span><span class="n">T</span><span class="p">;</span> <span class="n">backend</span> <span class="o">=</span> <span class="kt">Val</span><span class="p">(</span><span class="ss">:latex</span><span class="p">),</span> <span class="n">header</span> <span class="o">=</span> <span class="n">header</span><span class="p">,</span> <span class="n">formatters</span><span class="o">=</span><span class="n">ft_round</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="n">alignment</span><span class="o">=</span><span class="ss">:c</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -2254,6 +2403,20 @@ x1  -0.0788861   0.0355478  -2.22    0.0265  -0.148575  -0.00919709
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="05_Julia_Analyzing_RCT_with_Precision.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Analyzing RCT with Precision by Adjusting for Baseline Covariates</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="07_julia-notebook-linear-penalized-regs.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Penalized Linear Regressions: A Simulation Experiment</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
 </div>
             </footer>
         </div>

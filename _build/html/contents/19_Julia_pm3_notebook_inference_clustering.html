@@ -54,6 +54,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="The Effect of Gun Ownership on Gun-Homicide Rates - proceeding" href="20_Julia-pm3-newdata-nn.html" />
+    <link rel="prev" title="Causal identification in DAGs using Backdoor and Swigs, Equivalence Classes, Falsiability Tests" href="17_Notebook_DAGitty.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -113,10 +115,95 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="01_Julia_Notebook_Linear_Model_Overfitting.html">
    Simple Exercise on Overfitting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02_PM1_Notebook1_Prediction_newdata.html">
+   Chapter 2: Predictive Inference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03_PM1_Notebook_Inference.html">
+   An inferential problem: The Gender Wage Gap
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04_Juli_Notebook_RCT-polio.html">
+   Author: Roberto Mendoza
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05_Julia_Analyzing_RCT_with_Precision.html">
+   Analyzing RCT with Precision by Adjusting for Baseline Covariates
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06_RCT_Precision_Adjustment.html">
+   Author: Roberto Mendoza
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07_julia-notebook-linear-penalized-regs.html">
+   Penalized Linear Regressions: A Simulation Experiment
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="09_Julia_OrthogonalLearning_lab4.html">
+   Orthogonal Learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="10_Julia_pm2_notebook_jannis.html">
+   Testing the Convergence Hypothesis
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="11_py-heterogenous-wage-effects.html">
+   Application: Heterogeneous Effect of Gender on Wage Using Double Lasso
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="14_Julia_pm3_notebook_newdata_nn.html">
+   A Simple Case Study using Wage Data from 2015 - proceeding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="16_Functional-aproximation-by-nn-and-rf.html">
+   Functional Approximations by Trees and Neural Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="17_Notebook_DAGitty.html">
+   Causal identification in DAGs using Backdoor and Swigs, Equivalence Classes, Falsiability Tests
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   A Case Study: The Effect of Gun Ownership on Gun-Homicide Rates
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="20_Julia-pm3-newdata-nn.html">
+   The Effect of Gun Ownership on Gun-Homicide Rates - proceeding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="23_Julia_debiased-ml-for-partially-linear-model.html">
+   Double/Debiased Machine Learning for the Partially Linear Regression Model.
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="25_debiased-ml-for-partially-linear-iv-model-in-julia.html">
+   Double/Debiased ML for Partially Linear IV Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="27_Julia_weak_iv_experiments.html">
+   A Simple Example of Properties of IV estimator when Instruments are Weak
   </a>
  </li>
 </ul>
@@ -531,26 +618,11 @@ homicide rates, controlling for county-level demographic and economic characteri
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">Pkg</span>
-<span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;CSV&quot;</span><span class="p">),</span> <span class="k">using</span> <span class="n">CSV</span>
-<span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;DataFrames&quot;</span><span class="p">),</span> <span class="k">using</span> <span class="n">DataFrames</span>
-<span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;StatsModels&quot;</span><span class="p">),</span> <span class="k">using</span> <span class="n">StatsModels</span>
-<span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;GLM&quot;</span><span class="p">),</span> <span class="k">using</span> <span class="n">GLM</span>
-<span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;Random&quot;</span><span class="p">),</span> <span class="k">using</span> <span class="n">Random</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">    Updating</span> registry at `C:\Users\Work\.julia\registries\General.toml`
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">   Resolving</span> package versions...
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">  No Changes</span> to `C:\Users\Work\.julia\environments\v1.7\Project.toml`
-<span class=" -Color -Color-Bold -Color-Bold-Green">  No Changes</span> to `C:\Users\Work\.julia\environments\v1.7\Manifest.toml`
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">Precompiling</span> project...
+<span class="c"># Pkg.add(&quot;CSV&quot;), using CSV</span>
+<span class="c"># Pkg.add(&quot;DataFrames&quot;), using DataFrames</span>
+<span class="c"># Pkg.add(&quot;StatsModels&quot;), using StatsModels</span>
+<span class="c"># Pkg.add(&quot;GLM&quot;), using GLM</span>
+<span class="c"># Pkg.add(&quot;Random&quot;), using Random</span>
 </pre></div>
 </div>
 </div>
@@ -571,8 +643,21 @@ homicide rates, controlling for county-level demographic and economic characteri
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of rows: 3900
-Number of columns: 415
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">ArgumentError</span>: &quot;../data/gun_clean.csv&quot; is not a valid file or doesn&#39;t exist
+
+<span class="ne">Stacktrace</span>:
+ <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">CSV</span><span class="o">.</span><span class="n">Context</span><span class="p">(</span><span class="n">source</span><span class="p">::</span><span class="n">CSV</span><span class="o">.</span><span class="n">Arg</span><span class="p">,</span> <span class="n">header</span><span class="p">::</span><span class="n">CSV</span><span class="o">.</span><span class="n">Arg</span><span class="p">,</span> <span class="n">normalizenames</span><span class="p">::</span><span class="n">CSV</span><span class="o">.</span><span class="n">Arg</span><span class="p">,</span> <span class="n">datarow</span><span class="p">::</span><span class="n">CSV</span><span class="o">.</span><span class="n">Arg</span><span class="p">,</span> <span class="n">skipto</span><span class="p">::</span><span class="n">CSV</span><span class="o">.</span><span class="n">Arg</span><span class="p">,</span> <span class="n">footerskip</span><span class="p">::</span><span class="n">CSV</span><span class="o">.</span><span class="n">Arg</span><span class="p">,</span> <span class="n">transpose</span><span class="p">::</span><span class="n">CSV</span><span class="o">.</span><span class="n">Arg</span><span class="p">,</span> <span class="n">comment</span><span class="p">::</span><span class="n">CSV</span><span class="o">.</span><span class="n">Arg</span><span class="p">,</span> <span class="n">ignoreemptyrows</span><span class="p">::</span><span class="n">CSV</span><span class="o">.</span><span class="n">Arg</span><span class="p">,</span> <span class="n">ignoreemptylines</span><span class="p">::</span><span class="n">CSV</span><span class="o">.</span><span class="n">Arg</span><span class="p">,</span> <span class="n">select</span><span class="p">::</span><span class="n">CSV</span><span class="o">.</span><span class="n">Arg</span><span class="p">,</span> <span class="n">drop</span><span class="p">::</span><span class="n">CSV</span><span class="o">.</span><span class="n">Arg</span><span class="p">,</span> <span class="n">limit</span><span class="p">::</span><span class="n">CSV</span><span class="o">.</span><span class="n">Arg</span><span class="p">,</span> <span class="n">buffer_in_memory</span><span class="p">::</span><span class="n">CSV</span><span class="o">.</span><span class="n">Arg</span><span class="p">,</span> <span class="n">threaded</span><span class="p">::</span><span class="n">CSV</span><span class="o">.</span><span class="n">Arg</span><span class="p">,</span> <span class="n">ntasks</span><span class="p">::</span><span class="n">CSV</span><span class="o">.</span><span class="n">Arg</span><span class="p">,</span> <span class="n">tasks</span><span class="p">::</span><span class="n">CSV</span><span class="o">.</span><span class="n">Arg</span><span class="p">,</span> <span class="n">rows_to_check</span><span class="p">::</span><span class="n">CSV</span><span class="o">.</span><span class="n">Arg</span><span class="p">,</span> <span class="n">lines_to_check</span><span class="p">::</span><span class="n">CSV</span><span class="o">.</span><span class="n">Arg</span><span class="p">,</span> <span class="n">missingstrings</span><span class="p">::</span><span class="n">CSV</span><span class="o">.</span><span class="n">Arg</span><span class="p">,</span> <span class="n">missingstring</span><span class="p">::</span><span class="n">CSV</span><span class="o">.</span><span class="n">Arg</span><span class="p">,</span> <span class="n">delim</span><span class="p">::</span><span class="n">CSV</span><span class="o">.</span><span class="n">Arg</span><span class="p">,</span> <span class="n">ignorerepeated</span><span class="p">::</span><span class="n">CSV</span><span class="o">.</span><span class="n">Arg</span><span class="p">,</span> <span class="n">quoted</span><span class="p">::</span><span class="n">CSV</span><span class="o">.</span><span class="n">Arg</span><span class="p">,</span> <span class="n">quotechar</span><span class="p">::</span><span class="n">CSV</span><span class="o">.</span><span class="n">Arg</span><span class="p">,</span> <span class="n">openquotechar</span><span class="p">::</span><span class="n">CSV</span><span class="o">.</span><span class="n">Arg</span><span class="p">,</span> <span class="n">closequotechar</span><span class="p">::</span><span class="n">CSV</span><span class="o">.</span><span class="n">Arg</span><span class="p">,</span> <span class="n">escapechar</span><span class="p">::</span><span class="n">CSV</span><span class="o">.</span><span class="n">Arg</span><span class="p">,</span> <span class="n">dateformat</span><span class="p">::</span><span class="n">CSV</span><span class="o">.</span><span class="n">Arg</span><span class="p">,</span> <span class="n">dateformats</span><span class="p">::</span><span class="n">CSV</span><span class="o">.</span><span class="n">Arg</span><span class="p">,</span> <span class="n">decimal</span><span class="p">::</span><span class="n">CSV</span><span class="o">.</span><span class="n">Arg</span><span class="p">,</span> <span class="n">truestrings</span><span class="p">::</span><span class="n">CSV</span><span class="o">.</span><span class="n">Arg</span><span class="p">,</span> <span class="n">falsestrings</span><span class="p">::</span><span class="n">CSV</span><span class="o">.</span><span class="n">Arg</span><span class="p">,</span> <span class="n">stripwhitespace</span><span class="p">::</span><span class="n">CSV</span><span class="o">.</span><span class="n">Arg</span><span class="p">,</span> <span class="nb">type</span><span class="p">::</span><span class="n">CSV</span><span class="o">.</span><span class="n">Arg</span><span class="p">,</span> <span class="n">types</span><span class="p">::</span><span class="n">CSV</span><span class="o">.</span><span class="n">Arg</span><span class="p">,</span> <span class="n">typemap</span><span class="p">::</span><span class="n">CSV</span><span class="o">.</span><span class="n">Arg</span><span class="p">,</span> <span class="n">pool</span><span class="p">::</span><span class="n">CSV</span><span class="o">.</span><span class="n">Arg</span><span class="p">,</span> <span class="n">downcast</span><span class="p">::</span><span class="n">CSV</span><span class="o">.</span><span class="n">Arg</span><span class="p">,</span> <span class="n">lazystrings</span><span class="p">::</span><span class="n">CSV</span><span class="o">.</span><span class="n">Arg</span><span class="p">,</span> <span class="n">stringtype</span><span class="p">::</span><span class="n">CSV</span><span class="o">.</span><span class="n">Arg</span><span class="p">,</span> <span class="n">strict</span><span class="p">::</span><span class="n">CSV</span><span class="o">.</span><span class="n">Arg</span><span class="p">,</span> <span class="n">silencewarnings</span><span class="p">::</span><span class="n">CSV</span><span class="o">.</span><span class="n">Arg</span><span class="p">,</span> <span class="n">maxwarnings</span><span class="p">::</span><span class="n">CSV</span><span class="o">.</span><span class="n">Arg</span><span class="p">,</span> <span class="n">debug</span><span class="p">::</span><span class="n">CSV</span><span class="o">.</span><span class="n">Arg</span><span class="p">,</span> <span class="n">parsingdebug</span><span class="p">::</span><span class="n">CSV</span><span class="o">.</span><span class="n">Arg</span><span class="p">,</span> <span class="n">validate</span><span class="p">::</span><span class="n">CSV</span><span class="o">.</span><span class="n">Arg</span><span class="p">,</span> <span class="n">streaming</span><span class="p">::</span><span class="n">CSV</span><span class="o">.</span><span class="n">Arg</span><span class="p">)</span>
+   <span class="o">@</span> <span class="n">CSV</span> <span class="n">C</span><span class="p">:</span>\<span class="n">Users</span>\<span class="n">Work</span>\<span class="o">.</span><span class="n">julia</span>\<span class="n">packages</span>\<span class="n">CSV</span>\<span class="n">jFiCn</span>\<span class="n">src</span>\<span class="n">context</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">236</span>
+ <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="c1">#File#25</span>
+   <span class="o">@</span> <span class="n">C</span><span class="p">:</span>\<span class="n">Users</span>\<span class="n">Work</span>\<span class="o">.</span><span class="n">julia</span>\<span class="n">packages</span>\<span class="n">CSV</span>\<span class="n">jFiCn</span>\<span class="n">src</span>\<span class="n">file</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">221</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="n">CSV</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">source</span><span class="p">::</span><span class="n">String</span><span class="p">)</span>
+   <span class="o">@</span> <span class="n">CSV</span> <span class="n">C</span><span class="p">:</span>\<span class="n">Users</span>\<span class="n">Work</span>\<span class="o">.</span><span class="n">julia</span>\<span class="n">packages</span>\<span class="n">CSV</span>\<span class="n">jFiCn</span>\<span class="n">src</span>\<span class="n">file</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">221</span>
+ <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">3</span><span class="p">]:</span><span class="mi">1</span>
+ <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="nb">eval</span>
+   <span class="o">@</span> <span class="o">.</span>\<span class="n">boot</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">373</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="n">include_string</span><span class="p">(</span><span class="n">mapexpr</span><span class="p">::</span><span class="n">typeof</span><span class="p">(</span><span class="n">REPL</span><span class="o">.</span><span class="n">softscope</span><span class="p">),</span> <span class="n">mod</span><span class="p">::</span><span class="n">Module</span><span class="p">,</span> <span class="n">code</span><span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="n">filename</span><span class="p">::</span><span class="n">String</span><span class="p">)</span>
+   <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1196</span>
 </pre></div>
 </div>
 </div>
@@ -719,13 +804,6 @@ Number of columns: 415
 
 <span class="k">for</span> <span class="n">col</span> <span class="k">in</span> <span class="n">column_names</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">sum</span><span class="p">(</span><span class="n">data_1</span><span class="p">[</span><span class="o">!</span><span class="p">,</span><span class="n">col</span><span class="p">]</span> <span class="o">.==</span> <span class="n">rdata</span><span class="p">[</span><span class="o">!</span><span class="p">,</span><span class="n">col</span><span class="p">])</span>
-
-    <span class="k">if</span> <span class="n">result</span> <span class="o">.==</span> <span class="mi">3900</span>
-        <span class="n">println</span><span class="p">(</span><span class="s">&quot;Column &quot;</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span>  <span class="s">&quot; are equal at 6 decimals&quot;</span><span class="p">)</span>
-    <span class="k">else</span>
-        <span class="n">println</span><span class="p">(</span><span class="s">&quot;Column &quot;</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span>  <span class="s">&quot; are not equal at 6 decimals&quot;</span><span class="p">)</span>
-    <span class="k">end</span>
-
 <span class="k">end</span>
 </pre></div>
 </div>
@@ -1909,35 +1987,6 @@ of the methods works better.</p>
 <div class="cell_output docutils container">
 <div class="output text_html"><div class="data-frame"><p>8 rows × 3 columns</p><table class="data-frame"><thead><tr><th></th><th>modelos</th><th>Estimate</th><th>StdError</th></tr><tr><th></th><th title="String">String</th><th title="Float64">Float64</th><th title="Float64">Float64</th></tr></thead><tbody><tr><th>1</th><td>Baseline OLS</td><td>0.282304</td><td>0.0648108</td></tr><tr><th>2</th><td>Least Squares with controls</td><td>0.190645</td><td>0.0578919</td></tr><tr><th>3</th><td>Lasso</td><td>0.215859</td><td>0.0569238</td></tr><tr><th>4</th><td>CV Lasso</td><td>0.201257</td><td>0.0572105</td></tr><tr><th>5</th><td>CV Elnet</td><td>0.219933</td><td>0.0566664</td></tr><tr><th>6</th><td>CV Ridge</td><td>0.222651</td><td>0.0567713</td></tr><tr><th>7</th><td>Random Forest</td><td>0.317557</td><td>0.0594183</td></tr><tr><th>8</th><td>Best</td><td>0.22358</td><td>0.0566349</td></tr></tbody></table></div></div></div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># The table in latex</span>
-<span class="n">show</span><span class="p">(</span><span class="nb">stdout</span><span class="p">,</span> <span class="kt">MIME</span><span class="p">(</span><span class="s">&quot;text/latex&quot;</span><span class="p">),</span> <span class="n">DataFrame</span><span class="p">(</span><span class="n">modelos</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;Baseline OLS&quot;</span><span class="p">,</span> <span class="s">&quot;Least Squares with controls&quot;</span><span class="p">,</span> <span class="s">&quot;Lasso&quot;</span><span class="p">,</span> <span class="s">&quot;CV Lasso&quot;</span><span class="p">,</span> <span class="s">&quot;CV Elnet&quot;</span><span class="p">,</span> <span class="s">&quot;CV Ridge&quot;</span><span class="p">],</span> 
-<span class="n">Estimate</span> <span class="o">=</span> <span class="p">[</span><span class="n">ols_coef</span><span class="p">,</span> <span class="n">control_ols_coef</span><span class="p">,</span> <span class="n">lasso_coef</span><span class="p">,</span> <span class="n">DML2_lasso_cv_1_coef</span><span class="p">,</span> <span class="n">DML2_elnet_coef</span><span class="p">,</span> <span class="n">DML2_ridge_coef</span><span class="p">],</span> 
-<span class="n">StdError</span> <span class="o">=</span> <span class="p">[</span><span class="n">ols_std</span><span class="p">,</span> <span class="n">control_ols_std</span><span class="p">,</span> <span class="n">lasso_std</span><span class="p">,</span> <span class="n">DML2_lasso_cv_1_std</span><span class="p">,</span> <span class="n">DML2_elnet_std</span><span class="p">,</span> <span class="n">DML2_ridge_std</span><span class="p">]))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>\begin{tabular}{r|ccc}
-	&amp; modelos &amp; Estimate &amp; StdError\\
-	\hline
-	&amp; String &amp; Float64 &amp; Float64\\
-	\hline
-	1 &amp; Baseline OLS &amp; 0.282304 &amp; 0.0648108 \\
-	2 &amp; Least Squares with controls &amp; 0.190645 &amp; 0.0578919 \\
-	3 &amp; Lasso &amp; 0.215859 &amp; 0.0569238 \\
-	4 &amp; CV Lasso &amp; 0.201257 &amp; 0.0572105 \\
-	5 &amp; CV Elnet &amp; 0.219933 &amp; 0.0566664 \\
-	6 &amp; CV Ridge &amp; 0.222651 &amp; 0.0567713 \\
-\end{tabular}
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>14
-</pre></div>
-</div>
-</div>
-</div>
 </section>
 </section>
 </section>
@@ -1969,6 +2018,20 @@ of the methods works better.</p>
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="17_Notebook_DAGitty.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Causal identification in DAGs using Backdoor and Swigs, Equivalence Classes, Falsiability Tests</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="20_Julia-pm3-newdata-nn.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">The Effect of Gun Ownership on Gun-Homicide Rates - proceeding</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
 </div>
             </footer>
         </div>

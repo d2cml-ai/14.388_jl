@@ -73,15 +73,15 @@ penn[!,:dep] = categorical(penn[!,:dep])
 
 describe(penn)
 
-    # couples variables combinations 
-    combinations_upto(x, n) = Iterators.flatten(combinations(x, i) for i in 1:n)
+# couples variables combinations 
+combinations_upto(x, n) = Iterators.flatten(combinations(x, i) for i in 1:n)
 
-    # combinations without same couple
-    expand_exp(args, deg::ConstantTerm) =
-        tuple(((&)(terms...) for terms in combinations_upto(args, deg.n))...)
+# combinations without same couple
+expand_exp(args, deg::ConstantTerm) =
+    tuple(((&)(terms...) for terms in combinations_upto(args, deg.n))...)
 
-    StatsModels.apply_schema(t::FunctionTerm{typeof(^)}, sch::StatsModels.Schema, ctx::Type) =
-        apply_schema.(expand_exp(t.args_parsed...), Ref(sch), ctx)
+StatsModels.apply_schema(t::FunctionTerm{typeof(^)}, sch::StatsModels.Schema, ctx::Type) =
+    apply_schema.(expand_exp(t.args_parsed...), Ref(sch), ctx)
 
 # linear regression
 
@@ -212,24 +212,3 @@ T[3,1] = "Lower bound CI"
 T[4,1] = "Upper bound CI"
 
 header = (["Outcome", "CL", "CRA", "IRA", "IRA W Lasso"])
-
-pretty_table(T; backend = Val(:html), header = header, formatters=ft_round(4), alignment=:c)
-
-#Val(:latex) to tex format (Dataframe or DataTable, table , etc)
-
-pretty_table(T; backend = Val(:latex), header = header, formatters=ft_round(4), alignment=:c)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
