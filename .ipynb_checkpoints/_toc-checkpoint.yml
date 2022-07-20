@@ -4,4 +4,21 @@
 format: jb-book
 root: intro
 chapters:
-- file: contents/01_Julia_Notebook_Linear_Model_Overfitting
+- file: julia_notebooks/01_Julia_Notebook_Linear_Model_Overfitting
+- file: julia_notebooks/02_PM1_Notebook1_Prediction_newdata.ipynb
+- file: julia_notebooks/03_PM1_Notebook_Inference.ipynb
+- file: julia_notebooks/04_Juli_Notebook_RCT-polio.ipynb
+- file: julia_notebooks/05_Julia_Analyzing_RCT_with_Precision.ipynb
+- file: julia_notebooks/06_RCT_Precision_Adjustment.ipynb
+- file: julia_notebooks/07_julia-notebook-linear-penalized-regs.ipynb
+- file: julia_notebooks/09_Julia_OrthogonalLearning_lab4.ipynb
+- file: julia_notebooks/10_Julia_pm2_notebook_jannis.ipynb
+- file: julia_notebooks/11_py-heterogenous-wage-effects.ipynb
+- file: julia_notebooks/14_Julia_pm3_notebook_newdata_nn.ipynb
+- file: julia_notebooks/16_Functional-aproximation-by-nn-and-rf.ipynb
+- file: julia_notebooks/17_Notebook_DAGitty.ipynb
+- file: julia_notebooks/19_Julia_pm3_notebook_inference_clustering.ipynb
+- file: julia_notebooks/20_Julia-pm3-newdata-nn.ipynb
+- file: julia_notebooks/23_Julia_debiased-ml-for-partially-linear-model.ipynb
+- file: julia_notebooks/25_debiased-ml-for-partially-linear-iv-model-in-julia.ipynb
+- file: julia_notebooks/27_Julia_weak_iv_experiments.ipynb

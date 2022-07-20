@@ -1,4 +1,15 @@
 Traceback (most recent call last):
+  File "C:\Users\Work\anaconda3\lib\site-packages\nbclient\client.py", line 622, in _async_poll_for_reply
+    msg = await ensure_async(self.kc.shell_channel.get_msg(timeout=new_timeout))
+  File "C:\Users\Work\anaconda3\lib\site-packages\nbclient\util.py", line 85, in ensure_async
+    result = await obj
+  File "C:\Users\Work\anaconda3\lib\site-packages\jupyter_client\channels.py", line 230, in get_msg
+    raise Empty
+_queue.Empty
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
   File "C:\Users\Work\anaconda3\lib\site-packages\jupyter_cache\executors\utils.py", line 51, in single_nb_execution
     executenb(
   File "C:\Users\Work\anaconda3\lib\site-packages\nbclient\client.py", line 1112, in execute
@@ -11,31 +22,18 @@ Traceback (most recent call last):
     return future.result()
   File "C:\Users\Work\anaconda3\lib\site-packages\nbclient\client.py", line 553, in async_execute
     await self.async_execute_cell(
-  File "C:\Users\Work\anaconda3\lib\site-packages\nbclient\client.py", line 857, in async_execute_cell
-    self._check_raise_for_error(cell, exec_reply)
-  File "C:\Users\Work\anaconda3\lib\site-packages\nbclient\client.py", line 760, in _check_raise_for_error
-    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
-nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
-------------------
+  File "C:\Users\Work\anaconda3\lib\site-packages\nbclient\client.py", line 841, in async_execute_cell
+    exec_reply = await self.task_poll_for_reply
+  File "C:\Users\Work\anaconda3\lib\site-packages\nbclient\client.py", line 646, in _async_poll_for_reply
+    await self._async_handle_timeout(timeout, cell)
+  File "C:\Users\Work\anaconda3\lib\site-packages\nbclient\client.py", line 696, in _async_handle_timeout
+    raise CellTimeoutError.error_from_timeout_and_cell(
+nbclient.exceptions.CellTimeoutError: A cell timed out while it was being executed, after 30 seconds.
+The message was: Cell execution timed out.
+Here is a preview of the cell contents:
+-------------------
 data = CSV.File("../data/gun_clean.csv") |> DataFrame;
 println("Number of rows: ",size(data,1))
 println("Number of columns: ",size(data,2))
-------------------
-
-ArgumentError: "../data/gun_clean.csv" is not a valid file or doesn't exist
-
-Stacktrace:
- [1] CSV.Context(source::CSV.Arg, header::CSV.Arg, normalizenames::CSV.Arg, datarow::CSV.Arg, skipto::CSV.Arg, footerskip::CSV.Arg, transpose::CSV.Arg, comment::CSV.Arg, ignoreemptyrows::CSV.Arg, ignoreemptylines::CSV.Arg, select::CSV.Arg, drop::CSV.Arg, limit::CSV.Arg, buffer_in_memory::CSV.Arg, threaded::CSV.Arg, ntasks::CSV.Arg, tasks::CSV.Arg, rows_to_check::CSV.Arg, lines_to_check::CSV.Arg, missingstrings::CSV.Arg, missingstring::CSV.Arg, delim::CSV.Arg, ignorerepeated::CSV.Arg, quoted::CSV.Arg, quotechar::CSV.Arg, openquotechar::CSV.Arg, closequotechar::CSV.Arg, escapechar::CSV.Arg, dateformat::CSV.Arg, dateformats::CSV.Arg, decimal::CSV.Arg, truestrings::CSV.Arg, falsestrings::CSV.Arg, stripwhitespace::CSV.Arg, type::CSV.Arg, types::CSV.Arg, typemap::CSV.Arg, pool::CSV.Arg, downcast::CSV.Arg, lazystrings::CSV.Arg, stringtype::CSV.Arg, strict::CSV.Arg, silencewarnings::CSV.Arg, maxwarnings::CSV.Arg, debug::CSV.Arg, parsingdebug::CSV.Arg, validate::CSV.Arg, streaming::CSV.Arg)
-   @ CSV C:\Users\Work\.julia\packages\CSV\jFiCn\src\context.jl:236
- [2] #File#25
-   @ C:\Users\Work\.julia\packages\CSV\jFiCn\src\file.jl:221 [inlined]
- [3] CSV.File(source::String)
-   @ CSV C:\Users\Work\.julia\packages\CSV\jFiCn\src\file.jl:221
- [4] top-level scope
-   @ In[3]:1
- [5] eval
-   @ .\boot.jl:373 [inlined]
- [6] include_string(mapexpr::typeof(REPL.softscope), mod::Module, code::String, filename::String)
-   @ Base .\loading.jl:1196
-LoadError: ArgumentError: "../data/gun_clean.csv" is not a valid file or doesn't exist
+-------------------
 
