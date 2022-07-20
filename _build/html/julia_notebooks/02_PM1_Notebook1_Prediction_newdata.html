@@ -92,6 +92,11 @@ const thebe_selector_output = ".output, .cell_output"
         <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
       
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
       
       
       <h1 class="site-logo" id="site-title">My sample book</h1>
@@ -260,7 +265,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/julia_notebooks/02_PM1_Notebook1_Prediction_newdata.ipynb"
+        <a href="https://mybinder.org/v2/gh/d2cml-ai/14.388_jl/master?urlpath=tree/docs/julia_notebooks/02_PM1_Notebook1_Prediction_newdata.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -303,7 +308,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://github.com/executablebooks/jupyter-book"
+        <a href="https://github.com/d2cml-ai/14.388_jl"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -320,7 +325,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fjulia_notebooks/02_PM1_Notebook1_Prediction_newdata.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/d2cml-ai/14.388_jl/issues/new?title=Issue%20on%20page%20%2Fjulia_notebooks/02_PM1_Notebook1_Prediction_newdata.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -551,6 +556,41 @@ Two main questions here are:</p>
 <span class="c"># Pkg.add(to_install)</span>
 
 <span class="k">using</span> <span class="n">CSV</span><span class="p">,</span> <span class="n">DataFrames</span><span class="p">,</span> <span class="n">Dates</span><span class="p">,</span> <span class="n">Plots</span><span class="p">,</span> <span class="n">Lathe</span><span class="p">,</span> <span class="n">GLM</span><span class="p">,</span> <span class="n">Statistics</span><span class="p">,</span> <span class="n">MLBase</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>┌ Info: Precompiling Plots [91a5bcdd-55d7-5caf-9e0b-520d859cae80]
+└ @ Base loading.jl:1423
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">InterruptException</span>:
+
+<span class="ne">Stacktrace</span>:
+  <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">try_yieldto</span><span class="p">(</span><span class="n">undo</span><span class="p">::</span><span class="n">typeof</span><span class="p">(</span><span class="n">Base</span><span class="o">.</span><span class="n">ensure_rescheduled</span><span class="p">))</span>
+    <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">task</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">812</span>
+  <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">wait</span><span class="p">()</span>
+    <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">task</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">872</span>
+  <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="n">wait</span><span class="p">(</span><span class="n">c</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">GenericCondition</span><span class="p">{</span><span class="n">Base</span><span class="o">.</span><span class="n">Threads</span><span class="o">.</span><span class="n">SpinLock</span><span class="p">})</span>
+    <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">condition</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">123</span>
+  <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="n">wait</span><span class="p">(</span><span class="n">x</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">Process</span><span class="p">)</span>
+    <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">process</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">636</span>
+  <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="n">success</span><span class="p">(</span><span class="n">x</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">Process</span><span class="p">)</span>
+    <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">process</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">498</span>
+  <span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="n">compilecache</span><span class="p">(</span><span class="n">pkg</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">PkgId</span><span class="p">,</span> <span class="n">path</span><span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="n">internal_stderr</span><span class="p">::</span><span class="n">IO</span><span class="p">,</span> <span class="n">internal_stdout</span><span class="p">::</span><span class="n">IO</span><span class="p">,</span> <span class="n">ignore_loaded_modules</span><span class="p">::</span><span class="n">Bool</span><span class="p">)</span>
+    <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1433</span>
+  <span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="n">compilecache</span><span class="p">(</span><span class="n">pkg</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">PkgId</span><span class="p">,</span> <span class="n">path</span><span class="p">::</span><span class="n">String</span><span class="p">)</span>
+    <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1410</span>
+  <span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="n">_require</span><span class="p">(</span><span class="n">pkg</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">PkgId</span><span class="p">)</span>
+    <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1120</span>
+  <span class="p">[</span><span class="mi">9</span><span class="p">]</span> <span class="n">require</span><span class="p">(</span><span class="n">uuidkey</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">PkgId</span><span class="p">)</span>
+    <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1013</span>
+ <span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="n">require</span><span class="p">(</span><span class="n">into</span><span class="p">::</span><span class="n">Module</span><span class="p">,</span> <span class="n">mod</span><span class="p">::</span><span class="n">Symbol</span><span class="p">)</span>
+    <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">997</span>
+ <span class="p">[</span><span class="mi">11</span><span class="p">]</span> <span class="nb">eval</span>
+    <span class="o">@</span> <span class="o">.</span>\<span class="n">boot</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">373</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">12</span><span class="p">]</span> <span class="n">include_string</span><span class="p">(</span><span class="n">mapexpr</span><span class="p">::</span><span class="n">typeof</span><span class="p">(</span><span class="n">REPL</span><span class="o">.</span><span class="n">softscope</span><span class="p">),</span> <span class="n">mod</span><span class="p">::</span><span class="n">Module</span><span class="p">,</span> <span class="n">code</span><span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="n">filename</span><span class="p">::</span><span class="n">String</span><span class="p">)</span>
+    <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1196</span>
 </pre></div>
 </div>
 </div>
@@ -985,11 +1025,8 @@ Number of regressors in the flexible model: 246
 <p>We re-estimate the flexible model using Lasso (the least absolute shrinkage and selection operator) rather than ols. Lasso is a penalized regression method that can be used to reduce the complexity of a regression model when the ratio <span class="math notranslate nohighlight">\(p/n\)</span> is not small. We will introduce this approach formally later in the course, but for now, we try it out here as a black-box method.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># using Pkg</span>
-<span class="c"># Pkg.add(&quot;Lasso&quot;)</span>
-<span class="k">using</span> <span class="n">Lasso</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">Lasso</span>
 
-<span class="n">flex</span> <span class="o">=</span> <span class="nd">@formula</span><span class="p">(</span><span class="n">lwage</span> <span class="o">~</span> <span class="n">sex</span> <span class="o">+</span> <span class="n">shs</span><span class="o">+</span><span class="n">hsg</span><span class="o">+</span><span class="n">scl</span><span class="o">+</span><span class="n">clg</span><span class="o">+</span><span class="n">occ2</span><span class="o">+</span><span class="n">ind2</span><span class="o">+</span><span class="n">mw</span><span class="o">+</span><span class="n">so</span><span class="o">+</span><span class="n">we</span> <span class="o">+</span> <span class="p">(</span><span class="n">exp1</span><span class="o">+</span><span class="n">exp2</span><span class="o">+</span><span class="n">exp3</span><span class="o">+</span><span class="n">exp4</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">shs</span><span class="o">+</span><span class="n">hsg</span><span class="o">+</span><span class="n">scl</span><span class="o">+</span><span class="n">clg</span><span class="o">+</span><span class="n">occ2</span><span class="o">+</span><span class="n">ind2</span><span class="o">+</span><span class="n">mw</span><span class="o">+</span><span class="n">so</span><span class="o">+</span><span class="n">we</span><span class="p">))</span>
 <span class="n">lasso_model</span> <span class="o">=</span> <span class="n">fit</span><span class="p">(</span><span class="n">LassoModel</span><span class="p">,</span> <span class="n">flex</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1263,6 +1300,345 @@ x246  -0.000877637
 <p>Now, we can evaluate the performance of both models based on the (adjusted) <span class="math notranslate nohighlight">\(R^2_{sample}\)</span> and the (adjusted) <span class="math notranslate nohighlight">\(MSE_{sample}\)</span>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">n_data</span> <span class="o">=</span> <span class="n">size</span><span class="p">(</span><span class="n">data</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="k">function</span> <span class="n">ref_bsc</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">lasso</span> <span class="o">=</span> <span class="nb">false</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">n_data</span><span class="p">)</span>
+     <span class="k">if</span> <span class="n">lasso</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">length</span><span class="p">(</span><span class="n">coef</span><span class="p">(</span><span class="n">model</span><span class="p">))</span>
+        <span class="n">y_hat</span> <span class="o">=</span> <span class="n">predict</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+        <span class="n">y_r</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">lwage</span>
+        <span class="n">r_2</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">sum</span><span class="p">((</span><span class="n">y_r</span> <span class="o">.-</span> <span class="n">y_hat</span><span class="p">)</span><span class="o">.^</span><span class="mi">2</span><span class="p">)</span>  <span class="o">/</span> <span class="n">sum</span><span class="p">((</span><span class="n">y_r</span> <span class="o">.-</span> <span class="n">mean</span><span class="p">(</span><span class="n">y_r</span><span class="p">))</span><span class="o">.^</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">adj_r2</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">r_2</span><span class="p">)</span> <span class="o">*</span> <span class="p">((</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">p</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="k">else</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">length</span><span class="p">(</span><span class="n">coef</span><span class="p">(</span><span class="n">model</span><span class="p">))</span>
+        <span class="n">r_2</span> <span class="o">=</span> <span class="n">r2</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+        <span class="n">adj_r2</span> <span class="o">=</span> <span class="n">adjr2</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+    <span class="k">end</span>   
+    
+    <span class="n">mse</span> <span class="o">=</span> <span class="n">mean</span><span class="p">(</span><span class="n">residuals</span><span class="p">(</span><span class="n">model</span><span class="p">)</span><span class="o">.^</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">mse_adj</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span> <span class="o">/</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">p</span><span class="p">))</span> <span class="o">*</span> <span class="n">mse</span>
+    
+    <span class="n">ref</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span><span class="p">,</span> <span class="n">r_2</span><span class="p">,</span> <span class="n">adj_r2</span><span class="p">,</span> <span class="n">mse</span><span class="p">,</span> <span class="n">mse_adj</span><span class="p">]</span>
+    
+    <span class="k">return</span> <span class="n">p</span><span class="p">,</span> <span class="n">r_2</span><span class="p">,</span> <span class="n">adj_r2</span><span class="p">,</span> <span class="n">mse</span><span class="p">,</span> <span class="n">mse_adj</span>
+<span class="k">end</span>
+
+<span class="n">p1</span><span class="p">,</span> <span class="n">r2_1</span><span class="p">,</span> <span class="n">r2_adj1</span><span class="p">,</span> <span class="n">mse1</span><span class="p">,</span> <span class="n">mse_adj1</span> <span class="o">=</span> <span class="n">ref_bsc</span><span class="p">(</span><span class="n">basic_results</span><span class="p">);</span>
+
+<span class="n">p2</span><span class="p">,</span> <span class="n">r2_2</span><span class="p">,</span> <span class="n">r2_adj2</span><span class="p">,</span> <span class="n">mse2</span><span class="p">,</span> <span class="n">mse_adj2</span> <span class="o">=</span> <span class="n">ref_bsc</span><span class="p">(</span><span class="n">flex_results</span><span class="p">);</span>
+
+<span class="n">pL</span><span class="p">,</span> <span class="n">r2_L</span><span class="p">,</span> <span class="n">r2_adjL</span><span class="p">,</span> <span class="n">mseL</span><span class="p">,</span> <span class="n">mse_adjL</span> <span class="o">=</span> <span class="n">ref_bsc</span><span class="p">(</span><span class="n">lasso_model</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
+
+<span class="n">println</span><span class="p">(</span><span class="s">&quot;R-squared for the basic model: &quot;</span><span class="p">,</span> <span class="n">r2_1</span><span class="p">)</span>
+<span class="n">println</span><span class="p">(</span><span class="s">&quot;Adjusted R-squared for the basic model: &quot;</span><span class="p">,</span> <span class="n">r2_adj1</span><span class="p">)</span>
+<span class="n">println</span><span class="p">(</span><span class="s">&quot;R-squared for the flexible model: &quot;</span><span class="p">,</span> <span class="n">r2_2</span><span class="p">)</span>
+<span class="n">println</span><span class="p">(</span><span class="s">&quot;Adjusted R-squared for the flexible model: &quot;</span><span class="p">,</span> <span class="n">r2_adj2</span><span class="p">)</span>
+<span class="n">println</span><span class="p">(</span><span class="s">&quot;R-squared for the lasso with flexible model: &quot;</span><span class="p">,</span> <span class="n">r2_2</span><span class="p">)</span>
+<span class="n">println</span><span class="p">(</span><span class="s">&quot;Adjusted R-squared for the lasso with flexible model: &quot;</span><span class="p">,</span> <span class="n">r2_adj2</span><span class="p">,</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
+
+<span class="n">println</span><span class="p">(</span><span class="s">&quot;MSE for the basic model: &quot;</span><span class="p">,</span> <span class="n">mse1</span><span class="p">)</span>
+<span class="n">println</span><span class="p">(</span><span class="s">&quot;MSE for the basic model: &quot;</span><span class="p">,</span> <span class="n">mse_adj1</span><span class="p">)</span>
+<span class="n">println</span><span class="p">(</span><span class="s">&quot;MSE for the flexible model: &quot;</span><span class="p">,</span> <span class="n">mse2</span><span class="p">)</span>
+<span class="n">println</span><span class="p">(</span><span class="s">&quot;MSE for the flexible model: &quot;</span><span class="p">,</span> <span class="n">mse_adj2</span><span class="p">)</span>
+<span class="n">println</span><span class="p">(</span><span class="s">&quot;MSE for the lasso with flexible model: &quot;</span><span class="p">,</span> <span class="n">mseL</span><span class="p">)</span>
+<span class="n">println</span><span class="p">(</span><span class="s">&quot;MSE for the lasso with flexible model: &quot;</span><span class="p">,</span> <span class="n">mse_adjL</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R-squared for the basic model: 0.31004650692219493
+Adjusted R-squared for the basic model: 0.303280930406429
+R-squared for the flexible model: 0.35110989506172274
+Adjusted R-squared for the flexible model: 0.3186918535221881
+R-squared for the lasso with flexible model: 0.35110989506172274
+Adjusted R-squared for the lasso with flexible model: 0.3186918535221881
+
+MSE for the basic model: 0.22442505581164396
+MSE for the basic model: 0.2266697465051905
+MSE for the flexible model: 0.2110681364431821
+MSE for the flexible model: 0.22165597526149833
+MSE for the lasso with flexible model: 0.21912180704256773
+MSE for the lasso with flexible model: 0.23011364320334907
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># using Pkg</span>
+<span class="c"># Pkg.add(&quot;Lasso&quot;)</span>
+<span class="k">using</span> <span class="n">Lasso</span>
+
+<span class="n">flex</span> <span class="o">=</span> <span class="nd">@formula</span><span class="p">(</span><span class="n">lwage</span> <span class="o">~</span> <span class="n">sex</span> <span class="o">+</span> <span class="n">shs</span><span class="o">+</span><span class="n">hsg</span><span class="o">+</span><span class="n">scl</span><span class="o">+</span><span class="n">clg</span><span class="o">+</span><span class="n">occ2</span><span class="o">+</span><span class="n">ind2</span><span class="o">+</span><span class="n">mw</span><span class="o">+</span><span class="n">so</span><span class="o">+</span><span class="n">we</span> <span class="o">+</span> <span class="p">(</span><span class="n">exp1</span><span class="o">+</span><span class="n">exp2</span><span class="o">+</span><span class="n">exp3</span><span class="o">+</span><span class="n">exp4</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">shs</span><span class="o">+</span><span class="n">hsg</span><span class="o">+</span><span class="n">scl</span><span class="o">+</span><span class="n">clg</span><span class="o">+</span><span class="n">occ2</span><span class="o">+</span><span class="n">ind2</span><span class="o">+</span><span class="n">mw</span><span class="o">+</span><span class="n">so</span><span class="o">+</span><span class="n">we</span><span class="p">))</span>
+<span class="n">lasso_model</span> <span class="o">=</span> <span class="n">fit</span><span class="p">(</span><span class="n">LassoModel</span><span class="p">,</span> <span class="n">flex</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>StatsModels.TableRegressionModel{LassoModel{LinearModel{GLM.LmResp{Vector{Float64}}, GLM.DensePredChol{Float64, LinearAlgebra.CholeskyPivoted{Float64, Matrix{Float64}}}}, MinAICc}, Matrix{Float64}}
+
+lwage ~ sex + shs + hsg + scl + clg + occ2 + ind2 + mw + so + we + exp1 + exp2 + exp3 + exp4 + exp1 &amp; shs + exp1 &amp; hsg + exp1 &amp; scl + exp1 &amp; clg + exp1 &amp; occ2 + exp1 &amp; ind2 + exp1 &amp; mw + exp1 &amp; so + exp1 &amp; we + exp2 &amp; shs + exp2 &amp; hsg + exp2 &amp; scl + exp2 &amp; clg + exp2 &amp; occ2 + exp2 &amp; ind2 + exp2 &amp; mw + exp2 &amp; so + exp2 &amp; we + exp3 &amp; shs + exp3 &amp; hsg + exp3 &amp; scl + exp3 &amp; clg + exp3 &amp; occ2 + exp3 &amp; ind2 + exp3 &amp; mw + exp3 &amp; so + exp3 &amp; we + exp4 &amp; shs + exp4 &amp; hsg + exp4 &amp; scl + exp4 &amp; clg + exp4 &amp; occ2 + exp4 &amp; ind2 + exp4 &amp; mw + exp4 &amp; so + exp4 &amp; we
+
+Coefficients:
+LassoModel using MinAICc(2) segment of the regularization path.
+
+Coefficients:
+──────────────────
+          Estimate
+──────────────────
+x1     3.34129
+x2    -0.0631407
+x3    -0.565639
+x4    -0.50156
+x5    -0.400049
+x6    -0.14691
+x7     0.0
+x8    -0.360004
+x9    -0.209659
+x10   -0.188597
+x11   -0.249669
+x12   -0.363077
+x13   -0.16079
+x14   -0.353041
+x15   -0.324731
+x16   -0.178614
+x17    0.0
+x18   -0.165913
+x19   -0.147868
+x20   -0.369714
+x21    0.00735858
+x22    0.0
+x23   -0.11278
+x24   -0.330056
+x25    0.00179747
+x26   -0.327129
+x27   -0.175565
+x28    0.0646178
+x29    0.172216
+x30    0.0774118
+x31    0.0506054
+x32    0.0
+x33   -0.0489911
+x34   -0.0632706
+x35   -0.0881081
+x36   -0.137242
+x37    0.282243
+x38   -0.27567
+x39    0.0
+x40    0.103844
+x41    0.124828
+x42    0.0
+x43    0.0
+x44    0.0
+x45    0.0266645
+x46    0.041781
+x47   -0.148758
+x48    0.0
+x49   -0.018235
+x50    0.0
+x51    0.0142924
+x52    0.0
+x53    0.0
+x54    0.0
+x55    0.0
+x56    0.0
+x57    0.0
+x58   -0.000195042
+x59    0.00361625
+x60   -0.00321403
+x61    0.0
+x62   -0.00919592
+x63   -0.0109497
+x64   -0.00207628
+x65    0.0
+x66    0.0
+x67    0.0
+x68    0.0
+x69    0.0
+x70    0.0
+x71   -0.00436299
+x72    0.0
+x73   -0.000609112
+x74   -0.00228671
+x75    0.0
+x76    0.0
+x77    0.0
+x78    0.0
+x79    0.00130242
+x80    0.0
+x81    0.0
+x82    0.0
+x83    0.0
+x84    0.0
+x85    0.0
+x86    0.000821768
+x87    0.0
+x88    0.0
+x89    0.0
+x90    0.0
+x91   -0.00541602
+x92    0.00312622
+x93    0.0
+x94    0.0
+x95   -0.00189558
+x96   -0.000570929
+x97    0.00105877
+x98    0.0
+x99    0.0
+x100  -0.000714472
+x101   0.0
+x102   0.00278992
+x103   0.0
+x104   0.0
+x105   0.0
+x106   0.0
+x107   0.0
+x108   0.0
+x109   0.0
+x110  -0.00651112
+x111   0.0
+x112   0.0
+x113   0.0
+x114   0.0
+x115   0.0
+x116   0.0
+x117  -0.00142291
+x118   0.0
+x119   0.0
+x120   0.0
+x121   0.0
+x122  -0.00754277
+x123   0.0
+x124   0.0
+x125   0.0
+x126   0.0
+x127   0.0
+x128   0.0
+x129   0.0
+x130  -0.00780449
+x131   0.0
+x132   0.0
+x133   0.0
+x134   0.0
+x135   0.0
+x136   0.0
+x137  -0.0240004
+x138   0.0
+x139   0.0
+x140   0.0
+x141   0.0
+x142   0.0
+x143   0.0
+x144  -0.000657946
+x145   0.00747602
+x146  -0.0168673
+x147   0.0
+x148  -0.0023378
+x149  -0.000272732
+x150   0.0
+x151   0.0
+x152   0.0
+x153   0.0
+x154   0.0
+x155   0.0
+x156   0.0
+x157   0.0
+x158   0.0
+x159   0.0
+x160   0.0
+x161   0.0
+x162   0.0
+x163   0.00459082
+x164   0.0
+x165  -0.00107904
+x166   2.35047e-5
+x167   0.0
+x168   0.0
+x169   0.0
+x170   0.0
+x171   0.0
+x172   0.0
+x173   0.0
+x174   0.0
+x175   0.0
+x176   0.0
+x177  -0.00168826
+x178   0.0
+x179   0.0
+x180   0.0
+x181   0.0
+x182   0.0
+x183   0.0
+x184   0.000737299
+x185   0.0
+x186  -0.000841314
+x187   0.0
+x188   0.0
+x189   0.0
+x190   0.0
+x191   0.0
+x192   0.0
+x193   0.0
+x194   0.0
+x195   0.0
+x196   0.0
+x197  -0.00102585
+x198   0.0
+x199   0.0
+x200   0.000244024
+x201   0.0
+x202  -0.000476642
+x203  -0.000894288
+x204   0.0
+x205  -0.00130759
+x206   0.0
+x207   0.0
+x208  -0.000999333
+x209  -0.000961788
+x210  -0.000514903
+x211   0.0
+x212   0.0
+x213  -0.00131441
+x214   0.000250381
+x215  -0.000652594
+x216   0.0
+x217   0.000192503
+x218   0.0
+x219   0.0
+x220  -0.00166666
+x221   0.0
+x222   0.0
+x223   0.0
+x224  -0.000478704
+x225   0.0
+x226   0.0
+x227   0.000417421
+x228   0.0
+x229  -0.000827938
+x230   0.0
+x231  -9.91966e-5
+x232   0.000237123
+x233   0.0
+x234  -0.00042345
+x235   0.0
+x236  -0.00143342
+x237  -0.00146757
+x238  -0.000852059
+x239   0.0
+x240   0.0
+x241   0.000435754
+x242   0.0
+x243   0.0
+x244  -0.000537361
+x245  -6.33045e-5
+x246  -0.000877637
+──────────────────
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># lasso_model, basic_results, regflex</span>
 <span class="n">n_data</span> <span class="o">=</span> <span class="n">size</span><span class="p">(</span><span class="n">data</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
 
@@ -1292,13 +1668,13 @@ x246  -0.000877637
     <span class="n">Model</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;p&quot;</span><span class="p">,</span> <span class="s">&quot;R^2&quot;</span><span class="p">,</span> <span class="s">&quot;MSE&quot;</span><span class="p">,</span> <span class="s">&quot;R^2 adjusted&quot;</span><span class="p">,</span> <span class="s">&quot;MSE adjusted&quot;</span><span class="p">],</span>
     <span class="n">Basic_reg</span> <span class="o">=</span> <span class="n">ref_bsc</span><span class="p">(</span><span class="n">basic_results</span><span class="p">),</span>
     <span class="n">Flexible_reg</span> <span class="o">=</span> <span class="n">ref_bsc</span><span class="p">(</span><span class="n">flex_results</span><span class="p">),</span>
-    <span class="n">lasso_flex</span> <span class="o">=</span> <span class="n">ref_bsc</span><span class="p">(</span><span class="n">flex_results</span><span class="p">,</span> <span class="nb">true</span><span class="p">)</span>
+    <span class="n">lasso_flex</span> <span class="o">=</span> <span class="n">ref_bsc</span><span class="p">(</span><span class="n">lasso_model</span><span class="p">,</span> <span class="nb">true</span><span class="p">)</span>
 <span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><table class="data-frame"><thead><tr><th></th><th>Model</th><th>Basic_reg</th><th>Flexible_reg</th><th>lasso_flex</th></tr><tr><th></th><th>String</th><th>Float64</th><th>Float64</th><th>Float64</th></tr></thead><tbody><p>5 rows × 4 columns</p><tr><th>1</th><td>p</td><td>51.0</td><td>246.0</td><td>246.0</td></tr><tr><th>2</th><td>R^2</td><td>0.310047</td><td>0.35111</td><td>0.35111</td></tr><tr><th>3</th><td>MSE</td><td>0.303281</td><td>0.318692</td><td>0.318553</td></tr><tr><th>4</th><td>R^2 adjusted</td><td>0.224425</td><td>0.211068</td><td>0.211068</td></tr><tr><th>5</th><td>MSE adjusted</td><td>0.22667</td><td>0.221656</td><td>0.221656</td></tr></tbody></table></div></div>
+<div class="output text_html"><table class="data-frame"><thead><tr><th></th><th>Model</th><th>Basic_reg</th><th>Flexible_reg</th><th>lasso_flex</th></tr><tr><th></th><th>String</th><th>Float64</th><th>Float64</th><th>Float64</th></tr></thead><tbody><p>5 rows × 4 columns</p><tr><th>1</th><td>p</td><td>51.0</td><td>246.0</td><td>246.0</td></tr><tr><th>2</th><td>R^2</td><td>0.310047</td><td>0.35111</td><td>0.32635</td></tr><tr><th>3</th><td>MSE</td><td>0.303281</td><td>0.318692</td><td>0.292551</td></tr><tr><th>4</th><td>R^2 adjusted</td><td>0.224425</td><td>0.211068</td><td>0.219122</td></tr><tr><th>5</th><td>MSE adjusted</td><td>0.22667</td><td>0.221656</td><td>0.230114</td></tr></tbody></table></div></div>
 </div>
 <p>Considering the measures above, the flexible model performs slightly better than the basic model.</p>
 <p>As <span class="math notranslate nohighlight">\(p/n\)</span> is not large, the discrepancy between the adjusted and unadjusted measures is not large. However, if it were, we might still like to apply <strong>data splitting</strong> as a more general procedure to deal with potential overfitting if <span class="math notranslate nohighlight">\(p/n\)</span>. We illustrate the approach in the following.</p>
@@ -1335,8 +1711,8 @@ x246  -0.000877637
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test MSE for the basic model: 0.2290967876788522
-Test R2 for the basic model: 0.289238974704928
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test MSE for the basic model: 0.2185049608897876
+Test R2 for the basic model: 0.32969404519304046
 </pre></div>
 </div>
 </div>

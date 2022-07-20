@@ -36,6 +36,54 @@ flex_results = lm(flex, data)
 println(flex_results)
 println("Number of regressors in the flexible model: ", size(coef(flex_results), 1))
 
+using Lasso
+
+lasso_model = fit(LassoModel, flex, data)
+
+n_data = size(data)[1]
+
+function ref_bsc(model, lasso = false, n = n_data)
+     if lasso
+        p = length(coef(model))
+        y_hat = predict(model)
+        y_r = data.lwage
+        r_2 = 1 - sum((y_r .- y_hat).^2)  / sum((y_r .- mean(y_r)).^2)
+        adj_r2 = 1 - (1 - r_2) * ((n - 1) / (n - p - 1))
+    else
+        p = length(coef(model))
+        r_2 = r2(model)
+        adj_r2 = adjr2(model)
+    end   
+    
+    mse = mean(residuals(model).^2)
+    mse_adj = (n / (n - p)) * mse
+    
+    ref = [p, r_2, adj_r2, mse, mse_adj]
+    
+    return p, r_2, adj_r2, mse, mse_adj
+end
+
+p1, r2_1, r2_adj1, mse1, mse_adj1 = ref_bsc(basic_results);
+
+p2, r2_2, r2_adj2, mse2, mse_adj2 = ref_bsc(flex_results);
+
+pL, r2_L, r2_adjL, mseL, mse_adjL = ref_bsc(lasso_model, true);
+
+println("R-squared for the basic model: ", r2_1)
+println("Adjusted R-squared for the basic model: ", r2_adj1)
+println("R-squared for the flexible model: ", r2_2)
+println("Adjusted R-squared for the flexible model: ", r2_adj2)
+println("R-squared for the lasso with flexible model: ", r2_2)
+println("Adjusted R-squared for the lasso with flexible model: ", r2_adj2, "\n")
+
+println("MSE for the basic model: ", mse1)
+println("MSE for the basic model: ", mse_adj1)
+println("MSE for the flexible model: ", mse2)
+println("MSE for the flexible model: ", mse_adj2)
+println("MSE for the lasso with flexible model: ", mseL)
+println("MSE for the lasso with flexible model: ", mse_adjL)
+
+
 # using Pkg
 # Pkg.add("Lasso")
 using Lasso
@@ -72,7 +120,7 @@ DataFrame(
     Model = ["p", "R^2", "MSE", "R^2 adjusted", "MSE adjusted"],
     Basic_reg = ref_bsc(basic_results),
     Flexible_reg = ref_bsc(flex_results),
-    lasso_flex = ref_bsc(flex_results, true)
+    lasso_flex = ref_bsc(lasso_model, true)
 )
 
 using Lathe.preprocess: TrainTestSplit
