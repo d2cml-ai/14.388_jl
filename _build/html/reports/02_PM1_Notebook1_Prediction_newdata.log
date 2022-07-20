@@ -32,9 +32,10 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-#Reading the CSV file into a DataFrame
-#We have to set the category type for some variable
-data = CSV.File("../data/wage2015_subsample_inference.csv"; types = Dict("occ" => String,"occ2"=> String,"ind"=>String,"ind2"=>String)) |> DataFrame
-size(data)
+# to_install = ["CSV", "DataFrames", "Dates", "Plots"]
+# using Pkg 
+# Pkg.add(to_install)
+
+using CSV, DataFrames, Dates, Plots, Lathe, GLM, Statistics, MLBase
 -------------------
 

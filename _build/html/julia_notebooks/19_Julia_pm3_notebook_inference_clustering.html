@@ -1,0 +1,2036 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>A Case Study: The Effect of Gun Ownership on Gun-Homicide Rates &#8212; My sample book</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="The Effect of Gun Ownership on Gun-Homicide Rates - proceeding" href="20_Julia-pm3-newdata-nn.html" />
+    <link rel="prev" title="Causal identification in DAGs using Backdoor and Swigs, Equivalence Classes, Falsiability Tests" href="17_Notebook_DAGitty.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">My sample book</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome to your Jupyter Book
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="01_Julia_Notebook_Linear_Model_Overfitting.html">
+   Julia Notebook Linear Model Overfitting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02_PM1_Notebook1_Prediction_newdata.html">
+   OLS and lasso for wage prediction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03_PM1_Notebook_Inference.html">
+   An inferential problem: The Gender Wage Gap
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04_Juli_Notebook_RCT-polio.html">
+   Author: Roberto Mendoza
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05_Julia_Analyzing_RCT_with_Precision.html">
+   Analyzing RCT with Precision by Adjusting for Baseline Covariates
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06_RCT_Precision_Adjustment.html">
+   Author: Roberto Mendoza
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07_julia-notebook-linear-penalized-regs.html">
+   Penalized Linear Regressions: A Simulation Experiment
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="09_Julia_OrthogonalLearning_lab4.html">
+   Orthogonal Learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="10_Julia_pm2_notebook_jannis.html">
+   Testing the Convergence Hypothesis
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="11_py-heterogenous-wage-effects.html">
+   Application: Heterogeneous Effect of Gender on Wage Using Double Lasso
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="14_Julia_pm3_notebook_newdata_nn.html">
+   A Simple Case Study using Wage Data from 2015 - proceeding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="16_Functional-aproximation-by-nn-and-rf.html">
+   Functional Approximations by Trees and Neural Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="17_Notebook_DAGitty.html">
+   Causal identification in DAGs using Backdoor and Swigs, Equivalence Classes, Falsiability Tests
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   A Case Study: The Effect of Gun Ownership on Gun-Homicide Rates
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="20_Julia-pm3-newdata-nn.html">
+   The Effect of Gun Ownership on Gun-Homicide Rates - proceeding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="23_Julia_debiased-ml-for-partially-linear-model.html">
+   Double/Debiased Machine Learning for the Partially Linear Regression Model.
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="25_debiased-ml-for-partially-linear-iv-model-in-julia.html">
+   Double/Debiased ML for Partially Linear IV Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="27_Julia_weak_iv_experiments.html">
+   A Simple Example of Properties of IV estimator when Instruments are Weak
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/julia_notebooks/19_Julia_pm3_notebook_inference_clustering.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fjulia_notebooks/19_Julia_pm3_notebook_inference_clustering.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/julia_notebooks/19_Julia_pm3_notebook_inference_clustering.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   A Case Study: The Effect of Gun Ownership on Gun-Homicide Rates
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data">
+     Data
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#preprocessing">
+       Preprocessing
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#we-check-that-our-results-are-equal-to-r-results-at-6-decimals">
+     We check that our results are equal to R results at 6 decimals
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-effect-of-gun-ownership">
+     The effect of gun ownership
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#ols">
+       OLS
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dml-algorithm">
+   DML algorithm
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#lasso">
+     Lasso
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hdm-jl">
+     HDM.JL
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#glmnet">
+     GLMNET
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#ml-method-lasso-from-glmnet">
+       ML method = lasso from glmnet
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#ml-method-elastic-net-from-glmnet">
+       ML method = Elastic net from glmnet
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#ml-method-ridge-from-glmnet">
+       ML method = Ridge from glmnet
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#random-forest">
+       Random Forest
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>A Case Study: The Effect of Gun Ownership on Gun-Homicide Rates</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   A Case Study: The Effect of Gun Ownership on Gun-Homicide Rates
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data">
+     Data
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#preprocessing">
+       Preprocessing
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#we-check-that-our-results-are-equal-to-r-results-at-6-decimals">
+     We check that our results are equal to R results at 6 decimals
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-effect-of-gun-ownership">
+     The effect of gun ownership
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#ols">
+       OLS
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dml-algorithm">
+   DML algorithm
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#lasso">
+     Lasso
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hdm-jl">
+     HDM.JL
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#glmnet">
+     GLMNET
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#ml-method-lasso-from-glmnet">
+       ML method = lasso from glmnet
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#ml-method-elastic-net-from-glmnet">
+       ML method = Elastic net from glmnet
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#ml-method-ridge-from-glmnet">
+       ML method = Ridge from glmnet
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#random-forest">
+       Random Forest
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="a-case-study-the-effect-of-gun-ownership-on-gun-homicide-rates">
+<h1>A Case Study: The Effect of Gun Ownership on Gun-Homicide Rates<a class="headerlink" href="#a-case-study-the-effect-of-gun-ownership-on-gun-homicide-rates" title="Permalink to this headline">#</a></h1>
+<p>We consider the problem of estimating the effect of gun
+ownership on the homicide rate. For this purpose, we estimate the following partially
+linear model</p>
+<div class="math notranslate nohighlight">
+\[
+ Y_{j,t} = \beta D_{j,(t-1)} + g(Z_{j,t}) + \epsilon_{j,t}.
+\]</div>
+<section id="data">
+<h2>Data<a class="headerlink" href="#data" title="Permalink to this headline">#</a></h2>
+<p><span class="math notranslate nohighlight">\(Y_{j,t}\)</span> is log homicide rate in county <span class="math notranslate nohighlight">\(j\)</span> at time <span class="math notranslate nohighlight">\(t\)</span>, <span class="math notranslate nohighlight">\(D_{j, t-1}\)</span> is log  fraction of suicides committed with a firearm in county <span class="math notranslate nohighlight">\(j\)</span> at time <span class="math notranslate nohighlight">\(t-1\)</span>, which we use as a proxy for gun ownership,  and  <span class="math notranslate nohighlight">\(Z_{j,t}\)</span> is a set of demographic and economic characteristics of county <span class="math notranslate nohighlight">\(j\)</span> at time <span class="math notranslate nohighlight">\(t\)</span>. The parameter <span class="math notranslate nohighlight">\(\beta\)</span> is the effect of gun ownership on the
+homicide rates, controlling for county-level demographic and economic characteristics.</p>
+<p>The sample covers 195 large United States counties between the years 1980 through 1999, giving us 3900 observations.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">Pkg</span>
+<span class="c"># Pkg.add(&quot;CSV&quot;), using CSV</span>
+<span class="c"># Pkg.add(&quot;DataFrames&quot;), using DataFrames</span>
+<span class="c"># Pkg.add(&quot;StatsModels&quot;), using StatsModels</span>
+<span class="c"># Pkg.add(&quot;GLM&quot;), using GLM</span>
+<span class="c"># Pkg.add(&quot;Random&quot;), using Random</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">Pkg</span><span class="p">,</span> <span class="n">CSV</span><span class="p">,</span> <span class="n">DataFrames</span><span class="p">,</span> <span class="n">StatsModels</span><span class="p">,</span> <span class="n">GLM</span><span class="p">,</span> <span class="n">Random</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">CSV</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="s">&quot;../data/gun_clean.csv&quot;</span><span class="p">)</span> <span class="o">|&gt;</span> <span class="n">DataFrame</span><span class="p">;</span>
+<span class="n">println</span><span class="p">(</span><span class="s">&quot;Number of rows: &quot;</span><span class="p">,</span><span class="n">size</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">println</span><span class="p">(</span><span class="s">&quot;Number of columns: &quot;</span><span class="p">,</span><span class="n">size</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="preprocessing">
+<h3>Preprocessing<a class="headerlink" href="#preprocessing" title="Permalink to this headline">#</a></h3>
+<p>To account for heterogeneity across counties and time trends in  all variables, we remove from them county-specific and time-specific effects in the following preprocessing.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c">#################################  Find Variable Names from Dataset ########################</span>
+
+<span class="k">function</span> <span class="n">varlist</span><span class="p">(</span><span class="n">df</span> <span class="o">=</span> <span class="nb">nothing</span> <span class="p">,</span> <span class="n">type_dataframe</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;numeric&quot;</span><span class="p">,</span><span class="s">&quot;categorical&quot;</span><span class="p">,</span><span class="s">&quot;string&quot;</span><span class="p">],</span> <span class="n">pattern</span><span class="o">=</span><span class="kt">String</span> <span class="p">,</span> <span class="n">exclude</span> <span class="o">=</span>  <span class="nb">nothing</span><span class="p">)</span>
+
+    <span class="n">varrs</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="s">&quot;numeric&quot;</span> <span class="k">in</span> <span class="n">type_dataframe</span>
+        <span class="n">append!</span><span class="p">(</span><span class="n">varrs</span><span class="p">,</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="n">names</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="k">if</span> <span class="n">eltype</span><span class="p">(</span><span class="n">eachcol</span><span class="p">(</span><span class="n">data</span><span class="p">)[</span><span class="n">i</span><span class="p">])</span> <span class="o">&lt;:</span> <span class="kt">Number</span><span class="p">])</span>    
+    <span class="k">end</span>
+    <span class="k">if</span> <span class="s">&quot;categorical&quot;</span> <span class="k">in</span> <span class="n">type_dataframe</span>
+        <span class="n">append!</span><span class="p">(</span><span class="n">varrs</span><span class="p">,[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="n">names</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="k">if</span> <span class="n">eltype</span><span class="p">(</span><span class="n">eachcol</span><span class="p">(</span><span class="n">data</span><span class="p">)[</span><span class="n">i</span><span class="p">])</span> <span class="o">&lt;:</span> <span class="kt">CategoricalVector</span><span class="p">])</span>
+    <span class="k">end</span>
+    <span class="k">if</span> <span class="s">&quot;string&quot;</span> <span class="k">in</span> <span class="n">type_dataframe</span>
+        <span class="n">append!</span><span class="p">(</span><span class="n">varrs</span><span class="p">,[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="n">names</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="k">if</span> <span class="n">eltype</span><span class="p">(</span><span class="n">eachcol</span><span class="p">(</span><span class="n">data</span><span class="p">)[</span><span class="n">i</span><span class="p">])</span> <span class="o">&lt;:</span> <span class="kt">String</span><span class="p">])</span>
+    <span class="k">end</span>
+    <span class="n">varrs</span><span class="p">[(</span><span class="o">!</span><span class="n">varrs</span> <span class="k">in</span> <span class="n">exclude</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">varrs</span><span class="p">[</span><span class="n">findall</span><span class="p">(</span><span class="n">x</span><span class="o">-&gt;</span><span class="n">contains</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">pattern</span><span class="p">),</span><span class="n">names</span><span class="p">(</span><span class="n">data</span><span class="p">))]]</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>varlist (generic function with 5 methods)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c">################################# Create Variables ###############################</span>
+
+<span class="c"># Dummy Variables for Year and County Fixed Effects</span>
+<span class="n">fixed</span> <span class="o">=</span> <span class="n">filter</span><span class="p">(</span><span class="n">x</span><span class="o">-&gt;</span><span class="n">contains</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s">&quot;X_Jfips&quot;</span><span class="p">),</span> <span class="n">names</span><span class="p">(</span><span class="n">data</span><span class="p">));</span>
+<span class="n">year</span> <span class="o">=</span> <span class="n">filter</span><span class="p">(</span><span class="n">x</span><span class="o">-&gt;</span><span class="n">contains</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s">&quot;X_Tyear&quot;</span><span class="p">),</span> <span class="n">names</span><span class="p">(</span><span class="n">data</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">census</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">census_var</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;AGE&quot;</span><span class="p">,</span> <span class="s">&quot;BN&quot;</span><span class="p">,</span> <span class="s">&quot;BP&quot;</span><span class="p">,</span> <span class="s">&quot;BZ&quot;</span><span class="p">,</span> <span class="s">&quot;ED&quot;</span><span class="p">,</span> <span class="s">&quot;EL&quot;</span><span class="p">,</span> <span class="s">&quot;HI&quot;</span><span class="p">,</span> <span class="s">&quot;HS&quot;</span><span class="p">,</span> <span class="s">&quot;INC&quot;</span><span class="p">,</span> <span class="s">&quot;LF&quot;</span><span class="p">,</span> <span class="s">&quot;LN&quot;</span><span class="p">,</span> <span class="s">&quot;PI&quot;</span><span class="p">,</span> <span class="s">&quot;PO&quot;</span><span class="p">,</span> <span class="s">&quot;PP&quot;</span><span class="p">,</span> <span class="s">&quot;PV&quot;</span><span class="p">,</span> <span class="s">&quot;SPR&quot;</span><span class="p">,</span> <span class="s">&quot;VS&quot;</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="n">size</span><span class="p">(</span><span class="n">census_var</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> 
+    <span class="n">append!</span><span class="p">(</span><span class="n">census</span><span class="p">,</span> <span class="n">filter</span><span class="p">(</span><span class="n">x</span><span class="o">-&gt;</span><span class="n">contains</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">census_var</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span> <span class="n">names</span><span class="p">(</span><span class="n">data</span><span class="p">)))</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c">################################ Variables ##################################</span>
+
+<span class="c"># Treatment Variable</span>
+<span class="n">d</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;logfssl&quot;</span><span class="p">];</span>
+
+<span class="c"># Outcome Variable</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;logghomr&quot;</span><span class="p">];</span>
+
+<span class="c"># Other Control Variables</span>
+<span class="n">X1</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;logrobr&quot;</span><span class="p">,</span> <span class="s">&quot;logburg&quot;</span><span class="p">,</span> <span class="s">&quot;burg_missing&quot;</span><span class="p">,</span> <span class="s">&quot;robrate_missing&quot;</span><span class="p">];</span>
+<span class="n">X2</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;newblack&quot;</span><span class="p">,</span> <span class="s">&quot;newfhh&quot;</span><span class="p">,</span> <span class="s">&quot;newmove&quot;</span><span class="p">,</span> <span class="s">&quot;newdens&quot;</span><span class="p">,</span> <span class="s">&quot;newmal&quot;</span><span class="p">];</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c">#################################  Partial out Fixed Effects ########################</span>
+
+<span class="c"># Variables to be Partialled-out</span>
+<span class="n">variable</span> <span class="o">=</span> <span class="p">[</span><span class="n">y</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span><span class="n">X1</span><span class="p">,</span> <span class="n">X2</span><span class="p">,</span> <span class="n">census</span><span class="p">]</span>
+<span class="n">varlis</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c"># Partial out Variables in varlist from year and county fixed effect</span>
+<span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="n">variable</span>
+    <span class="n">append!</span><span class="p">(</span><span class="n">varlis</span><span class="p">,</span><span class="n">i</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Running the following lines takes aprox. 10 minutes (depends on your CPU)</span>
+
+<span class="n">example</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">(</span><span class="n">CountyCode</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="s">&quot;CountyCode&quot;</span><span class="p">]);</span>
+<span class="n">rdata</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">(</span><span class="n">CountyCode</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="s">&quot;CountyCode&quot;</span><span class="p">]);</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="n">size</span><span class="p">(</span><span class="n">varlis</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">rdata</span><span class="p">[</span><span class="o">!</span><span class="p">,</span><span class="n">varlis</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span><span class="o">=</span> <span class="n">residuals</span><span class="p">(</span><span class="n">lm</span><span class="p">(</span><span class="n">term</span><span class="p">(</span><span class="kt">Symbol</span><span class="p">(</span><span class="n">varlis</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span> <span class="o">~</span> <span class="n">sum</span><span class="p">(</span><span class="n">term</span><span class="o">.</span><span class="p">(</span><span class="kt">Symbol</span><span class="o">.</span><span class="p">(</span><span class="n">year</span><span class="p">)))</span> <span class="o">+</span> <span class="n">sum</span><span class="p">(</span><span class="n">term</span><span class="o">.</span><span class="p">(</span><span class="kt">Symbol</span><span class="o">.</span><span class="p">(</span><span class="n">fixed</span><span class="p">))),</span> <span class="n">data</span><span class="p">))</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">first</span><span class="p">(</span><span class="n">rdata</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div class="data-frame"><p>6 rows × 198 columns (omitted printing of 191 columns)</p><table class="data-frame"><thead><tr><th></th><th>CountyCode</th><th>logghomr</th><th>logfssl</th><th>logrobr</th><th>logburg</th><th>burg_missing</th><th>robrate_missing</th></tr><tr><th></th><th title="Int64">Int64</th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th></tr></thead><tbody><tr><th>1</th><td>1073</td><td>-0.134778</td><td>0.0961271</td><td>0.150893</td><td>-0.124395</td><td>0.0104613</td><td>-0.021229</td></tr><tr><th>2</th><td>1073</td><td>-0.239622</td><td>0.0808094</td><td>0.0401683</td><td>-0.134781</td><td>0.0104613</td><td>-0.0194181</td></tr><tr><th>3</th><td>1073</td><td>-0.0786772</td><td>0.0573399</td><td>-0.017679</td><td>-0.167909</td><td>0.0104613</td><td>-0.0220374</td></tr><tr><th>4</th><td>1073</td><td>-0.331465</td><td>0.0816945</td><td>-0.00963344</td><td>-0.22925</td><td>0.0104613</td><td>-0.0194181</td></tr><tr><th>5</th><td>1073</td><td>-0.31664</td><td>0.0253655</td><td>-0.0267151</td><td>-0.176635</td><td>0.00324793</td><td>-0.0208037</td></tr><tr><th>6</th><td>1073</td><td>0.105132</td><td>-0.00677726</td><td>-0.151487</td><td>-0.189069</td><td>0.0104613</td><td>0.016953</td></tr></tbody></table></div></div></div>
+</div>
+</section>
+</section>
+<section id="we-check-that-our-results-are-equal-to-r-results-at-6-decimals">
+<h2>We check that our results are equal to R results at 6 decimals<a class="headerlink" href="#we-check-that-our-results-are-equal-to-r-results-at-6-decimals" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># load dataset</span>
+<span class="n">rdata_read</span> <span class="o">=</span> <span class="n">CSV</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="s">&quot;../data/gun_clean2.csv&quot;</span><span class="p">)</span> <span class="o">|&gt;</span> <span class="n">DataFrame</span>
+<span class="n">data_1</span> <span class="o">=</span> <span class="n">rdata_read</span><span class="p">[</span><span class="o">!</span><span class="p">,</span> <span class="n">names</span><span class="p">(</span><span class="n">rdata</span><span class="p">)]</span>
+<span class="n">n</span> <span class="o">=</span> <span class="n">size</span><span class="p">(</span><span class="n">data_1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3900
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">column_names</span> <span class="o">=</span> <span class="n">names</span><span class="p">(</span><span class="n">data_1</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="n">size</span><span class="p">(</span><span class="n">data_1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="n">size</span><span class="p">(</span><span class="n">data_1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">data_1</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">round</span><span class="p">(</span><span class="n">data_1</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">],</span> <span class="n">digits</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+        <span class="n">rdata</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">round</span><span class="p">(</span><span class="n">rdata</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">],</span> <span class="n">digits</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="k">for</span> <span class="n">col</span> <span class="k">in</span> <span class="n">column_names</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">sum</span><span class="p">(</span><span class="n">data_1</span><span class="p">[</span><span class="o">!</span><span class="p">,</span><span class="n">col</span><span class="p">]</span> <span class="o">.==</span> <span class="n">rdata</span><span class="p">[</span><span class="o">!</span><span class="p">,</span><span class="n">col</span><span class="p">])</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Column CountyCode are equal at 6 decimals
+Column logghomr are equal at 6 decimals
+Column logfssl are equal at 6 decimals
+Column logrobr are equal at 6 decimals
+Column logburg are equal at 6 decimals
+Column burg_missing are equal at 6 decimals
+Column robrate_missing are equal at 6 decimals
+Column newblack are equal at 6 decimals
+Column newfhh are equal at 6 decimals
+Column newmove are equal at 6 decimals
+Column newdens are equal at 6 decimals
+Column newmal are equal at 6 decimals
+Column AGE010D are equal at 6 decimals
+Column AGE050D are equal at 6 decimals
+Column AGE110D are equal at 6 decimals
+Column AGE170D are equal at 6 decimals
+Column AGE180D are equal at 6 decimals
+Column AGE270D are equal at 6 decimals
+Column AGE310D are equal at 6 decimals
+Column AGE320D are equal at 6 decimals
+Column AGE350D are equal at 6 decimals
+Column AGE380D are equal at 6 decimals
+Column AGE410D are equal at 6 decimals
+Column AGE470D are equal at 6 decimals
+Column AGE570D are equal at 6 decimals
+Column AGE640D are equal at 6 decimals
+Column AGE670D are equal at 6 decimals
+Column AGE760D are equal at 6 decimals
+Column BNK010D are equal at 6 decimals
+Column BNK050D are equal at 6 decimals
+Column BPS030D are equal at 6 decimals
+Column BPS130D are equal at 6 decimals
+Column BPS230D are equal at 6 decimals
+Column BPS020D are equal at 6 decimals
+Column BPS120D are equal at 6 decimals
+Column BPS220D are equal at 6 decimals
+Column BPS820D are equal at 6 decimals
+Column BZA010D are equal at 6 decimals
+Column BZA110D are equal at 6 decimals
+Column BZA210D are equal at 6 decimals
+Column EDU100D are equal at 6 decimals
+Column EDU200D are equal at 6 decimals
+Column EDU600D are equal at 6 decimals
+Column EDU610D are equal at 6 decimals
+Column EDU620D are equal at 6 decimals
+Column EDU630D are equal at 6 decimals
+Column EDU635D are equal at 6 decimals
+Column EDU640D are equal at 6 decimals
+Column EDU650D are equal at 6 decimals
+Column EDU680D are equal at 6 decimals
+Column EDU685D are equal at 6 decimals
+Column ELE010D are equal at 6 decimals
+Column ELE020D are equal at 6 decimals
+Column ELE025D are equal at 6 decimals
+Column ELE030D are equal at 6 decimals
+Column ELE035D are equal at 6 decimals
+Column ELE060D are equal at 6 decimals
+Column ELE065D are equal at 6 decimals
+Column ELE210D are equal at 6 decimals
+Column ELE220D are equal at 6 decimals
+Column HIS010D are equal at 6 decimals
+Column HIS020D are equal at 6 decimals
+Column HIS030D are equal at 6 decimals
+Column HIS040D are equal at 6 decimals
+Column HIS110D are equal at 6 decimals
+Column HIS120D are equal at 6 decimals
+Column HIS130D are equal at 6 decimals
+Column HIS140D are equal at 6 decimals
+Column HIS200D are equal at 6 decimals
+Column HIS300D are equal at 6 decimals
+Column HIS500D are equal at 6 decimals
+Column HIS700D are equal at 6 decimals
+Column HSD010D are equal at 6 decimals
+Column HSD020D are equal at 6 decimals
+Column HSD030D are equal at 6 decimals
+Column HSD110D are equal at 6 decimals
+Column HSD120D are equal at 6 decimals
+Column HSD130D are equal at 6 decimals
+Column HSD140D are equal at 6 decimals
+Column HSD150D are equal at 6 decimals
+Column HSD170D are equal at 6 decimals
+Column HSD200D are equal at 6 decimals
+Column HSD210D are equal at 6 decimals
+Column HSD230D are equal at 6 decimals
+Column HSD300D are equal at 6 decimals
+Column HSD310D are equal at 6 decimals
+Column HSG030D are equal at 6 decimals
+Column HSG195D are equal at 6 decimals
+Column HSG200D are equal at 6 decimals
+Column HSG220D are equal at 6 decimals
+Column HSG440D are equal at 6 decimals
+Column HSG445D are equal at 6 decimals
+Column HSG460D are equal at 6 decimals
+Column HSG680D are equal at 6 decimals
+Column HSG700D are equal at 6 decimals
+Column HSD410D are equal at 6 decimals
+Column HSD500D are equal at 6 decimals
+Column HSD510D are equal at 6 decimals
+Column HSD520D are equal at 6 decimals
+Column HSD530D are equal at 6 decimals
+Column HSD540D are equal at 6 decimals
+Column HSD550D are equal at 6 decimals
+Column HSD560D are equal at 6 decimals
+Column HSD570D are equal at 6 decimals
+Column HSD580D are equal at 6 decimals
+Column HSD590D are equal at 6 decimals
+Column HSD610D are equal at 6 decimals
+Column HSD620D are equal at 6 decimals
+Column HSD710D are equal at 6 decimals
+Column HSD720D are equal at 6 decimals
+Column HSD730D are equal at 6 decimals
+Column HSD740D are equal at 6 decimals
+Column HSD750D are equal at 6 decimals
+Column HSD760D are equal at 6 decimals
+Column HSD770D are equal at 6 decimals
+Column HSD780D are equal at 6 decimals
+Column HSG040D are equal at 6 decimals
+Column HSG045D are equal at 6 decimals
+Column HSG050D are equal at 6 decimals
+Column HSG182D are equal at 6 decimals
+Column HSG210D are equal at 6 decimals
+Column HSG230D are equal at 6 decimals
+Column HSG240D are equal at 6 decimals
+Column HSG250D are equal at 6 decimals
+Column HSG310D are equal at 6 decimals
+Column HSG315D are equal at 6 decimals
+Column HSG320D are equal at 6 decimals
+Column HSG325D are equal at 6 decimals
+Column HSG335D are equal at 6 decimals
+Column HSG350D are equal at 6 decimals
+Column HSG370D are equal at 6 decimals
+Column HSG375D are equal at 6 decimals
+Column HSG380D are equal at 6 decimals
+Column HSG450D are equal at 6 decimals
+Column HSG490D are equal at 6 decimals
+Column HSG500D are equal at 6 decimals
+Column HSG510D are equal at 6 decimals
+Column HSG520D are equal at 6 decimals
+Column HSG530D are equal at 6 decimals
+Column HSG540D are equal at 6 decimals
+Column HSG550D are equal at 6 decimals
+Column HSG560D are equal at 6 decimals
+Column HSG570D are equal at 6 decimals
+Column HSG650D are equal at 6 decimals
+Column HSG690D are equal at 6 decimals
+Column HSG710D are equal at 6 decimals
+Column HSG730D are equal at 6 decimals
+Column INC110D are equal at 6 decimals
+Column INC650D are equal at 6 decimals
+Column INC670D are equal at 6 decimals
+Column INC680D are equal at 6 decimals
+Column INC690D are equal at 6 decimals
+Column INC700D are equal at 6 decimals
+Column INC710D are equal at 6 decimals
+Column INC720D are equal at 6 decimals
+Column INC730D are equal at 6 decimals
+Column INC760D are equal at 6 decimals
+Column INC790D are equal at 6 decimals
+Column LFE020D are equal at 6 decimals
+Column LFE023D are equal at 6 decimals
+Column LFE030D are equal at 6 decimals
+Column LFE080D are equal at 6 decimals
+Column LFE090D are equal at 6 decimals
+Column LFE210D are equal at 6 decimals
+Column LFE220D are equal at 6 decimals
+Column LND110D are equal at 6 decimals
+Column PIN020D are equal at 6 decimals
+Column POP110D are equal at 6 decimals
+Column POP210D are equal at 6 decimals
+Column POP240D are equal at 6 decimals
+Column POP440D are equal at 6 decimals
+Column POP450D are equal at 6 decimals
+Column POP470D are equal at 6 decimals
+Column POP480D are equal at 6 decimals
+Column POP540D are equal at 6 decimals
+Column POP550D are equal at 6 decimals
+Column POP570D are equal at 6 decimals
+Column POP580D are equal at 6 decimals
+Column POP700D are equal at 6 decimals
+Column POP710D are equal at 6 decimals
+Column POP720D are equal at 6 decimals
+Column POP740D are equal at 6 decimals
+Column PPQ010D are equal at 6 decimals
+Column PPQ100D are equal at 6 decimals
+Column PPQ110D are equal at 6 decimals
+Column PPQ120D are equal at 6 decimals
+Column PVY020D are equal at 6 decimals
+Column PVY120D are equal at 6 decimals
+Column PVY210D are equal at 6 decimals
+Column PVY310D are equal at 6 decimals
+Column PVY420D are equal at 6 decimals
+Column PVY520D are equal at 6 decimals
+Column SPR030D are equal at 6 decimals
+Column SPR130D are equal at 6 decimals
+Column SPR230D are equal at 6 decimals
+Column SPR330D are equal at 6 decimals
+Column SPR440D are equal at 6 decimals
+Column VST020D are equal at 6 decimals
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, we can construct the treatment variable, the outcome variable and the matrix <span class="math notranslate nohighlight">\(Z\)</span> that includes the control variables.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Treatment variable</span>
+<span class="n">D</span> <span class="o">=</span> <span class="n">rdata</span><span class="p">[</span><span class="o">!</span><span class="p">,</span><span class="n">d</span><span class="p">]</span>
+
+<span class="c"># Outcome variable</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">rdata</span><span class="p">[</span><span class="o">!</span><span class="p">,</span><span class="n">y</span><span class="p">];</span>
+
+<span class="c"># Construct matrix Z</span>
+<span class="n">Z</span> <span class="o">=</span> <span class="n">rdata</span><span class="p">[</span><span class="o">!</span><span class="p">,</span> <span class="n">varlis</span><span class="p">[</span><span class="mi">3</span><span class="o">:</span><span class="k">end</span><span class="p">]];</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We have in total 195 control variables. The control variables <span class="math notranslate nohighlight">\(Z_{j,t}\)</span> are from the U.S. Census Bureau and  contain demographic and economic characteristics of the counties such as  the age distribution, the income distribution, crime rates, federal spending, home ownership rates, house prices, educational attainment, voting paterns, employment statistics, and migration rates.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">clu</span> <span class="o">=</span> <span class="n">select</span><span class="p">(</span><span class="n">rdata</span><span class="p">,</span><span class="ss">:CountyCode</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">hcat</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span><span class="n">D</span><span class="p">,</span><span class="n">Z</span><span class="p">,</span><span class="n">clu</span><span class="p">);</span>
+<span class="n">first</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div class="data-frame"><p>6 rows × 198 columns (omitted printing of 192 columns)</p><table class="data-frame"><thead><tr><th></th><th>logghomr</th><th>logfssl</th><th>logrobr</th><th>logburg</th><th>burg_missing</th><th>robrate_missing</th></tr><tr><th></th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th></tr></thead><tbody><tr><th>1</th><td>-0.134778</td><td>0.0961271</td><td>0.150893</td><td>-0.124395</td><td>0.0104613</td><td>-0.021229</td></tr><tr><th>2</th><td>-0.239622</td><td>0.0808094</td><td>0.0401683</td><td>-0.134781</td><td>0.0104613</td><td>-0.0194181</td></tr><tr><th>3</th><td>-0.0786772</td><td>0.0573399</td><td>-0.017679</td><td>-0.167909</td><td>0.0104613</td><td>-0.0220374</td></tr><tr><th>4</th><td>-0.331465</td><td>0.0816945</td><td>-0.00963344</td><td>-0.22925</td><td>0.0104613</td><td>-0.0194181</td></tr><tr><th>5</th><td>-0.31664</td><td>0.0253655</td><td>-0.0267151</td><td>-0.176635</td><td>0.00324793</td><td>-0.0208037</td></tr><tr><th>6</th><td>0.105132</td><td>-0.00677726</td><td>-0.151487</td><td>-0.189069</td><td>0.0104613</td><td>0.016953</td></tr></tbody></table></div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">size</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">size</span><span class="p">(</span><span class="n">rdata</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((3900, 198), (3900, 198))
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="the-effect-of-gun-ownership">
+<h2>The effect of gun ownership<a class="headerlink" href="#the-effect-of-gun-ownership" title="Permalink to this headline">#</a></h2>
+<section id="ols">
+<h3>OLS<a class="headerlink" href="#ols" title="Permalink to this headline">#</a></h3>
+<p>After preprocessing the data, we first look at simple regression of <span class="math notranslate nohighlight">\(Y_{j,t}\)</span> on <span class="math notranslate nohighlight">\(D_{j,t-1}\)</span> without controls as a baseline model.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">FixedEffectModels</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># OLS clustering at the County level</span>
+
+<span class="n">fm_1</span> <span class="o">=</span> <span class="nd">@formula</span><span class="p">(</span><span class="n">logghomr</span> <span class="o">~</span> <span class="mi">0</span> <span class="o">+</span> <span class="n">logfssl</span> <span class="o">+</span> <span class="n">fe</span><span class="p">(</span><span class="n">CountyCode</span><span class="p">))</span>
+<span class="n">baseline_ols</span> <span class="o">=</span> <span class="n">reg</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">fm_1</span><span class="p">,</span> <span class="n">Vcov</span><span class="o">.</span><span class="n">cluster</span><span class="p">(</span><span class="ss">:CountyCode</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                        Fixed Effect Model                        
+==================================================================
+Number of obs:              3900  Degrees of freedom:            2
+R2:                        0.006  R2 Adjusted:               0.006
+F-Stat:                  18.9732  p-value:                   0.000
+R2 within:                 0.006  Iterations:                    1
+==================================================================
+logghomr | Estimate Std.Error t value Pr(&gt;|t|) Lower 95% Upper 95%
+------------------------------------------------------------------
+logfssl  | 0.282304 0.0648108 4.35582    0.000  0.155238  0.409371
+==================================================================
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">println</span><span class="p">(</span><span class="s">&quot;2.5% : &quot;</span><span class="p">,</span> <span class="n">GLM</span><span class="o">.</span><span class="n">coeftable</span><span class="p">(</span><span class="n">baseline_ols</span><span class="p">)</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>
+<span class="n">println</span><span class="p">(</span><span class="s">&quot;97.5% : &quot;</span> <span class="p">,</span> <span class="n">GLM</span><span class="o">.</span><span class="n">coeftable</span><span class="p">(</span><span class="n">baseline_ols</span><span class="p">)</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="mi">6</span><span class="p">])</span>
+<span class="n">println</span><span class="p">(</span><span class="s">&quot;Estimate: &quot;</span><span class="p">,</span> <span class="n">GLM</span><span class="o">.</span><span class="n">coeftable</span><span class="p">(</span><span class="n">baseline_ols</span><span class="p">)</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">println</span><span class="p">(</span><span class="s">&quot;Cluster s.e. : &quot;</span> <span class="p">,</span> <span class="n">GLM</span><span class="o">.</span><span class="n">r2</span><span class="p">(</span><span class="n">baseline_ols</span><span class="p">))</span>
+<span class="n">println</span><span class="p">(</span><span class="s">&quot;T-value : &quot;</span><span class="p">,</span> <span class="n">GLM</span><span class="o">.</span><span class="n">coeftable</span><span class="p">(</span><span class="n">baseline_ols</span><span class="p">)</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+<span class="n">println</span><span class="p">(</span><span class="s">&quot;Pr(&gt;|t|) : &quot;</span> <span class="p">,</span> <span class="n">GLM</span><span class="o">.</span><span class="n">coeftable</span><span class="p">(</span><span class="n">baseline_ols</span><span class="p">)</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.5% : [0.15523818202545506]
+97.5% : [0.40937075124096944]
+Estimate: [0.28230446663321224]
+Cluster s.e. : 0.006193263836883567
+T-value : [4.355824585575914]
+Pr(&gt;|t|) : [1.3597670123818405e-5]
+</pre></div>
+</div>
+</div>
+</div>
+<p>The point estimate is <span class="math notranslate nohighlight">\(0.282\)</span> with the confidence interval ranging from 0.167 to 0.397. This
+suggests that increases in gun ownership rates are related to gun homicide rates - if gun ownership increases by 1% relative
+to a trend then the predicted gun homicide rate goes up by 0.28%, without controlling for counties’ characteristics.</p>
+<p>Since our goal is to estimate the effect of gun ownership after controlling for a rich set county characteristics we next include the controls. First, we estimate the model by ols and then by an array of the modern regression methods using the double machine learning approach.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">control_formula</span> <span class="o">=</span> <span class="n">term</span><span class="p">(</span><span class="ss">:logghomr</span><span class="p">)</span> <span class="o">~</span> <span class="n">term</span><span class="p">(</span><span class="ss">:logfssl</span><span class="p">)</span> <span class="o">+</span> <span class="n">sum</span><span class="p">(</span><span class="n">term</span><span class="o">.</span><span class="p">(</span><span class="kt">Symbol</span><span class="o">.</span><span class="p">(</span><span class="n">names</span><span class="p">(</span><span class="n">Z</span><span class="p">))))</span> <span class="o">+</span> <span class="n">fe</span><span class="p">(</span><span class="ss">:CountyCode</span><span class="p">)</span>
+<span class="n">control_ols</span> <span class="o">=</span> <span class="n">reg</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">control_formula</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                                Fixed Effect Model                                
+===================================================================================
+Number of obs:                      3900   Degrees of freedom:                  375
+R2:                                0.203   R2 Adjusted:                       0.118
+F-Stat:                            4.987   p-value:                           0.000
+R2 within:                         0.203   Iterations:                            1
+===================================================================================
+logghomr        |    Estimate Std.Error    t value Pr(&gt;|t|)  Lower 95%    Upper 95%
+-----------------------------------------------------------------------------------
+logfssl         |    0.190645 0.0578919    3.29312    0.001  0.0771399      0.30415
+logrobr         |    0.189046 0.0439522    4.30118    0.000   0.102872     0.275221
+logburg         |    0.219263  0.062191    3.52564    0.000  0.0973288     0.341197
+burg_missing    |     1.52961  0.452901    3.37737    0.001   0.641639      2.41759
+robrate_missing |     1.13308  0.258481     4.3836    0.000    0.62629      1.63987
+newblack        |    -4.34622   1.01668   -4.27492    0.000   -6.33956     -2.35288
+newfhh          |     7.71732   6.39769    1.20627    0.228   -4.82622      20.2609
+newmove         |     42.1106   28.0383     1.5019    0.133   -12.8624      97.0836
+newdens         |    -2.40488   1.53413   -1.56758    0.117   -5.41276     0.602998
+newmal          |     0.61169    0.2731     2.2398    0.025   0.076239      1.14714
+AGE010D         |    -31.0998   46.3537  -0.670924    0.502   -121.983       59.783
+AGE050D         |      10.427   5.60406    1.86062    0.063  -0.560503      21.4146
+AGE110D         |    -6.45862   4.34915   -1.48503    0.138   -14.9857      2.06849
+AGE170D         |    -6.44631   4.56503   -1.41211    0.158   -15.3967      2.50406
+AGE180D         |    -11.5315    14.482   -0.79626    0.426   -39.9255      16.8625
+AGE270D         |      35.655   20.0702    1.77651    0.076   -3.69538      75.0054
+AGE310D         |     19.3837   25.0502   0.773796    0.439   -29.7306      68.4981
+AGE320D         |     1.58818   1.50379    1.05612    0.291   -1.36021      4.53658
+AGE350D         |    -9.33085   12.9579  -0.720089    0.472   -34.7366      16.0749
+AGE380D         |     27.1384   26.3214    1.03104    0.303   -24.4684      78.7452
+AGE410D         |    -9.26452   12.4292  -0.745381    0.456   -33.6337      15.1047
+AGE470D         |      5.1716   2.36612    2.18568    0.029    0.53249       9.8107
+AGE570D         |     3.81806   1.91895    1.98966    0.047  0.0556927      7.58042
+AGE640D         |     1.96507   1.38588    1.41792    0.156  -0.752135      4.68228
+AGE670D         |    -1.72923   1.22096    -1.4163    0.157   -4.12309     0.664618
+AGE760D         |    0.811396   3.00505   0.270011    0.787   -5.08042      6.70321
+BNK010D         |  -0.0756996 0.0801789  -0.944134    0.345  -0.232901    0.0815022
+BNK050D         |   0.0185195 0.0748159   0.247534    0.805  -0.128167     0.165206
+BPS030D         |  -0.0670493   0.13632  -0.491852    0.623  -0.334323     0.200225
+BPS130D         |   0.0281751  0.141942   0.198497    0.843  -0.250122     0.306472
+BPS230D         |  -0.0730225 0.0672526   -1.08579    0.278  -0.204881    0.0588355
+BPS020D         |  -0.0832099 0.0854561  -0.973716    0.330  -0.250758    0.0843385
+BPS120D         |   0.0354868 0.0734394   0.483212    0.629  -0.108501     0.179475
+BPS220D         |   0.0676879 0.0405164    1.67063    0.095   -0.01175     0.147126
+BPS820D         |   0.0314011 0.0195249    1.60826    0.108 -0.0068801    0.0696823
+BZA010D         |    0.341185  0.306873    1.11181    0.266  -0.260481     0.942851
+BZA110D         |   -0.135647  0.128622   -1.05462    0.292  -0.387828     0.116534
+BZA210D         |  -0.0971895  0.175951  -0.552366    0.581  -0.442166     0.247787
+EDU100D         |         0.0       NaN        NaN      NaN        NaN          NaN
+EDU200D         |         0.0       NaN        NaN      NaN        NaN          NaN
+EDU600D         |    -50.6628   58.3172  -0.868745    0.385   -165.002      63.6761
+EDU610D         |   -0.428207   0.41455   -1.03294    0.302   -1.24099     0.384575
+EDU620D         |     1.10019  0.633071    1.73787    0.082  -0.141027      2.34142
+EDU630D         |     28.5177   54.5575   0.522708    0.601   -78.4499      135.485
+EDU635D         |    -22.7577   54.2392  -0.419581    0.675   -129.101      83.5857
+EDU640D         |    -1.00389   1.09485  -0.916915    0.359    -3.1505      1.14272
+EDU650D         |    -2.01891  0.978975   -2.06227    0.039   -3.93833   -0.0994954
+EDU680D         |    -8.05494   15.3721  -0.523999    0.600    -38.194      22.0841
+EDU685D         |     7.22624    15.337   0.471164    0.638    -22.844      37.2965
+ELE010D         |     16.0534   18.9389   0.847645    0.397   -21.0788      53.1857
+ELE020D         |     2.23734    13.631   0.164137    0.870   -24.4881      28.9628
+ELE025D         |    -2.56733   13.6226  -0.188462    0.851   -29.2762      24.1416
+ELE030D         |    -18.6684   13.0853   -1.42667    0.154   -44.3239      6.98717
+ELE035D         |     18.6815   13.0753    1.42877    0.153   -6.95434      44.3174
+ELE060D         |  0.00555417 0.0178076   0.311898    0.755 -0.0293602    0.0404685
+ELE065D         |   -0.014298 0.0210801  -0.678268    0.498 -0.0556284    0.0270325
+ELE210D         |   -0.329838  0.131981   -2.49913    0.012  -0.588606   -0.0710706
+ELE220D         | -0.00283513 0.0551682 -0.0513907    0.959     -0.111      0.10533
+HIS010D         |         0.0       NaN        NaN      NaN        NaN          NaN
+HIS020D         |     18.9167   10.7819    1.75448    0.079   -2.22272      40.0561
+HIS030D         |    -9.10581   5.23129   -1.74064    0.082   -19.3625      1.15084
+HIS040D         |    -9.42998   5.59639   -1.68501    0.092   -20.4025      1.54252
+HIS110D         |   -0.835275   0.42122   -1.98299    0.047   -1.66114  -0.00941463
+HIS120D         |   0.0609434   1.18955  0.0512323    0.959   -2.27133      2.39322
+HIS130D         |  -0.0268448 0.0991369  -0.270785    0.787  -0.221216     0.167527
+HIS140D         |   -0.143565   0.13609   -1.05492    0.292  -0.410388     0.123259
+HIS200D         |         0.0       NaN        NaN      NaN        NaN          NaN
+HIS300D         |         0.0       NaN        NaN      NaN        NaN          NaN
+HIS500D         |         0.0       NaN        NaN      NaN        NaN          NaN
+HIS700D         |         0.0       NaN        NaN      NaN        NaN          NaN
+HSD010D         |     76.4943   110.246    0.69385    0.488   -139.658      292.647
+HSD020D         |   -0.153102 0.0594808   -2.57397    0.010  -0.269722   -0.0364813
+HSD030D         |      5.6202   3.39774     1.6541    0.098   -1.04152      12.2819
+HSD110D         |     76.8705   69.7297    1.10241    0.270   -59.8442      213.585
+HSD120D         |    -17.7899   10.6873   -1.66459    0.096   -38.7437      3.16397
+HSD130D         |     -78.271    32.262    -2.4261    0.015   -141.525     -15.0169
+HSD140D         |     12.5449   8.17146    1.53521    0.125   -3.47632      28.5662
+HSD150D         |    -2.97057   2.16737   -1.37059    0.171      -7.22      1.27886
+HSD170D         |    -6.81635   5.60026   -1.21715    0.224   -17.7964      4.16372
+HSD200D         |    -58.9814   20.7961   -2.83617    0.005   -99.7551     -18.2078
+HSD210D         |     33.4968   11.8303    2.83143    0.005    10.3018      56.6918
+HSD230D         |    -3.18941   3.03845   -1.04968    0.294   -9.14671      2.76789
+HSD300D         |     11.7346   106.498   0.110186    0.912    -197.07      220.539
+HSD310D         |    -20.4372   20.0619   -1.01871    0.308   -59.7714       18.897
+HSG030D         |    -67.0834   81.6017  -0.822082    0.411   -227.075      92.9081
+HSG195D         |  -0.0667794  0.364696   -0.18311    0.855  -0.781817     0.648258
+HSG200D         |         0.0       NaN        NaN      NaN        NaN          NaN
+HSG220D         |    -1.36752   1.80298  -0.758478    0.448   -4.90252      2.16747
+HSG440D         |    -398.106   237.504   -1.67621    0.094   -863.765      67.5536
+HSG445D         |     64.7986   59.6396     1.0865    0.277    -52.133       181.73
+HSG460D         |     0.39361  0.819571   0.480263    0.631   -1.21327      2.00049
+HSG680D         |    -80.9783    114.06  -0.709961    0.478   -304.609      142.652
+HSG700D         |     1.19998   1.00046    1.19942    0.230  -0.761566      3.16152
+HSD410D         |    -33.7818   74.2015  -0.455271    0.649   -179.264        111.7
+HSD500D         |    -86.7182   70.9099   -1.22293    0.221   -225.747      52.3105
+HSD510D         |     96.7617   30.9344    3.12796    0.002    36.1106      157.413
+HSD520D         |    -8.16829   6.54038    -1.2489    0.212   -20.9916      4.65502
+HSD530D         |   -0.803146   6.52354  -0.123115    0.902   -13.5934      11.9872
+HSD540D         |      4.7532   2.64694    1.79574    0.073  -0.436486      9.94288
+HSD550D         |   -0.836034   1.01653  -0.822438    0.411   -2.82908      1.15701
+HSD560D         |   -0.343998   1.37207  -0.250714    0.802   -3.03414      2.34614
+HSD570D         |         0.0       NaN        NaN      NaN        NaN          NaN
+HSD580D         |     2.34596   2.04351      1.148    0.251   -1.66062      6.35253
+HSD590D         |     2.71956   1.44161    1.88647    0.059  -0.106914      5.54604
+HSD610D         |     28.2381   23.6197    1.19553    0.232   -18.0716      74.5478
+HSD620D         |    -31.3837    12.891   -2.43454    0.015   -56.6583     -6.10909
+HSD710D         |     41.6004   95.7404   0.434513    0.664   -146.112      229.313
+HSD720D         |         0.0       NaN        NaN      NaN        NaN          NaN
+HSD730D         |    -7.50721   8.94448  -0.839312    0.401   -25.0441      10.0297
+HSD740D         |    -14.6973   6.09608   -2.41094    0.016   -26.6495     -2.74511
+HSD750D         |    0.865632  0.399115    2.16888    0.030  0.0831119      1.64815
+HSD760D         |     12.9136   4.98484    2.59058    0.010    3.14016      22.6871
+HSD770D         |     14.3236   7.30444    1.96095    0.050 0.00226319       28.645
+HSD780D         |    -2.01614  0.862821   -2.33668    0.020   -3.70782    -0.324459
+HSG040D         |      61.085   82.7939   0.737796    0.461   -101.244      223.414
+HSG045D         |    0.225821  0.108449    2.08228    0.037  0.0131921     0.438451
+HSG050D         |         0.0       NaN        NaN      NaN        NaN          NaN
+HSG182D         |     331.042   220.275    1.50286    0.133   -100.838      762.922
+HSG210D         |     5.42601   1.90796    2.84388    0.004    1.68519      9.16683
+HSG230D         |         0.0       NaN        NaN      NaN        NaN          NaN
+HSG240D         |     13.3649   6.53496    2.04513    0.041   0.552168      26.1775
+HSG250D         |    0.117331  0.332084   0.353315    0.724  -0.533766     0.768428
+HSG310D         |    0.182678   0.33501   0.545291    0.586  -0.474155     0.839511
+HSG315D         |   0.0783361  0.156528   0.500461    0.617  -0.228558      0.38523
+HSG320D         |      0.1786  0.219242   0.814625    0.415  -0.251254     0.608453
+HSG325D         |  -0.0160287 0.0874834   -0.18322    0.855  -0.187552     0.155495
+HSG335D         |    0.077291  0.105222   0.734549    0.463  -0.129012     0.283594
+HSG350D         |   0.0525904 0.0497627    1.05682    0.291 -0.0449763     0.150157
+HSG370D         |    -1.06479  0.618502   -1.72156    0.085   -2.27745     0.147868
+HSG375D         |   -0.843125   1.53396   -0.54964    0.583   -3.85066      2.16441
+HSG380D         |    -2.10192   2.36916  -0.887201    0.375   -6.74699      2.54314
+HSG450D         |    0.202061  0.848067   0.238261    0.812   -1.46069      1.86481
+HSG490D         |    0.711425  0.433281    1.64195    0.101  -0.138081      1.56093
+HSG500D         |   0.0765713  0.161625   0.473759    0.636  -0.240316     0.393459
+HSG510D         |  -0.0546356  0.254196  -0.214934    0.830  -0.553023     0.443751
+HSG520D         |    0.339298  0.326444    1.03938    0.299   -0.30074     0.979337
+HSG530D         |   -0.489419  0.249349   -1.96278    0.050  -0.978302 -0.000535244
+HSG540D         |    0.391536  0.186473    2.09969    0.036  0.0259303     0.757142
+HSG550D         |   -0.178454  0.176789   -1.00942    0.313  -0.525073     0.168165
+HSG560D         |   0.0440896  0.212525   0.207456    0.836  -0.372596     0.460775
+HSG570D         |   -0.029629  0.157865  -0.187685    0.851  -0.339146     0.279888
+HSG650D         |    0.680951  0.830388   0.820039    0.412  -0.947139      2.30904
+HSG690D         |    -0.45285   1.06089  -0.426858    0.670   -2.53287      1.62717
+HSG710D         |     79.6322   113.831   0.699564    0.484   -143.549      302.814
+HSG730D         |   -0.923085  0.607052    -1.5206    0.128   -2.11329     0.267124
+INC110D         |    -1.23532   1.05831   -1.16725    0.243   -3.31028     0.839646
+INC650D         |   -0.644222  0.999919  -0.644275    0.519    -2.6047      1.31626
+INC670D         |   -0.170282  0.557046  -0.305688    0.760   -1.26245     0.921883
+INC680D         |   -0.591852  0.710938  -0.832494    0.405   -1.98574      0.80204
+INC690D         |    0.584595  0.780246   0.749244    0.454  -0.945185      2.11437
+INC700D         |    0.117036  0.740572   0.158035    0.874   -1.33496      1.56903
+INC710D         |    0.347172  0.888027   0.390947    0.696   -1.39393      2.08827
+INC720D         |    -1.70807  0.844535    -2.0225    0.043    -3.3639   -0.0522468
+INC730D         |    0.148319  0.951026   0.155957    0.876    -1.7163      2.01294
+INC760D         |     1.01734   0.74768    1.36067    0.174  -0.448585      2.48327
+INC790D         |   -0.665296  0.472569   -1.40783    0.159   -1.59183     0.261241
+LFE020D         |    -11.1221   6.71988    -1.6551    0.098   -24.2973      2.05319
+LFE023D         |     5.50736   5.57333   0.988163    0.323   -5.41992      16.4346
+LFE030D         |    0.192258 0.0815242     2.3583    0.018  0.0324188     0.352097
+LFE080D         |   -0.193538  0.682271  -0.283667    0.777   -1.53122      1.14415
+LFE090D         |    0.992654   3.18155   0.312003    0.755   -5.24521      7.23052
+LFE210D         |     2.53462   1.92188    1.31882    0.187    -1.2335      6.30274
+LFE220D         |    0.192318  0.556457   0.345611    0.730  -0.898692      1.28333
+LND110D         |   -0.953834   1.25919  -0.757499    0.449   -3.42265      1.51498
+PIN020D         |    0.238888  0.322375   0.741025    0.459  -0.393173     0.870949
+POP110D         |         0.0       NaN        NaN      NaN        NaN          NaN
+POP210D         |    -0.97205  0.862226   -1.12737    0.260   -2.66256     0.718462
+POP240D         |         0.0       NaN        NaN      NaN        NaN          NaN
+POP440D         |      -3.881   2.36789   -1.63901    0.101   -8.52357     0.761582
+POP450D         |     11.6363   8.56405    1.35874    0.174    -5.1547      28.4273
+POP470D         |    -3.53761   1.20799   -2.92852    0.003   -5.90604     -1.16919
+POP480D         |    -1.77262   1.34222   -1.32067    0.187   -4.40422     0.858975
+POP540D         |    -1.48071   2.19712  -0.673931    0.500   -5.78847      2.82705
+POP550D         |    -28.1907   10.8632   -2.59506    0.009   -49.4895     -6.89191
+POP570D         |    0.166538   1.84645  0.0901933    0.928   -3.45369      3.78677
+POP580D         |     2.25075    1.7154    1.31208    0.190   -1.11253      5.61403
+POP700D         |     44.3169   33.8678    1.30853    0.191   -22.0856      110.719
+POP710D         |    -13.1278    8.3321   -1.57557    0.115    -29.464      3.20843
+POP720D         |    0.891964  0.817457    1.09114    0.275  -0.710773       2.4947
+POP740D         |    0.406846  0.386029    1.05393    0.292  -0.350017      1.16371
+PPQ010D         |    -0.31431  0.402496  -0.780902    0.435   -1.10346     0.474839
+PPQ100D         |    0.490539  0.261388    1.87667    0.061 -0.0219473      1.00303
+PPQ110D         |         0.0       NaN        NaN      NaN        NaN          NaN
+PPQ120D         |         0.0       NaN        NaN      NaN        NaN          NaN
+PVY020D         |    -1.14716   2.74035  -0.418619    0.676      -6.52      4.22568
+PVY120D         |     2.03161   1.93462    1.05014    0.294   -1.76147      5.82469
+PVY210D         |    0.307278    0.5058   0.607508    0.544  -0.684413      1.29897
+PVY310D         |   -0.428341  0.849478   -0.50424    0.614   -2.09386      1.23718
+PVY420D         |    0.611491   1.82103   0.335794    0.737    -2.9589      4.18188
+PVY520D         |   -0.326862  0.690404  -0.473436    0.636   -1.68049      1.02677
+SPR030D         |   -0.500169  0.443742   -1.12716    0.260   -1.37019     0.369848
+SPR130D         |    -1.65748  0.831641   -1.99303    0.046   -3.28803   -0.0269365
+SPR230D         |     1.44839  0.797224     1.8168    0.069  -0.114674      3.01146
+SPR330D         |  -0.0336548  0.322708  -0.104289    0.917  -0.666369     0.599059
+SPR440D         |   -0.431825  0.293288   -1.47236    0.141   -1.00686     0.143207
+VST020D         |    0.532202  0.264856    2.00941    0.045  0.0129168      1.05149
+===================================================================================
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">println</span><span class="p">(</span><span class="s">&quot;For &lt;&lt;logfssl&gt;&gt; variable: &quot;</span><span class="p">)</span>
+<span class="n">println</span><span class="p">(</span><span class="s">&quot;2.5% : &quot;</span><span class="p">,</span> <span class="n">GLM</span><span class="o">.</span><span class="n">coeftable</span><span class="p">(</span><span class="n">control_ols</span><span class="p">)</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="mi">5</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">println</span><span class="p">(</span><span class="s">&quot;97.5% : &quot;</span> <span class="p">,</span> <span class="n">GLM</span><span class="o">.</span><span class="n">coeftable</span><span class="p">(</span><span class="n">control_ols</span><span class="p">)</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="mi">6</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">println</span><span class="p">(</span><span class="s">&quot;Estimate: &quot;</span><span class="p">,</span> <span class="n">GLM</span><span class="o">.</span><span class="n">coeftable</span><span class="p">(</span><span class="n">control_ols</span><span class="p">)</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">println</span><span class="p">(</span><span class="s">&quot;Cluster s.e. : &quot;</span> <span class="p">,</span> <span class="n">GLM</span><span class="o">.</span><span class="n">r2</span><span class="p">(</span><span class="n">control_ols</span><span class="p">))</span>
+<span class="n">println</span><span class="p">(</span><span class="s">&quot;T-value : &quot;</span><span class="p">,</span> <span class="n">GLM</span><span class="o">.</span><span class="n">coeftable</span><span class="p">(</span><span class="n">control_ols</span><span class="p">)</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">println</span><span class="p">(</span><span class="s">&quot;Pr(&gt;|t|) : &quot;</span> <span class="p">,</span> <span class="n">GLM</span><span class="o">.</span><span class="n">coeftable</span><span class="p">(</span><span class="n">control_ols</span><span class="p">)</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="mi">4</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>For &lt;&lt;logfssl&gt;&gt; variable: 
+2.5% : 0.07713994895431024
+97.5% : 0.3041501481690573
+Estimate: 0.19064504856168377
+Cluster s.e. : 0.20296825192995305
+T-value : 3.2931187658598318
+Pr(&gt;|t|) : 0.0010006039635811058
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="dml-algorithm">
+<h1>DML algorithm<a class="headerlink" href="#dml-algorithm" title="Permalink to this headline">#</a></h1>
+<p>Here we perform inference of the predictive coefficient <span class="math notranslate nohighlight">\(\beta\)</span> in our partially linear statistical model,</p>
+<div class="math notranslate nohighlight">
+\[
+Y = D\beta + g(Z) + \epsilon, \quad E (\epsilon | D, Z) = 0,
+\]</div>
+<p>using the <strong>double machine learning</strong> approach.</p>
+<p>For <span class="math notranslate nohighlight">\(\tilde Y = Y- E(Y|Z)\)</span> and <span class="math notranslate nohighlight">\(\tilde D= D- E(D|Z)\)</span>, we can write
+$<span class="math notranslate nohighlight">\(
+\tilde Y = \alpha \tilde D + \epsilon, \quad E (\epsilon |\tilde D) =0.
+\)</span>$</p>
+<p>Using cross-fitting, we employ modern regression methods
+to build estimators <span class="math notranslate nohighlight">\(\hat \ell(Z)\)</span> and <span class="math notranslate nohighlight">\(\hat m(Z)\)</span> of <span class="math notranslate nohighlight">\(\ell(Z):=E(Y|Z)\)</span> and <span class="math notranslate nohighlight">\(m(Z):=E(D|Z)\)</span> to obtain the estimates of the residualized quantities:</p>
+<div class="math notranslate nohighlight">
+\[
+\tilde Y_i = Y_i  - \hat \ell (Z_i),   \quad \tilde D_i = D_i - \hat m(Z_i), \quad \text{ for each } i = 1,\dots,n.
+\]</div>
+<p>Finally, using ordinary least squares of <span class="math notranslate nohighlight">\(\tilde Y_i\)</span> on <span class="math notranslate nohighlight">\(\tilde D_i\)</span>, we obtain the
+estimate of <span class="math notranslate nohighlight">\(\beta\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span>  <span class="n">MLDataUtils</span><span class="p">,</span> <span class="n">MLBase</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">DML2_for_PLM</span><span class="p">(</span><span class="n">z</span> <span class="p">,</span> <span class="n">d</span> <span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">dreg</span> <span class="p">,</span> <span class="n">yreg</span> <span class="p">,</span> <span class="n">nfold</span><span class="p">,</span> <span class="n">clu</span><span class="p">)</span>
+    
+    <span class="c"># Num ob observations</span>
+    <span class="n">nobser</span> <span class="o">=</span> <span class="n">size</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+    
+    <span class="c"># Define folds indices </span>
+    <span class="n">foldid</span> <span class="o">=</span> <span class="n">collect</span><span class="p">(</span><span class="n">Kfold</span><span class="p">(</span><span class="n">size</span><span class="p">(</span><span class="n">z</span><span class="p">)[</span><span class="mi">1</span><span class="p">],</span> <span class="n">nfold</span><span class="p">))</span>
+    
+    <span class="c"># Create array to save errors </span>
+    <span class="n">ytil</span> <span class="o">=</span> <span class="n">ones</span><span class="p">(</span><span class="n">nobser</span><span class="p">)</span>
+    <span class="n">dtil</span> <span class="o">=</span> <span class="n">ones</span><span class="p">(</span><span class="n">nobser</span><span class="p">)</span>
+    <span class="n">println</span><span class="p">(</span><span class="s">&quot;Folds: &quot;</span> <span class="p">)</span>
+    
+    <span class="c"># loop to save results</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="n">nfold</span>
+        
+        <span class="c"># Lasso regression, excluding folds selected </span>
+        <span class="n">dfit</span> <span class="o">=</span> <span class="n">dreg</span><span class="p">(</span><span class="n">z</span><span class="p">[</span><span class="n">foldid</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="o">:</span><span class="p">],</span> <span class="n">d</span><span class="p">[</span><span class="n">foldid</span><span class="p">[</span><span class="n">i</span><span class="p">]])</span>
+        <span class="n">yfit</span> <span class="o">=</span> <span class="n">yreg</span><span class="p">(</span><span class="n">z</span><span class="p">[</span><span class="n">foldid</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="o">:</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">foldid</span><span class="p">[</span><span class="n">i</span><span class="p">]])</span>
+        
+        <span class="c"># Predict estimates using the </span>
+        <span class="n">dhat</span> <span class="o">=</span> <span class="n">GLM</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">dfit</span><span class="p">,</span> <span class="n">z</span><span class="p">[</span><span class="n">Not</span><span class="p">(</span><span class="n">foldid</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span><span class="o">:</span><span class="p">])</span>
+        <span class="n">yhat</span> <span class="o">=</span> <span class="n">GLM</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">yfit</span><span class="p">,</span> <span class="n">z</span><span class="p">[</span><span class="n">Not</span><span class="p">(</span><span class="n">foldid</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span><span class="o">:</span><span class="p">])</span>
+        
+        <span class="c"># Save errors </span>
+        <span class="n">dtil</span><span class="p">[</span><span class="n">Not</span><span class="p">(</span><span class="n">foldid</span><span class="p">[</span><span class="n">i</span><span class="p">])]</span> <span class="o">=</span> <span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">Not</span><span class="p">(</span><span class="n">foldid</span><span class="p">[</span><span class="n">i</span><span class="p">])]</span> <span class="o">-</span> <span class="n">dhat</span><span class="p">)</span>
+        <span class="n">ytil</span><span class="p">[</span><span class="n">Not</span><span class="p">(</span><span class="n">foldid</span><span class="p">[</span><span class="n">i</span><span class="p">])]</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">Not</span><span class="p">(</span><span class="n">foldid</span><span class="p">[</span><span class="n">i</span><span class="p">])]</span> <span class="o">-</span> <span class="n">yhat</span><span class="p">)</span>
+        <span class="n">println</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">end</span>
+    
+    <span class="c"># Create dataframe </span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">(</span><span class="n">ytil</span> <span class="o">=</span> <span class="n">ytil</span><span class="p">,</span> <span class="n">dtil</span> <span class="o">=</span> <span class="n">dtil</span><span class="p">,</span> <span class="n">clu</span><span class="o">=</span><span class="n">clu</span><span class="p">)</span>
+    
+    <span class="c"># OLS clustering at the County level</span>
+    <span class="n">rfit</span> <span class="o">=</span> <span class="n">reg</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nd">@formula</span><span class="p">(</span><span class="n">ytil</span> <span class="o">~</span> <span class="n">dtil</span> <span class="o">+</span><span class="n">fe</span><span class="p">(</span><span class="n">clu</span><span class="p">)))</span>
+    <span class="n">coef_est</span> <span class="o">=</span> <span class="n">coef</span><span class="p">(</span><span class="n">rfit</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">se</span> <span class="o">=</span> <span class="n">FixedEffectModels</span><span class="o">.</span><span class="n">coeftable</span><span class="p">(</span><span class="n">rfit</span><span class="p">)</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+
+    <span class="n">println</span><span class="p">(</span><span class="s">&quot; coef (se) = &quot;</span><span class="p">,</span> <span class="n">coef_est</span> <span class="p">,</span><span class="s">&quot;(&quot;</span><span class="p">,</span><span class="n">se</span><span class="p">,</span><span class="s">&quot;)&quot;</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">rfit</span><span class="p">,</span> <span class="n">data</span><span class="p">;</span>
+    
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DML2_for_PLM (generic function with 1 method)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, we apply the Double Machine Learning (DML) approach with different machine learning methods. First, we load the relevant libraries.</p>
+<p>Let us, construct the input matrices.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Create main variables</span>
+<span class="n">z</span> <span class="o">=</span> <span class="kt">Matrix</span><span class="p">(</span><span class="n">Z</span><span class="p">);</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">D</span><span class="p">[</span><span class="o">!</span><span class="p">,</span><span class="mi">1</span><span class="p">];</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">Y</span><span class="p">[</span><span class="o">!</span><span class="p">,</span><span class="mi">1</span><span class="p">];</span>
+<span class="n">clu</span> <span class="o">=</span> <span class="n">rdata</span><span class="p">[</span><span class="o">!</span><span class="p">,</span> <span class="ss">:CountyCode</span><span class="p">];</span>
+<span class="n">first</span><span class="p">(</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">logghomr</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span><span class="n">logfssl</span> <span class="o">=</span> <span class="n">d</span><span class="p">,</span><span class="n">CountyCode</span> <span class="o">=</span> <span class="n">clu</span> <span class="p">),</span><span class="mi">6</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div class="data-frame"><p>6 rows × 3 columns</p><table class="data-frame"><thead><tr><th></th><th>logghomr</th><th>logfssl</th><th>CountyCode</th></tr><tr><th></th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Int64">Int64</th></tr></thead><tbody><tr><th>1</th><td>-0.134778</td><td>0.0961271</td><td>1073</td></tr><tr><th>2</th><td>-0.239622</td><td>0.0808094</td><td>1073</td></tr><tr><th>3</th><td>-0.0786772</td><td>0.0573399</td><td>1073</td></tr><tr><th>4</th><td>-0.331465</td><td>0.0816945</td><td>1073</td></tr><tr><th>5</th><td>-0.31664</td><td>0.0253655</td><td>1073</td></tr><tr><th>6</th><td>0.105132</td><td>-0.00677726</td><td>1073</td></tr></tbody></table></div></div></div>
+</div>
+<p>In the following, we apply the DML approach with the differnt versions of lasso.</p>
+<section id="lasso">
+<h2>Lasso<a class="headerlink" href="#lasso" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">Lasso</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Random</span><span class="o">.</span><span class="n">seed!</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span>
+<span class="n">dreg</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="n">d</span><span class="p">)</span> <span class="o">=</span> <span class="n">fit</span><span class="p">(</span><span class="n">LassoModel</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">standardize</span> <span class="o">=</span> <span class="nb">false</span><span class="p">)</span>
+<span class="n">yreg</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="o">=</span> <span class="n">fit</span><span class="p">(</span><span class="n">LassoModel</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">standardize</span> <span class="o">=</span> <span class="nb">false</span><span class="p">)</span>
+<span class="n">DML2_lasso</span> <span class="o">=</span> <span class="n">DML2_for_PLM</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">dreg</span><span class="p">,</span> <span class="n">yreg</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">clu</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Folds: 
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+ coef (se) = 0.21585895494601096([0.056923806335367456])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="hdm-jl">
+<h2>HDM.JL<a class="headerlink" href="#hdm-jl" title="Permalink to this headline">#</a></h2>
+<p>We are going to replicate the above regressions but using <code class="docutils literal notranslate"><span class="pre">hmd</span></code> library.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">include</span><span class="p">(</span><span class="s">&quot;hdmjl/hdmjl.jl&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">DML2_lasso_cv_hdm</span><span class="p">(</span><span class="n">z</span> <span class="p">,</span> <span class="n">d</span> <span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">dreg</span> <span class="p">,</span> <span class="n">yreg</span> <span class="p">,</span> <span class="n">nfold</span><span class="p">,</span> <span class="n">clu</span><span class="p">)</span>
+    
+    <span class="c"># Num ob observations</span>
+    <span class="n">nobser</span> <span class="o">=</span> <span class="n">size</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+    
+    <span class="c"># Define folds indices</span>
+    <span class="n">foldid</span> <span class="o">=</span> <span class="n">collect</span><span class="p">(</span><span class="n">Kfold</span><span class="p">(</span><span class="n">size</span><span class="p">(</span><span class="n">z</span><span class="p">)[</span><span class="mi">1</span><span class="p">],</span> <span class="n">nfold</span><span class="p">))</span>
+    
+    <span class="c"># Create array to save errors </span>
+    <span class="n">ytil</span> <span class="o">=</span> <span class="n">ones</span><span class="p">(</span><span class="n">nobser</span><span class="p">)</span>
+    <span class="n">dtil</span> <span class="o">=</span> <span class="n">ones</span><span class="p">(</span><span class="n">nobser</span><span class="p">)</span>
+    <span class="n">println</span><span class="p">(</span><span class="s">&quot;Folds: &quot;</span> <span class="p">)</span>
+    
+    <span class="c"># loop to save results</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="n">nfold</span>
+        
+        <span class="c"># Lasso regression, excluding folds selected </span>
+        <span class="n">dtil</span><span class="o">=</span> <span class="n">dreg</span><span class="p">(</span><span class="n">Z</span><span class="p">[</span><span class="n">foldid</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="o">:</span><span class="p">],</span> <span class="n">D</span><span class="p">[</span><span class="n">foldid</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="o">:</span><span class="p">])</span>
+        <span class="n">ytil</span><span class="o">=</span> <span class="n">dreg</span><span class="p">(</span><span class="n">Z</span><span class="p">[</span><span class="n">foldid</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="o">:</span><span class="p">],</span> <span class="n">Y</span><span class="p">[</span><span class="n">foldid</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="o">:</span><span class="p">])</span>
+        
+        <span class="n">println</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">end</span>
+    
+    <span class="c"># Create dataframe </span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">(</span><span class="n">ytil</span> <span class="o">=</span> <span class="n">ytil</span><span class="p">,</span> <span class="n">dtil</span> <span class="o">=</span> <span class="n">dtil</span><span class="p">)</span>
+    
+    <span class="c"># OLS clustering at the County level</span>
+    <span class="n">rfit</span> <span class="o">=</span> <span class="n">reg</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nd">@formula</span><span class="p">(</span><span class="n">ytil</span> <span class="o">~</span> <span class="mi">0</span> <span class="o">+</span> <span class="n">dtil</span><span class="p">))</span>
+    <span class="n">coef_est</span> <span class="o">=</span> <span class="n">coef</span><span class="p">(</span><span class="n">rfit</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">se</span> <span class="o">=</span> <span class="n">FixedEffectModels</span><span class="o">.</span><span class="n">coeftable</span><span class="p">(</span><span class="n">rfit</span><span class="p">)</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+
+    <span class="n">println</span><span class="p">(</span><span class="s">&quot; coef (se) = &quot;</span><span class="p">,</span> <span class="n">coef_est</span> <span class="p">,</span><span class="s">&quot;(&quot;</span><span class="p">,</span><span class="n">se</span><span class="p">,</span><span class="s">&quot;)&quot;</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">rfit</span><span class="p">,</span> <span class="n">data</span><span class="p">;</span>
+    
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DML2_lasso_cv_hdm (generic function with 1 method)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">dreg</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
+    <span class="n">res_Y_0</span> <span class="o">=</span> <span class="n">rlasso_arg</span><span class="p">(</span> <span class="n">Z</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="nb">nothing</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> 
+                    <span class="nb">nothing</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="nb">nothing</span><span class="p">,</span> <span class="mi">5000</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="o">^</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">),</span> <span class="o">-</span><span class="nb">Inf</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="nb">Inf</span><span class="p">,</span> <span class="nb">true</span> <span class="p">)</span>
+    <span class="n">res_Y</span> <span class="o">=</span> <span class="n">rlasso</span><span class="p">(</span><span class="n">res_Y_0</span><span class="p">)[</span><span class="s">&quot;residuals&quot;</span><span class="p">]</span>
+<span class="k">end</span>
+
+<span class="k">function</span> <span class="n">yreg</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span> <span class="n">D</span><span class="p">)</span>
+    <span class="n">res_D_0</span> <span class="o">=</span> <span class="n">rlasso_arg</span><span class="p">(</span> <span class="n">Z</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="nb">nothing</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> 
+                        <span class="nb">nothing</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="nb">nothing</span><span class="p">,</span> <span class="mi">5000</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="o">^</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">),</span> <span class="o">-</span><span class="nb">Inf</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="nb">Inf</span><span class="p">,</span> <span class="nb">true</span> <span class="p">)</span>
+    <span class="n">res_D</span> <span class="o">=</span> <span class="n">rlasso</span><span class="p">(</span><span class="n">res_D_0</span><span class="p">)[</span><span class="s">&quot;residuals&quot;</span><span class="p">]</span>
+<span class="k">end</span>
+
+<span class="n">DML2_lasso_hdm</span> <span class="o">=</span> <span class="n">DML2_lasso_cv_hdm</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">dreg</span><span class="p">,</span> <span class="n">yreg</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">clu</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Folds: 
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+ coef (se) = 0.22759871882516988([0.06080798929481985])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="glmnet">
+<h2>GLMNET<a class="headerlink" href="#glmnet" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">GLMNet</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">DML2_lasso_cv</span><span class="p">(</span><span class="n">z</span> <span class="p">,</span> <span class="n">d</span> <span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">dreg</span> <span class="p">,</span> <span class="n">yreg</span> <span class="p">,</span> <span class="n">nfold</span><span class="p">,</span> <span class="n">clu</span><span class="p">)</span>
+    
+    <span class="c"># Num ob observations</span>
+    <span class="n">nobser</span> <span class="o">=</span> <span class="n">size</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+    
+    <span class="c"># Define folds indices</span>
+    <span class="n">foldid</span> <span class="o">=</span> <span class="n">collect</span><span class="p">(</span><span class="n">Kfold</span><span class="p">(</span><span class="n">size</span><span class="p">(</span><span class="n">z</span><span class="p">)[</span><span class="mi">1</span><span class="p">],</span> <span class="n">nfold</span><span class="p">))</span>
+    
+    <span class="c"># Create array to save errors </span>
+    <span class="n">ytil</span> <span class="o">=</span> <span class="n">ones</span><span class="p">(</span><span class="n">nobser</span><span class="p">)</span>
+    <span class="n">dtil</span> <span class="o">=</span> <span class="n">ones</span><span class="p">(</span><span class="n">nobser</span><span class="p">)</span>
+    <span class="n">println</span><span class="p">(</span><span class="s">&quot;Folds: &quot;</span> <span class="p">)</span>
+    
+    <span class="c"># loop to save results</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="n">nfold</span>
+        <span class="n">dfit</span> <span class="o">=</span> <span class="n">dreg</span><span class="p">(</span><span class="n">z</span><span class="p">[</span><span class="n">foldid</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="o">:</span><span class="p">],</span> <span class="n">d</span><span class="p">[</span><span class="n">foldid</span><span class="p">[</span><span class="n">i</span><span class="p">]])</span>
+        <span class="n">yfit</span> <span class="o">=</span> <span class="n">yreg</span><span class="p">(</span><span class="n">z</span><span class="p">[</span><span class="n">foldid</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="o">:</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">foldid</span><span class="p">[</span><span class="n">i</span><span class="p">]])</span>
+        <span class="n">dhat</span> <span class="o">=</span> <span class="n">GLMNet</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">dfit</span><span class="p">,</span> <span class="n">z</span><span class="p">[</span><span class="n">Not</span><span class="p">(</span><span class="n">foldid</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span><span class="o">:</span><span class="p">])</span>
+        <span class="n">yhat</span> <span class="o">=</span> <span class="n">GLMNet</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">yfit</span><span class="p">,</span> <span class="n">z</span><span class="p">[</span><span class="n">Not</span><span class="p">(</span><span class="n">foldid</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span><span class="o">:</span><span class="p">])</span>
+        <span class="n">dtil</span><span class="p">[</span><span class="n">Not</span><span class="p">(</span><span class="n">foldid</span><span class="p">[</span><span class="n">i</span><span class="p">])]</span>   <span class="o">=</span> <span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">Not</span><span class="p">(</span><span class="n">foldid</span><span class="p">[</span><span class="n">i</span><span class="p">])]</span> <span class="o">-</span> <span class="n">dhat</span><span class="p">)</span>
+        <span class="n">ytil</span><span class="p">[</span><span class="n">Not</span><span class="p">(</span><span class="n">foldid</span><span class="p">[</span><span class="n">i</span><span class="p">])]</span>   <span class="o">=</span> <span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">Not</span><span class="p">(</span><span class="n">foldid</span><span class="p">[</span><span class="n">i</span><span class="p">])]</span> <span class="o">-</span> <span class="n">yhat</span><span class="p">)</span>
+        <span class="n">println</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">end</span>
+    
+    <span class="c"># Create dataframe </span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">(</span><span class="n">ytil</span> <span class="o">=</span> <span class="n">ytil</span><span class="p">,</span> <span class="n">dtil</span> <span class="o">=</span> <span class="n">dtil</span><span class="p">,</span> <span class="n">clu</span><span class="o">=</span><span class="n">clu</span><span class="p">)</span>
+    
+    <span class="c"># OLS clustering at the County level</span>
+    <span class="n">rfit</span> <span class="o">=</span> <span class="n">reg</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nd">@formula</span><span class="p">(</span><span class="n">ytil</span> <span class="o">~</span> <span class="n">dtil</span> <span class="o">+</span><span class="n">fe</span><span class="p">(</span><span class="n">clu</span><span class="p">)))</span>
+    <span class="n">coef_est</span> <span class="o">=</span> <span class="n">coef</span><span class="p">(</span><span class="n">rfit</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">se</span> <span class="o">=</span> <span class="n">FixedEffectModels</span><span class="o">.</span><span class="n">coeftable</span><span class="p">(</span><span class="n">rfit</span><span class="p">)</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+
+    <span class="n">println</span><span class="p">(</span><span class="s">&quot; coef (se) = &quot;</span><span class="p">,</span> <span class="n">coef_est</span> <span class="p">,</span><span class="s">&quot;(&quot;</span><span class="p">,</span><span class="n">se</span><span class="p">,</span><span class="s">&quot;)&quot;</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">rfit</span><span class="p">,</span> <span class="n">data</span><span class="p">;</span>
+    
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DML2_lasso_cv (generic function with 1 method)
+</pre></div>
+</div>
+</div>
+</div>
+<section id="ml-method-lasso-from-glmnet">
+<h3>ML method = lasso from glmnet<a class="headerlink" href="#ml-method-lasso-from-glmnet" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c">##ML method = lasso from glmnet </span>
+<span class="n">dreg</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span> <span class="o">=</span> <span class="n">glmnetcv</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>    
+<span class="n">yreg</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="o">=</span> <span class="n">glmnetcv</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>   
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>yreg (generic function with 1 method)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">DML2_lasso_cv_1</span> <span class="o">=</span> <span class="n">DML2_lasso_cv</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">dreg</span><span class="p">,</span> <span class="n">yreg</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">clu</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Folds: 
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+ coef (se) = 0.20125677024540278([0.05721047723253721])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="ml-method-elastic-net-from-glmnet">
+<h3>ML method = Elastic net from glmnet<a class="headerlink" href="#ml-method-elastic-net-from-glmnet" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c">##ML method = elastic net from glmnet </span>
+<span class="n">dreg</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span> <span class="o">=</span> <span class="n">glmnetcv</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">)</span> 
+<span class="n">yreg</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="o">=</span> <span class="n">glmnetcv</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">)</span>
+
+<span class="n">DML2_elnet</span> <span class="o">=</span>  <span class="n">DML2_lasso_cv</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">dreg</span><span class="p">,</span> <span class="n">yreg</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">clu</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Folds: 
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+ coef (se) = 0.21993346167089925([0.05666642136725058])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="ml-method-ridge-from-glmnet">
+<h3>ML method = Ridge from glmnet<a class="headerlink" href="#ml-method-ridge-from-glmnet" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c">##ML method = elastic net from glmnet </span>
+<span class="n">dreg</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span> <span class="o">=</span> <span class="n">glmnetcv</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> 
+<span class="n">yreg</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="o">=</span> <span class="n">glmnetcv</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="n">DML2_ridge</span> <span class="o">=</span> <span class="n">DML2_lasso_cv</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">dreg</span><span class="p">,</span> <span class="n">yreg</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">clu</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Folds: 
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+ coef (se) = 0.2226512719332019([0.056771317887477434])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here we also compute DML with OLS used as the ML method</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Random</span><span class="o">.</span><span class="n">seed!</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span>
+<span class="n">dreg</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="n">d</span><span class="p">)</span> <span class="o">=</span> <span class="n">lm</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="n">d</span><span class="p">)</span>
+<span class="n">yreg</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="o">=</span> <span class="n">lm</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="n">DML2_ols</span> <span class="o">=</span> <span class="n">DML2_for_PLM</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">dreg</span><span class="p">,</span> <span class="n">yreg</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">clu</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Folds: 
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+ coef (se) = 0.1923864674102141([0.05591060950811912])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next, we also apply Random Forest for comparison purposes.</p>
+</section>
+<section id="random-forest">
+<h3>Random Forest<a class="headerlink" href="#random-forest" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">import</span> <span class="n">Pkg</span><span class="p">;</span> <span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;MLJ&quot;</span><span class="p">)</span>
+<span class="k">import</span> <span class="n">Pkg</span><span class="p">;</span> <span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;DecisionTree&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">   Resolving</span> package versions...
+<span class=" -Color -Color-Bold -Color-Bold-Green">  No Changes</span> to `C:\Users\sandr\.julia\environments\v1.6\Project.toml`
+<span class=" -Color -Color-Bold -Color-Bold-Green">  No Changes</span> to `C:\Users\sandr\.julia\environments\v1.6\Manifest.toml`
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Resolving</span> package versions...
+<span class=" -Color -Color-Bold -Color-Bold-Green">  No Changes</span> to `C:\Users\sandr\.julia\environments\v1.6\Project.toml`
+<span class=" -Color -Color-Bold -Color-Bold-Green">  No Changes</span> to `C:\Users\sandr\.julia\environments\v1.6\Manifest.toml`
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">DecisionTree</span><span class="p">,</span> <span class="n">MLJ</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">DML2_RF</span><span class="p">(</span><span class="n">z</span> <span class="p">,</span> <span class="n">d</span> <span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">dreg</span> <span class="p">,</span> <span class="n">yreg</span> <span class="p">,</span> <span class="n">nfold</span><span class="p">,</span> <span class="n">clu</span><span class="p">)</span>
+    
+    <span class="c"># Num ob observations</span>
+    <span class="n">nobser</span> <span class="o">=</span> <span class="n">size</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+    
+    <span class="c"># Define folds indices</span>
+    <span class="n">foldid</span> <span class="o">=</span> <span class="n">collect</span><span class="p">(</span><span class="n">Kfold</span><span class="p">(</span><span class="n">size</span><span class="p">(</span><span class="n">z</span><span class="p">)[</span><span class="mi">1</span><span class="p">],</span> <span class="n">nfold</span><span class="p">))</span>
+    
+    <span class="c"># Create array to save errors </span>
+    <span class="n">ytil</span> <span class="o">=</span> <span class="n">ones</span><span class="p">(</span><span class="n">nobser</span><span class="p">)</span>
+    <span class="n">dtil</span> <span class="o">=</span> <span class="n">ones</span><span class="p">(</span><span class="n">nobser</span><span class="p">)</span>
+    <span class="n">println</span><span class="p">(</span><span class="s">&quot;Folds: &quot;</span> <span class="p">)</span>
+    
+    <span class="c"># loop to save results</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="n">nfold</span>
+        <span class="n">dfit</span> <span class="o">=</span> <span class="n">dreg</span><span class="p">(</span><span class="n">z</span><span class="p">[</span><span class="n">foldid</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="o">:</span><span class="p">],</span> <span class="n">d</span><span class="p">[</span><span class="n">foldid</span><span class="p">[</span><span class="n">i</span><span class="p">]])</span>
+        <span class="n">yfit</span> <span class="o">=</span> <span class="n">yreg</span><span class="p">(</span><span class="n">z</span><span class="p">[</span><span class="n">foldid</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="o">:</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">foldid</span><span class="p">[</span><span class="n">i</span><span class="p">]])</span>
+        <span class="n">dhat</span> <span class="o">=</span> <span class="n">apply_forest</span><span class="p">(</span><span class="n">dfit</span><span class="p">,</span><span class="n">z</span><span class="p">[</span><span class="n">Not</span><span class="p">(</span><span class="n">foldid</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span><span class="o">:</span><span class="p">])</span>
+        <span class="n">yhat</span> <span class="o">=</span> <span class="n">apply_forest</span><span class="p">(</span><span class="n">yfit</span><span class="p">,</span><span class="n">z</span><span class="p">[</span><span class="n">Not</span><span class="p">(</span><span class="n">foldid</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span><span class="o">:</span><span class="p">])</span>
+        <span class="n">dtil</span><span class="p">[</span><span class="n">Not</span><span class="p">(</span><span class="n">foldid</span><span class="p">[</span><span class="n">i</span><span class="p">])]</span>   <span class="o">=</span> <span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">Not</span><span class="p">(</span><span class="n">foldid</span><span class="p">[</span><span class="n">i</span><span class="p">])]</span> <span class="o">-</span> <span class="n">dhat</span><span class="p">)</span>
+        <span class="n">ytil</span><span class="p">[</span><span class="n">Not</span><span class="p">(</span><span class="n">foldid</span><span class="p">[</span><span class="n">i</span><span class="p">])]</span>   <span class="o">=</span> <span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">Not</span><span class="p">(</span><span class="n">foldid</span><span class="p">[</span><span class="n">i</span><span class="p">])]</span> <span class="o">-</span> <span class="n">yhat</span><span class="p">)</span>
+        <span class="n">println</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">end</span>
+    
+    <span class="c"># Create dataframe </span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">(</span><span class="n">ytil</span> <span class="o">=</span> <span class="n">ytil</span><span class="p">,</span> <span class="n">dtil</span> <span class="o">=</span> <span class="n">dtil</span><span class="p">,</span> <span class="n">clu</span><span class="o">=</span><span class="n">clu</span><span class="p">)</span>
+    
+    <span class="c"># OLS clustering at the County level</span>
+    <span class="n">rfit</span> <span class="o">=</span> <span class="n">reg</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nd">@formula</span><span class="p">(</span><span class="n">ytil</span> <span class="o">~</span> <span class="n">dtil</span> <span class="o">+</span><span class="n">fe</span><span class="p">(</span><span class="n">clu</span><span class="p">)))</span>
+    <span class="n">coef_est</span> <span class="o">=</span> <span class="n">coef</span><span class="p">(</span><span class="n">rfit</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">se</span> <span class="o">=</span> <span class="n">FixedEffectModels</span><span class="o">.</span><span class="n">coeftable</span><span class="p">(</span><span class="n">rfit</span><span class="p">)</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+
+    <span class="n">println</span><span class="p">(</span><span class="s">&quot; coef (se) = &quot;</span><span class="p">,</span> <span class="n">coef_est</span> <span class="p">,</span><span class="s">&quot;(&quot;</span><span class="p">,</span><span class="n">se</span><span class="p">,</span><span class="s">&quot;)&quot;</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">rfit</span><span class="p">,</span> <span class="n">data</span><span class="p">;</span>
+    
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DML2_RF (generic function with 1 method)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">dreg</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="n">d</span><span class="p">)</span>
+    <span class="n">RFmodel</span> <span class="o">=</span> <span class="n">build_forest</span><span class="p">(</span><span class="n">d</span><span class="p">,</span><span class="n">z</span><span class="p">)</span>
+<span class="k">end</span>
+<span class="k">function</span> <span class="n">yreg</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+    <span class="n">RFmodel</span> <span class="o">=</span> <span class="n">build_forest</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">)</span>
+<span class="k">end</span>
+
+<span class="n">DML2_RF_1</span> <span class="o">=</span> <span class="n">DML2_RF</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">dreg</span><span class="p">,</span> <span class="n">yreg</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">clu</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Folds: 
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+ coef (se) = 0.3175570504921465([0.05941831382579539])
+</pre></div>
+</div>
+</div>
+</div>
+<p>We conclude that the gun ownership rates are related to gun homicide rates - if gun ownership increases by 1% relative
+to a trend then the predicted gun homicide rate goes up by about 0.20% controlling for counties’ characteristics.</p>
+<p>Finally, let’s see which method is actually better. We compute RMSE for predicting D and Y, and see which
+of the methods works better.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">PrettyTables</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">mods</span> <span class="o">=</span> <span class="p">[</span><span class="n">DML2_ols</span><span class="p">,</span> <span class="n">DML2_lasso</span><span class="p">,</span> <span class="n">DML2_lasso_cv_1</span><span class="p">,</span> <span class="n">DML2_ridge</span><span class="p">,</span> <span class="n">DML2_elnet</span><span class="p">,</span> <span class="n">DML2_RF_1</span><span class="p">];</span>
+<span class="n">mods_name</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;DML2_ols&quot;</span><span class="p">,</span> <span class="s">&quot;DML2_lasso&quot;</span><span class="p">,</span> <span class="s">&quot;DML2_lasso_cv&quot;</span><span class="p">,</span> <span class="s">&quot;DML2_ridge&quot;</span><span class="p">,</span> <span class="s">&quot;DML2_elnet&quot;</span><span class="p">,</span> <span class="s">&quot;DML2_RF&quot;</span><span class="p">];</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">RMSE_Y</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">RMSE_D</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="n">mods</span>
+    <span class="n">push!</span><span class="p">(</span><span class="n">RMSE_Y</span><span class="p">,</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">mean</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="o">!</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span><span class="o">^</span><span class="mi">2</span><span class="p">))</span>
+    <span class="n">push!</span><span class="p">(</span><span class="n">RMSE_D</span><span class="p">,</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">mean</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="o">!</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span><span class="o">^</span><span class="mi">2</span><span class="p">))</span>
+<span class="k">end</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">([</span><span class="n">mods_name</span> <span class="n">RMSE_Y</span> <span class="n">RMSE_D</span><span class="p">],</span> <span class="p">[</span><span class="ss">:Models</span><span class="p">,</span> <span class="ss">:RMSE_Y</span><span class="p">,</span> <span class="ss">:RMSE_D</span><span class="p">])</span>
+<span class="n">pretty_table</span><span class="p">(</span><span class="n">result</span><span class="p">;</span> <span class="n">formatters</span> <span class="o">=</span> <span class="n">ft_printf</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%5.10f</span><span class="s">&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>┌───────────────┬──────────────┬──────────────┐
+│<span class=" -Color -Color-Bold">        Models </span>│<span class=" -Color -Color-Bold">       RMSE_Y </span>│<span class=" -Color -Color-Bold">       RMSE_D </span>│
+│           Any │          Any │          Any │
+├───────────────┼──────────────┼──────────────┤
+│      DML2_ols │ 0.0011135761 │ 0.0002411937 │
+│    DML2_lasso │ 0.0008511270 │ 0.0000111794 │
+│ DML2_lasso_cv │ 0.0010020822 │ 0.0001238803 │
+│    DML2_ridge │ 0.0015664215 │ 0.0000376254 │
+│    DML2_elnet │ 0.0005612559 │ 0.0002353224 │
+│       DML2_RF │ 0.0005524424 │ 0.0005975433 │
+└───────────────┴──────────────┴──────────────┘
+</pre></div>
+</div>
+</div>
+</div>
+<p>It looks like the best method for predicting D is Lasso, and the best method for predicting Y is CV Ridge.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c">#DML with cross-validated Lasso:</span>
+<span class="n">dreg</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="n">d</span><span class="p">)</span> <span class="o">=</span> <span class="n">glmnetcv</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="n">d</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">yreg</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="o">=</span> <span class="n">glmnetcv</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="n">DML2_best</span> <span class="o">=</span> <span class="n">DML2_lasso_cv</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">dreg</span><span class="p">,</span> <span class="n">yreg</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">clu</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Folds: 
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+ coef (se) = 0.22358046307058665([0.0566348880807125])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">ols_coef</span> <span class="o">=</span> <span class="n">GLM</span><span class="o">.</span><span class="n">coeftable</span><span class="p">(</span><span class="n">baseline_ols</span><span class="p">)</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">ols_std</span> <span class="o">=</span> <span class="n">GLM</span><span class="o">.</span><span class="n">coeftable</span><span class="p">(</span><span class="n">baseline_ols</span><span class="p">)</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">control_ols_coef</span> <span class="o">=</span> <span class="n">GLM</span><span class="o">.</span><span class="n">coeftable</span><span class="p">(</span><span class="n">control_ols</span><span class="p">)</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">control_ols_std</span> <span class="o">=</span> <span class="n">GLM</span><span class="o">.</span><span class="n">coeftable</span><span class="p">(</span><span class="n">control_ols</span><span class="p">)</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">lasso_coef</span> <span class="o">=</span> <span class="n">GLM</span><span class="o">.</span><span class="n">coeftable</span><span class="p">(</span><span class="n">DML2_lasso</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">lasso_std</span> <span class="o">=</span> <span class="n">GLM</span><span class="o">.</span><span class="n">coeftable</span><span class="p">(</span><span class="n">DML2_lasso</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">DML2_lasso_cv_1_coef</span> <span class="o">=</span> <span class="n">GLM</span><span class="o">.</span><span class="n">coeftable</span><span class="p">(</span><span class="n">DML2_lasso_cv_1</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">DML2_lasso_cv_1_std</span> <span class="o">=</span> <span class="n">GLM</span><span class="o">.</span><span class="n">coeftable</span><span class="p">(</span><span class="n">DML2_lasso_cv_1</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">DML2_elnet_coef</span> <span class="o">=</span> <span class="n">GLM</span><span class="o">.</span><span class="n">coeftable</span><span class="p">(</span><span class="n">DML2_elnet</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">DML2_elnet_std</span> <span class="o">=</span> <span class="n">GLM</span><span class="o">.</span><span class="n">coeftable</span><span class="p">(</span><span class="n">DML2_elnet</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">DML2_ridge_coef</span> <span class="o">=</span> <span class="n">GLM</span><span class="o">.</span><span class="n">coeftable</span><span class="p">(</span><span class="n">DML2_ridge</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">DML2_ridge_std</span> <span class="o">=</span> <span class="n">GLM</span><span class="o">.</span><span class="n">coeftable</span><span class="p">(</span><span class="n">DML2_ridge</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">DML2_RF_1_coef</span> <span class="o">=</span> <span class="n">GLM</span><span class="o">.</span><span class="n">coeftable</span><span class="p">(</span><span class="n">DML2_RF_1</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">DML2_RF_1_std</span> <span class="o">=</span> <span class="n">GLM</span><span class="o">.</span><span class="n">coeftable</span><span class="p">(</span><span class="n">DML2_RF_1</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">DML2_best_coef</span> <span class="o">=</span> <span class="n">GLM</span><span class="o">.</span><span class="n">coeftable</span><span class="p">(</span><span class="n">DML2_best</span><span class="p">)</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">DML2_best_std</span> <span class="o">=</span> <span class="n">GLM</span><span class="o">.</span><span class="n">coeftable</span><span class="p">(</span><span class="n">DML2_best</span><span class="p">)</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">1</span><span class="p">];</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">tabla</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">(</span><span class="n">modelos</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;Baseline OLS&quot;</span><span class="p">,</span> <span class="s">&quot;Least Squares with controls&quot;</span><span class="p">,</span> <span class="s">&quot;Lasso&quot;</span><span class="p">,</span> <span class="s">&quot;CV Lasso&quot;</span><span class="p">,</span> <span class="s">&quot;CV Elnet&quot;</span><span class="p">,</span> <span class="s">&quot;CV Ridge&quot;</span><span class="p">,</span> <span class="s">&quot;Random Forest&quot;</span><span class="p">,</span> <span class="s">&quot;Best&quot;</span><span class="p">],</span> 
+<span class="n">Estimate</span> <span class="o">=</span> <span class="p">[</span><span class="n">ols_coef</span><span class="p">,</span> <span class="n">control_ols_coef</span><span class="p">,</span> <span class="n">lasso_coef</span><span class="p">,</span> <span class="n">DML2_lasso_cv_1_coef</span><span class="p">,</span> <span class="n">DML2_elnet_coef</span><span class="p">,</span> <span class="n">DML2_ridge_coef</span><span class="p">,</span> <span class="n">DML2_RF_1_coef</span><span class="p">,</span> <span class="n">DML2_best_coef</span><span class="p">],</span> 
+<span class="n">StdError</span> <span class="o">=</span> <span class="p">[</span><span class="n">ols_std</span><span class="p">,</span> <span class="n">control_ols_std</span><span class="p">,</span> <span class="n">lasso_std</span><span class="p">,</span> <span class="n">DML2_lasso_cv_1_std</span><span class="p">,</span> <span class="n">DML2_elnet_std</span><span class="p">,</span> <span class="n">DML2_ridge_std</span><span class="p">,</span> <span class="n">DML2_RF_1_std</span><span class="p">,</span> <span class="n">DML2_best_std</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div class="data-frame"><p>8 rows × 3 columns</p><table class="data-frame"><thead><tr><th></th><th>modelos</th><th>Estimate</th><th>StdError</th></tr><tr><th></th><th title="String">String</th><th title="Float64">Float64</th><th title="Float64">Float64</th></tr></thead><tbody><tr><th>1</th><td>Baseline OLS</td><td>0.282304</td><td>0.0648108</td></tr><tr><th>2</th><td>Least Squares with controls</td><td>0.190645</td><td>0.0578919</td></tr><tr><th>3</th><td>Lasso</td><td>0.215859</td><td>0.0569238</td></tr><tr><th>4</th><td>CV Lasso</td><td>0.201257</td><td>0.0572105</td></tr><tr><th>5</th><td>CV Elnet</td><td>0.219933</td><td>0.0566664</td></tr><tr><th>6</th><td>CV Ridge</td><td>0.222651</td><td>0.0567713</td></tr><tr><th>7</th><td>Random Forest</td><td>0.317557</td><td>0.0594183</td></tr><tr><th>8</th><td>Best</td><td>0.22358</td><td>0.0566349</td></tr></tbody></table></div></div></div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "julia-1.7"
+        },
+        kernelOptions: {
+            kernelName: "julia-1.7",
+            path: "./julia_notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'julia-1.7'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="17_Notebook_DAGitty.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Causal identification in DAGs using Backdoor and Swigs, Equivalence Classes, Falsiability Tests</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="20_Julia-pm3-newdata-nn.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">The Effect of Gun Ownership on Gun-Homicide Rates - proceeding</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By The Jupyter Book Community<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
