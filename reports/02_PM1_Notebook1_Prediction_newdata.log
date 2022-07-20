@@ -36,9 +36,6 @@ Here is a preview of the cell contents:
 # using Pkg 
 # Pkg.add(to_install)
 
-using CSV
-using DataFrames
-using Dates
-using Plots, Lathe
+using CSV, DataFrames, Dates, Plots, Lathe, GLM, Statistics, MLBase
 -------------------
 
