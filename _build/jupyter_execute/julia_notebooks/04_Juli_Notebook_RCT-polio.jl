@@ -1,6 +1,3 @@
-import Pkg
-
-
 ## Install package 
 
 #import Pkg; Pkg.add("CairoMakie")

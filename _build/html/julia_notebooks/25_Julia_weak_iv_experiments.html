@@ -1,0 +1,863 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>25. A Simple Example of Properties of IV estimator when Instruments are Weak &#8212; Inference on Causal and Structural Parametters Using ML and AI</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="24. Double/Debiased ML for Partially Linear IV Model" href="24_debiased-ml-for-partially-linear-iv-model-in-julia.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Inference on Causal and Structural Parametters Using ML and AI</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome to your Jupyter Book
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="01_Julia_Notebook_Linear_Model_Overfitting.html">
+   1. Julia Notebook Linear Model Overfitting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02_PM1_Notebook1_Prediction_newdata.html">
+   2. OLS and lasso for wage prediction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03_PM1_Notebook_Inference.html">
+   3. An inferential problem: The Gender Wage Gap
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04_Juli_Notebook_RCT-polio.html">
+   4. RCT application Polio  vaccination
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05_Julia_Analyzing_RCT_with_Precision.html">
+   5. Analyzing RCT with Precision by Adjusting for Baseline Covariates
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06_RCT_Precision_Adjustment.html">
+   6. Analyzing RCT reemployment experiment
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07_julia-notebook-linear-penalized-regs.html">
+   7. Penalized Linear Regressions: A Simulation Experiment
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08_jl_ml_estimators_wage_pred.html">
+   8. Machine Learning Estimators for Wage Prediction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="09_Julia_OrthogonalLearning_lab4.html">
+   9. Experiment on Orthogonal Learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="10_Julia_pm2_notebook_jannis.html">
+   10. Testing the Convergence Hypothesis
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="11_py-heterogenous-wage-effects.html">
+   11. Application: Heterogeneous Effect of Gender on Wage Using Double Lasso
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="12_jl_collider_bias.html">
+   12. Collider Bias
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="13_Julia_pm3_notebook_newdata_nn.html">
+   13. Deep Neural Networks for Wage Prediction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="14_jl_automl_wage.html">
+   14. AutoML for wage prediction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="15_Functional-aproximation-by-nn-and-rf.html">
+   15. Functional Approximations by Trees and Neural Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="16_Notebook_DAGitty.html">
+   16. Causal identification in DAGs using Backdoor and Swigs, Equivalence Classes, Falsiability Tests
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="17_jl_dosearch.html">
+   17. Dosearch for Causal Identification in DAGs
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="18_Julia_pm3_notebook_inference_clustering.html">
+   18. A Case Study: The Effect of Gun Ownership on Gun-Homicide Rates
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="19_Julia-pm3-newdata-nn.html">
+   19. The Effect of Gun Ownership on Gun-Homicide Rates - proceeding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="20_jl_dml_401k.html">
+   20. DML for ATE and LATE of 401(k) on Wealth
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="21_jl_dag_401k.html">
+   21. Identification Analysis of 401(k) Example w DAGs
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="22_Julia_debiased-ml-for-partially-linear-model.html">
+   22. Double/Debiased Machine Learning for the Partially Linear Regression Model.
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="23_jl_sensmakr_dml.html">
+   23. Sensitivity Analysis with Sensmakr and Debiased ML
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="24_debiased-ml-for-partially-linear-iv-model-in-julia.html">
+   24. Double/Debiased ML for Partially Linear IV Model
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   25. A Simple Example of Properties of IV estimator when Instruments are Weak
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/d2cml-ai/14.388_jl/main?urlpath=tree/_build/jupyter_execute/julia_notebooks/25_Julia_weak_iv_experiments.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://colab.research.google.com/github/d2cml-ai/14.388_jl/blob/main/_build/jupyter_execute/julia_notebooks/25_Julia_weak_iv_experiments.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="initThebeSBT()"
+  class="headerbtn headerbtn-launch-thebe"
+  data-toggle="tooltip"
+data-placement="left"
+title="Launch Thebe"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="headerbtn__text-container">Live Code</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/d2cml-ai/14.388_jl"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/d2cml-ai/14.388_jl/issues/new?title=Issue%20on%20page%20%2Fjulia_notebooks/25_Julia_weak_iv_experiments.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/d2cml-ai/14.388_jl/edit/main/_build/jupyter_execute/julia_notebooks/25_Julia_weak_iv_experiments.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Edit this page"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="headerbtn__text-container">suggest edit</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/julia_notebooks/25_Julia_weak_iv_experiments.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#run-1000-trials-to-evaluate-distribution-of-the-iv-estimator">
+   25.1. Run 1000 trials to evaluate distribution of the IV estimator
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plot-the-actual-distribution-against-the-normal-approximation-based-on-strong-instrument-assumption">
+   25.2. Plot the Actual Distribution against the Normal Approximation (based on Strong Instrument Assumption)
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>A Simple Example of Properties of IV estimator when Instruments are Weak</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#run-1000-trials-to-evaluate-distribution-of-the-iv-estimator">
+   25.1. Run 1000 trials to evaluate distribution of the IV estimator
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plot-the-actual-distribution-against-the-normal-approximation-based-on-strong-instrument-assumption">
+   25.2. Plot the Actual Distribution against the Normal Approximation (based on Strong Instrument Assumption)
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="a-simple-example-of-properties-of-iv-estimator-when-instruments-are-weak">
+<h1><span class="section-number">25. </span>A Simple Example of Properties of IV estimator when Instruments are Weak<a class="headerlink" href="#a-simple-example-of-properties-of-iv-estimator-when-instruments-are-weak" title="Permalink to this headline">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Import relevant packages</span>
+<span class="k">using</span> <span class="n">Pkg</span>
+<span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;CSV&quot;</span><span class="p">),</span> <span class="k">using</span> <span class="n">CSV</span>
+<span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;DataFrames&quot;</span><span class="p">),</span> <span class="k">using</span> <span class="n">DataFrames</span>
+<span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;GLM&quot;</span><span class="p">),</span> <span class="k">using</span> <span class="n">GLM</span>
+<span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;FixedEffectModels&quot;</span><span class="p">),</span> <span class="k">using</span> <span class="n">FixedEffectModels</span>
+<span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;PrettyTables&quot;</span><span class="p">),</span> <span class="k">using</span> <span class="n">PrettyTables</span>
+<span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;CovarianceMatrices&quot;</span><span class="p">),</span> <span class="k">using</span> <span class="n">CovarianceMatrices</span>
+<span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;RegressionTables&quot;</span><span class="p">),</span> <span class="k">using</span> <span class="n">RegressionTables</span>
+<span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;StatsFuns&quot;</span><span class="p">),</span> <span class="k">using</span> <span class="n">StatsFuns</span>
+<span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;Plots&quot;</span><span class="p">),</span> <span class="k">using</span> <span class="n">Plots</span>
+<span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;MLBase&quot;</span><span class="p">),</span> <span class="k">using</span> <span class="n">MLBase</span>
+<span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;Seaborn&quot;</span><span class="p">),</span> <span class="k">using</span> <span class="n">Seaborn</span>
+<span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;Random&quot;</span><span class="p">),</span> <span class="k">using</span> <span class="n">Random</span>
+<span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;Statistics&quot;</span><span class="p">),</span> <span class="k">using</span> <span class="n">Statistics</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">    Updating</span> registry at `C:\Users\Work\.julia\registries\General.toml`
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">   Resolving</span> package versions...
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">  No Changes</span> to `C:\Users\Work\.julia\environments\v1.7\Project.toml`
+<span class=" -Color -Color-Bold -Color-Bold-Green">  No Changes</span> 
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>to `C:\Users\Work\.julia\environments\v1.7\Manifest.toml`
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">foo1</span><span class="p">(</span><span class="n">a</span><span class="p">;</span><span class="n">rng</span><span class="o">=</span><span class="n">MersenneTwister</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+  <span class="k">return</span> <span class="n">randn</span><span class="p">(</span><span class="n">rng</span><span class="p">,</span><span class="n">a</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>foo1 (generic function with 1 method)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">foo2</span><span class="p">(</span><span class="n">a</span><span class="p">;</span><span class="n">rng</span><span class="o">=</span><span class="n">MersenneTwister</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+  <span class="k">return</span> <span class="n">randn</span><span class="p">(</span><span class="n">rng</span><span class="p">,</span><span class="n">a</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>foo2 (generic function with 1 method)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span>    <span class="n">B</span> <span class="o">=</span> <span class="mi">1000</span>
+    <span class="n">IVEst</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span> <span class="n">B</span> <span class="p">)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="mi">100</span>
+    <span class="n">beta</span> <span class="o">=</span> <span class="mf">0.25</span>
+
+    <span class="n">U</span> <span class="o">=</span> <span class="n">foo1</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">Z</span> <span class="o">=</span> <span class="n">foo2</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">D</span> <span class="o">=</span> <span class="n">beta</span><span class="o">*</span><span class="n">Z</span><span class="o">+</span><span class="n">U</span>
+    <span class="n">Y</span> <span class="o">=</span> <span class="n">D</span> <span class="o">+</span> <span class="n">U</span><span class="p">;</span>
+    <span class="n">intercept</span> <span class="o">=</span> <span class="n">ones</span><span class="p">(</span><span class="n">length</span><span class="p">(</span><span class="n">U</span><span class="p">))</span>
+    <span class="n">data1</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">(</span><span class="n">intercept</span> <span class="o">=</span> <span class="n">intercept</span><span class="p">,</span> <span class="n">U</span> <span class="o">=</span> <span class="n">U</span><span class="p">,</span> <span class="n">Z</span> <span class="o">=</span> <span class="n">Z</span><span class="p">,</span> <span class="n">D</span> <span class="o">=</span> <span class="n">D</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">Y</span><span class="p">);</span>
+
+    <span class="n">mod</span> <span class="o">=</span> <span class="n">reg</span><span class="p">(</span><span class="n">data1</span><span class="p">,</span> <span class="nd">@formula</span><span class="p">(</span><span class="n">D</span> <span class="o">~</span> <span class="n">Z</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                             Linear Model                             
+=======================================================================
+Number of obs:                 100   Degrees of freedom:              2
+R2:                          0.067   R2 Adjusted:                 0.057
+F-Stat:                    7.01262   p-value:                     0.009
+=======================================================================
+D           |  Estimate Std.Error  t value Pr(&gt;|t|) Lower 95% Upper 95%
+-----------------------------------------------------------------------
+Z           |  0.250108  0.094447  2.64814    0.009 0.0626815  0.437535
+(Intercept) | 0.0873342 0.0949433 0.919856    0.360 -0.101078  0.275746
+=======================================================================
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">IV</span> <span class="o">=</span>  <span class="n">reg</span><span class="p">(</span><span class="n">data1</span><span class="p">,</span> <span class="nd">@formula</span><span class="p">(</span><span class="n">Y</span> <span class="o">~</span> <span class="mi">0</span> <span class="o">+</span> <span class="p">(</span><span class="n">D</span> <span class="o">~</span> <span class="n">Z</span><span class="p">)))</span>
+<span class="n">IV</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                          IV Model                          
+============================================================
+Number of obs:            100  Degrees of freedom:         1
+R2:                     0.752  R2 Adjusted:            0.749
+F-Stat:               6.79219  p-value:                0.011
+F-Stat (First Stage): 7.01315  p-value (First Stage):  0.008
+============================================================
+Y  | Estimate Std.Error t value Pr(&gt;|t|) Lower 95% Upper 95%
+------------------------------------------------------------
+D  | 0.994509  0.381596 2.60618    0.011   0.23734   1.75168
+============================================================
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">IV</span><span class="o">.</span><span class="n">coef</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1-element Vector{Float64}:
+ 0.994509337024402
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that the instrument is weak here (contolled by <span class="math notranslate nohighlight">\(\beta\)</span>) – the t-stat is less than 4.</p>
+<section id="run-1000-trials-to-evaluate-distribution-of-the-iv-estimator">
+<h2><span class="section-number">25.1. </span>Run 1000 trials to evaluate distribution of the IV estimator<a class="headerlink" href="#run-1000-trials-to-evaluate-distribution-of-the-iv-estimator" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># dependent variable ~ exogenous variables + (endogenous variables ~ instrumental variables)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Set seed</span>
+<span class="n">B</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">IVEst</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
+
+
+<span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="n">B</span>
+    
+    <span class="n">U</span> <span class="o">=</span> <span class="n">randn</span><span class="p">(</span> <span class="n">n</span><span class="p">)</span>
+    <span class="n">Z</span> <span class="o">=</span> <span class="n">randn</span><span class="p">(</span> <span class="n">n</span><span class="p">)</span>
+    <span class="n">D</span> <span class="o">=</span> <span class="n">beta</span><span class="o">*</span><span class="n">Z</span><span class="o">+</span><span class="n">U</span>
+    <span class="n">Y</span> <span class="o">=</span> <span class="n">D</span> <span class="o">+</span> <span class="n">U</span>
+    <span class="n">intercept</span> <span class="o">=</span> <span class="n">ones</span><span class="p">(</span><span class="n">length</span><span class="p">(</span><span class="n">U</span><span class="p">))</span>
+    <span class="n">data2</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">(</span><span class="n">intercept</span> <span class="o">=</span> <span class="n">intercept</span><span class="p">,</span> <span class="n">U</span> <span class="o">=</span> <span class="n">U</span><span class="p">,</span> <span class="n">Z</span> <span class="o">=</span> <span class="n">Z</span><span class="p">,</span> <span class="n">D</span> <span class="o">=</span> <span class="n">D</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">Y</span><span class="p">);</span>
+        
+    <span class="n">IV</span> <span class="o">=</span>  <span class="n">reg</span><span class="p">(</span><span class="n">data2</span><span class="p">,</span> <span class="nd">@formula</span><span class="p">(</span><span class="n">Y</span> <span class="o">~</span> <span class="o">+</span> <span class="p">(</span><span class="n">D</span> <span class="o">~</span>  <span class="n">Z</span><span class="p">)))</span>
+    
+    <span class="n">IVEst</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">IV</span><span class="o">.</span><span class="n">coef</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">println</span><span class="p">(</span><span class="n">minimum</span><span class="p">(</span><span class="n">IVEst</span><span class="p">))</span>
+<span class="n">println</span><span class="p">(</span><span class="n">maximum</span><span class="p">(</span><span class="n">IVEst</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-40.368264648867964
+57.83003936193075
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">IVEst</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1000-element Vector{Float64}:
+ -0.2633141021687235
+  0.8948832260053269
+ -0.20787697208091646
+  0.6792079361265198
+  1.052671004982911
+ -0.7421608576444562
+  1.1668318792400871
+  0.933747261081341
+  0.6850752909186767
+  1.4639180207647025
+ -0.9642817021998845
+ -1.497309542643626
+  1.2189323077695131
+  ⋮
+  5.460232661324924
+  0.5478868710622211
+  1.3717744154929605
+  1.2644078444676423
+  1.487865163308266
+  0.7873831110483491
+  0.7967961713080116
+  0.9696312102644875
+ -0.07785624411680934
+  0.08917470799234822
+  1.4232140851370487
+  0.9943702695396225
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="plot-the-actual-distribution-against-the-normal-approximation-based-on-strong-instrument-assumption">
+<h2><span class="section-number">25.2. </span>Plot the Actual Distribution against the Normal Approximation (based on Strong Instrument Assumption)<a class="headerlink" href="#plot-the-actual-distribution-against-the-normal-approximation-based-on-strong-instrument-assumption" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">val</span> <span class="o">=</span> <span class="n">collect</span><span class="p">(</span><span class="n">range</span><span class="p">(</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mf">5.5</span><span class="p">,</span> <span class="n">step</span> <span class="o">=</span> <span class="mf">0.05</span> <span class="p">))</span>
+<span class="n">var</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">beta</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">100</span><span class="p">)</span> <span class="c"># theoretical variance of IV</span>
+<span class="n">sd</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
+
+<span class="n">μ</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">σ</span><span class="o">=</span><span class="n">sd</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">Normal</span><span class="p">(</span><span class="n">μ</span><span class="p">,</span> <span class="n">σ</span><span class="p">)</span>
+<span class="n">normal_dist</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="n">d</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
+
+<span class="c"># plotting both distibutions on the same figure</span>
+<span class="n">Seaborn</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">IVEst</span><span class="o">.-</span><span class="mi">1</span><span class="p">,</span> <span class="n">shade</span> <span class="o">=</span> <span class="nb">true</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s">&quot;red&quot;</span><span class="p">)</span>
+<span class="n">Seaborn</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">normal_dist</span><span class="p">,</span> <span class="n">shade</span> <span class="o">=</span> <span class="nb">true</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s">&quot;blue&quot;</span><span class="p">)</span>
+<span class="n">Seaborn</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">&quot;Actual Distribution vs Gaussian&quot;</span><span class="p">)</span>
+<span class="n">Seaborn</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">&quot;IV Estimator -True Effect&quot;</span><span class="p">)</span>
+<span class="n">Seaborn</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/25_Julia_weak_iv_experiments_14_0.png" src="../_images/25_Julia_weak_iv_experiments_14_0.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-5.0, 5.0)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "d2cml-ai/14.388_jl",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "julia-1.7"
+        },
+        kernelOptions: {
+            kernelName: "julia-1.7",
+            path: "./julia_notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'julia-1.7'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="24_debiased-ml-for-partially-linear-iv-model-in-julia.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">24. </span>Double/Debiased ML for Partially Linear IV Model</p>
+        </div>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Victor Chernozhukov<br/>
+  
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

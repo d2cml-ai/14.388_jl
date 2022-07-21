@@ -1,6 +1,6 @@
-import Pkg
+# import Pkg
 
-Pkg.add("CovarianceMatrices")
+# Pkg.add("CovarianceMatrices")
 
 using Distributions
 using DataFrames

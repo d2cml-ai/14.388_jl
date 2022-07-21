@@ -272,5 +272,3 @@ scatter!(gX, yhat_ridge, label="Ridge")
 scatter!(Gx, y_hat_lava, lavel="Lava n(5)")
 yaxis!("Predicted value")
 xaxis!("True G(x)")
-
-

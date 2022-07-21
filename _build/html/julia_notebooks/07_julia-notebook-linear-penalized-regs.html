@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>17. Penalized Linear Regressions: A Simulation Experiment &#8212; Inference on Causal and Structural Parametters Using ML and AI</title>
+    <title>7. Penalized Linear Regressions: A Simulation Experiment &#8212; Inference on Causal and Structural Parametters Using ML and AI</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -52,8 +52,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="19. Orthogonal Learning" href="09_Julia_OrthogonalLearning_lab4.html" />
-    <link rel="prev" title="13. Author: Roberto Mendoza" href="06_RCT_Precision_Adjustment.html" />
+    <link rel="next" title="8. Machine Learning Estimators for Wage Prediction" href="08_jl_ml_estimators_wage_pred.html" />
+    <link rel="prev" title="6. Analyzing RCT reemployment experiment" href="06_RCT_Precision_Adjustment.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -131,77 +131,112 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="04_Juli_Notebook_RCT-polio.html">
-   4. Author: Roberto Mendoza
+   4. RCT application Polio  vaccination
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="05_Julia_Analyzing_RCT_with_Precision.html">
-   8. Analyzing RCT with Precision by Adjusting for Baseline Covariates
+   5. Analyzing RCT with Precision by Adjusting for Baseline Covariates
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="06_RCT_Precision_Adjustment.html">
-   13. Author: Roberto Mendoza
+   6. Analyzing RCT reemployment experiment
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   17. Penalized Linear Regressions: A Simulation Experiment
+   7. Penalized Linear Regressions: A Simulation Experiment
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08_jl_ml_estimators_wage_pred.html">
+   8. Machine Learning Estimators for Wage Prediction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="09_Julia_OrthogonalLearning_lab4.html">
-   19. Orthogonal Learning
+   9. Experiment on Orthogonal Learning
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="10_Julia_pm2_notebook_jannis.html">
-   20. Testing the Convergence Hypothesis
+   10. Testing the Convergence Hypothesis
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="11_py-heterogenous-wage-effects.html">
-   22. Application: Heterogeneous Effect of Gender on Wage Using Double Lasso
+   11. Application: Heterogeneous Effect of Gender on Wage Using Double Lasso
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="14_Julia_pm3_notebook_newdata_nn.html">
-   24. A Simple Case Study using Wage Data from 2015 - proceeding
+  <a class="reference internal" href="12_jl_collider_bias.html">
+   12. Collider Bias
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="16_Functional-aproximation-by-nn-and-rf.html">
-   25. Functional Approximations by Trees and Neural Networks
+  <a class="reference internal" href="13_Julia_pm3_notebook_newdata_nn.html">
+   13. Deep Neural Networks for Wage Prediction
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="17_Notebook_DAGitty.html">
-   30. Causal identification in DAGs using Backdoor and Swigs, Equivalence Classes, Falsiability Tests
+  <a class="reference internal" href="14_jl_automl_wage.html">
+   14. AutoML for wage prediction
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="19_Julia_pm3_notebook_inference_clustering.html">
-   40. A Case Study: The Effect of Gun Ownership on Gun-Homicide Rates
+  <a class="reference internal" href="15_Functional-aproximation-by-nn-and-rf.html">
+   15. Functional Approximations by Trees and Neural Networks
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="20_Julia-pm3-newdata-nn.html">
-   42. The Effect of Gun Ownership on Gun-Homicide Rates - proceeding
+  <a class="reference internal" href="16_Notebook_DAGitty.html">
+   16. Causal identification in DAGs using Backdoor and Swigs, Equivalence Classes, Falsiability Tests
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="23_Julia_debiased-ml-for-partially-linear-model.html">
-   45. Double/Debiased Machine Learning for the Partially Linear Regression Model.
+  <a class="reference internal" href="17_jl_dosearch.html">
+   17. Dosearch for Causal Identification in DAGs
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="25_debiased-ml-for-partially-linear-iv-model-in-julia.html">
-   47. Double/Debiased ML for Partially Linear IV Model
+  <a class="reference internal" href="18_Julia_pm3_notebook_inference_clustering.html">
+   18. A Case Study: The Effect of Gun Ownership on Gun-Homicide Rates
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="27_Julia_weak_iv_experiments.html">
-   55. A Simple Example of Properties of IV estimator when Instruments are Weak
+  <a class="reference internal" href="19_Julia-pm3-newdata-nn.html">
+   19. The Effect of Gun Ownership on Gun-Homicide Rates - proceeding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="20_jl_dml_401k.html">
+   20. DML for ATE and LATE of 401(k) on Wealth
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="21_jl_dag_401k.html">
+   21. Identification Analysis of 401(k) Example w DAGs
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="22_Julia_debiased-ml-for-partially-linear-model.html">
+   22. Double/Debiased Machine Learning for the Partially Linear Regression Model.
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="23_jl_sensmakr_dml.html">
+   23. Sensitivity Analysis with Sensmakr and Debiased ML
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="24_debiased-ml-for-partially-linear-iv-model-in-julia.html">
+   24. Double/Debiased ML for Partially Linear IV Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="25_Julia_weak_iv_experiments.html">
+   25. A Simple Example of Properties of IV estimator when Instruments are Weak
   </a>
  </li>
 </ul>
@@ -463,33 +498,26 @@ title="Print to PDF"
     </div>
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   17. Penalized Linear Regressions: A Simulation Experiment
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-generating-process-approximately-sparse">
+   7.1. Data Generating Process: Approximately Sparse
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#data-generating-process-approximately-sparse">
-     17.1. Data Generating Process: Approximately Sparse
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#summary">
+     7.1.1. Summary
     </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#summary">
-       17.1.1. Summary
-      </a>
-     </li>
-    </ul>
    </li>
   </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#data-generating-process-approximately-sparse-small-dense-part">
-   18. Data Generating Process: Approximately Sparse + Small Dense Part
+   7.2. Data Generating Process: Approximately Sparse + Small Dense Part
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id1">
-     18.1. Summary
+     7.2.1. Summary
     </a>
    </li>
   </ul>
@@ -513,33 +541,26 @@ title="Print to PDF"
                         </div>
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   17. Penalized Linear Regressions: A Simulation Experiment
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-generating-process-approximately-sparse">
+   7.1. Data Generating Process: Approximately Sparse
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#data-generating-process-approximately-sparse">
-     17.1. Data Generating Process: Approximately Sparse
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#summary">
+     7.1.1. Summary
     </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#summary">
-       17.1.1. Summary
-      </a>
-     </li>
-    </ul>
    </li>
   </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#data-generating-process-approximately-sparse-small-dense-part">
-   18. Data Generating Process: Approximately Sparse + Small Dense Part
+   7.2. Data Generating Process: Approximately Sparse + Small Dense Part
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id1">
-     18.1. Summary
+     7.2.1. Summary
     </a>
    </li>
   </ul>
@@ -560,9 +581,9 @@ title="Print to PDF"
 </ul>
 <p>This notebook contains an example for teaching.</p>
 <section class="tex2jax_ignore mathjax_ignore" id="penalized-linear-regressions-a-simulation-experiment">
-<h1><span class="section-number">17. </span>Penalized Linear Regressions: A Simulation Experiment<a class="headerlink" href="#penalized-linear-regressions-a-simulation-experiment" title="Permalink to this headline">#</a></h1>
+<h1><span class="section-number">7. </span>Penalized Linear Regressions: A Simulation Experiment<a class="headerlink" href="#penalized-linear-regressions-a-simulation-experiment" title="Permalink to this headline">#</a></h1>
 <section id="data-generating-process-approximately-sparse">
-<h2><span class="section-number">17.1. </span>Data Generating Process: Approximately Sparse<a class="headerlink" href="#data-generating-process-approximately-sparse" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">7.1. </span>Data Generating Process: Approximately Sparse<a class="headerlink" href="#data-generating-process-approximately-sparse" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># #Needed Packages and extra just in case</span>
@@ -608,6 +629,12 @@ title="Print to PDF"
 <span class="k">using</span> <span class="n">Distributions</span>
 
 <span class="k">using</span> <span class="n">GLMNet</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>┌ Info: Precompiling CSV [336ed68f-0bac-5ca0-87d4-7b16caf5d00b]
+└ @ Base loading.jl:1423
 </pre></div>
 </div>
 </div>
@@ -765,7 +792,7 @@ title="Print to PDF"
 </div>
 </div>
 <section id="summary">
-<h3><span class="section-number">17.1.1. </span>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">7.1.1. </span>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">msa</span> <span class="o">=</span> <span class="p">[</span><span class="n">MSE_lasso_cv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">MSE_ridge</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">MSE_elnet</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">mse_lava</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
@@ -794,9 +821,8 @@ title="Print to PDF"
 </div>
 </section>
 </section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="data-generating-process-approximately-sparse-small-dense-part">
-<h1><span class="section-number">18. </span>Data Generating Process: Approximately Sparse + Small Dense Part<a class="headerlink" href="#data-generating-process-approximately-sparse-small-dense-part" title="Permalink to this headline">#</a></h1>
+<section id="data-generating-process-approximately-sparse-small-dense-part">
+<h2><span class="section-number">7.2. </span>Data Generating Process: Approximately Sparse + Small Dense Part<a class="headerlink" href="#data-generating-process-approximately-sparse-small-dense-part" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Random</span><span class="o">.</span><span class="n">seed!</span><span class="p">(</span><span class="mi">122109</span><span class="p">)</span>
@@ -933,7 +959,7 @@ title="Print to PDF"
 </div>
 </div>
 <section id="id1">
-<h2><span class="section-number">18.1. </span>Summary<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h2>
+<h3><span class="section-number">7.2.1. </span>Summary<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">msa</span> <span class="o">=</span> <span class="p">[</span><span class="n">MSE_lasso_cv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">MSE_ridge</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">MSE_elnet</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">mse_lava</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
@@ -961,6 +987,7 @@ title="Print to PDF"
 <div class="cell_output docutils container">
 <img alt="../_images/07_julia-notebook-linear-penalized-regs_26_0.svg" src="../_images/07_julia-notebook-linear-penalized-regs_26_0.svg" /></div>
 </div>
+</section>
 </section>
 </section>
 
@@ -995,13 +1022,13 @@ title="Print to PDF"
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">13. </span>Author: Roberto Mendoza</p>
+            <p class="prev-next-title"><span class="section-number">6. </span>Analyzing RCT reemployment experiment</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="09_Julia_OrthogonalLearning_lab4.html" title="next page">
+    <a class='right-next' id="next-link" href="08_jl_ml_estimators_wage_pred.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">19. </span>Orthogonal Learning</p>
+        <p class="prev-next-title"><span class="section-number">8. </span>Machine Learning Estimators for Wage Prediction</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

@@ -1,0 +1,1596 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>16. Causal identification in DAGs using Backdoor and Swigs, Equivalence Classes, Falsiability Tests &#8212; Inference on Causal and Structural Parametters Using ML and AI</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="17. Dosearch for Causal Identification in DAGs" href="17_jl_dosearch.html" />
+    <link rel="prev" title="15. Functional Approximations by Trees and Neural Networks" href="15_Functional-aproximation-by-nn-and-rf.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Inference on Causal and Structural Parametters Using ML and AI</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome to your Jupyter Book
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="01_Julia_Notebook_Linear_Model_Overfitting.html">
+   1. Julia Notebook Linear Model Overfitting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02_PM1_Notebook1_Prediction_newdata.html">
+   2. OLS and lasso for wage prediction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03_PM1_Notebook_Inference.html">
+   3. An inferential problem: The Gender Wage Gap
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04_Juli_Notebook_RCT-polio.html">
+   4. RCT application Polio  vaccination
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05_Julia_Analyzing_RCT_with_Precision.html">
+   5. Analyzing RCT with Precision by Adjusting for Baseline Covariates
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06_RCT_Precision_Adjustment.html">
+   6. Analyzing RCT reemployment experiment
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07_julia-notebook-linear-penalized-regs.html">
+   7. Penalized Linear Regressions: A Simulation Experiment
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08_jl_ml_estimators_wage_pred.html">
+   8. Machine Learning Estimators for Wage Prediction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="09_Julia_OrthogonalLearning_lab4.html">
+   9. Experiment on Orthogonal Learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="10_Julia_pm2_notebook_jannis.html">
+   10. Testing the Convergence Hypothesis
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="11_py-heterogenous-wage-effects.html">
+   11. Application: Heterogeneous Effect of Gender on Wage Using Double Lasso
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="12_jl_collider_bias.html">
+   12. Collider Bias
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="13_Julia_pm3_notebook_newdata_nn.html">
+   13. Deep Neural Networks for Wage Prediction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="14_jl_automl_wage.html">
+   14. AutoML for wage prediction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="15_Functional-aproximation-by-nn-and-rf.html">
+   15. Functional Approximations by Trees and Neural Networks
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   16. Causal identification in DAGs using Backdoor and Swigs, Equivalence Classes, Falsiability Tests
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="17_jl_dosearch.html">
+   17. Dosearch for Causal Identification in DAGs
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="18_Julia_pm3_notebook_inference_clustering.html">
+   18. A Case Study: The Effect of Gun Ownership on Gun-Homicide Rates
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="19_Julia-pm3-newdata-nn.html">
+   19. The Effect of Gun Ownership on Gun-Homicide Rates - proceeding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="20_jl_dml_401k.html">
+   20. DML for ATE and LATE of 401(k) on Wealth
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="21_jl_dag_401k.html">
+   21. Identification Analysis of 401(k) Example w DAGs
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="22_Julia_debiased-ml-for-partially-linear-model.html">
+   22. Double/Debiased Machine Learning for the Partially Linear Regression Model.
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="23_jl_sensmakr_dml.html">
+   23. Sensitivity Analysis with Sensmakr and Debiased ML
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="24_debiased-ml-for-partially-linear-iv-model-in-julia.html">
+   24. Double/Debiased ML for Partially Linear IV Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="25_Julia_weak_iv_experiments.html">
+   25. A Simple Example of Properties of IV estimator when Instruments are Weak
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/d2cml-ai/14.388_jl/main?urlpath=tree/_build/jupyter_execute/julia_notebooks/16_Notebook_DAGitty.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://colab.research.google.com/github/d2cml-ai/14.388_jl/blob/main/_build/jupyter_execute/julia_notebooks/16_Notebook_DAGitty.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="initThebeSBT()"
+  class="headerbtn headerbtn-launch-thebe"
+  data-toggle="tooltip"
+data-placement="left"
+title="Launch Thebe"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="headerbtn__text-container">Live Code</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/d2cml-ai/14.388_jl"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/d2cml-ai/14.388_jl/issues/new?title=Issue%20on%20page%20%2Fjulia_notebooks/16_Notebook_DAGitty.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/d2cml-ai/14.388_jl/edit/main/_build/jupyter_execute/julia_notebooks/16_Notebook_DAGitty.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Edit this page"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="headerbtn__text-container">suggest edit</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/julia_notebooks/16_Notebook_DAGitty.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#graph-generation-and-plotting">
+   16.1. Graph Generation and Plotting
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#report-relative-of-x2">
+   16.2. Report Relative of X2
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#find-paths-between-d-and-y">
+   16.3. Find Paths Between D and Y
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#list-all-testable-implications-of-the-model">
+   16.4. List All Testable Implications of the Model¶
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#identification-by-backdoor-list-minimal-adjustment-sets-to-identify-causal-effects">
+   16.5. Identification by Backdoor: List minimal adjustment sets to identify causal effects
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#identification-via-swig-and-d-separation">
+   16.6. Identification via SWIG and D-separation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#print-all-average-effects-identifiable-by-conditioning">
+   16.7. Print All Average Effects Identifiable by Conditioning
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#next-consider-the-elemntary-triangular-model">
+   16.8. Next Consider the elemntary Triangular Model:
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#this-model-has-not-testable-implications-and-is-markov-equivalent-to-any-other-dag-difined-on-names-x-d-y">
+     16.8.1. This model has not testable implications and is Markov-equivalent to any other DAG difined on names
+     <span class="math notranslate nohighlight">
+      \( (X,D,Y) \)
+     </span>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example-of-testing-dag-validity">
+   16.9. Example of Testing DAG Validity
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Causal identification in DAGs using Backdoor and Swigs, Equivalence Classes, Falsiability Tests</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#graph-generation-and-plotting">
+   16.1. Graph Generation and Plotting
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#report-relative-of-x2">
+   16.2. Report Relative of X2
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#find-paths-between-d-and-y">
+   16.3. Find Paths Between D and Y
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#list-all-testable-implications-of-the-model">
+   16.4. List All Testable Implications of the Model¶
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#identification-by-backdoor-list-minimal-adjustment-sets-to-identify-causal-effects">
+   16.5. Identification by Backdoor: List minimal adjustment sets to identify causal effects
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#identification-via-swig-and-d-separation">
+   16.6. Identification via SWIG and D-separation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#print-all-average-effects-identifiable-by-conditioning">
+   16.7. Print All Average Effects Identifiable by Conditioning
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#next-consider-the-elemntary-triangular-model">
+   16.8. Next Consider the elemntary Triangular Model:
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#this-model-has-not-testable-implications-and-is-markov-equivalent-to-any-other-dag-difined-on-names-x-d-y">
+     16.8.1. This model has not testable implications and is Markov-equivalent to any other DAG difined on names
+     <span class="math notranslate nohighlight">
+      \( (X,D,Y) \)
+     </span>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example-of-testing-dag-validity">
+   16.9. Example of Testing DAG Validity
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="causal-identification-in-dags-using-backdoor-and-swigs-equivalence-classes-falsiability-tests">
+<h1><span class="section-number">16. </span>Causal identification in DAGs using Backdoor and Swigs, Equivalence Classes, Falsiability Tests<a class="headerlink" href="#causal-identification-in-dags-using-backdoor-and-swigs-equivalence-classes-falsiability-tests" title="Permalink to this headline">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c">#import Pkg; Pkg.add(&quot;StructuralCausalModels&quot;)</span>
+<span class="c">#import Pkg; Pkg.add(&quot;TikzGraphs&quot;)</span>
+<span class="c">#import Pkg; Pkg.add(&quot;TikzPictures&quot;)</span>
+<span class="c">#import Pkg; Pkg.add(&quot;GraphViz&quot;)</span>
+<span class="c">#import Pkg; Pkg.add(&quot;Dagitty&quot;)</span>
+<span class="c">#import Pkg; Pkg.add(&quot;GraphPlot&quot;)</span>
+
+<span class="c">#using StructuralCausalModels</span>
+<span class="c">#using TikzGraphs</span>
+<span class="c">#using TikzPictures</span>
+<span class="c">#using Dagitty, Test </span>
+<span class="c">#using LightGraphs, GraphPlot</span>
+<span class="c">#import Pkg; Pkg.add(&quot;lav_parse_model_string&quot;)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="p">]</span><span class="n">build</span> <span class="n">GR</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">    Building</span> GR → `C:\Users\Work\.julia\scratchspaces\44cfe95a-1eb2-52ea-b672-e2afdf69b78f\037a1ca47e8a5989cc07d19729567bb71bfabd0c\build.log`
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Pkg</span><span class="o">.</span><span class="n">rm</span><span class="p">(</span><span class="s">&quot;Plots&quot;</span><span class="p">)</span>
+<span class="n">GC</span><span class="o">.</span><span class="n">gc</span><span class="p">()</span>
+<span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;Plots&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">    Updating</span> `C:\Users\Alexander\.julia\environments\v1.7\Project.toml`
+  [91a5bcdd] - Plots v1.29.0
+<span class=" -Color -Color-Bold -Color-Bold-Green">  No Changes</span> to `C:\Users\Alexander\.julia\environments\v1.7\Manifest.toml`
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Resolving</span> package versions...
+<span class=" -Color -Color-Bold -Color-Bold-Green">    Updating</span> `C:\Users\Alexander\.julia\environments\v1.7\Project.toml`
+  [91a5bcdd] + Plots v1.29.0
+<span class=" -Color -Color-Bold -Color-Bold-Green">  No Changes</span> to `C:\Users\Alexander\.julia\environments\v1.7\Manifest.toml`
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">Plots</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>┌ Info: Precompiling Plots [91a5bcdd-55d7-5caf-9e0b-520d859cae80]
+└ @ Base loading.jl:1423
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">StructuralCausalModels</span>
+<span class="k">using</span> <span class="n">GraphRecipes</span><span class="p">,</span> <span class="n">Plots</span>
+<span class="k">using</span> <span class="n">Random</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="graph-generation-and-plotting">
+<h2><span class="section-number">16.1. </span>Graph Generation and Plotting<a class="headerlink" href="#graph-generation-and-plotting" title="Permalink to this headline">#</a></h2>
+<p>The following DAG is due to Judea Pearl</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">G</span> <span class="o">=</span> <span class="s">&quot;dag {Z1 -&gt; {X1}; X1 -&gt; {D}; Z1 -&gt; {X2}; Z2 -&gt; X3; X3 -&gt; {Y}; Z2 -&gt; {X2}; D -&gt; {Y}</span>
+<span class="s">                ; X2 -&gt; {Y}; X2 -&gt; {D}; M -&gt; {Y}; D -&gt; {M}}&quot;</span>
+
+<span class="n">G</span> <span class="o">=</span> <span class="n">DAG</span><span class="p">(</span><span class="s">&quot;Model_1&quot;</span><span class="p">,</span> <span class="n">G</span><span class="p">);</span>
+
+<span class="n">to_ggm</span><span class="p">(</span><span class="n">G</span><span class="p">)</span> <span class="o">|&gt;</span> <span class="n">display</span>
+
+<span class="n">show</span><span class="p">(</span><span class="n">G</span><span class="p">)</span> <span class="c"># Variable&#39;s location in an array </span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&quot;DAG(M ~ D, Y ~ M + X2 + D + X3, D ~ X2 + X1, X2 ~ Z2 + Z1, X3 ~ Z2, X1 ~ Z1)&quot;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>OrderedDict{Union{Symbol, Vector{Symbol}}, Union{Symbol, Vector{Symbol}}} with 6 entries:
+  [:M]  =&gt; :D
+  [:Y]  =&gt; [:M, :X2, :D, :X3]
+  [:D]  =&gt; [:X2, :X1]
+  [:X2] =&gt; [:Z2, :Z1]
+  :X3   =&gt; :Z2
+  [:X1] =&gt; :Z1
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DAG object:
+
+name = &quot;Model_1&quot;
+vars = [:M, :D, :Y, :X2, :X3, :X1, :Z2, :Z1]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># variables&#39;s name into two arrays</span>
+
+<span class="n">names</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2-element Vector{Vector{Symbol}}:
+ [:M, :D, :Y, :X2, :X3, :X1, :Z2, :Z1]
+ [:M, :D, :Y, :X2, :X3, :X1, :Z2, :Z1]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># DAG to matrix</span>
+<span class="n">G</span><span class="o">.</span><span class="n">e</span>
+
+<span class="c"># colums : affected varaible </span>
+<span class="c"># rows : covariables </span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8×8 Named Matrix{Int64}
+Rows ╲ Cols │  :M   :D   :Y  :X2  :X3  :X1  :Z2  :Z1
+────────────┼───────────────────────────────────────
+:M          │   0    0    1    0    0    0    0    0
+:D          │   1    0    1    0    0    0    0    0
+:Y          │   0    0    0    0    0    0    0    0
+:X2         │   0    1    1    0    0    0    0    0
+:X3         │   0    0    1    0    0    0    0    0
+:X1         │   0    1    0    0    0    0    0    0
+:Z2         │   0    0    0    1    1    0    0    0
+:Z1         │   0    0    0    1    0    1    0    0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># First: all varibles in (0,0) coordinates</span>
+
+<span class="n">graphplot</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">e</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">names</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">e</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">curvature_scalar</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">nodesize</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+  <span class="n">method</span><span class="o">=</span><span class="ss">:spring</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">arrow</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nodeshape</span><span class="o">=</span><span class="ss">:circle</span><span class="p">,</span> <span class="n">nodecolor</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">dim</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="c"># curvature_scalar: size point</span>
+<span class="c"># arrow : arrow size</span>
+<span class="c"># fontsize: circle&#39;s size</span>
+<span class="c"># (x, y) location </span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/16_Notebook_DAGitty_10_0.svg" src="../_images/16_Notebook_DAGitty_10_0.svg" /></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">names</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">e</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8-element Vector{Symbol}:
+ :M
+ :D
+ :Y
+ :X2
+ :X3
+ :X1
+ :Z2
+ :Z1
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># X3 in (1,0) coordinates</span>
+<span class="n">graphplot</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">e</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">names</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">e</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">curvature_scalar</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">nodesize</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+  <span class="n">method</span><span class="o">=</span><span class="ss">:spring</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">arrow</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nodeshape</span><span class="o">=</span><span class="ss">:circle</span><span class="p">,</span> <span class="n">nodecolor</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">dim</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/16_Notebook_DAGitty_12_0.svg" src="../_images/16_Notebook_DAGitty_12_0.svg" /></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">names</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">e</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8-element Vector{Symbol}:
+ :M
+ :D
+ :Y
+ :X2
+ :X3
+ :X1
+ :Z2
+ :Z1
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># more details</span>
+<span class="c"># edgecolor: arrow&#39;s color</span>
+<span class="c"># axis_buffer: graph&#39;s size</span>
+
+<span class="n">graphplot</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">e</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">names</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">e</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">curvature_scalar</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">nodesize</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
+      <span class="n">method</span><span class="o">=</span><span class="ss">:spring</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">arrow</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">nodeshape</span><span class="o">=</span><span class="ss">:circle</span><span class="p">,</span> <span class="n">nodecolor</span> <span class="o">=</span> <span class="ss">:gray</span><span class="p">,</span><span class="n">axis_buffer</span> <span class="o">=</span> <span class="mf">0.1</span>
+        <span class="p">,</span><span class="n">edgecolor</span> <span class="o">=</span> <span class="ss">:black</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">nodestrokecolor</span> <span class="o">=</span> <span class="ss">:black</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/16_Notebook_DAGitty_14_0.svg" src="../_images/16_Notebook_DAGitty_14_0.svg" /></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">G</span><span class="o">.</span><span class="n">e</span>
+
+<span class="c"># rows : childer</span>
+<span class="c"># columns: parents </span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8×8 Named Matrix{Int64}
+Rows ╲ Cols │  :M   :D   :Y  :X2  :X3  :X1  :Z2  :Z1
+────────────┼───────────────────────────────────────
+:M          │   0    0    1    0    0    0    0    0
+:D          │   1    0    1    0    0    0    0    0
+:Y          │   0    0    0    0    0    0    0    0
+:X2         │   0    1    1    0    0    0    0    0
+:X3         │   0    0    1    0    0    0    0    0
+:X1         │   0    1    0    0    0    0    0    0
+:Z2         │   0    0    0    1    1    0    0    0
+:Z1         │   0    0    0    1    0    1    0    0
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="report-relative-of-x2">
+<h2><span class="section-number">16.2. </span>Report Relative of X2<a class="headerlink" href="#report-relative-of-x2" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c">#Parents function</span>
+
+<span class="k">function</span> <span class="n">parents</span><span class="p">(</span><span class="n">DAG</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="n">DAG</span><span class="o">.</span><span class="n">e</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">size</span><span class="p">(</span><span class="n">M</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">v</span> <span class="o">=</span><span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="n">n</span>
+            <span class="n">B</span> <span class="o">=</span> <span class="n">convert</span><span class="p">(</span><span class="kt">Int64</span><span class="p">,</span> <span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">x</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">B</span> <span class="o">==</span> <span class="mi">1</span>
+           <span class="n">push!</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">names</span><span class="p">(</span><span class="n">M</span><span class="p">,</span><span class="mi">1</span><span class="p">)[</span><span class="n">i</span><span class="p">])</span>
+        <span class="k">end</span>
+        <span class="k">end</span>
+<span class="k">return</span> <span class="n">v</span>
+<span class="k">end</span>
+ 
+<span class="c"># Children function</span>
+
+<span class="k">function</span> <span class="n">children</span><span class="p">(</span><span class="n">DAG</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="n">DAG</span><span class="o">.</span><span class="n">e</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">size</span><span class="p">(</span><span class="n">M</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">v</span> <span class="o">=</span><span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="n">n</span>
+           <span class="n">B</span> <span class="o">=</span> <span class="n">convert</span><span class="p">(</span><span class="kt">Int64</span><span class="p">,</span> <span class="n">M</span><span class="p">[</span><span class="n">x</span><span class="p">,</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">B</span> <span class="o">==</span> <span class="mi">1</span>
+            <span class="n">push!</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">names</span><span class="p">(</span><span class="n">M</span><span class="p">,</span><span class="mi">1</span><span class="p">)[</span><span class="n">i</span><span class="p">])</span>
+        <span class="k">end</span>
+        <span class="k">end</span>
+<span class="k">return</span> <span class="n">v</span>
+<span class="k">end</span>
+
+<span class="c"># Ancentors function</span>
+
+<span class="k">function</span> <span class="n">ancestors</span><span class="p">(</span><span class="n">DAG</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">CC</span> <span class="o">=</span><span class="p">[]</span>
+    <span class="n">A</span> <span class="o">=</span>  <span class="n">parents</span><span class="p">(</span><span class="n">DAG</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">push!</span><span class="p">(</span><span class="n">CC</span><span class="p">,</span> <span class="p">[</span><span class="n">A</span><span class="p">,</span><span class="n">x</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="n">size</span><span class="p">(</span><span class="n">A</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">push!</span><span class="p">(</span><span class="n">CC</span><span class="p">,</span> <span class="n">parents</span><span class="p">(</span><span class="n">DAG</span><span class="p">,</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+    <span class="k">end</span>
+<span class="k">return</span> <span class="n">CC</span>
+<span class="k">end</span> 
+
+
+<span class="c"># descendants function</span>
+
+<span class="k">function</span> <span class="n">descendants</span><span class="p">(</span><span class="n">DAG</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">CC</span> <span class="o">=</span><span class="p">[]</span>
+    <span class="n">A</span> <span class="o">=</span>  <span class="n">children</span><span class="p">(</span><span class="n">DAG</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">push!</span><span class="p">(</span><span class="n">CC</span><span class="p">,</span> <span class="p">[</span><span class="n">A</span><span class="p">,</span><span class="n">x</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="n">size</span><span class="p">(</span><span class="n">A</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">push!</span><span class="p">(</span><span class="n">CC</span><span class="p">,</span> <span class="n">children</span><span class="p">(</span><span class="n">DAG</span><span class="p">,</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+    <span class="k">end</span>
+<span class="k">return</span> <span class="n">CC</span>
+<span class="k">end</span> 
+
+
+<span class="c">#Details </span>
+
+<span class="c">#Declare variables at the beginning makes them as global variables</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>descendants (generic function with 1 method)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">parents</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="ss">:X2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2-element Vector{Any}:
+ :Z2
+ :Z1
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">ancestors</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="ss">:X2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3-element Vector{Any}:
+ Any[Any[:Z2, :Z1], :X2]
+ Any[]
+ Any[]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">children</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="ss">:D</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2-element Vector{Any}:
+ :M
+ :Y
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">descendants</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="ss">:X2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3-element Vector{Any}:
+ Any[Any[:D, :Y], :X2]
+ Any[:M, :Y]
+ Any[]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="find-paths-between-d-and-y">
+<h2><span class="section-number">16.3. </span>Find Paths Between D and Y<a class="headerlink" href="#find-paths-between-d-and-y" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">pths</span> <span class="o">=</span> <span class="n">all_paths</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="ss">:D</span><span class="p">,</span> <span class="ss">:Y</span><span class="p">)</span>
+<span class="c">#pths |&gt; display</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5-element Vector{Vector{Symbol}}:
+ [:D, :M, :Y]
+ [:D, :X1, :Z1, :X2, :Y]
+ [:D, :X1, :Z1, :X2, :Z2, :X3, :Y]
+ [:D, :X2, :Y]
+ [:D, :X2, :Z2, :X3, :Y]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="list-all-testable-implications-of-the-model">
+<h2><span class="section-number">16.4. </span>List All Testable Implications of the Model¶<a class="headerlink" href="#list-all-testable-implications-of-the-model" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c">#Conditional independency between two varaibles given conditioned set of variables</span>
+
+<span class="n">CInd</span> <span class="o">=</span> <span class="n">basis_set</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">CInd</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BasisSet[
+  :D ∐ :X3 | [:Z2]
+  :D ∐ :X3 | [:X2, :X1]
+  :D ∐ :X3 | [:X2, :Z2]
+  :D ∐ :X3 | [:X1, :Z2]
+  :D ∐ :X3 | [:X2, :X1, :Z2]
+  :D ∐ :Z2 | [:X2, :X1]
+  :D ∐ :Z1 | [:X2, :X1]
+  :M ∐ :X2 | [:D]
+  :M ∐ :X2 | [:Z2, :D]
+  :M ∐ :X2 | [:Z1, :D]
+  :M ∐ :X2 | [:Z2, :Z1, :D]
+  :M ∐ :X3 | [:D]
+  :M ∐ :X3 | [:Z2]
+  :M ∐ :X3 | [:D, :Z2]
+  :M ∐ :X1 | [:D]
+  :M ∐ :X1 | [:Z1, :D]
+  :M ∐ :Z2 | [:D]
+  :M ∐ :Z1 | [:D]
+  :X1 ∐ :Z2
+  :X1 ∐ :Z2 | [:Z1]
+  :X2 ∐ :X3 | [:Z2]
+  :X2 ∐ :X3 | [:Z2, :Z1]
+  :X2 ∐ :X1 | [:Z1]
+  :X2 ∐ :X1 | [:Z2, :Z1]
+  :X3 ∐ :X1
+  :X3 ∐ :X1 | [:Z1]
+  :X3 ∐ :X1 | [:Z2]
+  :X3 ∐ :X1 | [:Z1, :Z2]
+  :X3 ∐ :Z1
+  :X3 ∐ :Z1 | [:Z2]
+  :Y ∐ :X1 | [:Z1, :X2, :D]
+  :Y ∐ :X1 | [:X2, :D, :X3]
+  :Y ∐ :X1 | [:Z1, :X2, :D, :M]
+  :Y ∐ :X1 | [:Z1, :X2, :D, :X3]
+  :Y ∐ :X1 | [:X2, :D, :M, :X3]
+  :Y ∐ :X1 | [:Z1, :X2, :D, :M, :X3]
+  :Y ∐ :Z2 | [:X2, :D, :X3]
+  :Y ∐ :Z2 | [:X2, :D, :M, :X3]
+  :Y ∐ :Z1 | [:X2, :D, :X3]
+  :Y ∐ :Z1 | [:X2, :D, :M, :X3]
+  :Z2 ∐ :Z1
+]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="identification-by-backdoor-list-minimal-adjustment-sets-to-identify-causal-effects">
+<h2><span class="section-number">16.5. </span>Identification by Backdoor: List minimal adjustment sets to identify causal effects<a class="headerlink" href="#identification-by-backdoor-list-minimal-adjustment-sets-to-identify-causal-effects" title="Permalink to this headline">#</a></h2>
+<div class="math notranslate nohighlight">
+\[ D \rightarrow Y\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">pths</span> <span class="o">=</span> <span class="n">all_paths</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="ss">:D</span><span class="p">,</span> <span class="ss">:Y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5-element Vector{Vector{Symbol}}:
+ [:D, :M, :Y]
+ [:D, :X1, :Z1, :X2, :Y]
+ [:D, :X1, :Z1, :X2, :Z2, :X3, :Y]
+ [:D, :X2, :Y]
+ [:D, :X2, :Z2, :X3, :Y]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">bp</span> <span class="o">=</span> <span class="n">backdoor_paths</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pths</span><span class="p">,</span> <span class="ss">:D</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4-element Vector{Vector{Symbol}}:
+ [:D, :X1, :Z1, :X2, :Y]
+ [:D, :X1, :Z1, :X2, :Z2, :X3, :Y]
+ [:D, :X2, :Y]
+ [:D, :X2, :Z2, :X3, :Y]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">adjustmentsets</span> <span class="o">=</span> <span class="n">adjustment_sets</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="ss">:D</span><span class="p">,</span> <span class="ss">:Y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4-element Vector{Vector{Symbol}}:
+ [:X1, :X2]
+ [:Z1, :X2]
+ [:X2, :Z2]
+ [:X2, :X3]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">e</span> <span class="o">=</span> <span class="n">d_separation</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="ss">:D</span><span class="p">,</span> <span class="ss">:Y</span><span class="p">)</span>
+<span class="n">println</span><span class="p">(</span><span class="s">&quot;d_separation(</span><span class="si">$</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">name</span><span class="p">)</span><span class="s">, D, Y) = </span><span class="si">$e</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>d_separation(Model_1, D, Y) = false
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="identification-via-swig-and-d-separation">
+<h2><span class="section-number">16.6. </span>Identification via SWIG and D-separation<a class="headerlink" href="#identification-via-swig-and-d-separation" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">SWIG</span> <span class="o">=</span> <span class="s">&quot;dag {Z1 -&gt; {X1}; X1 -&gt; {D}; Z1 -&gt; {X2}; Z2 -&gt; X3; X3 -&gt; {Yd}; Z2 -&gt; {X2}; X2 -&gt; {Yd} </span>
+<span class="s">        ; X2 -&gt; {D}; Md -&gt; {Yd}; d -&gt; {Md}}&quot;</span>
+
+<span class="n">SWIG</span> <span class="o">=</span> <span class="n">DAG</span><span class="p">(</span><span class="s">&quot;Model_2&quot;</span><span class="p">,</span> <span class="n">SWIG</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>OrderedDict{Union{Symbol, Vector{Symbol}}, Union{Symbol, Vector{Symbol}}} with 6 entries:
+  [:Md] =&gt; :d
+  [:Yd] =&gt; [:Md, :X2, :X3]
+  [:D]  =&gt; [:X2, :X1]
+  [:X2] =&gt; [:Z2, :Z1]
+  :X3   =&gt; :Z2
+  [:X1] =&gt; :Z1
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>name = &quot;Model_2&quot;
+vars = [:Md, :d, :Yd, :X2, :X3, :D, :X1, :Z2, :Z1]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DAG object:
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">names</span><span class="p">(</span><span class="n">SWIG</span><span class="o">.</span><span class="n">e</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9-element Vector{Symbol}:
+ :Md
+ :d
+ :Yd
+ :X2
+ :X3
+ :D
+ :X1
+ :Z2
+ :Z1
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">graphplot</span><span class="p">(</span><span class="n">SWIG</span><span class="o">.</span><span class="n">e</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">names</span><span class="p">(</span><span class="n">SWIG</span><span class="o">.</span><span class="n">e</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">curvature_scalar</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">nodesize</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
+      <span class="n">method</span><span class="o">=</span><span class="ss">:spring</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">arrow</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">nodeshape</span><span class="o">=</span><span class="ss">:circle</span><span class="p">,</span> <span class="n">nodecolor</span> <span class="o">=</span> <span class="ss">:gray</span><span class="p">,</span><span class="n">axis_buffer</span> <span class="o">=</span> <span class="mf">0.1</span>
+        <span class="p">,</span><span class="n">edgecolor</span> <span class="o">=</span> <span class="ss">:black</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">nodestrokecolor</span> <span class="o">=</span> <span class="ss">:black</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/16_Notebook_DAGitty_34_0.svg" src="../_images/16_Notebook_DAGitty_34_0.svg" /></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c">#Conditional independency between two varaibles given conditioned set of variables</span>
+
+<span class="n">CInd</span> <span class="o">=</span> <span class="n">basis_set</span><span class="p">(</span><span class="n">SWIG</span><span class="p">)</span>
+<span class="c">#length(CInd)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BasisSet[
+  :D ∐ :Z2 | [:X2, :X1]
+  :D ∐ :Z1 | [:X2, :X1]
+  :Md ∐ :X2
+  :Md ∐ :X2 | [:d]
+  :Md ∐ :X2 | [:Z2]
+  :Md ∐ :X2 | [:Z1]
+  :Md ∐ :X2 | [:d, :Z2]
+  :Md ∐ :X2 | [:d, :Z1]
+  :Md ∐ :X2 | [:Z2, :Z1]
+  :Md ∐ :X2 | [:d, :Z2, :Z1]
+  :Md ∐ :X3
+  :Md ∐ :X3 | [:d]
+  :Md ∐ :X3 | [:Z2]
+  :Md ∐ :X3 | [:d, :Z2]
+  :Md ∐ :D
+  :Md ∐ :D | [:d]
+  :Md ∐ :D | [:X2]
+  :Md ∐ :D | [:X1]
+  :Md ∐ :D | [:d, :X2]
+  :Md ∐ :D | [:d, :X1]
+  :Md ∐ :D | [:X2, :X1]
+  :Md ∐ :D | [:d, :X2, :X1]
+  :Md ∐ :X1
+  :Md ∐ :X1 | [:d]
+  :Md ∐ :X1 | [:Z1]
+  :Md ∐ :X1 | [:d, :Z1]
+  :Md ∐ :Z2
+  :Md ∐ :Z2 | [:d]
+  :Md ∐ :Z1
+  :Md ∐ :Z1 | [:d]
+  :X1 ∐ :Z2
+  :X1 ∐ :Z2 | [:Z1]
+  :X2 ∐ :X3 | [:Z2]
+  :X2 ∐ :X3 | [:Z2, :Z1]
+  :X2 ∐ :X1 | [:Z1]
+  :X2 ∐ :X1 | [:Z2, :Z1]
+  :X3 ∐ :D | [:Z2]
+  :X3 ∐ :D | [:Z2, :X2]
+  :X3 ∐ :D | [:Z2, :X1]
+  :X3 ∐ :D | [:X2, :X1]
+  :X3 ∐ :D | [:Z2, :X2, :X1]
+  :X3 ∐ :X1
+  :X3 ∐ :X1 | [:Z2]
+  :X3 ∐ :X1 | [:Z1]
+  :X3 ∐ :X1 | [:Z2, :Z1]
+  :X3 ∐ :Z1
+  :X3 ∐ :Z1 | [:Z2]
+  :Yd ∐ :D | [:X2, :X3]
+  :Yd ∐ :D | [:X2, :X1]
+  :Yd ∐ :D | [:Md, :X2, :X3]
+  :Yd ∐ :D | [:Md, :X2, :X1]
+  :Yd ∐ :D | [:X2, :X3, :X1]
+  :Yd ∐ :D | [:Md, :X2, :X3, :X1]
+  :Yd ∐ :X1 | [:Z1]
+  :Yd ∐ :X1 | [:Md, :Z1]
+  :Yd ∐ :X1 | [:X2, :X3]
+  :Yd ∐ :X1 | [:X2, :Z1]
+  :Yd ∐ :X1 | [:X3, :Z1]
+  :Yd ∐ :X1 | [:Md, :X2, :X3]
+  :Yd ∐ :X1 | [:Md, :X2, :Z1]
+  :Yd ∐ :X1 | [:Md, :X3, :Z1]
+  :Yd ∐ :X1 | [:X2, :X3, :Z1]
+  :Yd ∐ :X1 | [:Md, :X2, :X3, :Z1]
+  :Yd ∐ :Z2 | [:X2, :X3]
+  :Yd ∐ :Z2 | [:Md, :X2, :X3]
+  :Yd ∐ :Z1 | [:X2, :X3]
+  :Yd ∐ :Z1 | [:Md, :X2, :X3]
+  :Z2 ∐ :Z1
+  :d ∐ :Yd | [:Md]
+  :d ∐ :Yd | [:Md, :X2]
+  :d ∐ :Yd | [:Md, :X3]
+  :d ∐ :Yd | [:Md, :X2, :X3]
+  :d ∐ :X2
+  :d ∐ :X2 | [:Z2]
+  :d ∐ :X2 | [:Z1]
+  :d ∐ :X2 | [:Z2, :Z1]
+  :d ∐ :X3
+  :d ∐ :X3 | [:Z2]
+  :d ∐ :D
+  :d ∐ :D | [:X2]
+  :d ∐ :D | [:X1]
+  :d ∐ :D | [:X2, :X1]
+  :d ∐ :X1
+  :d ∐ :X1 | [:Z1]
+  :d ∐ :Z2
+  :d ∐ :Z1
+]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="print-all-average-effects-identifiable-by-conditioning">
+<h2><span class="section-number">16.7. </span>Print All Average Effects Identifiable by Conditioning<a class="headerlink" href="#print-all-average-effects-identifiable-by-conditioning" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">conditioning_iden</span><span class="p">(</span><span class="n">DAG</span><span class="p">)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="n">size</span><span class="p">(</span><span class="n">names</span><span class="p">(</span><span class="n">DAG</span><span class="o">.</span><span class="n">e</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="n">n</span>
+        <span class="n">a1</span> <span class="o">=</span> <span class="n">names</span><span class="p">(</span><span class="n">DAG</span><span class="o">.</span><span class="n">e</span><span class="p">,</span><span class="mi">1</span><span class="p">)[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">a2</span> <span class="o">=</span> <span class="n">children</span><span class="p">(</span><span class="n">DAG</span><span class="p">,</span> <span class="n">a1</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="n">size</span><span class="p">(</span><span class="n">a2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>  
+            <span class="n">a3</span> <span class="o">=</span> <span class="n">adjustment_sets</span><span class="p">(</span><span class="n">DAG</span><span class="p">,</span> <span class="n">a1</span><span class="p">,</span> <span class="n">a2</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">size</span><span class="p">(</span><span class="n">a3</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span>
+                <span class="n">println</span><span class="p">(</span><span class="s">&quot;The effect:&quot;</span><span class="p">,</span> <span class="n">a1</span><span class="p">,</span> <span class="s">&quot; -&gt; &quot;</span><span class="p">,</span> <span class="n">a2</span><span class="p">[</span><span class="n">j</span><span class="p">],</span><span class="s">&quot;  is identifiable by controlling for : &quot;</span> <span class="p">,</span> <span class="n">a3</span><span class="p">)</span>
+
+            <span class="k">end</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>conditioning_iden (generic function with 1 method)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">conditioning_iden</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The effect:M -&gt; Y  is identifiable by controlling for : [[:D]]
+The effect:D -&gt; M  is identifiable by controlling for : [[:X1], [:Z1], [:X2], [:Z2], [:X3]]
+The effect:D -&gt; Y  is identifiable by controlling for : [[:X1, :X2], [:Z1, :X2], [:X2, :Z2], [:X2, :X3]]
+The effect:X2 -&gt; D  is identifiable by controlling for : [[:Z1], [:X1]]
+The effect:X2 -&gt; Y  is identifiable by controlling for : [[:Z1, :Z2], [:Z1, :X3], [:X1, :Z2], [:X1, :X3], [:D, :Z2], [:D, :X3]]
+The effect:X3 -&gt; Y  is identifiable by controlling for : [[:Z2], [:X2, :D], [:X2, :Z1], [:X2, :X1]]
+The effect:X1 -&gt; D  is identifiable by controlling for : [[:Z1], [:X2]]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="next-consider-the-elemntary-triangular-model">
+<h2><span class="section-number">16.8. </span>Next Consider the elemntary Triangular Model:<a class="headerlink" href="#next-consider-the-elemntary-triangular-model" title="Permalink to this headline">#</a></h2>
+<div class="math notranslate nohighlight">
+\[ D \rightarrow Y, X \rightarrow (D,Y) \]</div>
+<section id="this-model-has-not-testable-implications-and-is-markov-equivalent-to-any-other-dag-difined-on-names-x-d-y">
+<h3><span class="section-number">16.8.1. </span>This model has not testable implications and is Markov-equivalent to any other DAG difined on names <span class="math notranslate nohighlight">\( (X,D,Y) \)</span><a class="headerlink" href="#this-model-has-not-testable-implications-and-is-markov-equivalent-to-any-other-dag-difined-on-names-x-d-y" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">G3</span> <span class="o">=</span> <span class="s">&quot;dag {D -&gt; {Y}; X -&gt; {D}; X -&gt; {Y}}&quot;</span>
+
+<span class="n">G3</span> <span class="o">=</span> <span class="n">DAG</span><span class="p">(</span><span class="s">&quot;Model_3&quot;</span><span class="p">,</span> <span class="n">G3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>OrderedDict{Union{Symbol, Vector{Symbol}}, Union{Symbol, Vector{Symbol}}} with 2 entries:
+  [:Y] =&gt; [:X, :D]
+  [:D] =&gt; :X
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>name = &quot;Model_3&quot;
+vars = [:Y, :X, :D]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DAG object:
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">names</span><span class="p">(</span><span class="n">G3</span><span class="o">.</span><span class="n">e</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3-element Vector{Symbol}:
+ :Y
+ :X
+ :D
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">graphplot</span><span class="p">(</span><span class="n">G3</span><span class="o">.</span><span class="n">e</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">names</span><span class="p">(</span><span class="n">G3</span><span class="o">.</span><span class="n">e</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">curvature_scalar</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">nodesize</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
+      <span class="n">method</span><span class="o">=</span><span class="ss">:spring</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">arrow</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">nodeshape</span><span class="o">=</span><span class="ss">:circle</span><span class="p">,</span> <span class="n">nodecolor</span> <span class="o">=</span> <span class="ss">:gray</span><span class="p">,</span><span class="n">axis_buffer</span> <span class="o">=</span> <span class="mf">0.1</span>
+        <span class="p">,</span><span class="n">edgecolor</span> <span class="o">=</span> <span class="ss">:black</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mf">0.5</span><span class="p">],</span> <span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="n">nodestrokecolor</span> <span class="o">=</span> <span class="ss">:black</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/16_Notebook_DAGitty_42_0.svg" src="../_images/16_Notebook_DAGitty_42_0.svg" /></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c">#Conditional Independencies</span>
+<span class="n">CInd</span> <span class="o">=</span> <span class="n">basis_set</span><span class="p">(</span><span class="n">G3</span><span class="p">)</span> <span class="c"># nothing</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BasisSet[
+]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">bp1</span> <span class="o">=</span> <span class="n">backdoor_paths</span><span class="p">(</span><span class="n">G3</span><span class="p">,</span> <span class="n">all_paths</span><span class="p">(</span><span class="n">G3</span><span class="p">,</span> <span class="ss">:D</span><span class="p">,</span> <span class="ss">:Y</span><span class="p">),</span> <span class="ss">:D</span><span class="p">)</span> <span class="c"># controling X (confounder varaible)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1-element Vector{Vector{Symbol}}:
+ [:D, :X, :Y]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">conditioning_iden</span><span class="p">(</span><span class="n">G3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The effect:D -&gt; Y  is identifiable by controlling for : [[:X]]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="example-of-testing-dag-validity">
+<h2><span class="section-number">16.9. </span>Example of Testing DAG Validity<a class="headerlink" href="#example-of-testing-dag-validity" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Random</span><span class="o">.</span><span class="n">seed!</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>TaskLocalRNG()
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">to_ggm</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&quot;DAG(M ~ D, Y ~ M + X2 + D + X3, D ~ X2 + X1, X2 ~ Z2 + Z1, X3 ~ Z2, X1 ~ Z1)&quot;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "d2cml-ai/14.388_jl",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "julia-1.7"
+        },
+        kernelOptions: {
+            kernelName: "julia-1.7",
+            path: "./julia_notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'julia-1.7'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="15_Functional-aproximation-by-nn-and-rf.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">15. </span>Functional Approximations by Trees and Neural Networks</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="17_jl_dosearch.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">17. </span>Dosearch for Causal Identification in DAGs</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Victor Chernozhukov<br/>
+  
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
