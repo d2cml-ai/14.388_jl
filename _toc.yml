@@ -3,6 +3,9 @@
 
 format: jb-book
 root: intro
+options:
+    numbered: true
+
 chapters:
 - file: julia_notebooks/01_Julia_Notebook_Linear_Model_Overfitting
 - file: julia_notebooks/02_PM1_Notebook1_Prediction_newdata.ipynb
