@@ -12,8 +12,21 @@ execute:
 
 # Define the name of the latex output file for PDF builds
 latex:
+  latex_engine: "pdflatex"
+  use_jupyterbook_latex: true
   latex_documents:
     targetname: book.tex
+
+notebook_interface: "notebook"
+
+# Sphinx configs
+
+sphinx:
+  config:
+    html_show_copyright: false
+    latex_toplevel_sectioning: 'section'
+    latex_elements.papersize: a4paper
+    latex_elements.pointsize: 12pt
 
 # Add a bibtex file so that we can create citations
 bibtex_bibfiles:
@@ -24,6 +37,20 @@ repository:
   url: https://github.com/d2cml-ai/14.388_jl  # Online location of your book
   path_to_book: _build/jupyter_execute  # Optional path to your book, relative to the repository root
   branch: main  # Which branch of the repository should be used when creating links (optional)
+
+# Launch button settings
+launch_buttons:
+  binder             : false
+  binderhub          : false
+  bunderhub_url      : https://mybinder.org
+  jupyterhub         : false
+  thebe              : true
+  colab              : false
+  notebook_interface : classic
+  colab_url          : https://colab.research.google.com
+
+
+
 
 # Add GitHub buttons to your book
 # See https://jupyterbook.org/customize/config.html#add-a-link-to-your-repository
