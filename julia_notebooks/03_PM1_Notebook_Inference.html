@@ -92,6 +92,11 @@ const thebe_selector_output = ".output, .cell_output"
         <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
       
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
       
       
       <h1 class="site-logo" id="site-title">My sample book</h1>
@@ -260,7 +265,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/julia_notebooks/03_PM1_Notebook_Inference.ipynb"
+        <a href="https://mybinder.org/v2/gh/d2cml-ai/14.388_jl/master?urlpath=tree/docs/julia_notebooks/03_PM1_Notebook_Inference.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -303,7 +308,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://github.com/executablebooks/jupyter-book"
+        <a href="https://github.com/d2cml-ai/14.388_jl"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -320,7 +325,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fjulia_notebooks/03_PM1_Notebook_Inference.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/d2cml-ai/14.388_jl/issues/new?title=Issue%20on%20page%20%2Fjulia_notebooks/03_PM1_Notebook_Inference.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -541,10 +546,13 @@ title="Print to PDF"
 <p>What is the difference in predicted wages between men and women with the same job-relevant characteristics?</p>
 <p>Thus, we analyze if there is a difference in the payment of men and women (<em>gender wage gap</em>). The gender wage gap may partly reflect <em>discrimination</em> against women in the labor market or may partly reflect a <em>selection effect</em>, namely that women are relatively more likely to take on occupations that pay somewhat less (for example, school teaching).</p>
 <p>To investigate the gender wage gap, we consider the following log-linear regression model</p>
-<p>\begin{align}
-\log(Y) &amp;= \beta’X + \epsilon\
-&amp;= \beta_1 D  + \beta_2’ W + \epsilon,
-\end{align}</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\log(Y) &amp;= \beta'X + \epsilon \\
+&amp;= \beta_1 D  + \beta_2' W + \epsilon,
+\end{align}
+\end{split}\]</div>
 <p>where <span class="math notranslate nohighlight">\(D\)</span> is the indicator of being female (<span class="math notranslate nohighlight">\(1\)</span> if female and <span class="math notranslate nohighlight">\(0\)</span> otherwise) and the
 <span class="math notranslate nohighlight">\(W\)</span>’s are controls explaining variation in wages. Considering transformed wages by the logarithm, we are analyzing the relative difference in the payment of men and women.</p>
 <section id="data-analysis">
@@ -564,6 +572,12 @@ title="Print to PDF"
 <span class="k">using</span> <span class="n">Dates</span>
 <span class="k">using</span> <span class="n">Plots</span>
 <span class="k">using</span> <span class="n">Statistics</span><span class="p">,</span><span class="n">RData</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>┌ Info: Precompiling Plots [91a5bcdd-55d7-5caf-9e0b-520d859cae80]
+└ @ Base loading.jl:1423
 </pre></div>
 </div>
 </div>
@@ -617,9 +631,10 @@ Number of Columns : 20
 </div>
 <p>Thus, the unconditional gender wage gap is about <span class="math notranslate nohighlight">\(3,8\)</span>% for the group of never married workers (women get paid less on average in our sample). We also observe that never married working women are relatively more educated than working men and have lower working experience.</p>
 <p>This unconditional (predictive) effect of gender equals the coefficient <span class="math notranslate nohighlight">\(\beta\)</span> in the univariate ols regression of <span class="math notranslate nohighlight">\(Y\)</span> on <span class="math notranslate nohighlight">\(D\)</span>:</p>
-<p>\begin{align}
-\log(Y) &amp;=\beta D + \epsilon.
-\end{align}</p>
+<div class="math notranslate nohighlight">
+\[
+\log(Y) =\beta D + \epsilon.
+\]</div>
 <p>We verify this by running an ols regression in Julia.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">

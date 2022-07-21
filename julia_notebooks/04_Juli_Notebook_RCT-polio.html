@@ -92,6 +92,11 @@ const thebe_selector_output = ".output, .cell_output"
         <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
       
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
       
       
       <h1 class="site-logo" id="site-title">My sample book</h1>
@@ -260,7 +265,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/julia_notebooks/04_Juli_Notebook_RCT-polio.ipynb"
+        <a href="https://mybinder.org/v2/gh/d2cml-ai/14.388_jl/master?urlpath=tree/docs/julia_notebooks/04_Juli_Notebook_RCT-polio.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -303,7 +308,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://github.com/executablebooks/jupyter-book"
+        <a href="https://github.com/d2cml-ai/14.388_jl"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -320,7 +325,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fjulia_notebooks/04_Juli_Notebook_RCT-polio.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/d2cml-ai/14.388_jl/issues/new?title=Issue%20on%20page%20%2Fjulia_notebooks/04_Juli_Notebook_RCT-polio.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -501,6 +506,21 @@ title="Print to PDF"
 <span class="k">using</span> <span class="n">Distributions</span>
 <span class="k">using</span> <span class="n">HypothesisTests</span>
 <span class="k">using</span> <span class="n">Images</span><span class="p">,</span> <span class="n">FileIO</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>ArgumentError: Package ClinicalTrialUtilities not found in current path:
+- Run `import Pkg; Pkg.add(&quot;ClinicalTrialUtilities&quot;)` to install the ClinicalTrialUtilities package.
+
+
+Stacktrace:
+ [1] require(into::Module, mod::Symbol)
+   @ Base .\loading.jl:967
+ [2] eval
+   @ .\boot.jl:373 [inlined]
+ [3] include_string(mapexpr::typeof(REPL.softscope), mod::Module, code::String, filename::String)
+   @ Base .\loading.jl:1196
 </pre></div>
 </div>
 </div>
