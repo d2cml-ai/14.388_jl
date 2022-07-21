@@ -32,8 +32,13 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-data = CSV.File("../data/gun_clean.csv") |> DataFrame;
-println("Number of rows: ",size(data,1))
-println("Number of columns: ",size(data,2))
+# Running the following lines takes aprox. 10 minutes (depends on your CPU)
+
+example = DataFrame(CountyCode = data[:,"CountyCode"]);
+rdata = DataFrame(CountyCode = data[:,"CountyCode"]);
+
+for i in 1:size(varlis,1)
+    rdata[!,varlis[i]]= residuals(lm(term(Symbol(varlis[i])) ~ sum(term.(Symbol.(year))) + sum(term.(Symbol.(fixed))), data))
+end
 -------------------
 
