@@ -633,8 +633,37 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>┌ Info: Precompiling CSV [336ed68f-0bac-5ca0-87d4-7b16caf5d00b]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>┌ Info: Precompiling Plots [91a5bcdd-55d7-5caf-9e0b-520d859cae80]
 └ @ Base loading.jl:1423
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">InterruptException</span>:
+
+<span class="ne">Stacktrace</span>:
+  <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">try_yieldto</span><span class="p">(</span><span class="n">undo</span><span class="p">::</span><span class="n">typeof</span><span class="p">(</span><span class="n">Base</span><span class="o">.</span><span class="n">ensure_rescheduled</span><span class="p">))</span>
+    <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">task</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">812</span>
+  <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">wait</span><span class="p">()</span>
+    <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">task</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">872</span>
+  <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="n">wait</span><span class="p">(</span><span class="n">c</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">GenericCondition</span><span class="p">{</span><span class="n">Base</span><span class="o">.</span><span class="n">Threads</span><span class="o">.</span><span class="n">SpinLock</span><span class="p">})</span>
+    <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">condition</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">123</span>
+  <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="n">wait</span><span class="p">(</span><span class="n">x</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">Process</span><span class="p">)</span>
+    <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">process</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">636</span>
+  <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="n">success</span><span class="p">(</span><span class="n">x</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">Process</span><span class="p">)</span>
+    <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">process</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">498</span>
+  <span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="n">compilecache</span><span class="p">(</span><span class="n">pkg</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">PkgId</span><span class="p">,</span> <span class="n">path</span><span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="n">internal_stderr</span><span class="p">::</span><span class="n">IO</span><span class="p">,</span> <span class="n">internal_stdout</span><span class="p">::</span><span class="n">IO</span><span class="p">,</span> <span class="n">ignore_loaded_modules</span><span class="p">::</span><span class="n">Bool</span><span class="p">)</span>
+    <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1433</span>
+  <span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="n">compilecache</span><span class="p">(</span><span class="n">pkg</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">PkgId</span><span class="p">,</span> <span class="n">path</span><span class="p">::</span><span class="n">String</span><span class="p">)</span>
+    <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1410</span>
+  <span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="n">_require</span><span class="p">(</span><span class="n">pkg</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">PkgId</span><span class="p">)</span>
+    <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1120</span>
+  <span class="p">[</span><span class="mi">9</span><span class="p">]</span> <span class="n">require</span><span class="p">(</span><span class="n">uuidkey</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">PkgId</span><span class="p">)</span>
+    <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1013</span>
+ <span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="n">require</span><span class="p">(</span><span class="n">into</span><span class="p">::</span><span class="n">Module</span><span class="p">,</span> <span class="n">mod</span><span class="p">::</span><span class="n">Symbol</span><span class="p">)</span>
+    <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">997</span>
+ <span class="p">[</span><span class="mi">11</span><span class="p">]</span> <span class="nb">eval</span>
+    <span class="o">@</span> <span class="o">.</span>\<span class="n">boot</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">373</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">12</span><span class="p">]</span> <span class="n">include_string</span><span class="p">(</span><span class="n">mapexpr</span><span class="p">::</span><span class="n">typeof</span><span class="p">(</span><span class="n">REPL</span><span class="o">.</span><span class="n">softscope</span><span class="p">),</span> <span class="n">mod</span><span class="p">::</span><span class="n">Module</span><span class="p">,</span> <span class="n">code</span><span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="n">filename</span><span class="p">::</span><span class="n">String</span><span class="p">)</span>
+    <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1196</span>
 </pre></div>
 </div>
 </div>
