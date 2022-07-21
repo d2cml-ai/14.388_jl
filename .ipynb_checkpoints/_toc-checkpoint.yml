@@ -4,7 +4,7 @@
 format: jb-book
 root: intro
 options:
-    numbered: true
+  numbered: true
 
 chapters:
 - file: julia_notebooks/01_Julia_Notebook_Linear_Model_Overfitting
