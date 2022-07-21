@@ -32,8 +32,8 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-['n = 100', 'p = 400', 'Z = rand( Uniform( 0, 1 ), n  ) .- 0.5', 'W = reshape( rand( Uniform( 0, 1 ), n * p  ), n, p )', '']
+['using Pkg', 'using CSV', 'using DataFrames', 'using Dates', 'using Plots']
 ...
-['    label = "", ', '    lw = 3)', 'xlabel!( "g(X)" )', 'ylabel!( "Y" )', 'display( plt )']
+['using LinearAlgebra, GLM, DataFrames, Statistics, Random', '', 'using Distributions', '', 'using GLMNet']
 -------------------
 

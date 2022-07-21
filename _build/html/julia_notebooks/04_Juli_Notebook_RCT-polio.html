@@ -509,6 +509,21 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>ArgumentError: Package ClinicalTrialUtilities not found in current path:
+- Run `import Pkg; Pkg.add(&quot;ClinicalTrialUtilities&quot;)` to install the ClinicalTrialUtilities package.
+
+
+Stacktrace:
+ [1] require(into::Module, mod::Symbol)
+   @ Base .\loading.jl:967
+ [2] eval
+   @ .\boot.jl:373 [inlined]
+ [3] include_string(mapexpr::typeof(REPL.softscope), mod::Module, code::String, filename::String)
+   @ Base .\loading.jl:1196
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="rct-application-polio-vaccination">

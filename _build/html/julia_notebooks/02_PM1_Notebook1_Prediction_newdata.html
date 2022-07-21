@@ -412,49 +412,42 @@ title="Print to PDF"
     </div>
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   OLS and lasso for wage prediction
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   Introduction
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#introduction">
-     Introduction
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#data">
-     Data
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#data-analysis">
-     Data Analysis
-    </a>
-   </li>
-  </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data">
+   Data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-analysis">
+   Data Analysis
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#prediction-question">
    Prediction Question
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#re-estimating-the-flexible-model-using-lasso">
      Re-estimating the flexible model using lasso
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#evaluating-the-predictive-performance-of-the-basic-and-flexible-models">
      Evaluating the predictive performance of the basic and flexible models
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#data-splitting">
-     Data Splitting
-    </a>
-   </li>
   </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-splitting">
+   Data Splitting
+  </a>
  </li>
 </ul>
 
@@ -475,49 +468,42 @@ title="Print to PDF"
                         </div>
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   OLS and lasso for wage prediction
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   Introduction
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#introduction">
-     Introduction
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#data">
-     Data
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#data-analysis">
-     Data Analysis
-    </a>
-   </li>
-  </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data">
+   Data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-analysis">
+   Data Analysis
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#prediction-question">
    Prediction Question
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#re-estimating-the-flexible-model-using-lasso">
      Re-estimating the flexible model using lasso
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#evaluating-the-predictive-performance-of-the-basic-and-flexible-models">
      Evaluating the predictive performance of the basic and flexible models
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#data-splitting">
-     Data Splitting
-    </a>
-   </li>
   </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-splitting">
+   Data Splitting
+  </a>
  </li>
 </ul>
 
@@ -556,41 +542,6 @@ Two main questions here are:</p>
 <span class="c"># Pkg.add(to_install)</span>
 
 <span class="k">using</span> <span class="n">CSV</span><span class="p">,</span> <span class="n">DataFrames</span><span class="p">,</span> <span class="n">Dates</span><span class="p">,</span> <span class="n">Plots</span><span class="p">,</span> <span class="n">Lathe</span><span class="p">,</span> <span class="n">GLM</span><span class="p">,</span> <span class="n">Statistics</span><span class="p">,</span> <span class="n">MLBase</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>┌ Info: Precompiling Plots [91a5bcdd-55d7-5caf-9e0b-520d859cae80]
-└ @ Base loading.jl:1423
-</pre></div>
-</div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">InterruptException</span>:
-
-<span class="ne">Stacktrace</span>:
-  <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">try_yieldto</span><span class="p">(</span><span class="n">undo</span><span class="p">::</span><span class="n">typeof</span><span class="p">(</span><span class="n">Base</span><span class="o">.</span><span class="n">ensure_rescheduled</span><span class="p">))</span>
-    <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">task</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">812</span>
-  <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">wait</span><span class="p">()</span>
-    <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">task</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">872</span>
-  <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="n">wait</span><span class="p">(</span><span class="n">c</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">GenericCondition</span><span class="p">{</span><span class="n">Base</span><span class="o">.</span><span class="n">Threads</span><span class="o">.</span><span class="n">SpinLock</span><span class="p">})</span>
-    <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">condition</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">123</span>
-  <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="n">wait</span><span class="p">(</span><span class="n">x</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">Process</span><span class="p">)</span>
-    <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">process</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">636</span>
-  <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="n">success</span><span class="p">(</span><span class="n">x</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">Process</span><span class="p">)</span>
-    <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">process</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">498</span>
-  <span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="n">compilecache</span><span class="p">(</span><span class="n">pkg</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">PkgId</span><span class="p">,</span> <span class="n">path</span><span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="n">internal_stderr</span><span class="p">::</span><span class="n">IO</span><span class="p">,</span> <span class="n">internal_stdout</span><span class="p">::</span><span class="n">IO</span><span class="p">,</span> <span class="n">ignore_loaded_modules</span><span class="p">::</span><span class="n">Bool</span><span class="p">)</span>
-    <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1433</span>
-  <span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="n">compilecache</span><span class="p">(</span><span class="n">pkg</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">PkgId</span><span class="p">,</span> <span class="n">path</span><span class="p">::</span><span class="n">String</span><span class="p">)</span>
-    <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1410</span>
-  <span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="n">_require</span><span class="p">(</span><span class="n">pkg</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">PkgId</span><span class="p">)</span>
-    <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1120</span>
-  <span class="p">[</span><span class="mi">9</span><span class="p">]</span> <span class="n">require</span><span class="p">(</span><span class="n">uuidkey</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">PkgId</span><span class="p">)</span>
-    <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1013</span>
- <span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="n">require</span><span class="p">(</span><span class="n">into</span><span class="p">::</span><span class="n">Module</span><span class="p">,</span> <span class="n">mod</span><span class="p">::</span><span class="n">Symbol</span><span class="p">)</span>
-    <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">997</span>
- <span class="p">[</span><span class="mi">11</span><span class="p">]</span> <span class="nb">eval</span>
-    <span class="o">@</span> <span class="o">.</span>\<span class="n">boot</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">373</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
- <span class="p">[</span><span class="mi">12</span><span class="p">]</span> <span class="n">include_string</span><span class="p">(</span><span class="n">mapexpr</span><span class="p">::</span><span class="n">typeof</span><span class="p">(</span><span class="n">REPL</span><span class="o">.</span><span class="n">softscope</span><span class="p">),</span> <span class="n">mod</span><span class="p">::</span><span class="n">Module</span><span class="p">,</span> <span class="n">code</span><span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="n">filename</span><span class="p">::</span><span class="n">String</span><span class="p">)</span>
-    <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1196</span>
 </pre></div>
 </div>
 </div>
@@ -655,9 +606,8 @@ Number of raw regressors: 18
 </div>
 <p>E.g., the share of female workers in our example is ~44% (<span class="math notranslate nohighlight">\(sex = 1\)</span> if female).</p>
 </section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="prediction-question">
-<h1>Prediction Question<a class="headerlink" href="#prediction-question" title="Permalink to this headline">#</a></h1>
+<section id="prediction-question">
+<h2>Prediction Question<a class="headerlink" href="#prediction-question" title="Permalink to this headline">#</a></h2>
 <p>Now, we will construct a prediction rule for hourly wage <span class="math notranslate nohighlight">\(Y\)</span> , which depends linearly on job-relevant characteristics  <span class="math notranslate nohighlight">\(X\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[Y = \beta' X + \epsilon \]</div>
@@ -1021,7 +971,7 @@ Number of regressors in the flexible model: 246
 </div>
 </div>
 <section id="re-estimating-the-flexible-model-using-lasso">
-<h2>Re-estimating the flexible model using lasso<a class="headerlink" href="#re-estimating-the-flexible-model-using-lasso" title="Permalink to this headline">#</a></h2>
+<h3>Re-estimating the flexible model using lasso<a class="headerlink" href="#re-estimating-the-flexible-model-using-lasso" title="Permalink to this headline">#</a></h3>
 <p>We re-estimate the flexible model using Lasso (the least absolute shrinkage and selection operator) rather than ols. Lasso is a penalized regression method that can be used to reduce the complexity of a regression model when the ratio <span class="math notranslate nohighlight">\(p/n\)</span> is not small. We will introduce this approach formally later in the course, but for now, we try it out here as a black-box method.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1296,7 +1246,7 @@ x246  -0.000877637
 </div>
 </section>
 <section id="evaluating-the-predictive-performance-of-the-basic-and-flexible-models">
-<h2>Evaluating the predictive performance of the basic and flexible models<a class="headerlink" href="#evaluating-the-predictive-performance-of-the-basic-and-flexible-models" title="Permalink to this headline">#</a></h2>
+<h3>Evaluating the predictive performance of the basic and flexible models<a class="headerlink" href="#evaluating-the-predictive-performance-of-the-basic-and-flexible-models" title="Permalink to this headline">#</a></h3>
 <p>Now, we can evaluate the performance of both models based on the (adjusted) <span class="math notranslate nohighlight">\(R^2_{sample}\)</span> and the (adjusted) <span class="math notranslate nohighlight">\(MSE_{sample}\)</span>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1678,6 +1628,7 @@ x246  -0.000877637
 </div>
 <p>Considering the measures above, the flexible model performs slightly better than the basic model.</p>
 <p>As <span class="math notranslate nohighlight">\(p/n\)</span> is not large, the discrepancy between the adjusted and unadjusted measures is not large. However, if it were, we might still like to apply <strong>data splitting</strong> as a more general procedure to deal with potential overfitting if <span class="math notranslate nohighlight">\(p/n\)</span>. We illustrate the approach in the following.</p>
+</section>
 </section>
 <section id="data-splitting">
 <h2>Data Splitting<a class="headerlink" href="#data-splitting" title="Permalink to this headline">#</a></h2>
