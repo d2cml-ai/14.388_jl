@@ -17,34 +17,31 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-## Install package 
+## Confidence interval of VEs
 
-#import Pkg; Pkg.add("CairoMakie")
-#import Pkg; Pkg.add("Plots")
-#import Pkg; Pkg.add("Distributions")
-#import Pkg; Pkg.add("HypothesisTests")
-#Pkg.add("ClinicalTrialUtilities")
-using CairoMakie  # for density plot 
-using ClinicalTrialUtilities
-using Random   # for random seeds
-using Statistics 
-using Distributions
-using HypothesisTests
-using Images, FileIO
+CI_VE = [round(quantile!(VEs, 0.025); digits = 4 ), round(quantile!(VEs, 0.975); digits = 4)]
+
+println("two-sided 95% confidence interval of VE is $CI_VE")
+
+## Approximate distribution of VEs estimates 
+
+f = Figure(resolution = (600, 400))
+Axis(f[1,1], title = "Approximate distribution of VEs estimates ")
+    
+density!(VEs, color = (:red, 0.1), strokecolor = :red, strokewidth = 1, strokearound = true, bandwidth = 0.008257) 
+
+f
+
 ------------------
 
-ArgumentError: Package ClinicalTrialUtilities not found in current path:
-- Run `import Pkg; Pkg.add("ClinicalTrialUtilities")` to install the ClinicalTrialUtilities package.
-
+UndefVarError: Axis not defined
 
 Stacktrace:
- [1] require(into::Module, mod::Symbol)
-   @ Base .\loading.jl:967
+ [1] top-level scope
+   @ In[7]:10
  [2] eval
    @ .\boot.jl:373 [inlined]
  [3] include_string(mapexpr::typeof(REPL.softscope), mod::Module, code::String, filename::String)
    @ Base .\loading.jl:1196
-LoadError: ArgumentError: Package ClinicalTrialUtilities not found in current path:
-- Run `import Pkg; Pkg.add("ClinicalTrialUtilities")` to install the ClinicalTrialUtilities package.
-
+LoadError: UndefVarError: Axis not defined
 

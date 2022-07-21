@@ -1,0 +1,1255 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>15. Functional Approximations by Trees and Neural Networks &#8212; Inference on Causal and Structural Parametters Using ML and AI</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="16. Causal identification in DAGs using Backdoor and Swigs, Equivalence Classes, Falsiability Tests" href="16_Notebook_DAGitty.html" />
+    <link rel="prev" title="14. AutoML for wage prediction" href="14_jl_automl_wage.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Inference on Causal and Structural Parametters Using ML and AI</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome to your Jupyter Book
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="01_Julia_Notebook_Linear_Model_Overfitting.html">
+   1. Julia Notebook Linear Model Overfitting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02_PM1_Notebook1_Prediction_newdata.html">
+   2. OLS and lasso for wage prediction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03_PM1_Notebook_Inference.html">
+   3. An inferential problem: The Gender Wage Gap
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04_Juli_Notebook_RCT-polio.html">
+   4. RCT application Polio  vaccination
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05_Julia_Analyzing_RCT_with_Precision.html">
+   5. Analyzing RCT with Precision by Adjusting for Baseline Covariates
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06_RCT_Precision_Adjustment.html">
+   6. Analyzing RCT reemployment experiment
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07_julia-notebook-linear-penalized-regs.html">
+   7. Penalized Linear Regressions: A Simulation Experiment
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08_jl_ml_estimators_wage_pred.html">
+   8. Machine Learning Estimators for Wage Prediction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="09_Julia_OrthogonalLearning_lab4.html">
+   9. Experiment on Orthogonal Learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="10_Julia_pm2_notebook_jannis.html">
+   10. Testing the Convergence Hypothesis
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="11_py-heterogenous-wage-effects.html">
+   11. Application: Heterogeneous Effect of Gender on Wage Using Double Lasso
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="12_jl_collider_bias.html">
+   12. Collider Bias
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="13_Julia_pm3_notebook_newdata_nn.html">
+   13. Deep Neural Networks for Wage Prediction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="14_jl_automl_wage.html">
+   14. AutoML for wage prediction
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   15. Functional Approximations by Trees and Neural Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="16_Notebook_DAGitty.html">
+   16. Causal identification in DAGs using Backdoor and Swigs, Equivalence Classes, Falsiability Tests
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="17_jl_dosearch.html">
+   17. Dosearch for Causal Identification in DAGs
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="18_Julia_pm3_notebook_inference_clustering.html">
+   18. A Case Study: The Effect of Gun Ownership on Gun-Homicide Rates
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="19_Julia-pm3-newdata-nn.html">
+   19. The Effect of Gun Ownership on Gun-Homicide Rates - proceeding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="20_jl_dml_401k.html">
+   20. DML for ATE and LATE of 401(k) on Wealth
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="21_jl_dag_401k.html">
+   21. Identification Analysis of 401(k) Example w DAGs
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="22_Julia_debiased-ml-for-partially-linear-model.html">
+   22. Double/Debiased Machine Learning for the Partially Linear Regression Model.
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="23_jl_sensmakr_dml.html">
+   23. Sensitivity Analysis with Sensmakr and Debiased ML
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="24_debiased-ml-for-partially-linear-iv-model-in-julia.html">
+   24. Double/Debiased ML for Partially Linear IV Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="25_Julia_weak_iv_experiments.html">
+   25. A Simple Example of Properties of IV estimator when Instruments are Weak
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/d2cml-ai/14.388_jl/main?urlpath=tree/_build/jupyter_execute/julia_notebooks/15_Functional-aproximation-by-nn-and-rf.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://colab.research.google.com/github/d2cml-ai/14.388_jl/blob/main/_build/jupyter_execute/julia_notebooks/15_Functional-aproximation-by-nn-and-rf.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="initThebeSBT()"
+  class="headerbtn headerbtn-launch-thebe"
+  data-toggle="tooltip"
+data-placement="left"
+title="Launch Thebe"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="headerbtn__text-container">Live Code</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/d2cml-ai/14.388_jl"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/d2cml-ai/14.388_jl/issues/new?title=Issue%20on%20page%20%2Fjulia_notebooks/15_Functional-aproximation-by-nn-and-rf.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/d2cml-ai/14.388_jl/edit/main/_build/jupyter_execute/julia_notebooks/15_Functional-aproximation-by-nn-and-rf.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Edit this page"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="headerbtn__text-container">suggest edit</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/julia_notebooks/15_Functional-aproximation-by-nn-and-rf.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#functional-approximation-by-a-tree">
+   15.1. Functional Approximation by a Tree
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#functional-approximation-by-rf">
+   15.2. Functional Approximation by RF
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#boosted-trees">
+   15.3. Boosted Trees
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#same-example-with-a-neural-network">
+   15.4. Same Example with a Neural Network
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Functional Approximations by Trees and Neural Networks</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#functional-approximation-by-a-tree">
+   15.1. Functional Approximation by a Tree
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#functional-approximation-by-rf">
+   15.2. Functional Approximation by RF
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#boosted-trees">
+   15.3. Boosted Trees
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#same-example-with-a-neural-network">
+   15.4. Same Example with a Neural Network
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="functional-approximations-by-trees-and-neural-networks">
+<h1><span class="section-number">15. </span>Functional Approximations by Trees and Neural Networks<a class="headerlink" href="#functional-approximations-by-trees-and-neural-networks" title="Permalink to this headline">#</a></h1>
+<p>Here we show how the function
+$<span class="math notranslate nohighlight">\(
+x \mapsto exp(4 x)
+\)</span>$
+can be easily approximated by a tree-based methods (Trees, Random Forest) and a neural network (2 Layered Neural Network)</p>
+<section id="functional-approximation-by-a-tree">
+<h2><span class="section-number">15.1. </span>Functional Approximation by a Tree<a class="headerlink" href="#functional-approximation-by-a-tree" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c">#import packages</span>
+<span class="k">using</span> <span class="n">Pkg</span>
+<span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;Distributions&quot;</span><span class="p">)</span>
+<span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;DecisionTree&quot;</span><span class="p">)</span> 
+<span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;Plots&quot;</span><span class="p">)</span>
+<span class="k">using</span> <span class="n">LinearAlgebra</span><span class="p">,</span> <span class="n">DataFrames</span><span class="p">,</span> <span class="n">Statistics</span><span class="p">,</span> <span class="n">Random</span><span class="p">,</span> <span class="n">Distributions</span><span class="p">,</span><span class="n">DecisionTree</span><span class="p">,</span> <span class="n">Plots</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">    Updating</span> registry at `C:\Users\Work\.julia\registries\General.toml`
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">   Resolving</span> package versions...
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">  No Changes</span> to `C:\Users\Work\.julia\environments\v1.7\Project.toml`
+<span class=" -Color -Color-Bold -Color-Bold-Green">  No Changes</span> to `C:\Users\Work\.julia\environments\v1.7\Manifest.toml`
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Interrupted: Exiting precompilation...
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">rand</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">X_train</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">f1</span> <span class="o">=</span> <span class="n">x</span><span class="o">-&gt;</span><span class="n">exp</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
+<span class="n">Y_train</span> <span class="o">=</span> <span class="n">vec</span><span class="p">(</span><span class="n">f1</span><span class="o">.</span><span class="p">(</span><span class="n">X_train</span><span class="p">));</span>
+
+<span class="n">TreeModel</span> <span class="o">=</span> <span class="n">build_tree</span><span class="p">(</span><span class="n">Y_train</span><span class="p">,</span> <span class="n">X_train</span><span class="p">)</span>
+<span class="c"># apply learned model</span>
+<span class="n">predTM</span> <span class="o">=</span> <span class="n">apply_tree</span><span class="p">(</span><span class="n">TreeModel</span><span class="p">,</span> <span class="n">X_train</span><span class="p">)</span>
+
+
+<span class="n">scatter</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s">&quot;p&quot;</span><span class="p">,</span> <span class="n">pch</span><span class="o">=</span><span class="mi">19</span><span class="p">,</span> <span class="n">xlab</span><span class="o">=</span><span class="s">&quot;z&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;g(z)&quot;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">.8</span><span class="p">)</span>
+<span class="n">plot!</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">predTM</span><span class="p">,</span> <span class="n">lt</span> <span class="o">=</span> <span class="ss">:scatter</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/15_Functional-aproximation-by-nn-and-rf_3_0.svg" src="../_images/15_Functional-aproximation-by-nn-and-rf_3_0.svg" /></div>
+</div>
+<hr class="docutils" />
+<p>Another method</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;DecisionTree&quot;</span><span class="p">)</span>
+<span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;ScikitLearn&quot;</span><span class="p">)</span>
+<span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;PyPlot&quot;</span><span class="p">)</span>
+<span class="k">using</span> <span class="n">DecisionTree</span><span class="p">,</span> <span class="n">ScikitLearn</span><span class="p">,</span> <span class="n">PyPlot</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">   Resolving</span> package versions...
+<span class=" -Color -Color-Bold -Color-Bold-Green">  No Changes</span> to `C:\Users\PC\.julia\environments\v1.6\Project.toml`
+<span class=" -Color -Color-Bold -Color-Bold-Green">  No Changes</span> to `C:\Users\PC\.julia\environments\v1.6\Manifest.toml`
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Resolving</span> package versions...
+<span class=" -Color -Color-Bold -Color-Bold-Green">  No Changes</span> to `C:\Users\PC\.julia\environments\v1.6\Project.toml`
+<span class=" -Color -Color-Bold -Color-Bold-Green">  No Changes</span> to `C:\Users\PC\.julia\environments\v1.6\Manifest.toml`
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Resolving</span> package versions...
+<span class=" -Color -Color-Bold -Color-Bold-Green">  No Changes</span> to `C:\Users\PC\.julia\environments\v1.6\Project.toml`
+<span class=" -Color -Color-Bold -Color-Bold-Green">  No Changes</span> to `C:\Users\PC\.julia\environments\v1.6\Manifest.toml`
+WARNING: using PyPlot.scatter in module Main conflicts with an existing identifier.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">reg</span><span class="o">=</span> <span class="n">DecisionTreeRegressor</span><span class="p">(</span><span class="n">pruning_purity_threshold</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DecisionTreeRegressor
+max_depth:                -1
+min_samples_leaf:         5
+min_samples_split:        2
+min_purity_increase:      0.0
+pruning_purity_threshold: 0.1
+n_subfeatures:            0
+root:                     nothing
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c">#using DecisionTree: fit as fit</span>
+<span class="n">DecisionTree</span><span class="o">.</span><span class="n">fit!</span><span class="p">(</span><span class="n">reg</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span><span class="n">Y_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DecisionTreeRegressor
+max_depth:                -1
+min_samples_leaf:         5
+min_samples_split:        2
+min_purity_increase:      0.0
+pruning_purity_threshold: 0.1
+n_subfeatures:            0
+root:                     Decision Tree
+Leaves: 142
+Depth:  10
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">predic1</span> <span class="o">=</span> <span class="n">DecisionTree</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">reg</span><span class="p">,</span><span class="n">X_train</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">scatter</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s">&quot;p&quot;</span><span class="p">,</span> <span class="n">pch</span><span class="o">=</span><span class="mi">19</span><span class="p">,</span> <span class="n">xlab</span><span class="o">=</span><span class="s">&quot;z&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;g(z)&quot;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">.8</span><span class="p">)</span>
+<span class="n">scatter!</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">predic1</span>   <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/15_Functional-aproximation-by-nn-and-rf_10_0.svg" src="../_images/15_Functional-aproximation-by-nn-and-rf_10_0.svg" /></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">tree</span> <span class="o">=</span> <span class="n">DecisionTreeRegressor</span><span class="p">(</span><span class="n">pruning_purity_threshold</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">)</span> <span class="c">#</span>
+<span class="n">DecisionTree</span><span class="o">.</span><span class="n">fit!</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span><span class="n">Y_train</span><span class="p">)</span>
+<span class="n">pred2</span> <span class="o">=</span> <span class="n">DecisionTree</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">scatter</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s">&quot;p&quot;</span><span class="p">,</span> <span class="n">pch</span><span class="o">=</span><span class="mi">19</span><span class="p">,</span> <span class="n">xlab</span><span class="o">=</span><span class="s">&quot;z&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;g(z)&quot;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">.8</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">&quot;actual&quot;</span><span class="p">)</span>
+<span class="n">scatter!</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">pred2</span> <span class="p">,</span><span class="n">label</span> <span class="o">=</span> <span class="s">&quot;pred&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/15_Functional-aproximation-by-nn-and-rf_11_0.svg" src="../_images/15_Functional-aproximation-by-nn-and-rf_11_0.svg" /></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="functional-approximation-by-rf">
+<h2><span class="section-number">15.2. </span>Functional Approximation by RF<a class="headerlink" href="#functional-approximation-by-rf" title="Permalink to this headline">#</a></h2>
+<p>Here we show how the function
+$<span class="math notranslate nohighlight">\(
+x \mapsto exp(4 x)
+\)</span>$
+can be easily approximated by a tree-based method (Random Forest) and a neural network (2 Layered Neural Network)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">RFmodel</span> <span class="o">=</span> <span class="n">build_forest</span><span class="p">(</span><span class="n">Y_train</span><span class="p">,</span> <span class="n">X_train</span><span class="p">)</span>
+<span class="n">pred_RF</span> <span class="o">=</span> <span class="n">apply_forest</span><span class="p">(</span><span class="n">RFmodel</span><span class="p">,</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">scatter</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s">&quot;p&quot;</span><span class="p">,</span> <span class="n">pch</span><span class="o">=</span><span class="mi">19</span><span class="p">,</span> <span class="n">xlab</span><span class="o">=</span><span class="s">&quot;z&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;g(z)&quot;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">&quot;real data&quot;</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s">&quot;Random Forest&quot;</span><span class="p">)</span>
+<span class="n">scatter!</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">pred_RF</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span> <span class="s">&quot;RF pred&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/15_Functional-aproximation-by-nn-and-rf_15_0.svg" src="../_images/15_Functional-aproximation-by-nn-and-rf_15_0.svg" /></div>
+</div>
+</section>
+<section id="boosted-trees">
+<h2><span class="section-number">15.3. </span>Boosted Trees<a class="headerlink" href="#boosted-trees" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;JLBoost&quot;</span><span class="p">),</span><span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;StatsBase&quot;</span><span class="p">),</span><span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;MLJBase&quot;</span><span class="p">),</span><span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;MLJ&quot;</span><span class="p">)</span>
+<span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">url</span> <span class="o">=</span><span class="s">&quot;https://github.com/Evovest/EvoTrees.jl&quot;</span><span class="p">)</span> 
+<span class="k">using</span> <span class="n">StatsBase</span><span class="o">:</span> <span class="n">sample</span>
+<span class="k">using</span> <span class="n">EvoTrees</span><span class="p">,</span><span class="n">MLJBase</span><span class="p">,</span> <span class="n">MLJ</span><span class="p">,</span><span class="n">JLBoost</span><span class="p">,</span><span class="n">EvoTrees</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">   Resolving</span> package versions...
+<span class=" -Color -Color-Bold -Color-Bold-Green">  No Changes</span> to `C:\Users\PC\.julia\environments\v1.6\Project.toml`
+<span class=" -Color -Color-Bold -Color-Bold-Green">  No Changes</span> to `C:\Users\PC\.julia\environments\v1.6\Manifest.toml`
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Resolving</span> package versions...
+<span class=" -Color -Color-Bold -Color-Bold-Green">  No Changes</span> to `C:\Users\PC\.julia\environments\v1.6\Project.toml`
+<span class=" -Color -Color-Bold -Color-Bold-Green">  No Changes</span> to `C:\Users\PC\.julia\environments\v1.6\Manifest.toml`
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Resolving</span> package versions...
+<span class=" -Color -Color-Bold -Color-Bold-Green">  No Changes</span> to `C:\Users\PC\.julia\environments\v1.6\Project.toml`
+<span class=" -Color -Color-Bold -Color-Bold-Green">  No Changes</span> to `C:\Users\PC\.julia\environments\v1.6\Manifest.toml`
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Resolving</span> package versions...
+<span class=" -Color -Color-Bold -Color-Bold-Green">  No Changes</span> to `C:\Users\PC\.julia\environments\v1.6\Project.toml`
+<span class=" -Color -Color-Bold -Color-Bold-Green">  No Changes</span> to `C:\Users\PC\.julia\environments\v1.6\Manifest.toml`
+<span class=" -Color -Color-Bold -Color-Bold-Green">    Updating</span> git-repo `https://github.com/Evovest/EvoTrees.jl`
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Resolving</span> package versions...
+<span class=" -Color -Color-Bold -Color-Bold-Green">  No Changes</span> to `C:\Users\PC\.julia\environments\v1.6\Project.toml`
+<span class=" -Color -Color-Bold -Color-Bold-Green">  No Changes</span> to `C:\Users\PC\.julia\environments\v1.6\Manifest.toml`
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">tree_model</span> <span class="o">=</span> <span class="n">EvoTreeRegressor</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="ss">:linear</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">η</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">nrounds</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>EvoTreeRegressor(
+    loss = EvoTrees.Linear(),
+    nrounds = 100,
+    λ = 0.0,
+    γ = 0.0,
+    η = 0.01,
+    max_depth = 4,
+    min_weight = 1.0,
+    rowsample = 1.0,
+    colsample = 1.0,
+    nbins = 64,
+    α = 0.5,
+    metric = :mse,
+    rng = MersenneTwister(123),
+    device = &quot;cpu&quot;)<span class=" -Color -Color-Blue"> @756</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">mach</span> <span class="o">=</span> <span class="n">machine</span><span class="p">(</span><span class="n">tree_model</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Blue">Machine{EvoTreeRegressor{Float64,…},…} @017</span> trained 0 times; caches data
+  args: 
+    1:	<span class=" -Color -Color-Blue">Source @677</span> ⏎ `AbstractMatrix{ScientificTypes.Continuous}`
+    2:	<span class=" -Color -Color-Blue">Source @195</span> ⏎ `AbstractVector{ScientificTypes.Continuous}`
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">MLJ</span><span class="o">.</span><span class="n">fit!</span><span class="p">(</span><span class="n">mach</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>┌ Info: Training <span class=" -Color -Color-Blue">Machine{EvoTreeRegressor{Float64,…},…} @017</span>.
+└ @ MLJBase C:\Users\PC\.julia\packages\MLJBase\KWyqX\src\machines.jl:342
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Blue">Machine{EvoTreeRegressor{Float64,…},…} @017</span> trained 1 time; caches data
+  args: 
+    1:	<span class=" -Color -Color-Blue">Source @677</span> ⏎ `AbstractMatrix{ScientificTypes.Continuous}`
+    2:	<span class=" -Color -Color-Blue">Source @195</span> ⏎ `AbstractVector{ScientificTypes.Continuous}`
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">yhat</span> <span class="o">=</span> <span class="n">MLJ</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">mach</span><span class="p">,</span> <span class="n">X_train</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">scatter</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span><span class="n">type</span><span class="o">=</span><span class="s">&quot;p&quot;</span><span class="p">,</span> <span class="n">pch</span><span class="o">=</span><span class="mi">19</span><span class="p">,</span> <span class="n">xlab</span><span class="o">=</span><span class="s">&quot;z&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;g(z)&quot;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">&quot;real data&quot;</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s">&quot;Boosted Tree&quot;</span><span class="p">)</span>
+<span class="n">scatter!</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">yhat</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">&quot;boosted tree pred&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/15_Functional-aproximation-by-nn-and-rf_22_0.svg" src="../_images/15_Functional-aproximation-by-nn-and-rf_22_0.svg" /></div>
+</div>
+<hr class="docutils" />
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;XGBoost&quot;</span><span class="p">)</span>
+<span class="k">using</span>  <span class="n">XGBoost</span>
+<span class="k">using</span> <span class="n">XGBoost</span><span class="o">:</span> <span class="n">predict</span> <span class="n">as</span> <span class="n">predict</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">   Resolving</span> package versions...
+<span class=" -Color -Color-Bold -Color-Bold-Green">  No Changes</span> to `C:\Users\PC\.julia\environments\v1.6\Project.toml`
+<span class=" -Color -Color-Bold -Color-Bold-Green">  No Changes</span> to `C:\Users\PC\.julia\environments\v1.6\Manifest.toml`
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">bst</span> <span class="o">=</span> <span class="n">xgboost</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="n">Y_train</span><span class="p">,</span> <span class="n">eta</span> <span class="o">=</span> <span class="mf">0.01</span><span class="p">,</span> <span class="n">max_depth</span> <span class="o">=</span> <span class="mi">4</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1]	train-rmse:18.876593
+[2]	train-rmse:18.691868
+[3]	train-rmse:18.508989
+[4]	train-rmse:18.327881
+[5]	train-rmse:18.148575
+[6]	train-rmse:17.971058
+[7]	train-rmse:17.795252
+[8]	train-rmse:17.621233
+[9]	train-rmse:17.448864
+[10]	train-rmse:17.278259
+[11]	train-rmse:17.109264
+[12]	train-rmse:16.942022
+[13]	train-rmse:16.776306
+[14]	train-rmse:16.612339
+[15]	train-rmse:16.449865
+[16]	train-rmse:16.289007
+[17]	train-rmse:16.129822
+[18]	train-rmse:15.972092
+[19]	train-rmse:15.815914
+[20]	train-rmse:15.661380
+[21]	train-rmse:15.508253
+[22]	train-rmse:15.356736
+[23]	train-rmse:15.206606
+[24]	train-rmse:15.058071
+[25]	train-rmse:14.910873
+[26]	train-rmse:14.765248
+[27]	train-rmse:14.620919
+[28]	train-rmse:14.478019
+[29]	train-rmse:14.336637
+[30]	train-rmse:14.196507
+[31]	train-rmse:14.057889
+[32]	train-rmse:13.920573
+[33]	train-rmse:13.784621
+[34]	train-rmse:13.649907
+[35]	train-rmse:13.516484
+[36]	train-rmse:13.384448
+[37]	train-rmse:13.253679
+[38]	train-rmse:13.124231
+[39]	train-rmse:12.996073
+[40]	train-rmse:12.869074
+[41]	train-rmse:12.743465
+[42]	train-rmse:12.619059
+[43]	train-rmse:12.495759
+[44]	train-rmse:12.373770
+[45]	train-rmse:12.252950
+[46]	train-rmse:12.133340
+[47]	train-rmse:12.014955
+[48]	train-rmse:11.897552
+[49]	train-rmse:11.781461
+[50]	train-rmse:11.666348
+[51]	train-rmse:11.552497
+[52]	train-rmse:11.439727
+[53]	train-rmse:11.328119
+[54]	train-rmse:11.217441
+[55]	train-rmse:11.108001
+[56]	train-rmse:10.999513
+[57]	train-rmse:10.892219
+[58]	train-rmse:10.785958
+[59]	train-rmse:10.680598
+[60]	train-rmse:10.576423
+[61]	train-rmse:10.473196
+[62]	train-rmse:10.371066
+[63]	train-rmse:10.269953
+[64]	train-rmse:10.169834
+[65]	train-rmse:10.070516
+[66]	train-rmse:9.972274
+[67]	train-rmse:9.875071
+[68]	train-rmse:9.778818
+[69]	train-rmse:9.683336
+[70]	train-rmse:9.588865
+[71]	train-rmse:9.495381
+[72]	train-rmse:9.402850
+[73]	train-rmse:9.311188
+[74]	train-rmse:9.220325
+[75]	train-rmse:9.130445
+[76]	train-rmse:9.041410
+[77]	train-rmse:8.953279
+[78]	train-rmse:8.865887
+[79]	train-rmse:8.779490
+[80]	train-rmse:8.693878
+[81]	train-rmse:8.609105
+[82]	train-rmse:8.525094
+[83]	train-rmse:8.441978
+[84]	train-rmse:8.359652
+[85]	train-rmse:8.278185
+[86]	train-rmse:8.197524
+[87]	train-rmse:8.117633
+[88]	train-rmse:8.038429
+[89]	train-rmse:7.960125
+[90]	train-rmse:7.882496
+[91]	train-rmse:7.805698
+[92]	train-rmse:7.729612
+[93]	train-rmse:7.654318
+[94]	train-rmse:7.579671
+[95]	train-rmse:7.505816
+[96]	train-rmse:7.432719
+[97]	train-rmse:7.360249
+[98]	train-rmse:7.288570
+[99]	train-rmse:7.217535
+[100]	train-rmse:7.147254
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">pred_xg</span> <span class="o">=</span> <span class="n">XGBoost</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">bst</span><span class="p">,</span> <span class="n">X_train</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">scatter</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span><span class="n">type</span><span class="o">=</span><span class="s">&quot;p&quot;</span><span class="p">,</span> <span class="n">pch</span><span class="o">=</span><span class="mi">19</span><span class="p">,</span> <span class="n">xlab</span><span class="o">=</span><span class="s">&quot;z&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;g(z)&quot;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">&quot;real data&quot;</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s">&quot;Boosted Tree&quot;</span><span class="p">)</span>
+<span class="n">scatter!</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">pred_xg</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">&quot;boosted tree pred&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/15_Functional-aproximation-by-nn-and-rf_27_0.svg" src="../_images/15_Functional-aproximation-by-nn-and-rf_27_0.svg" /></div>
+</div>
+</section>
+<section id="same-example-with-a-neural-network">
+<h2><span class="section-number">15.4. </span>Same Example with a Neural Network<a class="headerlink" href="#same-example-with-a-neural-network" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">Pkg</span>
+<span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;Flux&quot;</span><span class="p">)</span>
+<span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;CUDA&quot;</span><span class="p">)</span>
+<span class="k">using</span> <span class="n">Flux</span> <span class="p">,</span><span class="n">CUDA</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">    Updating</span> registry at `C:\Users\PC\.julia\registries\General`
+<span class=" -Color -Color-Bold -Color-Bold-Green">    Updating</span> git-repo `https://github.com/JuliaRegistries/General.git`
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Resolving</span> package versions...
+<span class=" -Color -Color-Bold -Color-Bold-Green">  No Changes</span> to `C:\Users\PC\.julia\environments\v1.6\Project.toml`
+<span class=" -Color -Color-Bold -Color-Bold-Green">  No Changes</span> to `C:\Users\PC\.julia\environments\v1.6\Manifest.toml`
+<span class=" -Color -Color-Bold -Color-Bold-Green">   Resolving</span> package versions...
+<span class=" -Color -Color-Bold -Color-Bold-Green">  No Changes</span> to `C:\Users\PC\.julia\environments\v1.6\Project.toml`
+<span class=" -Color -Color-Bold -Color-Bold-Green">  No Changes</span> to `C:\Users\PC\.julia\environments\v1.6\Manifest.toml`
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c">#building the model</span>
+<span class="n">layer1</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span><span class="n">relu</span><span class="p">)</span>
+<span class="n">layer2</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="n">relu</span>  <span class="p">)</span>
+<span class="n">layer3</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">Chain</span><span class="p">(</span> 
+    <span class="n">layer1</span><span class="p">,</span>
+    <span class="n">layer2</span><span class="p">,</span>
+    <span class="n">layer3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Chain(Dense(200, 200, relu), Dense(20, 20, relu), Dense(1, 1))
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c">#building the predict function</span>
+<span class="n">predict</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dense(1000, 1000)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">pred1</span> <span class="o">=</span>  <span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">);</span>
+<span class="n">loss</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="o">=</span> <span class="n">Flux</span><span class="o">.</span><span class="n">Losses</span><span class="o">.</span><span class="n">mse</span><span class="p">(</span><span class="n">predict</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">loss</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">)</span>
+<span class="n">scatter</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">&quot;real data&quot;</span><span class="p">)</span>
+<span class="n">scatter!</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">pred1</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">&quot;Pred 1 epoch&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/15_Functional-aproximation-by-nn-and-rf_32_0.svg" src="../_images/15_Functional-aproximation-by-nn-and-rf_32_0.svg" /></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">loss</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="o">=</span> <span class="n">Flux</span><span class="o">.</span><span class="n">Losses</span><span class="o">.</span><span class="n">mse</span><span class="p">(</span><span class="n">predict</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">println</span><span class="p">(</span><span class="s">&quot;The MSE for this first prediction without optimizer is &quot;</span><span class="p">,</span> <span class="n">loss</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The MSE for this first prediction without optimizer is 337.16081003955463
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c">#we add a optimizer and join the data</span>
+<span class="n">opt</span> <span class="o">=</span> <span class="n">Descent</span><span class="p">()</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">[(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1-element Vector{Tuple{Matrix{Float64}, Vector{Float64}}}:
+ ([0.9689090290325688; 0.31471100259046536; … ; 0.2663976530107113; 0.20701468772840603], [48.213357833162746, 3.521348491280118, 2.866427439356483, 8.272422817358601, 53.512866881993816, 14.529213760147783, 6.108768791529166, 19.672450641566268, 23.60526446409177, 2.954510831462392  …  4.408653805124879, 31.962469934004506, 14.977500601729055, 49.52996018680737, 3.388360418105015, 13.077868353751981, 13.46074438760623, 1.488868999465349, 2.90255276053667, 2.288871155686333])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">predict</span><span class="o">.</span><span class="n">weight</span><span class="p">;</span>
+<span class="n">predict</span><span class="o">.</span><span class="n">bias</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">parameters</span> <span class="o">=</span> <span class="n">Flux</span><span class="o">.</span><span class="n">params</span><span class="p">(</span><span class="n">predict</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Params([Float32[-0.013528538 0.0005054379 … 0.03477837 -0.034057308; 0.022096576 0.012891116 … 0.045323372 0.035130866; … ; 0.033888526 -0.010750242 … 0.006573618 -0.045998964; -0.023219064 0.018195882 … 0.028697826 0.008215948], Float32[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0  …  0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">predict</span><span class="o">.</span><span class="n">weight</span> <span class="k">in</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">predict</span><span class="o">.</span><span class="n">bias</span> <span class="k">in</span> <span class="n">parameters</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(true, true)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c">#training the model</span>
+<span class="k">using</span> <span class="n">Flux</span><span class="o">:</span> <span class="n">train!</span>
+<span class="n">train!</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">opt</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c">#the loss function change</span>
+<span class="n">println</span><span class="p">(</span><span class="s">&quot;The MSE for this second model with optimizer is &quot;</span><span class="p">,</span> <span class="n">loss</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">))</span>
+<span class="n">pred2</span> <span class="o">=</span> <span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">scatter</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">&quot;real data&quot;</span><span class="p">)</span>
+<span class="n">scatter!</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">pred2</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">&quot;pred 1 epochs&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The MSE for this second model with optimizer is 295.23456080214163
+</pre></div>
+</div>
+<img alt="../_images/15_Functional-aproximation-by-nn-and-rf_39_1.svg" src="../_images/15_Functional-aproximation-by-nn-and-rf_39_1.svg" /></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c">#running 100 epochs</span>
+<span class="k">for</span> <span class="n">epoch</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="mi">100</span>
+    <span class="n">train!</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">opt</span><span class="p">)</span>
+  <span class="k">end</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">print</span><span class="p">(</span><span class="s">&quot;The MSE with 100 epochs is &quot;</span><span class="p">,</span><span class="n">loss</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">))</span>
+<span class="n">pred100</span> <span class="o">=</span> <span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">scatter</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">&quot;real data&quot;</span><span class="p">)</span>
+<span class="n">scatter!</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">pred100</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">&quot;pred 100 epochs&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The MSE with 100 epochs is 0.0005048678966490891
+</pre></div>
+</div>
+<img alt="../_images/15_Functional-aproximation-by-nn-and-rf_41_1.svg" src="../_images/15_Functional-aproximation-by-nn-and-rf_41_1.svg" /></div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "d2cml-ai/14.388_jl",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "julia-1.7"
+        },
+        kernelOptions: {
+            kernelName: "julia-1.7",
+            path: "./julia_notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'julia-1.7'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="14_jl_automl_wage.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">14. </span>AutoML for wage prediction</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="16_Notebook_DAGitty.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">16. </span>Causal identification in DAGs using Backdoor and Swigs, Equivalence Classes, Falsiability Tests</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Victor Chernozhukov<br/>
+  
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
