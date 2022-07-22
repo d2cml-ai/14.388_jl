@@ -54,8 +54,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="3. An inferential problem: The Gender Wage Gap" href="03_PM1_Notebook_Inference.html" />
-    <link rel="prev" title="1. Julia Notebook Linear Model Overfitting" href="01_Julia_Notebook_Linear_Model_Overfitting.html" />
+    <link rel="next" title="3. OLS and lasso for gender wage gap inference" href="03_PM1_Notebook_Inference.html" />
+    <link rel="prev" title="1. Linear Model Overfiting" href="01_Julia_Notebook_Linear_Model_Overfitting.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -111,14 +111,14 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="../intro.html">
-                    Welcome to your Jupyter Book
+                    Introduction
                 </a>
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="01_Julia_Notebook_Linear_Model_Overfitting.html">
-   1. Julia Notebook Linear Model Overfitting
+   1. Linear Model Overfiting
   </a>
  </li>
  <li class="toctree-l1 current active">
@@ -128,82 +128,117 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="03_PM1_Notebook_Inference.html">
-   3. An inferential problem: The Gender Wage Gap
+   3. OLS and lasso for gender wage gap inference
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="04_Juli_Notebook_RCT-polio.html">
-   4. Author: Roberto Mendoza
+   4. Some RCT Examples
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="05_Julia_Analyzing_RCT_with_Precision.html">
-   8. Analyzing RCT with Precision by Adjusting for Baseline Covariates
+   5. Analyzing RCT reemployment experiment
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="06_RCT_Precision_Adjustment.html">
-   13. Author: Roberto Mendoza
+   6. Analyzing RCT reemployment experiment
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="07_julia-notebook-linear-penalized-regs.html">
-   17. Penalized Linear Regressions: A Simulation Experiment
+   7. Linear Penalized Regs
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08_jl_ml_estimators_wage_pred.html">
+   8. ML for wage prediction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="09_Julia_OrthogonalLearning_lab4.html">
-   19. Orthogonal Learning
+   9. Experiment on Orthogonal Learning
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="10_Julia_pm2_notebook_jannis.html">
-   20. Testing the Convergence Hypothesis
+   10. Double Lasso for the convergence hypothesis
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="11_py-heterogenous-wage-effects.html">
-   22. Application: Heterogeneous Effect of Gender on Wage Using Double Lasso
+   11. Heterogenous Wage Effects
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="14_Julia_pm3_notebook_newdata_nn.html">
-   24. A Simple Case Study using Wage Data from 2015 - proceeding
+  <a class="reference internal" href="12_jl_collider_bias.html">
+   12. ColliderBias Hollywood
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="16_Functional-aproximation-by-nn-and-rf.html">
-   25. Functional Approximations by Trees and Neural Networks
+  <a class="reference internal" href="13_Julia_pm3_notebook_newdata_nn.html">
+   13. Deep Neural Networks for Wage Prediction
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="17_Notebook_DAGitty.html">
-   30. Causal identification in DAGs using Backdoor and Swigs, Equivalence Classes, Falsiability Tests
+  <a class="reference internal" href="14_jl_automl_wage.html">
+   14. AutoML for wage prediction
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="19_Julia_pm3_notebook_inference_clustering.html">
-   40. A Case Study: The Effect of Gun Ownership on Gun-Homicide Rates
+  <a class="reference internal" href="15_Functional-aproximation-by-nn-and-rf.html">
+   15. Functional Approximations by NN and RF
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="20_Julia-pm3-newdata-nn.html">
-   42. The Effect of Gun Ownership on Gun-Homicide Rates - proceeding
+  <a class="reference internal" href="16_Notebook_DAGitty.html">
+   16. Notebook-DAGitty
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="23_Julia_debiased-ml-for-partially-linear-model.html">
-   45. Double/Debiased Machine Learning for the Partially Linear Regression Model.
+  <a class="reference internal" href="17_jl_dosearch.html">
+   17. Notebook-Dosearch
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="25_debiased-ml-for-partially-linear-iv-model-in-julia.html">
-   47. Double/Debiased ML for Partially Linear IV Model
+  <a class="reference internal" href="18_Julia_pm3_notebook_inference_clustering.html">
+   18. DML inference for gun ownership
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="27_Julia_weak_iv_experiments.html">
-   55. A Simple Example of Properties of IV estimator when Instruments are Weak
+  <a class="reference internal" href="19_Julia-pm3-newdata-nn.html">
+   19. DML inference using NN for gun ownership
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="20_jl_dml_401k.html">
+   20. DML for ATE and LATE of 401(k) on Wealth
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="21_jl_dag_401k.html">
+   21. Identification Analysis of 401(k) Example w DAGs
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="22_Julia_debiased-ml-for-partially-linear-model.html">
+   22. Debiased ML for Partially Linear Model in Julia
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="23_jl_sensmakr_dml.html">
+   23. Sensitivity Analysis with Sensmakr and Debiased ML
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="24_debiased-ml-for-partially-linear-iv-model-in-julia.html">
+   24. Debiased ML for Partially Linear IV Model in Julia
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="25_Julia_weak_iv_experiments.html">
+   25. Weak IV Experiments
   </a>
  </li>
 </ul>
@@ -595,12 +630,6 @@ Two main questions here are:</p>
 <span class="c"># Pkg.add(to_install)</span>
 
 <span class="k">using</span> <span class="n">CSV</span><span class="p">,</span> <span class="n">DataFrames</span><span class="p">,</span> <span class="n">Dates</span><span class="p">,</span> <span class="n">Plots</span><span class="p">,</span> <span class="n">Lathe</span><span class="p">,</span> <span class="n">GLM</span><span class="p">,</span> <span class="n">Statistics</span><span class="p">,</span> <span class="n">MLBase</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>┌ Info: Precompiling Plots [91a5bcdd-55d7-5caf-9e0b-520d859cae80]
-└ @ Base loading.jl:1423
 </pre></div>
 </div>
 </div>
@@ -1814,13 +1843,13 @@ Test R2 for the basic model: 0.28923118187993957
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">1. </span>Julia Notebook Linear Model Overfitting</p>
+            <p class="prev-next-title"><span class="section-number">1. </span>Linear Model Overfiting</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="03_PM1_Notebook_Inference.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">3. </span>An inferential problem: The Gender Wage Gap</p>
+        <p class="prev-next-title"><span class="section-number">3. </span>OLS and lasso for gender wage gap inference</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
