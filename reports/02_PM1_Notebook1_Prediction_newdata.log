@@ -32,10 +32,10 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-# to_install = ["CSV", "DataFrames", "Dates", "Plots"]
-# using Pkg 
-# Pkg.add(to_install)
-
-using CSV, DataFrames, Dates, Plots, Lathe, GLM, Statistics, MLBase
+#flexible model
+flex = @formula(lwage ~ sex + shs+hsg+scl+clg+occ2+ind2+mw+so+we + (exp1+exp2+exp3+exp4)*(shs+hsg+scl+clg+occ2+ind2+mw+so+we))
+flex_results = lm(flex, data)
+println(flex_results)
+println("Number of regressors in the flexible model: ", size(coef(flex_results), 1))
 -------------------
 

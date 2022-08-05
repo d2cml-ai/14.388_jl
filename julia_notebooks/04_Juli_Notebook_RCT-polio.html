@@ -551,6 +551,29 @@ title="Print to PDF"
                 
   <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># !wget https://developer.nvidia.com/compute/cuda/9.0/Prod/local_installers/cuda-repo-ubuntu1604-9-0-local_9.0.176-1_amd64-deb</span>
+<span class="c"># !dpkg -i cuda-repo-ubuntu1604-9-0-local_9.0.176-1_amd64-deb</span>
+<span class="c"># !apt-key add /var/cuda-repo-9-0-local/7fa2af80.pub</span>
+<span class="c"># !apt update -q</span>
+<span class="c"># !apt install cuda gcc-6 g++-6 -y -q</span>
+<span class="c"># !ln -s /usr/bin/gcc-6 /usr/local/cuda/bin/gcc</span>
+<span class="c"># !ln -s /usr/bin/g++-6 /usr/local/cuda/bin/g++</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># !curl -sSL &quot;https://julialang-s3.julialang.org/bin/linux/x64/1.7/julia-1.7.3-linux-x86_64.tar.gz&quot; -o julia.tar.gz</span>
+<span class="c"># !tar -xzf julia.tar.gz -C /usr --strip-components 1</span>
+<span class="c"># !rm -rf julia.tar.gz*</span>
+<span class="c"># !julia -e &#39;using Pkg; pkg&quot;add IJulia; precompile&quot;&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c">## Install package </span>
 
 <span class="c">#import Pkg; Pkg.add(&quot;CairoMakie&quot;)</span>
@@ -622,7 +645,10 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Incidence per 100000 among treated: 16.4388
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Incidence per 100000 among treated: 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>16.4388
 Incidence per 100000 among untreated: 57.1488
 Estimated ATE of occurances per 100,000 is: -40.7101
 </pre></div>
@@ -697,12 +723,7 @@ Overall VE is: 0.7124
  0.6556843828007883
  0.8379647737634552
  0.8132928763558297
- 0.6864550692620768
- 0.729847409124033
- 0.6893974356034072
  ⋮
- 0.7124512490775646
- 0.743478827635636
  0.6243684604532374
  0.7093989620521691
  0.7272183082401089
@@ -740,7 +761,20 @@ Overall VE is: 0.7124
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>two-sided 95% confidence interval of VE is [0.59, 0.8179]
 </pre></div>
 </div>
-<img alt="../_images/04_Juli_Notebook_RCT-polio_8_1.png" src="../_images/04_Juli_Notebook_RCT-polio_8_1.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING: both Images and CairoMakie export &quot;Axis&quot;; uses of it in module Main must be qualified
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">UndefVarError</span>: Axis not defined
+
+<span class="ne">Stacktrace</span>:
+ <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">9</span><span class="p">]:</span><span class="mi">10</span>
+ <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="nb">eval</span>
+   <span class="o">@</span> <span class="o">.</span>\<span class="n">boot</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">373</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="n">include_string</span><span class="p">(</span><span class="n">mapexpr</span><span class="p">::</span><span class="n">typeof</span><span class="p">(</span><span class="n">REPL</span><span class="o">.</span><span class="n">softscope</span><span class="p">),</span> <span class="n">mod</span><span class="p">::</span><span class="n">Module</span><span class="p">,</span> <span class="n">code</span><span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="n">filename</span><span class="p">::</span><span class="n">String</span><span class="p">)</span>
+   <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1196</span>
+</pre></div>
+</div>
 </div>
 </div>
 <section id="pfizer-bntx-covid-19-rct-application">

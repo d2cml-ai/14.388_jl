@@ -671,7 +671,30 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="dml-inference-for-gun-ownership">
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># !wget https://developer.nvidia.com/compute/cuda/9.0/Prod/local_installers/cuda-repo-ubuntu1604-9-0-local_9.0.176-1_amd64-deb</span>
+<span class="c"># !dpkg -i cuda-repo-ubuntu1604-9-0-local_9.0.176-1_amd64-deb</span>
+<span class="c"># !apt-key add /var/cuda-repo-9-0-local/7fa2af80.pub</span>
+<span class="c"># !apt update -q</span>
+<span class="c"># !apt install cuda gcc-6 g++-6 -y -q</span>
+<span class="c"># !ln -s /usr/bin/gcc-6 /usr/local/cuda/bin/gcc</span>
+<span class="c"># !ln -s /usr/bin/g++-6 /usr/local/cuda/bin/g++</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># !curl -sSL &quot;https://julialang-s3.julialang.org/bin/linux/x64/1.7/julia-1.7.3-linux-x86_64.tar.gz&quot; -o julia.tar.gz</span>
+<span class="c"># !tar -xzf julia.tar.gz -C /usr --strip-components 1</span>
+<span class="c"># !rm -rf julia.tar.gz*</span>
+<span class="c"># !julia -e &#39;using Pkg; pkg&quot;add IJulia; precompile&quot;&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="dml-inference-for-gun-ownership">
 <h1><span class="section-number">18. </span>DML inference for gun ownership<a class="headerlink" href="#dml-inference-for-gun-ownership" title="Permalink to this headline">#</a></h1>
 <p>We consider the problem of estimating the effect of gun
 ownership on the homicide rate. For this purpose, we estimate the following partially
@@ -699,14 +722,19 @@ homicide rates, controlling for county-level demographic and economic characteri
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">Pkg</span><span class="p">,</span> <span class="n">CSV</span><span class="p">,</span> <span class="n">DataFrames</span><span class="p">,</span> <span class="n">StatsModels</span><span class="p">,</span> <span class="n">GLM</span><span class="p">,</span> <span class="n">Random</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">Pkg</span><span class="p">,</span> <span class="n">RData</span><span class="p">,</span> <span class="n">DataFrames</span><span class="p">,</span> <span class="n">StatsModels</span><span class="p">,</span> <span class="n">GLM</span><span class="p">,</span> <span class="n">Random</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">CSV</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="s">&quot;../data/gun_clean.csv&quot;</span><span class="p">)</span> <span class="o">|&gt;</span> <span class="n">DataFrame</span><span class="p">;</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="s">&quot;https://github.com/d2cml-ai/14.388_jl/raw/github_data/data/gun_clean.RData&quot;</span>
+<span class="n">download</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="s">&quot;data.RData&quot;</span><span class="p">)</span>
+<span class="n">rdata_read</span> <span class="o">=</span> <span class="n">load</span><span class="p">(</span><span class="s">&quot;data.RData&quot;</span><span class="p">)</span>
+<span class="n">rm</span><span class="p">(</span><span class="s">&quot;data.RData&quot;</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">rdata_read</span><span class="p">[</span><span class="s">&quot;data&quot;</span><span class="p">]</span>
+<span class="n">names</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 <span class="n">println</span><span class="p">(</span><span class="s">&quot;Number of rows: &quot;</span><span class="p">,</span><span class="n">size</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
 <span class="n">println</span><span class="p">(</span><span class="s">&quot;Number of columns: &quot;</span><span class="p">,</span><span class="n">size</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
 </pre></div>
@@ -714,7 +742,7 @@ homicide rates, controlling for county-level demographic and economic characteri
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of rows: 3900
-Number of columns: 415
+Number of columns: 198
 </pre></div>
 </div>
 </div>
@@ -815,6 +843,56 @@ Number of columns: 415
 <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="n">size</span><span class="p">(</span><span class="n">varlis</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">rdata</span><span class="p">[</span><span class="o">!</span><span class="p">,</span><span class="n">varlis</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span><span class="o">=</span> <span class="n">residuals</span><span class="p">(</span><span class="n">lm</span><span class="p">(</span><span class="n">term</span><span class="p">(</span><span class="kt">Symbol</span><span class="p">(</span><span class="n">varlis</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span> <span class="o">~</span> <span class="n">sum</span><span class="p">(</span><span class="n">term</span><span class="o">.</span><span class="p">(</span><span class="kt">Symbol</span><span class="o">.</span><span class="p">(</span><span class="n">year</span><span class="p">)))</span> <span class="o">+</span> <span class="n">sum</span><span class="p">(</span><span class="n">term</span><span class="o">.</span><span class="p">(</span><span class="kt">Symbol</span><span class="o">.</span><span class="p">(</span><span class="n">fixed</span><span class="p">))),</span> <span class="n">data</span><span class="p">))</span>
 <span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">MethodError</span>: no method matching zero(::Type{Term})
+<span class="n">Closest</span> <span class="n">candidates</span> <span class="n">are</span><span class="p">:</span>
+  <span class="n">zero</span><span class="p">(::</span><span class="n">Union</span><span class="p">{</span><span class="n">Type</span><span class="p">{</span><span class="n">P</span><span class="p">},</span> <span class="n">P</span><span class="p">})</span> <span class="n">where</span> <span class="n">P</span><span class="o">&lt;</span><span class="p">:</span><span class="n">Dates</span><span class="o">.</span><span class="n">Period</span> <span class="n">at</span> <span class="n">C</span><span class="p">:</span>\<span class="n">Users</span>\<span class="n">Work</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Programs</span>\<span class="n">Julia</span><span class="o">-</span><span class="mf">1.7.3</span>\<span class="n">share</span>\<span class="n">julia</span>\<span class="n">stdlib</span>\<span class="n">v1</span><span class="mf">.7</span>\<span class="n">Dates</span>\<span class="n">src</span>\<span class="n">periods</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">53</span>
+  <span class="n">zero</span><span class="p">(::</span><span class="n">T</span><span class="p">)</span> <span class="n">where</span> <span class="n">T</span><span class="o">&lt;</span><span class="p">:</span><span class="n">Dates</span><span class="o">.</span><span class="n">TimeType</span> <span class="n">at</span> <span class="n">C</span><span class="p">:</span>\<span class="n">Users</span>\<span class="n">Work</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Programs</span>\<span class="n">Julia</span><span class="o">-</span><span class="mf">1.7.3</span>\<span class="n">share</span>\<span class="n">julia</span>\<span class="n">stdlib</span>\<span class="n">v1</span><span class="mf">.7</span>\<span class="n">Dates</span>\<span class="n">src</span>\<span class="n">types</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">450</span>
+  <span class="n">zero</span><span class="p">(::</span><span class="n">FillArrays</span><span class="o">.</span><span class="n">Fill</span><span class="p">{</span><span class="n">T</span><span class="p">,</span> <span class="n">N</span><span class="p">})</span> <span class="n">where</span> <span class="p">{</span><span class="n">T</span><span class="p">,</span> <span class="n">N</span><span class="p">}</span> <span class="n">at</span> <span class="n">C</span><span class="p">:</span>\<span class="n">Users</span>\<span class="n">Work</span>\<span class="o">.</span><span class="n">julia</span>\<span class="n">packages</span>\<span class="n">FillArrays</span>\<span class="n">VLeUk</span>\<span class="n">src</span>\<span class="n">FillArrays</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">541</span>
+  <span class="o">...</span>
+
+<span class="ne">Stacktrace</span>:
+  <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">reduce_empty</span><span class="p">(</span><span class="c1">#unused#::typeof(+), #unused#::Type{Term})</span>
+    <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">reduce</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">313</span>
+  <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">reduce_empty</span><span class="p">(</span><span class="c1">#unused#::typeof(Base.add_sum), #unused#::Type{Term})</span>
+    <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">reduce</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">322</span>
+  <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="n">mapreduce_empty</span><span class="p">(</span><span class="c1">#unused#::typeof(identity), op::Function, T::Type)</span>
+    <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">reduce</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">345</span>
+  <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="n">reduce_empty</span><span class="p">(</span><span class="n">op</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">MappingRF</span><span class="p">{</span><span class="n">typeof</span><span class="p">(</span><span class="n">identity</span><span class="p">),</span> <span class="n">typeof</span><span class="p">(</span><span class="n">Base</span><span class="o">.</span><span class="n">add_sum</span><span class="p">)},</span> <span class="c1">#unused#::Type{Term})</span>
+    <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">reduce</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">331</span>
+  <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="n">reduce_empty_iter</span>
+    <span class="o">@</span> <span class="o">.</span>\<span class="n">reduce</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">357</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+  <span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="n">mapreduce_empty_iter</span><span class="p">(</span><span class="n">f</span><span class="p">::</span><span class="n">Function</span><span class="p">,</span> <span class="n">op</span><span class="p">::</span><span class="n">Function</span><span class="p">,</span> <span class="n">itr</span><span class="p">::</span><span class="n">Vector</span><span class="p">{</span><span class="n">Term</span><span class="p">},</span> <span class="n">ItrEltype</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">HasEltype</span><span class="p">)</span>
+    <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">reduce</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">353</span>
+  <span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="n">_mapreduce</span><span class="p">(</span><span class="n">f</span><span class="p">::</span><span class="n">typeof</span><span class="p">(</span><span class="n">identity</span><span class="p">),</span> <span class="n">op</span><span class="p">::</span><span class="n">typeof</span><span class="p">(</span><span class="n">Base</span><span class="o">.</span><span class="n">add_sum</span><span class="p">),</span> <span class="c1">#unused#::IndexLinear, A::Vector{Term})</span>
+    <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">reduce</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">402</span>
+  <span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="n">_mapreduce_dim</span>
+    <span class="o">@</span> <span class="o">.</span>\<span class="n">reducedim</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">330</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+  <span class="p">[</span><span class="mi">9</span><span class="p">]</span> <span class="c1">#mapreduce#731</span>
+    <span class="o">@</span> <span class="o">.</span>\<span class="n">reducedim</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">322</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="n">mapreduce</span>
+    <span class="o">@</span> <span class="o">.</span>\<span class="n">reducedim</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">322</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">11</span><span class="p">]</span> <span class="c1">#_sum#741</span>
+    <span class="o">@</span> <span class="o">.</span>\<span class="n">reducedim</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">894</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">12</span><span class="p">]</span> <span class="n">_sum</span>
+    <span class="o">@</span> <span class="o">.</span>\<span class="n">reducedim</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">894</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">13</span><span class="p">]</span> <span class="c1">#_sum#740</span>
+    <span class="o">@</span> <span class="o">.</span>\<span class="n">reducedim</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">893</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">14</span><span class="p">]</span> <span class="n">_sum</span>
+    <span class="o">@</span> <span class="o">.</span>\<span class="n">reducedim</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">893</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">15</span><span class="p">]</span> <span class="c1">#sum#738</span>
+    <span class="o">@</span> <span class="o">.</span>\<span class="n">reducedim</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">889</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">16</span><span class="p">]</span> <span class="nb">sum</span><span class="p">(</span><span class="n">a</span><span class="p">::</span><span class="n">Vector</span><span class="p">{</span><span class="n">Term</span><span class="p">})</span>
+    <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">reducedim</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">889</span>
+ <span class="p">[</span><span class="mi">17</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
+    <span class="o">@</span> <span class="o">.</span>\<span class="n">In</span><span class="p">[</span><span class="mi">11</span><span class="p">]:</span><span class="mi">7</span>
+ <span class="p">[</span><span class="mi">18</span><span class="p">]</span> <span class="nb">eval</span>
+    <span class="o">@</span> <span class="o">.</span>\<span class="n">boot</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">373</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">19</span><span class="p">]</span> <span class="n">include_string</span><span class="p">(</span><span class="n">mapexpr</span><span class="p">::</span><span class="n">typeof</span><span class="p">(</span><span class="n">REPL</span><span class="o">.</span><span class="n">softscope</span><span class="p">),</span> <span class="n">mod</span><span class="p">::</span><span class="n">Module</span><span class="p">,</span> <span class="n">code</span><span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="n">filename</span><span class="p">::</span><span class="n">String</span><span class="p">)</span>
+    <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1196</span>
 </pre></div>
 </div>
 </div>

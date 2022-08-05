@@ -607,7 +607,30 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="debiased-ml-for-partially-linear-iv-model-in-julia">
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># !wget https://developer.nvidia.com/compute/cuda/9.0/Prod/local_installers/cuda-repo-ubuntu1604-9-0-local_9.0.176-1_amd64-deb</span>
+<span class="c"># !dpkg -i cuda-repo-ubuntu1604-9-0-local_9.0.176-1_amd64-deb</span>
+<span class="c"># !apt-key add /var/cuda-repo-9-0-local/7fa2af80.pub</span>
+<span class="c"># !apt update -q</span>
+<span class="c"># !apt install cuda gcc-6 g++-6 -y -q</span>
+<span class="c"># !ln -s /usr/bin/gcc-6 /usr/local/cuda/bin/gcc</span>
+<span class="c"># !ln -s /usr/bin/g++-6 /usr/local/cuda/bin/g++</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># !curl -sSL &quot;https://julialang-s3.julialang.org/bin/linux/x64/1.7/julia-1.7.3-linux-x86_64.tar.gz&quot; -o julia.tar.gz</span>
+<span class="c"># !tar -xzf julia.tar.gz -C /usr --strip-components 1</span>
+<span class="c"># !rm -rf julia.tar.gz*</span>
+<span class="c"># !julia -e &#39;using Pkg; pkg&quot;add IJulia; precompile&quot;&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="debiased-ml-for-partially-linear-iv-model-in-julia">
 <h1><span class="section-number">24. </span>Debiased ML for Partially Linear IV Model in Julia<a class="headerlink" href="#debiased-ml-for-partially-linear-iv-model-in-julia" title="Permalink to this headline">#</a></h1>
 <p>References:</p>
 <p><a class="reference external" href="https://arxiv.org/abs/1608.00060">https://arxiv.org/abs/1608.00060</a></p>
@@ -677,34 +700,56 @@ stage errors.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Import relevant packages</span>
-<span class="k">using</span> <span class="n">Pkg</span>
-<span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;CSV&quot;</span><span class="p">),</span> <span class="k">using</span> <span class="n">CSV</span>
-<span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;DataFrames&quot;</span><span class="p">),</span> <span class="k">using</span> <span class="n">DataFrames</span>
-<span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;GLM&quot;</span><span class="p">),</span> <span class="k">using</span> <span class="n">GLM</span>
-<span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;FixedEffectModels&quot;</span><span class="p">),</span> <span class="k">using</span> <span class="n">FixedEffectModels</span>
-<span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;DecisionTree&quot;</span><span class="p">),</span> <span class="k">using</span> <span class="n">DecisionTree</span>
-<span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;PrettyTables&quot;</span><span class="p">),</span> <span class="k">using</span> <span class="n">PrettyTables</span>
-<span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;CovarianceMatrices&quot;</span><span class="p">),</span> <span class="k">using</span> <span class="n">CovarianceMatrices</span>
-<span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;RegressionTables&quot;</span><span class="p">),</span> <span class="k">using</span> <span class="n">RegressionTables</span>
-<span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;StatsFuns&quot;</span><span class="p">),</span> <span class="k">using</span> <span class="n">StatsFuns</span>
-<span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;Plots&quot;</span><span class="p">),</span> <span class="k">using</span> <span class="n">Plots</span>
-<span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;RData&quot;</span><span class="p">),</span> <span class="k">using</span> <span class="n">RData</span>
-<span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;MLBase&quot;</span><span class="p">),</span> <span class="k">using</span> <span class="n">MLBase</span>
+<span class="c"># using Pkg</span>
+<span class="c"># Pkg.add(&quot;CSV&quot;)</span>
+<span class="c"># Pkg.add(&quot;DataFrames&quot;)</span>
+<span class="c"># Pkg.add(&quot;GLM&quot;)</span>
+<span class="c"># Pkg.add(&quot;FixedEffectModels&quot;)</span>
+<span class="c"># Pkg.add(&quot;DecisionTree&quot;)</span>
+<span class="c"># Pkg.add(&quot;PrettyTables&quot;)</span>
+<span class="c"># Pkg.add(&quot;CovarianceMatrices&quot;)</span>
+<span class="c"># Pkg.add(&quot;RegressionTables&quot;)</span>
+<span class="c"># Pkg.add(&quot;StatsFuns&quot;)</span>
+<span class="c"># Pkg.add(&quot;Plots&quot;)</span>
+<span class="c"># Pkg.add(&quot;RData&quot;)</span>
+<span class="c"># Pkg.add(&quot;MLBase&quot;)</span>
+
+<span class="k">using</span> <span class="n">CSV</span><span class="p">,</span> <span class="n">DataFrames</span><span class="p">,</span> <span class="n">FixedEffectModels</span><span class="p">,</span> <span class="n">DecisionTree</span><span class="p">,</span> <span class="n">PrettyTables</span><span class="p">,</span> <span class="n">CovarianceMatrices</span><span class="p">,</span> <span class="n">RegressionTables</span><span class="p">,</span> <span class="n">StatsFuns</span><span class="p">,</span> <span class="n">Plots</span><span class="p">,</span> <span class="n">RData</span><span class="p">,</span> <span class="n">MLBase</span><span class="p">,</span> <span class="n">GLM</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">    Updating</span> registry at `C:\Users\Work\.julia\registries\General.toml`
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>┌ Info: Precompiling Plots [91a5bcdd-55d7-5caf-9e0b-520d859cae80]
+└ @ Base loading.jl:1423
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">   Resolving</span> package versions...
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">  No Changes</span> to `C:\Users\Work\.julia\environments\v1.7\Project.toml`
-<span class=" -Color -Color-Bold -Color-Bold-Green">  No Changes</span> to `C:\Users\Work\.julia\environments\v1.7\Manifest.toml`
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">InterruptException</span>:
+
+<span class="ne">Stacktrace</span>:
+  <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">try_yieldto</span><span class="p">(</span><span class="n">undo</span><span class="p">::</span><span class="n">typeof</span><span class="p">(</span><span class="n">Base</span><span class="o">.</span><span class="n">ensure_rescheduled</span><span class="p">))</span>
+    <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">task</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">812</span>
+  <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">wait</span><span class="p">()</span>
+    <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">task</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">872</span>
+  <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="n">wait</span><span class="p">(</span><span class="n">c</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">GenericCondition</span><span class="p">{</span><span class="n">Base</span><span class="o">.</span><span class="n">Threads</span><span class="o">.</span><span class="n">SpinLock</span><span class="p">})</span>
+    <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">condition</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">123</span>
+  <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="n">wait</span><span class="p">(</span><span class="n">x</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">Process</span><span class="p">)</span>
+    <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">process</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">636</span>
+  <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="n">success</span><span class="p">(</span><span class="n">x</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">Process</span><span class="p">)</span>
+    <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">process</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">498</span>
+  <span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="n">compilecache</span><span class="p">(</span><span class="n">pkg</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">PkgId</span><span class="p">,</span> <span class="n">path</span><span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="n">internal_stderr</span><span class="p">::</span><span class="n">IO</span><span class="p">,</span> <span class="n">internal_stdout</span><span class="p">::</span><span class="n">IO</span><span class="p">,</span> <span class="n">ignore_loaded_modules</span><span class="p">::</span><span class="n">Bool</span><span class="p">)</span>
+    <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1433</span>
+  <span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="n">compilecache</span><span class="p">(</span><span class="n">pkg</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">PkgId</span><span class="p">,</span> <span class="n">path</span><span class="p">::</span><span class="n">String</span><span class="p">)</span>
+    <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1410</span>
+  <span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="n">_require</span><span class="p">(</span><span class="n">pkg</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">PkgId</span><span class="p">)</span>
+    <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1120</span>
+  <span class="p">[</span><span class="mi">9</span><span class="p">]</span> <span class="n">require</span><span class="p">(</span><span class="n">uuidkey</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">PkgId</span><span class="p">)</span>
+    <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1013</span>
+ <span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="n">require</span><span class="p">(</span><span class="n">into</span><span class="p">::</span><span class="n">Module</span><span class="p">,</span> <span class="n">mod</span><span class="p">::</span><span class="n">Symbol</span><span class="p">)</span>
+    <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">997</span>
+ <span class="p">[</span><span class="mi">11</span><span class="p">]</span> <span class="nb">eval</span>
+    <span class="o">@</span> <span class="o">.</span>\<span class="n">boot</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">373</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">12</span><span class="p">]</span> <span class="n">include_string</span><span class="p">(</span><span class="n">mapexpr</span><span class="p">::</span><span class="n">typeof</span><span class="p">(</span><span class="n">REPL</span><span class="o">.</span><span class="n">softscope</span><span class="p">),</span> <span class="n">mod</span><span class="p">::</span><span class="n">Module</span><span class="p">,</span> <span class="n">code</span><span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="n">filename</span><span class="p">::</span><span class="n">String</span><span class="p">)</span>
+    <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1196</span>
 </pre></div>
 </div>
 </div>
@@ -712,10 +757,13 @@ stage errors.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># load data</span>
-<span class="n">rdata_read</span> <span class="o">=</span> <span class="n">RData</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s">&quot;../data/ajr.RData&quot;</span><span class="p">)</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s">&quot;https://github.com/d2cml-ai/14.388_jl/raw/github_data/data/ajr.RData&quot;</span>
+<span class="n">download</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="s">&quot;data.RData&quot;</span><span class="p">)</span>
+<span class="n">rdata_read</span> <span class="o">=</span> <span class="n">RData</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s">&quot;data.RData&quot;</span><span class="p">)</span>
+<span class="n">rm</span><span class="p">(</span><span class="s">&quot;data.RData&quot;</span><span class="p">)</span>
 <span class="n">AJR</span> <span class="o">=</span> <span class="n">rdata_read</span><span class="p">[</span><span class="s">&quot;AJR&quot;</span><span class="p">]</span>
-<span class="n">names</span><span class="p">(</span><span class="n">AJR</span><span class="p">)</span>
-<span class="n">println</span><span class="p">(</span><span class="s">&quot;Number of Rows : &quot;</span><span class="p">,</span> <span class="n">size</span><span class="p">(</span><span class="n">AJR</span><span class="p">)[</span><span class="mi">1</span><span class="p">],</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="s">&quot;Number of Columns : &quot;</span><span class="p">,</span> <span class="n">size</span><span class="p">(</span><span class="n">AJR</span><span class="p">)[</span><span class="mi">2</span><span class="p">],)</span> <span class="c">#rows and columns</span>
+<span class="n">names</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">println</span><span class="p">(</span><span class="s">&quot;Number of Rows : &quot;</span><span class="p">,</span> <span class="n">size</span><span class="p">(</span><span class="n">AJR</span><span class="p">)[</span><span class="mi">1</span><span class="p">],</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="s">&quot;Number of Columns : &quot;</span><span class="p">,</span> <span class="n">size</span><span class="p">(</span><span class="n">AJR</span><span class="p">)[</span><span class="mi">2</span><span class="p">],)</span> <span class="c">#rows and columnsRows : &quot;, size(AJR)[1],&quot;\n&quot;,&quot;Number of Columns : &quot;, size(AJR)[2],) #rows and columns</span>
 </pre></div>
 </div>
 </div>
@@ -1275,7 +1323,7 @@ ztil  -0.41886    0.163672  -2.56    0.0129  -0.745932  -0.0917875
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>UB =2.0LB =0.39
 </pre></div>
 </div>
-<img alt="../_images/24_debiased-ml-for-partially-linear-iv-model-in-julia_32_1.svg" src="../_images/24_debiased-ml-for-partially-linear-iv-model-in-julia_32_1.svg" /></div>
+<img alt="../_images/24_debiased-ml-for-partially-linear-iv-model-in-julia_34_1.svg" src="../_images/24_debiased-ml-for-partially-linear-iv-model-in-julia_34_1.svg" /></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1287,7 +1335,7 @@ ztil  -0.41886    0.163672  -2.56    0.0129  -0.745932  -0.0917875
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>UB =2.0LB =0.34
 </pre></div>
 </div>
-<img alt="../_images/24_debiased-ml-for-partially-linear-iv-model-in-julia_33_1.svg" src="../_images/24_debiased-ml-for-partially-linear-iv-model-in-julia_33_1.svg" /></div>
+<img alt="../_images/24_debiased-ml-for-partially-linear-iv-model-in-julia_35_1.svg" src="../_images/24_debiased-ml-for-partially-linear-iv-model-in-julia_35_1.svg" /></div>
 </div>
 </section>
 </section>

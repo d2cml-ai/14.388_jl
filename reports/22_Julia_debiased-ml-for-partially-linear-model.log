@@ -1,15 +1,4 @@
 Traceback (most recent call last):
-  File "C:\Users\Work\anaconda3\lib\site-packages\nbclient\client.py", line 622, in _async_poll_for_reply
-    msg = await ensure_async(self.kc.shell_channel.get_msg(timeout=new_timeout))
-  File "C:\Users\Work\anaconda3\lib\site-packages\nbclient\util.py", line 85, in ensure_async
-    result = await obj
-  File "C:\Users\Work\anaconda3\lib\site-packages\jupyter_client\channels.py", line 230, in get_msg
-    raise Empty
-_queue.Empty
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
   File "C:\Users\Work\anaconda3\lib\site-packages\jupyter_cache\executors\utils.py", line 51, in single_nb_execution
     executenb(
   File "C:\Users\Work\anaconda3\lib\site-packages\nbclient\client.py", line 1112, in execute
@@ -22,18 +11,28 @@ Traceback (most recent call last):
     return future.result()
   File "C:\Users\Work\anaconda3\lib\site-packages\nbclient\client.py", line 553, in async_execute
     await self.async_execute_cell(
-  File "C:\Users\Work\anaconda3\lib\site-packages\nbclient\client.py", line 841, in async_execute_cell
-    exec_reply = await self.task_poll_for_reply
-  File "C:\Users\Work\anaconda3\lib\site-packages\nbclient\client.py", line 646, in _async_poll_for_reply
-    await self._async_handle_timeout(timeout, cell)
-  File "C:\Users\Work\anaconda3\lib\site-packages\nbclient\client.py", line 696, in _async_handle_timeout
-    raise CellTimeoutError.error_from_timeout_and_cell(
-nbclient.exceptions.CellTimeoutError: A cell timed out while it was being executed, after 30 seconds.
-The message was: Cell execution timed out.
-Here is a preview of the cell contents:
--------------------
-['using Pkg', 'Pkg.add("CSV"), using CSV', 'Pkg.add("DataFrames"), using DataFrames', 'Pkg.add("StatsModels"), using StatsModels', 'Pkg.add("GLM"), using GLM']
-...
-['Pkg.add("MLJ"), using MLJ', 'Pkg.add("DecisionTree"), using DecisionTree', 'Pkg.add("RData"), using RData', 'Pkg.add("GLMNet"), using GLMNet', 'Pkg.add("PrettyTables"), using PrettyTables']
--------------------
+  File "C:\Users\Work\anaconda3\lib\site-packages\nbclient\client.py", line 857, in async_execute_cell
+    self._check_raise_for_error(cell, exec_reply)
+  File "C:\Users\Work\anaconda3\lib\site-packages\nbclient\client.py", line 760, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+y = GrowthData[!,1]
+y= reshape(y, (length(y),1))
+d = GrowthData[!,3]
+d= reshape(d, (length(y),1))
+x = GrowthData[!,4:end]
+x = Matrix(x);
+------------------
+
+UndefVarError: GrowthData not defined
+
+Stacktrace:
+ [1] top-level scope
+   @ In[6]:1
+ [2] eval
+   @ .\boot.jl:373 [inlined]
+ [3] include_string(mapexpr::typeof(REPL.softscope), mod::Module, code::String, filename::String)
+   @ Base .\loading.jl:1196
+LoadError: UndefVarError: GrowthData not defined
 

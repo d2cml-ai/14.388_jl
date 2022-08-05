@@ -639,7 +639,30 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="notebook-dagitty">
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># !wget https://developer.nvidia.com/compute/cuda/9.0/Prod/local_installers/cuda-repo-ubuntu1604-9-0-local_9.0.176-1_amd64-deb</span>
+<span class="c"># !dpkg -i cuda-repo-ubuntu1604-9-0-local_9.0.176-1_amd64-deb</span>
+<span class="c"># !apt-key add /var/cuda-repo-9-0-local/7fa2af80.pub</span>
+<span class="c"># !apt update -q</span>
+<span class="c"># !apt install cuda gcc-6 g++-6 -y -q</span>
+<span class="c"># !ln -s /usr/bin/gcc-6 /usr/local/cuda/bin/gcc</span>
+<span class="c"># !ln -s /usr/bin/g++-6 /usr/local/cuda/bin/g++</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># !curl -sSL &quot;https://julialang-s3.julialang.org/bin/linux/x64/1.7/julia-1.7.3-linux-x86_64.tar.gz&quot; -o julia.tar.gz</span>
+<span class="c"># !tar -xzf julia.tar.gz -C /usr --strip-components 1</span>
+<span class="c"># !rm -rf julia.tar.gz*</span>
+<span class="c"># !julia -e &#39;using Pkg; pkg&quot;add IJulia; precompile&quot;&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="notebook-dagitty">
 <h1><span class="section-number">16. </span>Notebook-DAGitty<a class="headerlink" href="#notebook-dagitty" title="Permalink to this headline">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -668,6 +691,9 @@ title="Print to PDF"
 </div>
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">    Building</span> GR → `C:\Users\Work\.julia\scratchspaces\44cfe95a-1eb2-52ea-b672-e2afdf69b78f\037a1ca47e8a5989cc07d19729567bb71bfabd0c\build.log`
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">Precompiling</span> project...
 </pre></div>
 </div>
 </div>
@@ -808,7 +834,7 @@ Rows ╲ Cols │  :M   :D   :Y  :X2  :X3  :X1  :Z2  :Z1
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/16_Notebook_DAGitty_10_0.svg" src="../_images/16_Notebook_DAGitty_10_0.svg" /></div>
+<img alt="../_images/16_Notebook_DAGitty_12_0.svg" src="../_images/16_Notebook_DAGitty_12_0.svg" /></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -839,7 +865,7 @@ Rows ╲ Cols │  :M   :D   :Y  :X2  :X3  :X1  :Z2  :Z1
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/16_Notebook_DAGitty_12_0.svg" src="../_images/16_Notebook_DAGitty_12_0.svg" /></div>
+<img alt="../_images/16_Notebook_DAGitty_14_0.svg" src="../_images/16_Notebook_DAGitty_14_0.svg" /></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -874,7 +900,7 @@ Rows ╲ Cols │  :M   :D   :Y  :X2  :X3  :X1  :Z2  :Z1
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/16_Notebook_DAGitty_14_0.svg" src="../_images/16_Notebook_DAGitty_14_0.svg" /></div>
+<img alt="../_images/16_Notebook_DAGitty_16_0.svg" src="../_images/16_Notebook_DAGitty_16_0.svg" /></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1244,7 +1270,7 @@ vars = [:Md, :d, :Yd, :X2, :X3, :D, :X1, :Z2, :Z1]
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/16_Notebook_DAGitty_34_0.svg" src="../_images/16_Notebook_DAGitty_34_0.svg" /></div>
+<img alt="../_images/16_Notebook_DAGitty_36_0.svg" src="../_images/16_Notebook_DAGitty_36_0.svg" /></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1453,7 +1479,7 @@ vars = [:Y, :X, :D]
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/16_Notebook_DAGitty_42_0.svg" src="../_images/16_Notebook_DAGitty_42_0.svg" /></div>
+<img alt="../_images/16_Notebook_DAGitty_44_0.svg" src="../_images/16_Notebook_DAGitty_44_0.svg" /></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">

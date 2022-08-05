@@ -661,7 +661,30 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="double-lasso-for-the-convergence-hypothesis">
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># !wget https://developer.nvidia.com/compute/cuda/9.0/Prod/local_installers/cuda-repo-ubuntu1604-9-0-local_9.0.176-1_amd64-deb</span>
+<span class="c"># !dpkg -i cuda-repo-ubuntu1604-9-0-local_9.0.176-1_amd64-deb</span>
+<span class="c"># !apt-key add /var/cuda-repo-9-0-local/7fa2af80.pub</span>
+<span class="c"># !apt update -q</span>
+<span class="c"># !apt install cuda gcc-6 g++-6 -y -q</span>
+<span class="c"># !ln -s /usr/bin/gcc-6 /usr/local/cuda/bin/gcc</span>
+<span class="c"># !ln -s /usr/bin/g++-6 /usr/local/cuda/bin/g++</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># !curl -sSL &quot;https://julialang-s3.julialang.org/bin/linux/x64/1.7/julia-1.7.3-linux-x86_64.tar.gz&quot; -o julia.tar.gz</span>
+<span class="c"># !tar -xzf julia.tar.gz -C /usr --strip-components 1</span>
+<span class="c"># !rm -rf julia.tar.gz*</span>
+<span class="c"># !julia -e &#39;using Pkg; pkg&quot;add IJulia; precompile&quot;&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="double-lasso-for-the-convergence-hypothesis">
 <h1><span class="section-number">10. </span>Double Lasso for the convergence hypothesis<a class="headerlink" href="#double-lasso-for-the-convergence-hypothesis" title="Permalink to this headline">#</a></h1>
 <section id="introduction">
 <h2><span class="section-number">10.1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h2>
@@ -695,32 +718,14 @@ $<span class="math notranslate nohighlight">\(
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>ArgumentError: Package DataStructures not found in current path:
-- Run `import Pkg; Pkg.add(&quot;DataStructures&quot;)` to install the DataStructures package.
-
-
-Stacktrace:
- [1] require(into::Module, mod::Symbol)
-   @ Base .\loading.jl:967
- [2] eval
-   @ .\boot.jl:373 [inlined]
- [3] include_string(mapexpr::typeof(REPL.softscope), mod::Module, code::String, filename::String)
-   @ Base .\loading.jl:1196
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Importing .Rdata file</span>
-<span class="n">growth_read</span> <span class="o">=</span> <span class="n">load</span><span class="p">(</span><span class="s">&quot;../data/GrowthData.RData&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dict{String, Any} with 1 entry:
-  &quot;GrowthData&quot; =&gt; <span class=" -Color -Color-Bold">90×63 DataFrame</span>…
+<span class="n">url</span> <span class="o">=</span> <span class="s">&quot;https://github.com/d2cml-ai/14.388_jl/raw/github_data/data/GrowthData.RData&quot;</span>
+<span class="n">download</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="s">&quot;GrowthData.RData&quot;</span><span class="p">)</span>
+<span class="n">growth_read</span> <span class="o">=</span> <span class="n">load</span><span class="p">(</span><span class="s">&quot;GrowthData.RData&quot;</span><span class="p">)</span>
+<span class="n">rm</span><span class="p">(</span><span class="s">&quot;GrowthData.RData&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -746,36 +751,7 @@ Stacktrace:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>63-element Vector{String}:
- &quot;Outcome&quot;
- &quot;intercept&quot;
- &quot;gdpsh465&quot;
- &quot;bmp1l&quot;
- &quot;freeop&quot;
- &quot;freetar&quot;
- &quot;h65&quot;
- &quot;hm65&quot;
- &quot;hf65&quot;
- &quot;p65&quot;
- &quot;pm65&quot;
- &quot;pf65&quot;
- &quot;s65&quot;
- ⋮
- &quot;secc65&quot;
- &quot;seccm65&quot;
- &quot;seccf65&quot;
- &quot;syr65&quot;
- &quot;syrm65&quot;
- &quot;syrf65&quot;
- &quot;teapri65&quot;
- &quot;teasec65&quot;
- &quot;ex1&quot;
- &quot;im1&quot;
- &quot;xr65&quot;
- &quot;tot1&quot;
-</pre></div>
-</div>
-</div>
+<div class="output text_html"><table class="data-frame"><thead><tr><th></th><th>Outcome</th><th>intercept</th><th>gdpsh465</th><th>bmp1l</th><th>freeop</th><th>freetar</th><th>h65</th><th>hm65</th></tr><tr><th></th><th>Float64</th><th>Int32</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th></tr></thead><tbody><p>90 rows × 63 columns (omitted printing of 55 columns)</p><tr><th>1</th><td>-0.0243358</td><td>1</td><td>6.59167</td><td>0.2837</td><td>0.153491</td><td>0.043888</td><td>0.007</td><td>0.013</td></tr><tr><th>2</th><td>0.100473</td><td>1</td><td>6.82979</td><td>0.6141</td><td>0.313509</td><td>0.061827</td><td>0.019</td><td>0.032</td></tr><tr><th>3</th><td>0.0670515</td><td>1</td><td>8.89508</td><td>0.0</td><td>0.204244</td><td>0.009186</td><td>0.26</td><td>0.325</td></tr><tr><th>4</th><td>0.0640892</td><td>1</td><td>7.56528</td><td>0.1997</td><td>0.248714</td><td>0.03627</td><td>0.061</td><td>0.07</td></tr><tr><th>5</th><td>0.0279295</td><td>1</td><td>7.1624</td><td>0.174</td><td>0.299252</td><td>0.037367</td><td>0.017</td><td>0.027</td></tr><tr><th>6</th><td>0.0464074</td><td>1</td><td>7.21891</td><td>0.0</td><td>0.258865</td><td>0.02088</td><td>0.023</td><td>0.038</td></tr><tr><th>7</th><td>0.0673323</td><td>1</td><td>7.8536</td><td>0.0</td><td>0.182525</td><td>0.014385</td><td>0.039</td><td>0.063</td></tr><tr><th>8</th><td>0.0209777</td><td>1</td><td>7.70391</td><td>0.2776</td><td>0.215275</td><td>0.029713</td><td>0.024</td><td>0.035</td></tr><tr><th>9</th><td>0.0335512</td><td>1</td><td>9.06346</td><td>0.0</td><td>0.109614</td><td>0.002171</td><td>0.402</td><td>0.488</td></tr><tr><th>10</th><td>0.0391465</td><td>1</td><td>8.15191</td><td>0.1484</td><td>0.110885</td><td>0.028579</td><td>0.145</td><td>0.173</td></tr><tr><th>11</th><td>0.0761265</td><td>1</td><td>6.92952</td><td>0.0296</td><td>0.165784</td><td>0.020115</td><td>0.046</td><td>0.066</td></tr><tr><th>12</th><td>0.127951</td><td>1</td><td>7.23778</td><td>0.2151</td><td>0.078488</td><td>0.011581</td><td>0.022</td><td>0.031</td></tr><tr><th>13</th><td>-0.0243261</td><td>1</td><td>8.11582</td><td>0.4318</td><td>0.137482</td><td>0.026547</td><td>0.059</td><td>0.073</td></tr><tr><th>14</th><td>0.0782934</td><td>1</td><td>7.2717</td><td>0.1689</td><td>0.164598</td><td>0.044446</td><td>0.029</td><td>0.045</td></tr><tr><th>15</th><td>0.112912</td><td>1</td><td>7.12125</td><td>0.1832</td><td>0.188016</td><td>0.045678</td><td>0.033</td><td>0.051</td></tr><tr><th>16</th><td>0.0523082</td><td>1</td><td>6.97728</td><td>0.0962</td><td>0.204611</td><td>0.077852</td><td>0.037</td><td>0.043</td></tr><tr><th>17</th><td>0.0363909</td><td>1</td><td>7.64969</td><td>0.0227</td><td>0.136287</td><td>0.04673</td><td>0.081</td><td>0.105</td></tr><tr><th>18</th><td>0.0297382</td><td>1</td><td>8.05674</td><td>0.0208</td><td>0.197853</td><td>0.037224</td><td>0.083</td><td>0.097</td></tr><tr><th>19</th><td>-0.0566436</td><td>1</td><td>8.78094</td><td>0.2654</td><td>0.189867</td><td>0.031747</td><td>0.068</td><td>0.089</td></tr><tr><th>20</th><td>0.0192048</td><td>1</td><td>6.28786</td><td>0.4207</td><td>0.130682</td><td>0.109921</td><td>0.053</td><td>0.039</td></tr><tr><th>21</th><td>0.085206</td><td>1</td><td>6.13773</td><td>0.1371</td><td>0.123818</td><td>0.015897</td><td>0.028</td><td>0.025</td></tr><tr><th>22</th><td>0.133982</td><td>1</td><td>8.12888</td><td>0.0</td><td>0.16721</td><td>0.003311</td><td>0.129</td><td>0.196</td></tr><tr><th>23</th><td>0.173025</td><td>1</td><td>6.68085</td><td>0.4713</td><td>0.228424</td><td>0.029328</td><td>0.062</td><td>0.09</td></tr><tr><th>24</th><td>0.109699</td><td>1</td><td>7.17702</td><td>0.0178</td><td>0.18524</td><td>0.015453</td><td>0.02</td><td>0.026</td></tr><tr><th>25</th><td>0.0159899</td><td>1</td><td>6.64898</td><td>0.4762</td><td>0.171181</td><td>0.058937</td><td>0.018</td><td>0.028</td></tr><tr><th>&vellip;</th><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td></tr></tbody></table></div></div>
 </div>
 <p>We determine the type and the dimension of our data set.</p>
 <div class="cell docutils container">
@@ -800,7 +776,7 @@ Stacktrace:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div class="data-frame"><p>90 rows × 1 columns</p><table class="data-frame"><thead><tr><th></th><th>y</th></tr><tr><th></th><th title="Float64">Float64</th></tr></thead><tbody><tr><th>1</th><td>-0.0243358</td></tr><tr><th>2</th><td>0.100473</td></tr><tr><th>3</th><td>0.0670515</td></tr><tr><th>4</th><td>0.0640892</td></tr><tr><th>5</th><td>0.0279295</td></tr><tr><th>6</th><td>0.0464074</td></tr><tr><th>7</th><td>0.0673323</td></tr><tr><th>8</th><td>0.0209777</td></tr><tr><th>9</th><td>0.0335512</td></tr><tr><th>10</th><td>0.0391465</td></tr><tr><th>11</th><td>0.0761265</td></tr><tr><th>12</th><td>0.127951</td></tr><tr><th>13</th><td>-0.0243261</td></tr><tr><th>14</th><td>0.0782934</td></tr><tr><th>15</th><td>0.112912</td></tr><tr><th>16</th><td>0.0523082</td></tr><tr><th>17</th><td>0.0363909</td></tr><tr><th>18</th><td>0.0297382</td></tr><tr><th>19</th><td>-0.0566436</td></tr><tr><th>20</th><td>0.0192048</td></tr><tr><th>21</th><td>0.085206</td></tr><tr><th>22</th><td>0.133982</td></tr><tr><th>23</th><td>0.173025</td></tr><tr><th>24</th><td>0.109699</td></tr><tr><th>25</th><td>0.0159899</td></tr><tr><th>26</th><td>0.0622498</td></tr><tr><th>27</th><td>0.109871</td></tr><tr><th>28</th><td>0.0921063</td></tr><tr><th>29</th><td>0.083376</td></tr><tr><th>30</th><td>0.0762335</td></tr><tr><th>&vellip;</th><td>&vellip;</td></tr></tbody></table></div></div></div>
+<div class="output text_html"><table class="data-frame"><thead><tr><th></th><th>y</th></tr><tr><th></th><th>Float64</th></tr></thead><tbody><p>90 rows × 1 columns</p><tr><th>1</th><td>-0.0243358</td></tr><tr><th>2</th><td>0.100473</td></tr><tr><th>3</th><td>0.0670515</td></tr><tr><th>4</th><td>0.0640892</td></tr><tr><th>5</th><td>0.0279295</td></tr><tr><th>6</th><td>0.0464074</td></tr><tr><th>7</th><td>0.0673323</td></tr><tr><th>8</th><td>0.0209777</td></tr><tr><th>9</th><td>0.0335512</td></tr><tr><th>10</th><td>0.0391465</td></tr><tr><th>11</th><td>0.0761265</td></tr><tr><th>12</th><td>0.127951</td></tr><tr><th>13</th><td>-0.0243261</td></tr><tr><th>14</th><td>0.0782934</td></tr><tr><th>15</th><td>0.112912</td></tr><tr><th>16</th><td>0.0523082</td></tr><tr><th>17</th><td>0.0363909</td></tr><tr><th>18</th><td>0.0297382</td></tr><tr><th>19</th><td>-0.0566436</td></tr><tr><th>20</th><td>0.0192048</td></tr><tr><th>21</th><td>0.085206</td></tr><tr><th>22</th><td>0.133982</td></tr><tr><th>23</th><td>0.173025</td></tr><tr><th>24</th><td>0.109699</td></tr><tr><th>25</th><td>0.0159899</td></tr><tr><th>&vellip;</th><td>&vellip;</td></tr></tbody></table></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -809,7 +785,7 @@ Stacktrace:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div class="data-frame"><p>90 rows × 62 columns (omitted printing of 53 columns)</p><table class="data-frame"><thead><tr><th></th><th>intercept</th><th>gdpsh465</th><th>bmp1l</th><th>freeop</th><th>freetar</th><th>h65</th><th>hm65</th><th>hf65</th><th>p65</th></tr><tr><th></th><th title="Int32">Int32</th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th></tr></thead><tbody><tr><th>1</th><td>1</td><td>6.59167</td><td>0.2837</td><td>0.153491</td><td>0.043888</td><td>0.007</td><td>0.013</td><td>0.001</td><td>0.29</td></tr><tr><th>2</th><td>1</td><td>6.82979</td><td>0.6141</td><td>0.313509</td><td>0.061827</td><td>0.019</td><td>0.032</td><td>0.007</td><td>0.91</td></tr><tr><th>3</th><td>1</td><td>8.89508</td><td>0.0</td><td>0.204244</td><td>0.009186</td><td>0.26</td><td>0.325</td><td>0.201</td><td>1.0</td></tr><tr><th>4</th><td>1</td><td>7.56528</td><td>0.1997</td><td>0.248714</td><td>0.03627</td><td>0.061</td><td>0.07</td><td>0.051</td><td>1.0</td></tr><tr><th>5</th><td>1</td><td>7.1624</td><td>0.174</td><td>0.299252</td><td>0.037367</td><td>0.017</td><td>0.027</td><td>0.007</td><td>0.82</td></tr><tr><th>6</th><td>1</td><td>7.21891</td><td>0.0</td><td>0.258865</td><td>0.02088</td><td>0.023</td><td>0.038</td><td>0.006</td><td>0.5</td></tr><tr><th>7</th><td>1</td><td>7.8536</td><td>0.0</td><td>0.182525</td><td>0.014385</td><td>0.039</td><td>0.063</td><td>0.014</td><td>0.92</td></tr><tr><th>8</th><td>1</td><td>7.70391</td><td>0.2776</td><td>0.215275</td><td>0.029713</td><td>0.024</td><td>0.035</td><td>0.013</td><td>0.69</td></tr><tr><th>9</th><td>1</td><td>9.06346</td><td>0.0</td><td>0.109614</td><td>0.002171</td><td>0.402</td><td>0.488</td><td>0.314</td><td>1.0</td></tr><tr><th>10</th><td>1</td><td>8.15191</td><td>0.1484</td><td>0.110885</td><td>0.028579</td><td>0.145</td><td>0.173</td><td>0.114</td><td>1.0</td></tr><tr><th>11</th><td>1</td><td>6.92952</td><td>0.0296</td><td>0.165784</td><td>0.020115</td><td>0.046</td><td>0.066</td><td>0.025</td><td>0.73</td></tr><tr><th>12</th><td>1</td><td>7.23778</td><td>0.2151</td><td>0.078488</td><td>0.011581</td><td>0.022</td><td>0.031</td><td>0.014</td><td>1.0</td></tr><tr><th>13</th><td>1</td><td>8.11582</td><td>0.4318</td><td>0.137482</td><td>0.026547</td><td>0.059</td><td>0.073</td><td>0.045</td><td>1.0</td></tr><tr><th>14</th><td>1</td><td>7.2717</td><td>0.1689</td><td>0.164598</td><td>0.044446</td><td>0.029</td><td>0.045</td><td>0.013</td><td>0.84</td></tr><tr><th>15</th><td>1</td><td>7.12125</td><td>0.1832</td><td>0.188016</td><td>0.045678</td><td>0.033</td><td>0.051</td><td>0.015</td><td>0.91</td></tr><tr><th>16</th><td>1</td><td>6.97728</td><td>0.0962</td><td>0.204611</td><td>0.077852</td><td>0.037</td><td>0.043</td><td>0.03</td><td>1.0</td></tr><tr><th>17</th><td>1</td><td>7.64969</td><td>0.0227</td><td>0.136287</td><td>0.04673</td><td>0.081</td><td>0.105</td><td>0.056</td><td>0.99</td></tr><tr><th>18</th><td>1</td><td>8.05674</td><td>0.0208</td><td>0.197853</td><td>0.037224</td><td>0.083</td><td>0.097</td><td>0.069</td><td>1.0</td></tr><tr><th>19</th><td>1</td><td>8.78094</td><td>0.2654</td><td>0.189867</td><td>0.031747</td><td>0.068</td><td>0.089</td><td>0.046</td><td>0.94</td></tr><tr><th>20</th><td>1</td><td>6.28786</td><td>0.4207</td><td>0.130682</td><td>0.109921</td><td>0.053</td><td>0.039</td><td>0.011</td><td>0.74</td></tr><tr><th>21</th><td>1</td><td>6.13773</td><td>0.1371</td><td>0.123818</td><td>0.015897</td><td>0.028</td><td>0.025</td><td>0.007</td><td>0.72</td></tr><tr><th>22</th><td>1</td><td>8.12888</td><td>0.0</td><td>0.16721</td><td>0.003311</td><td>0.129</td><td>0.196</td><td>0.063</td><td>1.0</td></tr><tr><th>23</th><td>1</td><td>6.68085</td><td>0.4713</td><td>0.228424</td><td>0.029328</td><td>0.062</td><td>0.09</td><td>0.032</td><td>1.0</td></tr><tr><th>24</th><td>1</td><td>7.17702</td><td>0.0178</td><td>0.18524</td><td>0.015453</td><td>0.02</td><td>0.026</td><td>0.013</td><td>0.9</td></tr><tr><th>25</th><td>1</td><td>6.64898</td><td>0.4762</td><td>0.171181</td><td>0.058937</td><td>0.018</td><td>0.028</td><td>0.007</td><td>0.4</td></tr><tr><th>26</th><td>1</td><td>6.87936</td><td>0.2927</td><td>0.179508</td><td>0.035842</td><td>0.188</td><td>0.169</td><td>0.208</td><td>1.0</td></tr><tr><th>27</th><td>1</td><td>7.3473</td><td>0.1017</td><td>0.247626</td><td>0.037392</td><td>0.08</td><td>0.133</td><td>0.027</td><td>0.78</td></tr><tr><th>28</th><td>1</td><td>6.72503</td><td>0.0266</td><td>0.179933</td><td>0.046376</td><td>0.015</td><td>0.02</td><td>0.01</td><td>0.78</td></tr><tr><th>29</th><td>1</td><td>8.45105</td><td>0.0</td><td>0.358556</td><td>0.016468</td><td>0.09</td><td>0.133</td><td>0.044</td><td>1.0</td></tr><tr><th>30</th><td>1</td><td>8.60245</td><td>0.0</td><td>0.416234</td><td>0.014721</td><td>0.148</td><td>0.194</td><td>0.1</td><td>1.0</td></tr><tr><th>&vellip;</th><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td></tr></tbody></table></div></div></div>
+<div class="output text_html"><table class="data-frame"><thead><tr><th></th><th>intercept</th><th>gdpsh465</th><th>bmp1l</th><th>freeop</th><th>freetar</th><th>h65</th><th>hm65</th><th>hf65</th><th>p65</th></tr><tr><th></th><th>Int32</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th></tr></thead><tbody><p>90 rows × 62 columns (omitted printing of 53 columns)</p><tr><th>1</th><td>1</td><td>6.59167</td><td>0.2837</td><td>0.153491</td><td>0.043888</td><td>0.007</td><td>0.013</td><td>0.001</td><td>0.29</td></tr><tr><th>2</th><td>1</td><td>6.82979</td><td>0.6141</td><td>0.313509</td><td>0.061827</td><td>0.019</td><td>0.032</td><td>0.007</td><td>0.91</td></tr><tr><th>3</th><td>1</td><td>8.89508</td><td>0.0</td><td>0.204244</td><td>0.009186</td><td>0.26</td><td>0.325</td><td>0.201</td><td>1.0</td></tr><tr><th>4</th><td>1</td><td>7.56528</td><td>0.1997</td><td>0.248714</td><td>0.03627</td><td>0.061</td><td>0.07</td><td>0.051</td><td>1.0</td></tr><tr><th>5</th><td>1</td><td>7.1624</td><td>0.174</td><td>0.299252</td><td>0.037367</td><td>0.017</td><td>0.027</td><td>0.007</td><td>0.82</td></tr><tr><th>6</th><td>1</td><td>7.21891</td><td>0.0</td><td>0.258865</td><td>0.02088</td><td>0.023</td><td>0.038</td><td>0.006</td><td>0.5</td></tr><tr><th>7</th><td>1</td><td>7.8536</td><td>0.0</td><td>0.182525</td><td>0.014385</td><td>0.039</td><td>0.063</td><td>0.014</td><td>0.92</td></tr><tr><th>8</th><td>1</td><td>7.70391</td><td>0.2776</td><td>0.215275</td><td>0.029713</td><td>0.024</td><td>0.035</td><td>0.013</td><td>0.69</td></tr><tr><th>9</th><td>1</td><td>9.06346</td><td>0.0</td><td>0.109614</td><td>0.002171</td><td>0.402</td><td>0.488</td><td>0.314</td><td>1.0</td></tr><tr><th>10</th><td>1</td><td>8.15191</td><td>0.1484</td><td>0.110885</td><td>0.028579</td><td>0.145</td><td>0.173</td><td>0.114</td><td>1.0</td></tr><tr><th>11</th><td>1</td><td>6.92952</td><td>0.0296</td><td>0.165784</td><td>0.020115</td><td>0.046</td><td>0.066</td><td>0.025</td><td>0.73</td></tr><tr><th>12</th><td>1</td><td>7.23778</td><td>0.2151</td><td>0.078488</td><td>0.011581</td><td>0.022</td><td>0.031</td><td>0.014</td><td>1.0</td></tr><tr><th>13</th><td>1</td><td>8.11582</td><td>0.4318</td><td>0.137482</td><td>0.026547</td><td>0.059</td><td>0.073</td><td>0.045</td><td>1.0</td></tr><tr><th>14</th><td>1</td><td>7.2717</td><td>0.1689</td><td>0.164598</td><td>0.044446</td><td>0.029</td><td>0.045</td><td>0.013</td><td>0.84</td></tr><tr><th>15</th><td>1</td><td>7.12125</td><td>0.1832</td><td>0.188016</td><td>0.045678</td><td>0.033</td><td>0.051</td><td>0.015</td><td>0.91</td></tr><tr><th>16</th><td>1</td><td>6.97728</td><td>0.0962</td><td>0.204611</td><td>0.077852</td><td>0.037</td><td>0.043</td><td>0.03</td><td>1.0</td></tr><tr><th>17</th><td>1</td><td>7.64969</td><td>0.0227</td><td>0.136287</td><td>0.04673</td><td>0.081</td><td>0.105</td><td>0.056</td><td>0.99</td></tr><tr><th>18</th><td>1</td><td>8.05674</td><td>0.0208</td><td>0.197853</td><td>0.037224</td><td>0.083</td><td>0.097</td><td>0.069</td><td>1.0</td></tr><tr><th>19</th><td>1</td><td>8.78094</td><td>0.2654</td><td>0.189867</td><td>0.031747</td><td>0.068</td><td>0.089</td><td>0.046</td><td>0.94</td></tr><tr><th>20</th><td>1</td><td>6.28786</td><td>0.4207</td><td>0.130682</td><td>0.109921</td><td>0.053</td><td>0.039</td><td>0.011</td><td>0.74</td></tr><tr><th>21</th><td>1</td><td>6.13773</td><td>0.1371</td><td>0.123818</td><td>0.015897</td><td>0.028</td><td>0.025</td><td>0.007</td><td>0.72</td></tr><tr><th>22</th><td>1</td><td>8.12888</td><td>0.0</td><td>0.16721</td><td>0.003311</td><td>0.129</td><td>0.196</td><td>0.063</td><td>1.0</td></tr><tr><th>23</th><td>1</td><td>6.68085</td><td>0.4713</td><td>0.228424</td><td>0.029328</td><td>0.062</td><td>0.09</td><td>0.032</td><td>1.0</td></tr><tr><th>24</th><td>1</td><td>7.17702</td><td>0.0178</td><td>0.18524</td><td>0.015453</td><td>0.02</td><td>0.026</td><td>0.013</td><td>0.9</td></tr><tr><th>25</th><td>1</td><td>6.64898</td><td>0.4762</td><td>0.171181</td><td>0.058937</td><td>0.018</td><td>0.028</td><td>0.007</td><td>0.4</td></tr><tr><th>&vellip;</th><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td></tr></tbody></table></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -842,7 +818,7 @@ Stacktrace:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div class="data-frame"><p>90 rows × 63 columns (omitted printing of 55 columns)</p><table class="data-frame"><thead><tr><th></th><th>y</th><th>intercept</th><th>gdpsh465</th><th>bmp1l</th><th>freeop</th><th>freetar</th><th>h65</th><th>hm65</th></tr><tr><th></th><th title="Float64">Float64</th><th title="Int32">Int32</th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th></tr></thead><tbody><tr><th>1</th><td>-0.0243358</td><td>1</td><td>6.59167</td><td>0.2837</td><td>0.153491</td><td>0.043888</td><td>0.007</td><td>0.013</td></tr><tr><th>2</th><td>0.100473</td><td>1</td><td>6.82979</td><td>0.6141</td><td>0.313509</td><td>0.061827</td><td>0.019</td><td>0.032</td></tr><tr><th>3</th><td>0.0670515</td><td>1</td><td>8.89508</td><td>0.0</td><td>0.204244</td><td>0.009186</td><td>0.26</td><td>0.325</td></tr><tr><th>4</th><td>0.0640892</td><td>1</td><td>7.56528</td><td>0.1997</td><td>0.248714</td><td>0.03627</td><td>0.061</td><td>0.07</td></tr><tr><th>5</th><td>0.0279295</td><td>1</td><td>7.1624</td><td>0.174</td><td>0.299252</td><td>0.037367</td><td>0.017</td><td>0.027</td></tr><tr><th>6</th><td>0.0464074</td><td>1</td><td>7.21891</td><td>0.0</td><td>0.258865</td><td>0.02088</td><td>0.023</td><td>0.038</td></tr><tr><th>7</th><td>0.0673323</td><td>1</td><td>7.8536</td><td>0.0</td><td>0.182525</td><td>0.014385</td><td>0.039</td><td>0.063</td></tr><tr><th>8</th><td>0.0209777</td><td>1</td><td>7.70391</td><td>0.2776</td><td>0.215275</td><td>0.029713</td><td>0.024</td><td>0.035</td></tr><tr><th>9</th><td>0.0335512</td><td>1</td><td>9.06346</td><td>0.0</td><td>0.109614</td><td>0.002171</td><td>0.402</td><td>0.488</td></tr><tr><th>10</th><td>0.0391465</td><td>1</td><td>8.15191</td><td>0.1484</td><td>0.110885</td><td>0.028579</td><td>0.145</td><td>0.173</td></tr><tr><th>11</th><td>0.0761265</td><td>1</td><td>6.92952</td><td>0.0296</td><td>0.165784</td><td>0.020115</td><td>0.046</td><td>0.066</td></tr><tr><th>12</th><td>0.127951</td><td>1</td><td>7.23778</td><td>0.2151</td><td>0.078488</td><td>0.011581</td><td>0.022</td><td>0.031</td></tr><tr><th>13</th><td>-0.0243261</td><td>1</td><td>8.11582</td><td>0.4318</td><td>0.137482</td><td>0.026547</td><td>0.059</td><td>0.073</td></tr><tr><th>14</th><td>0.0782934</td><td>1</td><td>7.2717</td><td>0.1689</td><td>0.164598</td><td>0.044446</td><td>0.029</td><td>0.045</td></tr><tr><th>15</th><td>0.112912</td><td>1</td><td>7.12125</td><td>0.1832</td><td>0.188016</td><td>0.045678</td><td>0.033</td><td>0.051</td></tr><tr><th>16</th><td>0.0523082</td><td>1</td><td>6.97728</td><td>0.0962</td><td>0.204611</td><td>0.077852</td><td>0.037</td><td>0.043</td></tr><tr><th>17</th><td>0.0363909</td><td>1</td><td>7.64969</td><td>0.0227</td><td>0.136287</td><td>0.04673</td><td>0.081</td><td>0.105</td></tr><tr><th>18</th><td>0.0297382</td><td>1</td><td>8.05674</td><td>0.0208</td><td>0.197853</td><td>0.037224</td><td>0.083</td><td>0.097</td></tr><tr><th>19</th><td>-0.0566436</td><td>1</td><td>8.78094</td><td>0.2654</td><td>0.189867</td><td>0.031747</td><td>0.068</td><td>0.089</td></tr><tr><th>20</th><td>0.0192048</td><td>1</td><td>6.28786</td><td>0.4207</td><td>0.130682</td><td>0.109921</td><td>0.053</td><td>0.039</td></tr><tr><th>21</th><td>0.085206</td><td>1</td><td>6.13773</td><td>0.1371</td><td>0.123818</td><td>0.015897</td><td>0.028</td><td>0.025</td></tr><tr><th>22</th><td>0.133982</td><td>1</td><td>8.12888</td><td>0.0</td><td>0.16721</td><td>0.003311</td><td>0.129</td><td>0.196</td></tr><tr><th>23</th><td>0.173025</td><td>1</td><td>6.68085</td><td>0.4713</td><td>0.228424</td><td>0.029328</td><td>0.062</td><td>0.09</td></tr><tr><th>24</th><td>0.109699</td><td>1</td><td>7.17702</td><td>0.0178</td><td>0.18524</td><td>0.015453</td><td>0.02</td><td>0.026</td></tr><tr><th>25</th><td>0.0159899</td><td>1</td><td>6.64898</td><td>0.4762</td><td>0.171181</td><td>0.058937</td><td>0.018</td><td>0.028</td></tr><tr><th>26</th><td>0.0622498</td><td>1</td><td>6.87936</td><td>0.2927</td><td>0.179508</td><td>0.035842</td><td>0.188</td><td>0.169</td></tr><tr><th>27</th><td>0.109871</td><td>1</td><td>7.3473</td><td>0.1017</td><td>0.247626</td><td>0.037392</td><td>0.08</td><td>0.133</td></tr><tr><th>28</th><td>0.0921063</td><td>1</td><td>6.72503</td><td>0.0266</td><td>0.179933</td><td>0.046376</td><td>0.015</td><td>0.02</td></tr><tr><th>29</th><td>0.083376</td><td>1</td><td>8.45105</td><td>0.0</td><td>0.358556</td><td>0.016468</td><td>0.09</td><td>0.133</td></tr><tr><th>30</th><td>0.0762335</td><td>1</td><td>8.60245</td><td>0.0</td><td>0.416234</td><td>0.014721</td><td>0.148</td><td>0.194</td></tr><tr><th>&vellip;</th><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td></tr></tbody></table></div></div></div>
+<div class="output text_html"><table class="data-frame"><thead><tr><th></th><th>y</th><th>intercept</th><th>gdpsh465</th><th>bmp1l</th><th>freeop</th><th>freetar</th><th>h65</th><th>hm65</th></tr><tr><th></th><th>Float64</th><th>Int32</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th></tr></thead><tbody><p>90 rows × 63 columns (omitted printing of 55 columns)</p><tr><th>1</th><td>-0.0243358</td><td>1</td><td>6.59167</td><td>0.2837</td><td>0.153491</td><td>0.043888</td><td>0.007</td><td>0.013</td></tr><tr><th>2</th><td>0.100473</td><td>1</td><td>6.82979</td><td>0.6141</td><td>0.313509</td><td>0.061827</td><td>0.019</td><td>0.032</td></tr><tr><th>3</th><td>0.0670515</td><td>1</td><td>8.89508</td><td>0.0</td><td>0.204244</td><td>0.009186</td><td>0.26</td><td>0.325</td></tr><tr><th>4</th><td>0.0640892</td><td>1</td><td>7.56528</td><td>0.1997</td><td>0.248714</td><td>0.03627</td><td>0.061</td><td>0.07</td></tr><tr><th>5</th><td>0.0279295</td><td>1</td><td>7.1624</td><td>0.174</td><td>0.299252</td><td>0.037367</td><td>0.017</td><td>0.027</td></tr><tr><th>6</th><td>0.0464074</td><td>1</td><td>7.21891</td><td>0.0</td><td>0.258865</td><td>0.02088</td><td>0.023</td><td>0.038</td></tr><tr><th>7</th><td>0.0673323</td><td>1</td><td>7.8536</td><td>0.0</td><td>0.182525</td><td>0.014385</td><td>0.039</td><td>0.063</td></tr><tr><th>8</th><td>0.0209777</td><td>1</td><td>7.70391</td><td>0.2776</td><td>0.215275</td><td>0.029713</td><td>0.024</td><td>0.035</td></tr><tr><th>9</th><td>0.0335512</td><td>1</td><td>9.06346</td><td>0.0</td><td>0.109614</td><td>0.002171</td><td>0.402</td><td>0.488</td></tr><tr><th>10</th><td>0.0391465</td><td>1</td><td>8.15191</td><td>0.1484</td><td>0.110885</td><td>0.028579</td><td>0.145</td><td>0.173</td></tr><tr><th>11</th><td>0.0761265</td><td>1</td><td>6.92952</td><td>0.0296</td><td>0.165784</td><td>0.020115</td><td>0.046</td><td>0.066</td></tr><tr><th>12</th><td>0.127951</td><td>1</td><td>7.23778</td><td>0.2151</td><td>0.078488</td><td>0.011581</td><td>0.022</td><td>0.031</td></tr><tr><th>13</th><td>-0.0243261</td><td>1</td><td>8.11582</td><td>0.4318</td><td>0.137482</td><td>0.026547</td><td>0.059</td><td>0.073</td></tr><tr><th>14</th><td>0.0782934</td><td>1</td><td>7.2717</td><td>0.1689</td><td>0.164598</td><td>0.044446</td><td>0.029</td><td>0.045</td></tr><tr><th>15</th><td>0.112912</td><td>1</td><td>7.12125</td><td>0.1832</td><td>0.188016</td><td>0.045678</td><td>0.033</td><td>0.051</td></tr><tr><th>16</th><td>0.0523082</td><td>1</td><td>6.97728</td><td>0.0962</td><td>0.204611</td><td>0.077852</td><td>0.037</td><td>0.043</td></tr><tr><th>17</th><td>0.0363909</td><td>1</td><td>7.64969</td><td>0.0227</td><td>0.136287</td><td>0.04673</td><td>0.081</td><td>0.105</td></tr><tr><th>18</th><td>0.0297382</td><td>1</td><td>8.05674</td><td>0.0208</td><td>0.197853</td><td>0.037224</td><td>0.083</td><td>0.097</td></tr><tr><th>19</th><td>-0.0566436</td><td>1</td><td>8.78094</td><td>0.2654</td><td>0.189867</td><td>0.031747</td><td>0.068</td><td>0.089</td></tr><tr><th>20</th><td>0.0192048</td><td>1</td><td>6.28786</td><td>0.4207</td><td>0.130682</td><td>0.109921</td><td>0.053</td><td>0.039</td></tr><tr><th>21</th><td>0.085206</td><td>1</td><td>6.13773</td><td>0.1371</td><td>0.123818</td><td>0.015897</td><td>0.028</td><td>0.025</td></tr><tr><th>22</th><td>0.133982</td><td>1</td><td>8.12888</td><td>0.0</td><td>0.16721</td><td>0.003311</td><td>0.129</td><td>0.196</td></tr><tr><th>23</th><td>0.173025</td><td>1</td><td>6.68085</td><td>0.4713</td><td>0.228424</td><td>0.029328</td><td>0.062</td><td>0.09</td></tr><tr><th>24</th><td>0.109699</td><td>1</td><td>7.17702</td><td>0.0178</td><td>0.18524</td><td>0.015453</td><td>0.02</td><td>0.026</td></tr><tr><th>25</th><td>0.0159899</td><td>1</td><td>6.64898</td><td>0.4762</td><td>0.171181</td><td>0.058937</td><td>0.018</td><td>0.028</td></tr><tr><th>&vellip;</th><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td></tr></tbody></table></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1025,7 +1001,7 @@ tot1         -0.127901      0.112595     -1.14    0.2656   -0.358542       0.102
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.05184424349589355
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.05184424328137179
 </pre></div>
 </div>
 </div>
@@ -1080,7 +1056,7 @@ OLS   │ -0.00937799    0.0298877   -0.0706002    0.0518442
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div class="data-frame"><p>1 rows × 5 columns</p><table class="data-frame"><thead><tr><th></th><th>model</th><th>Estimator</th><th>Std. Error</th><th>lower bound CI</th><th>upper bound CI</th></tr><tr><th></th><th title="String">String</th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th></tr></thead><tbody><tr><th>1</th><td>OLS</td><td>-0.00937799</td><td>0.0298877</td><td>-0.0706002</td><td>0.0518442</td></tr></tbody></table></div></div></div>
+<div class="output text_html"><table class="data-frame"><thead><tr><th></th><th>model</th><th>Estimator</th><th>Std. Error</th><th>lower bound CI</th><th>upper bound CI</th></tr><tr><th></th><th>String</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th></tr></thead><tbody><p>1 rows × 5 columns</p><tr><th>1</th><td>OLS</td><td>-0.00937799</td><td>0.0298877</td><td>-0.0706002</td><td>0.0518442</td></tr></tbody></table></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1090,72 +1066,22 @@ OLS   │ -0.00937799    0.0298877   -0.0706002    0.0518442
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><!DOCTYPE html>
-<html>
-<meta charset="UTF-8">
-<style>
-  table, td, th {
-      border-collapse: collapse;
-      font-family: sans-serif;
-  }
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">TypeError</span>: in keyword argument backend, expected Union{Nothing, Symbol}, got a value of type Val{:html}
 
-  td, th {
-      border-bottom: 0;
-      padding: 4px
-  }
-
-  tr:nth-child(odd) {
-      background: #eee;
-  }
-
-  tr:nth-child(even) {
-      background: #fff;
-  }
-
-  tr.header {
-      background: navy !important;
-      color: white;
-      font-weight: bold;
-  }
-
-  tr.subheader {
-      background: lightgray !important;
-      color: black;
-  }
-
-  tr.headerLastRow {
-      border-bottom: 2px solid black;
-  }
-
-  th.rowNumber, td.rowNumber {
-      text-align: right;
-  }
-
-</style>
-<body>
-<table>
-  <thead>
-    <tr class = "header headerLastRow">
-      <th style = "text-align: center;">Model</th>
-      <th style = "text-align: center;">Estimator</th>
-      <th style = "text-align: center;">Std. Error</th>
-      <th style = "text-align: center;">lower bound CI</th>
-      <th style = "text-align: center;">upper bound CI</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style = "text-align: center;">OLS</td>
-      <td style = "text-align: center;">-0.009378</td>
-      <td style = "text-align: center;">0.029888</td>
-      <td style = "text-align: center;">-0.0706</td>
-      <td style = "text-align: center;">0.051844</td>
-    </tr>
-  </tbody>
-</table>
-</body>
-</html>
-</div></div>
+<span class="ne">Stacktrace</span>:
+ <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">_pretty_table</span><span class="p">(</span><span class="n">io</span><span class="p">::</span><span class="n">IJulia</span><span class="o">.</span><span class="n">IJuliaStdio</span><span class="p">{</span><span class="n">Base</span><span class="o">.</span><span class="n">PipeEndpoint</span><span class="p">},</span> <span class="n">data</span><span class="p">::</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">header</span><span class="p">::</span><span class="n">Vector</span><span class="p">{</span><span class="n">String</span><span class="p">};</span> <span class="n">kwargs</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">Pairs</span><span class="p">{</span><span class="n">Symbol</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">NTuple</span><span class="p">{</span><span class="mi">4</span><span class="p">,</span> <span class="n">Symbol</span><span class="p">},</span> <span class="n">NamedTuple</span><span class="p">{(:</span><span class="n">backend</span><span class="p">,</span> <span class="p">:</span><span class="n">header</span><span class="p">,</span> <span class="p">:</span><span class="n">formatters</span><span class="p">,</span> <span class="p">:</span><span class="n">alignment</span><span class="p">),</span> <span class="n">Tuple</span><span class="p">{</span><span class="n">Val</span><span class="p">{:</span><span class="n">html</span><span class="p">},</span> <span class="n">Vector</span><span class="p">{</span><span class="n">String</span><span class="p">},</span> <span class="n">PrettyTables</span><span class="o">.</span><span class="n">var</span><span class="s2">&quot;#36#38&quot;</span><span class="p">{</span><span class="n">Vector</span><span class="p">{</span><span class="n">Int64</span><span class="p">}},</span> <span class="n">Symbol</span><span class="p">}}})</span>
+   <span class="o">@</span> <span class="n">PrettyTables</span> <span class="n">C</span><span class="p">:</span>\<span class="n">Users</span>\<span class="n">Work</span>\<span class="o">.</span><span class="n">julia</span>\<span class="n">packages</span>\<span class="n">PrettyTables</span>\<span class="n">ayuQh</span>\<span class="n">src</span>\<span class="n">private</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">357</span>
+ <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="c1">#pretty_table#46</span>
+   <span class="o">@</span> <span class="n">C</span><span class="p">:</span>\<span class="n">Users</span>\<span class="n">Work</span>\<span class="o">.</span><span class="n">julia</span>\<span class="n">packages</span>\<span class="n">PrettyTables</span>\<span class="n">ayuQh</span>\<span class="n">src</span>\<span class="nb">print</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">718</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">20</span><span class="p">]:</span><span class="mi">2</span>
+ <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="nb">eval</span>
+   <span class="o">@</span> <span class="o">.</span>\<span class="n">boot</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">373</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="n">include_string</span><span class="p">(</span><span class="n">mapexpr</span><span class="p">::</span><span class="n">typeof</span><span class="p">(</span><span class="n">REPL</span><span class="o">.</span><span class="n">softscope</span><span class="p">),</span> <span class="n">mod</span><span class="p">::</span><span class="n">Module</span><span class="p">,</span> <span class="n">code</span><span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="n">filename</span><span class="p">::</span><span class="n">String</span><span class="p">)</span>
+   <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1196</span>
+</pre></div>
+</div>
+</div>
 </div>
 <p>Least squares provides a rather noisy estimate (high standard error) of the
 speed of convergence, and does not allow us to answer the question
@@ -1564,7 +1490,7 @@ DOUBLE LASSO │ 0.0302396
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/10_Julia_pm2_notebook_jannis_48_0.svg" src="../_images/10_Julia_pm2_notebook_jannis_48_0.svg" /></div>
+<img alt="../_images/10_Julia_pm2_notebook_jannis_50_0.svg" src="../_images/10_Julia_pm2_notebook_jannis_50_0.svg" /></div>
 </div>
 </section>
 <section id="using-hdmjl">

@@ -55,7 +55,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="14. AutoML for wage prediction" href="14_jl_automl_wage.html" />
-    <link rel="prev" title="12. Collider Bias" href="12_jl_collider_bias.html" />
+    <link rel="prev" title="12. ColliderBias Hollywood" href="12_jl_collider_bias.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -111,14 +111,14 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="../intro.html">
-                    Welcome to your Jupyter Book
+                    Introduction
                 </a>
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="01_Julia_Notebook_Linear_Model_Overfitting.html">
-   1. Julia Notebook Linear Model Overfitting
+   1. Linear Model Overfiting
   </a>
  </li>
  <li class="toctree-l1">
@@ -128,17 +128,17 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="03_PM1_Notebook_Inference.html">
-   3. An inferential problem: The Gender Wage Gap
+   3. OLS and lasso for gender wage gap inference
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="04_Juli_Notebook_RCT-polio.html">
-   4. RCT application Polio  vaccination
+   4. Some RCT Examples
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="05_Julia_Analyzing_RCT_with_Precision.html">
-   5. Analyzing RCT with Precision by Adjusting for Baseline Covariates
+   5. Analyzing RCT reemployment experiment
   </a>
  </li>
  <li class="toctree-l1">
@@ -148,12 +148,12 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="07_julia-notebook-linear-penalized-regs.html">
-   7. Penalized Linear Regressions: A Simulation Experiment
+   7. Linear Penalized Regs
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="08_jl_ml_estimators_wage_pred.html">
-   8. Machine Learning Estimators for Wage Prediction
+   8. ML for wage prediction
   </a>
  </li>
  <li class="toctree-l1">
@@ -163,17 +163,17 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="10_Julia_pm2_notebook_jannis.html">
-   10. Testing the Convergence Hypothesis
+   10. Double Lasso for the convergence hypothesis
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="11_py-heterogenous-wage-effects.html">
-   11. Application: Heterogeneous Effect of Gender on Wage Using Double Lasso
+   11. Heterogenous Wage Effects
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="12_jl_collider_bias.html">
-   12. Collider Bias
+   12. ColliderBias Hollywood
   </a>
  </li>
  <li class="toctree-l1 current active">
@@ -188,27 +188,27 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="15_Functional-aproximation-by-nn-and-rf.html">
-   15. Functional Approximations by Trees and Neural Networks
+   15. Functional Approximations by NN and RF
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="16_Notebook_DAGitty.html">
-   16. Causal identification in DAGs using Backdoor and Swigs, Equivalence Classes, Falsiability Tests
+   16. Notebook-DAGitty
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="17_jl_dosearch.html">
-   17. Dosearch for Causal Identification in DAGs
+   17. Notebook-Dosearch
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="18_Julia_pm3_notebook_inference_clustering.html">
-   18. A Case Study: The Effect of Gun Ownership on Gun-Homicide Rates
+   18. DML inference for gun ownership
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="19_Julia-pm3-newdata-nn.html">
-   19. The Effect of Gun Ownership on Gun-Homicide Rates - proceeding
+   19. DML inference using NN for gun ownership
   </a>
  </li>
  <li class="toctree-l1">
@@ -223,7 +223,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="22_Julia_debiased-ml-for-partially-linear-model.html">
-   22. Double/Debiased Machine Learning for the Partially Linear Regression Model.
+   22. Debiased ML for Partially Linear Model in Julia
   </a>
  </li>
  <li class="toctree-l1">
@@ -233,12 +233,12 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="24_debiased-ml-for-partially-linear-iv-model-in-julia.html">
-   24. Double/Debiased ML for Partially Linear IV Model
+   24. Debiased ML for Partially Linear IV Model in Julia
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="25_Julia_weak_iv_experiments.html">
-   25. A Simple Example of Properties of IV estimator when Instruments are Weak
+   25. Weak IV Experiments
   </a>
  </li>
 </ul>
@@ -553,7 +553,30 @@ title="Print to PDF"
                 
               <div>
                 
-  <p>This notebook contains an example for teaching.</p>
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># !wget https://developer.nvidia.com/compute/cuda/9.0/Prod/local_installers/cuda-repo-ubuntu1604-9-0-local_9.0.176-1_amd64-deb</span>
+<span class="c"># !dpkg -i cuda-repo-ubuntu1604-9-0-local_9.0.176-1_amd64-deb</span>
+<span class="c"># !apt-key add /var/cuda-repo-9-0-local/7fa2af80.pub</span>
+<span class="c"># !apt update -q</span>
+<span class="c"># !apt install cuda gcc-6 g++-6 -y -q</span>
+<span class="c"># !ln -s /usr/bin/gcc-6 /usr/local/cuda/bin/gcc</span>
+<span class="c"># !ln -s /usr/bin/g++-6 /usr/local/cuda/bin/g++</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># !curl -sSL &quot;https://julialang-s3.julialang.org/bin/linux/x64/1.7/julia-1.7.3-linux-x86_64.tar.gz&quot; -o julia.tar.gz</span>
+<span class="c"># !tar -xzf julia.tar.gz -C /usr --strip-components 1</span>
+<span class="c"># !rm -rf julia.tar.gz*</span>
+<span class="c"># !julia -e &#39;using Pkg; pkg&quot;add IJulia; precompile&quot;&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This notebook contains an example for teaching.</p>
 <section class="tex2jax_ignore mathjax_ignore" id="deep-neural-networks-for-wage-prediction">
 <h1><span class="section-number">13. </span>Deep Neural Networks for Wage Prediction<a class="headerlink" href="#deep-neural-networks-for-wage-prediction" title="Permalink to this headline">#</a></h1>
 <p>So far we considered many machine learning method, e.g Lasso and Random Forests, to build a predictive model. In this lab, we extend our toolbox by predicting wages by a neural network.</p>
@@ -574,52 +597,14 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>ArgumentError: Package DataStructures not found in current path:
-- Run `import Pkg; Pkg.add(&quot;DataStructures&quot;)` to install the DataStructures package.
-
-
-Stacktrace:
- [1] require(into::Module, mod::Symbol)
-   @ Base .\loading.jl:967
- [2] eval
-   @ .\boot.jl:373 [inlined]
- [3] include_string(mapexpr::typeof(REPL.softscope), mod::Module, code::String, filename::String)
-   @ Base .\loading.jl:1196
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Importing .Rdata file</span>
-<span class="n">rdata_read</span> <span class="o">=</span> <span class="n">load</span><span class="p">(</span><span class="s">&quot;../data/wage2015_subsample_inference.RData&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dict{String, Any} with 1 entry:
-  &quot;data&quot; =&gt; <span class=" -Color -Color-Bold">5150×20 DataFrame</span>…
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Since rdata_read is a dictionary, we check if there is a key called &quot;data&quot;, the one we need for our analyze</span>
-<span class="n">haskey</span><span class="p">(</span><span class="n">rdata_read</span><span class="p">,</span> <span class="s">&quot;data&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>true
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Now we save that dataframe with a new name</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s">&quot;https://github.com/d2cml-ai/14.388_jl/raw/github_data/data/wage2015_subsample_inference.RData&quot;</span>
+<span class="n">download</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="s">&quot;data.RData&quot;</span><span class="p">)</span>
+<span class="n">rdata_read</span> <span class="o">=</span> <span class="n">load</span><span class="p">(</span><span class="s">&quot;data.RData&quot;</span><span class="p">)</span>
+<span class="n">rm</span><span class="p">(</span><span class="s">&quot;data.RData&quot;</span><span class="p">)</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">rdata_read</span><span class="p">[</span><span class="s">&quot;data&quot;</span><span class="p">]</span>
 <span class="n">names</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 </pre></div>
@@ -670,7 +655,7 @@ Stacktrace:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><table class="data-frame"><thead><tr><th></th><th>lwage</th><th>wage</th></tr><tr><th></th><th>Float64</th><th>Float64</th></tr></thead><tbody><p>5,150 rows × 2 columns</p><tr><th>1</th><td>2.26336</td><td>9.61538</td></tr><tr><th>2</th><td>3.8728</td><td>48.0769</td></tr><tr><th>3</th><td>2.40313</td><td>11.0577</td></tr><tr><th>4</th><td>2.63493</td><td>13.9423</td></tr><tr><th>5</th><td>3.36198</td><td>28.8462</td></tr><tr><th>6</th><td>2.46222</td><td>11.7308</td></tr><tr><th>7</th><td>2.95651</td><td>19.2308</td></tr><tr><th>8</th><td>2.95651</td><td>19.2308</td></tr><tr><th>9</th><td>2.48491</td><td>12.0</td></tr><tr><th>10</th><td>2.95651</td><td>19.2308</td></tr><tr><th>11</th><td>2.85115</td><td>17.3077</td></tr><tr><th>12</th><td>2.48651</td><td>12.0192</td></tr><tr><th>13</th><td>2.48651</td><td>12.0192</td></tr><tr><th>14</th><td>2.59984</td><td>13.4615</td></tr><tr><th>15</th><td>2.79399</td><td>16.3462</td></tr><tr><th>16</th><td>3.32808</td><td>27.8846</td></tr><tr><th>17</th><td>3.07269</td><td>21.6</td></tr><tr><th>18</th><td>2.158</td><td>8.65385</td></tr><tr><th>19</th><td>2.95651</td><td>19.2308</td></tr><tr><th>20</th><td>2.57922</td><td>13.1868</td></tr><tr><th>21</th><td>2.36872</td><td>10.6838</td></tr><tr><th>22</th><td>2.44569</td><td>11.5385</td></tr><tr><th>23</th><td>2.87855</td><td>17.7885</td></tr><tr><th>24</th><td>2.95651</td><td>19.2308</td></tr><tr><th>25</th><td>2.79143</td><td>16.3043</td></tr><tr><th>26</th><td>2.95651</td><td>19.2308</td></tr><tr><th>27</th><td>2.66883</td><td>14.4231</td></tr><tr><th>28</th><td>2.48491</td><td>12.0</td></tr><tr><th>29</th><td>2.82298</td><td>16.8269</td></tr><tr><th>30</th><td>2.97911</td><td>19.6703</td></tr><tr><th>&vellip;</th><td>&vellip;</td><td>&vellip;</td></tr></tbody></table></div></div>
+<div class="output text_html"><table class="data-frame"><thead><tr><th></th><th>lwage</th><th>wage</th></tr><tr><th></th><th>Float64</th><th>Float64</th></tr></thead><tbody><p>5,150 rows × 2 columns</p><tr><th>1</th><td>2.26336</td><td>9.61538</td></tr><tr><th>2</th><td>3.8728</td><td>48.0769</td></tr><tr><th>3</th><td>2.40313</td><td>11.0577</td></tr><tr><th>4</th><td>2.63493</td><td>13.9423</td></tr><tr><th>5</th><td>3.36198</td><td>28.8462</td></tr><tr><th>6</th><td>2.46222</td><td>11.7308</td></tr><tr><th>7</th><td>2.95651</td><td>19.2308</td></tr><tr><th>8</th><td>2.95651</td><td>19.2308</td></tr><tr><th>9</th><td>2.48491</td><td>12.0</td></tr><tr><th>10</th><td>2.95651</td><td>19.2308</td></tr><tr><th>11</th><td>2.85115</td><td>17.3077</td></tr><tr><th>12</th><td>2.48651</td><td>12.0192</td></tr><tr><th>13</th><td>2.48651</td><td>12.0192</td></tr><tr><th>14</th><td>2.59984</td><td>13.4615</td></tr><tr><th>15</th><td>2.79399</td><td>16.3462</td></tr><tr><th>16</th><td>3.32808</td><td>27.8846</td></tr><tr><th>17</th><td>3.07269</td><td>21.6</td></tr><tr><th>18</th><td>2.158</td><td>8.65385</td></tr><tr><th>19</th><td>2.95651</td><td>19.2308</td></tr><tr><th>20</th><td>2.57922</td><td>13.1868</td></tr><tr><th>21</th><td>2.36872</td><td>10.6838</td></tr><tr><th>22</th><td>2.44569</td><td>11.5385</td></tr><tr><th>23</th><td>2.87855</td><td>17.7885</td></tr><tr><th>24</th><td>2.95651</td><td>19.2308</td></tr><tr><th>25</th><td>2.79143</td><td>16.3043</td></tr><tr><th>&vellip;</th><td>&vellip;</td><td>&vellip;</td></tr></tbody></table></div></div>
 </div>
 <p>Firt, we split the data first and normalize it.</p>
 <div class="cell docutils container">
@@ -682,32 +667,27 @@ Stacktrace:
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3862-element Vector{Int64}:
- 2455
- 3109
- 4807
- 3107
-  617
- 2230
- 4697
-  755
-  771
- 3729
- 2063
-  528
- 3238
+ 1679
+ 2829
+ 1128
+ 4606
+ 1822
+ 2034
+ 4909
+ 4099
+ 2550
+ 3857
     ⋮
- 4057
-  973
- 4183
- 1230
- 3228
- 3687
- 4789
- 4060
- 2723
- 3610
-  899
- 1273
+ 4589
+ 1136
+ 1027
+ 2431
+  770
+  402
+ 3702
+ 1053
+ 1149
+  241
 </pre></div>
 </div>
 </div>
@@ -721,7 +701,7 @@ Stacktrace:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><table class="data-frame"><thead><tr><th></th><th>wage</th><th>lwage</th><th>sex</th><th>shs</th><th>hsg</th><th>scl</th><th>clg</th><th>ad</th><th>mw</th></tr><tr><th></th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th></tr></thead><tbody><p>3,862 rows × 16 columns (omitted printing of 7 columns)</p><tr><th>1</th><td>12.0192</td><td>2.48651</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>1.0</td></tr><tr><th>2</th><td>10.2857</td><td>2.33076</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>3</th><td>10.5769</td><td>2.35867</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>4</th><td>17.3077</td><td>2.85115</td><td>1.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>5</th><td>25.641</td><td>3.24419</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>6</th><td>42.3077</td><td>3.74497</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>1.0</td></tr><tr><th>7</th><td>15.8654</td><td>2.76414</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>8</th><td>72.1154</td><td>4.27827</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td></tr><tr><th>9</th><td>35.7143</td><td>3.57555</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td></tr><tr><th>10</th><td>15.3846</td><td>2.73337</td><td>1.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>11</th><td>16.5385</td><td>2.80569</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>1.0</td></tr><tr><th>12</th><td>16.8269</td><td>2.82298</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td></tr><tr><th>13</th><td>36.0577</td><td>3.58512</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td></tr><tr><th>14</th><td>19.2308</td><td>2.95651</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td></tr><tr><th>15</th><td>36.0577</td><td>3.58512</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td></tr><tr><th>16</th><td>26.4423</td><td>3.27497</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td></tr><tr><th>17</th><td>14.4231</td><td>2.66883</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>18</th><td>45.1923</td><td>3.81093</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td></tr><tr><th>19</th><td>30.7692</td><td>3.42652</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td></tr><tr><th>20</th><td>25.0</td><td>3.21888</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td></tr><tr><th>21</th><td>18.4615</td><td>2.91569</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td></tr><tr><th>22</th><td>8.71795</td><td>2.16538</td><td>1.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>1.0</td></tr><tr><th>23</th><td>19.2308</td><td>2.95651</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>24</th><td>13.4615</td><td>2.59984</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td></tr><tr><th>25</th><td>22.5962</td><td>3.11778</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td></tr><tr><th>26</th><td>10.6838</td><td>2.36872</td><td>1.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>27</th><td>48.0769</td><td>3.8728</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td></tr><tr><th>28</th><td>23.5577</td><td>3.15945</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>29</th><td>48.7179</td><td>3.88605</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td></tr><tr><th>30</th><td>14.4712</td><td>2.67216</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td></tr><tr><th>&vellip;</th><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td></tr></tbody></table></div></div>
+<div class="output text_html"><table class="data-frame"><thead><tr><th></th><th>wage</th><th>lwage</th><th>sex</th><th>shs</th><th>hsg</th><th>scl</th><th>clg</th><th>ad</th><th>mw</th></tr><tr><th></th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th></tr></thead><tbody><p>3,862 rows × 16 columns (omitted printing of 7 columns)</p><tr><th>1</th><td>14.9573</td><td>2.7052</td><td>1.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>1.0</td></tr><tr><th>2</th><td>76.0073</td><td>4.33083</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td></tr><tr><th>3</th><td>30.0</td><td>3.4012</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td></tr><tr><th>4</th><td>22.1154</td><td>3.09627</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td></tr><tr><th>5</th><td>40.1709</td><td>3.69314</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>1.0</td></tr><tr><th>6</th><td>24.9202</td><td>3.21568</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>1.0</td></tr><tr><th>7</th><td>34.6154</td><td>3.5443</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>8</th><td>13.4615</td><td>2.59984</td><td>1.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>9</th><td>7.21154</td><td>1.97568</td><td>1.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>10</th><td>17.094</td><td>2.83873</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>11</th><td>9.61538</td><td>2.26336</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>12</th><td>12.5</td><td>2.52573</td><td>1.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>13</th><td>12.9371</td><td>2.5601</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>14</th><td>10.5769</td><td>2.35867</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>15</th><td>13.6752</td><td>2.61558</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td></tr><tr><th>16</th><td>16.25</td><td>2.78809</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td></tr><tr><th>17</th><td>22.5962</td><td>3.11778</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>18</th><td>29.021</td><td>3.36802</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td></tr><tr><th>19</th><td>9.61538</td><td>2.26336</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>20</th><td>48.0769</td><td>3.8728</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>21</th><td>43.2692</td><td>3.76744</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td></tr><tr><th>22</th><td>14.4231</td><td>2.66883</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>23</th><td>13.7363</td><td>2.62004</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td></tr><tr><th>24</th><td>8.24176</td><td>2.10921</td><td>1.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td></tr><tr><th>25</th><td>86.5385</td><td>4.46059</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td></tr><tr><th>&vellip;</th><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td></tr></tbody></table></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -746,22 +726,22 @@ Stacktrace:
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>16×2 Matrix{Any}:
- &quot;wage&quot;   23.3849
- &quot;lwage&quot;   2.97164
- &quot;sex&quot;     0.44407
- &quot;shs&quot;     0.0222683
- &quot;hsg&quot;     0.24754
- &quot;scl&quot;     0.283014
- &quot;clg&quot;     0.310979
- &quot;ad&quot;      0.136199
- &quot;mw&quot;      0.262558
- &quot;so&quot;      0.296737
- &quot;we&quot;      0.215691
- &quot;ne&quot;      0.225013
- &quot;exp1&quot;   13.6699
- &quot;exp2&quot;    2.97307
- &quot;exp3&quot;    8.05316
- &quot;exp4&quot;   24.4216
+ &quot;wage&quot;   23.6925
+ &quot;lwage&quot;   2.981
+ &quot;sex&quot;     0.444329
+ &quot;shs&quot;     0.023304
+ &quot;hsg&quot;     0.238477
+ &quot;scl&quot;     0.280943
+ &quot;clg&quot;     0.321336
+ &quot;ad&quot;      0.13594
+ &quot;mw&quot;      0.255567
+ &quot;so&quot;      0.304764
+ &quot;we&quot;      0.216468
+ &quot;ne&quot;      0.2232
+ &quot;exp1&quot;   13.6932
+ &quot;exp2&quot;    2.98419
+ &quot;exp3&quot;    8.10838
+ &quot;exp4&quot;   24.6962
 </pre></div>
 </div>
 </div>
@@ -775,22 +755,22 @@ Stacktrace:
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>16×2 Matrix{Any}:
- &quot;wage&quot;   20.445
- &quot;lwage&quot;   0.566839
- &quot;sex&quot;     0.496926
- &quot;shs&quot;     0.147574
- &quot;hsg&quot;     0.431639
- &quot;scl&quot;     0.450522
- &quot;clg&quot;     0.462954
- &quot;ad&quot;      0.343044
- &quot;mw&quot;      0.440081
- &quot;so&quot;      0.456879
- &quot;we&quot;      0.411354
- &quot;ne&quot;      0.417645
- &quot;exp1&quot;   10.5105
- &quot;exp2&quot;    3.94797
- &quot;exp3&quot;   14.2448
- &quot;exp4&quot;   52.4952
+ &quot;wage&quot;   21.2742
+ &quot;lwage&quot;   0.571903
+ &quot;sex&quot;     0.496955
+ &quot;shs&quot;     0.150887
+ &quot;hsg&quot;     0.426208
+ &quot;scl&quot;     0.449518
+ &quot;clg&quot;     0.46705
+ &quot;ad&quot;      0.342769
+ &quot;mw&quot;      0.436236
+ &quot;so&quot;      0.460367
+ &quot;we&quot;      0.41189
+ &quot;ne&quot;      0.416446
+ &quot;exp1&quot;   10.533
+ &quot;exp2&quot;    3.97428
+ &quot;exp3&quot;   14.4163
+ &quot;exp4&quot;   53.3581
 </pre></div>
 </div>
 </div>
@@ -809,7 +789,7 @@ Stacktrace:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><table class="data-frame"><thead><tr><th></th><th>wage</th><th>lwage</th><th>sex</th><th>shs</th><th>hsg</th><th>scl</th><th>clg</th><th>ad</th></tr><tr><th></th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th></tr></thead><tbody><p>3,862 rows × 16 columns (omitted printing of 8 columns)</p><tr><th>1</th><td>-0.555914</td><td>-0.855849</td><td>-0.893634</td><td>-0.150896</td><td>-0.573489</td><td>-0.628192</td><td>1.48831</td><td>-0.39703</td></tr><tr><th>2</th><td>-0.640703</td><td>-1.13062</td><td>-0.893634</td><td>-0.150896</td><td>1.74326</td><td>-0.628192</td><td>-0.671727</td><td>-0.39703</td></tr><tr><th>3</th><td>-0.62646</td><td>-1.08137</td><td>-0.893634</td><td>-0.150896</td><td>-0.573489</td><td>1.59146</td><td>-0.671727</td><td>-0.39703</td></tr><tr><th>4</th><td>-0.297246</td><td>-0.212557</td><td>1.11874</td><td>-0.150896</td><td>-0.573489</td><td>1.59146</td><td>-0.671727</td><td>-0.39703</td></tr><tr><th>5</th><td>0.110351</td><td>0.480836</td><td>-0.893634</td><td>-0.150896</td><td>-0.573489</td><td>1.59146</td><td>-0.671727</td><td>-0.39703</td></tr><tr><th>6</th><td>0.925545</td><td>1.36429</td><td>-0.893634</td><td>-0.150896</td><td>-0.573489</td><td>-0.628192</td><td>1.48831</td><td>-0.39703</td></tr><tr><th>7</th><td>-0.367792</td><td>-0.36606</td><td>-0.893634</td><td>6.62538</td><td>-0.573489</td><td>-0.628192</td><td>-0.671727</td><td>-0.39703</td></tr><tr><th>8</th><td>2.38349</td><td>2.30512</td><td>1.11874</td><td>-0.150896</td><td>-0.573489</td><td>-0.628192</td><td>1.48831</td><td>-0.39703</td></tr><tr><th>9</th><td>0.603051</td><td>1.06541</td><td>1.11874</td><td>-0.150896</td><td>-0.573489</td><td>-0.628192</td><td>-0.671727</td><td>2.51805</td></tr><tr><th>10</th><td>-0.391307</td><td>-0.420346</td><td>1.11874</td><td>-0.150896</td><td>1.74326</td><td>-0.628192</td><td>-0.671727</td><td>-0.39703</td></tr><tr><th>11</th><td>-0.334871</td><td>-0.292761</td><td>-0.893634</td><td>-0.150896</td><td>-0.573489</td><td>1.59146</td><td>-0.671727</td><td>-0.39703</td></tr><tr><th>12</th><td>-0.320762</td><td>-0.262255</td><td>1.11874</td><td>-0.150896</td><td>-0.573489</td><td>-0.628192</td><td>1.48831</td><td>-0.39703</td></tr><tr><th>13</th><td>0.619847</td><td>1.08229</td><td>-0.893634</td><td>-0.150896</td><td>-0.573489</td><td>-0.628192</td><td>-0.671727</td><td>2.51805</td></tr><tr><th>14</th><td>-0.203185</td><td>-0.0266836</td><td>1.11874</td><td>-0.150896</td><td>-0.573489</td><td>-0.628192</td><td>1.48831</td><td>-0.39703</td></tr><tr><th>15</th><td>0.619847</td><td>1.08229</td><td>-0.893634</td><td>-0.150896</td><td>1.74326</td><td>-0.628192</td><td>-0.671727</td><td>-0.39703</td></tr><tr><th>16</th><td>0.149543</td><td>0.535122</td><td>-0.893634</td><td>-0.150896</td><td>-0.573489</td><td>-0.628192</td><td>1.48831</td><td>-0.39703</td></tr><tr><th>17</th><td>-0.438338</td><td>-0.534203</td><td>-0.893634</td><td>-0.150896</td><td>-0.573489</td><td>1.59146</td><td>-0.671727</td><td>-0.39703</td></tr><tr><th>18</th><td>1.06664</td><td>1.48065</td><td>-0.893634</td><td>-0.150896</td><td>-0.573489</td><td>-0.628192</td><td>1.48831</td><td>-0.39703</td></tr><tr><th>19</th><td>0.36118</td><td>0.802482</td><td>-0.893634</td><td>-0.150896</td><td>-0.573489</td><td>-0.628192</td><td>-0.671727</td><td>2.51805</td></tr><tr><th>20</th><td>0.0789973</td><td>0.436171</td><td>-0.893634</td><td>-0.150896</td><td>-0.573489</td><td>-0.628192</td><td>1.48831</td><td>-0.39703</td></tr><tr><th>21</th><td>-0.24081</td><td>-0.0987005</td><td>1.11874</td><td>-0.150896</td><td>-0.573489</td><td>-0.628192</td><td>1.48831</td><td>-0.39703</td></tr><tr><th>22</th><td>-0.717385</td><td>-1.42237</td><td>1.11874</td><td>-0.150896</td><td>-0.573489</td><td>1.59146</td><td>-0.671727</td><td>-0.39703</td></tr><tr><th>23</th><td>-0.203185</td><td>-0.0266836</td><td>-0.893634</td><td>-0.150896</td><td>1.74326</td><td>-0.628192</td><td>-0.671727</td><td>-0.39703</td></tr><tr><th>24</th><td>-0.485368</td><td>-0.655918</td><td>-0.893634</td><td>-0.150896</td><td>1.74326</td><td>-0.628192</td><td>-0.671727</td><td>-0.39703</td></tr><tr><th>25</th><td>-0.0385788</td><td>0.257821</td><td>-0.893634</td><td>-0.150896</td><td>1.74326</td><td>-0.628192</td><td>-0.671727</td><td>-0.39703</td></tr><tr><th>26</th><td>-0.621234</td><td>-1.06364</td><td>1.11874</td><td>-0.150896</td><td>1.74326</td><td>-0.628192</td><td>-0.671727</td><td>-0.39703</td></tr><tr><th>27</th><td>1.20773</td><td>1.58981</td><td>-0.893634</td><td>-0.150896</td><td>-0.573489</td><td>-0.628192</td><td>1.48831</td><td>-0.39703</td></tr><tr><th>28</th><td>0.00845161</td><td>0.331338</td><td>-0.893634</td><td>-0.150896</td><td>-0.573489</td><td>1.59146</td><td>-0.671727</td><td>-0.39703</td></tr><tr><th>29</th><td>1.23908</td><td>1.61317</td><td>-0.893634</td><td>-0.150896</td><td>-0.573489</td><td>-0.628192</td><td>-0.671727</td><td>2.51805</td></tr><tr><th>30</th><td>-0.435986</td><td>-0.528332</td><td>-0.893634</td><td>-0.150896</td><td>-0.573489</td><td>-0.628192</td><td>1.48831</td><td>-0.39703</td></tr><tr><th>&vellip;</th><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td></tr></tbody></table></div></div>
+<div class="output text_html"><table class="data-frame"><thead><tr><th></th><th>wage</th><th>lwage</th><th>sex</th><th>shs</th><th>hsg</th><th>scl</th><th>clg</th><th>ad</th></tr><tr><th></th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th></tr></thead><tbody><p>3,862 rows × 16 columns (omitted printing of 8 columns)</p><tr><th>1</th><td>-0.410602</td><td>-0.48225</td><td>1.11815</td><td>-0.154447</td><td>-0.559533</td><td>1.59962</td><td>-0.688012</td><td>-0.396593</td></tr><tr><th>2</th><td>2.45907</td><td>2.36025</td><td>1.11815</td><td>-0.154447</td><td>-0.559533</td><td>-0.624987</td><td>-0.688012</td><td>2.52082</td></tr><tr><th>3</th><td>0.296485</td><td>0.73474</td><td>1.11815</td><td>-0.154447</td><td>-0.559533</td><td>-0.624987</td><td>1.45309</td><td>-0.396593</td></tr><tr><th>4</th><td>-0.0741333</td><td>0.201566</td><td>-0.894103</td><td>-0.154447</td><td>-0.559533</td><td>-0.624987</td><td>-0.688012</td><td>2.52082</td></tr><tr><th>5</th><td>0.774572</td><td>1.24522</td><td>1.11815</td><td>-0.154447</td><td>-0.559533</td><td>-0.624987</td><td>1.45309</td><td>-0.396593</td></tr><tr><th>6</th><td>0.0577073</td><td>0.410351</td><td>-0.894103</td><td>-0.154447</td><td>-0.559533</td><td>-0.624987</td><td>-0.688012</td><td>2.52082</td></tr><tr><th>7</th><td>0.513432</td><td>0.984959</td><td>-0.894103</td><td>-0.154447</td><td>-0.559533</td><td>1.59962</td><td>-0.688012</td><td>-0.396593</td></tr><tr><th>8</th><td>-0.480909</td><td>-0.666478</td><td>1.11815</td><td>-0.154447</td><td>1.78674</td><td>-0.624987</td><td>-0.688012</td><td>-0.396593</td></tr><tr><th>9</th><td>-0.774692</td><td>-1.75784</td><td>1.11815</td><td>-0.154447</td><td>1.78674</td><td>-0.624987</td><td>-0.688012</td><td>-0.396593</td></tr><tr><th>10</th><td>-0.310164</td><td>-0.248764</td><td>-0.894103</td><td>-0.154447</td><td>1.78674</td><td>-0.624987</td><td>-0.688012</td><td>-0.396593</td></tr><tr><th>11</th><td>-0.661699</td><td>-1.25482</td><td>-0.894103</td><td>-0.154447</td><td>1.78674</td><td>-0.624987</td><td>-0.688012</td><td>-0.396593</td></tr><tr><th>12</th><td>-0.526107</td><td>-0.79606</td><td>1.11815</td><td>-0.154447</td><td>1.78674</td><td>-0.624987</td><td>-0.688012</td><td>-0.396593</td></tr><tr><th>13</th><td>-0.505562</td><td>-0.735966</td><td>-0.894103</td><td>-0.154447</td><td>-0.559533</td><td>1.59962</td><td>-0.688012</td><td>-0.396593</td></tr><tr><th>14</th><td>-0.616501</td><td>-1.08816</td><td>-0.894103</td><td>-0.154447</td><td>1.78674</td><td>-0.624987</td><td>-0.688012</td><td>-0.396593</td></tr><tr><th>15</th><td>-0.470866</td><td>-0.638942</td><td>-0.894103</td><td>-0.154447</td><td>1.78674</td><td>-0.624987</td><td>-0.688012</td><td>-0.396593</td></tr><tr><th>16</th><td>-0.349837</td><td>-0.337303</td><td>1.11815</td><td>-0.154447</td><td>-0.559533</td><td>-0.624987</td><td>1.45309</td><td>-0.396593</td></tr><tr><th>17</th><td>-0.0515347</td><td>0.23917</td><td>-0.894103</td><td>-0.154447</td><td>-0.559533</td><td>1.59962</td><td>-0.688012</td><td>-0.396593</td></tr><tr><th>18</th><td>0.250466</td><td>0.676726</td><td>-0.894103</td><td>-0.154447</td><td>-0.559533</td><td>-0.624987</td><td>-0.688012</td><td>2.52082</td></tr><tr><th>19</th><td>-0.661699</td><td>-1.25482</td><td>-0.894103</td><td>-0.154447</td><td>1.78674</td><td>-0.624987</td><td>-0.688012</td><td>-0.396593</td></tr><tr><th>20</th><td>1.14619</td><td>1.55936</td><td>-0.894103</td><td>-0.154447</td><td>-0.559533</td><td>1.59962</td><td>-0.688012</td><td>-0.396593</td></tr><tr><th>21</th><td>0.920208</td><td>1.37514</td><td>-0.894103</td><td>-0.154447</td><td>-0.559533</td><td>-0.624987</td><td>1.45309</td><td>-0.396593</td></tr><tr><th>22</th><td>-0.435712</td><td>-0.545841</td><td>-0.894103</td><td>-0.154447</td><td>1.78674</td><td>-0.624987</td><td>-0.688012</td><td>-0.396593</td></tr><tr><th>23</th><td>-0.467996</td><td>-0.631153</td><td>1.11815</td><td>-0.154447</td><td>-0.559533</td><td>-0.624987</td><td>1.45309</td><td>-0.396593</td></tr><tr><th>24</th><td>-0.726266</td><td>-1.52436</td><td>1.11815</td><td>-0.154447</td><td>1.78674</td><td>-0.624987</td><td>-0.688012</td><td>-0.396593</td></tr><tr><th>25</th><td>2.95409</td><td>2.58714</td><td>-0.894103</td><td>-0.154447</td><td>-0.559533</td><td>-0.624987</td><td>-0.688012</td><td>2.52082</td></tr><tr><th>&vellip;</th><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td></tr></tbody></table></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -825,7 +805,7 @@ Stacktrace:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><table class="data-frame"><thead><tr><th></th><th>wage</th><th>lwage</th><th>sex</th><th>shs</th><th>hsg</th><th>scl</th><th>clg</th></tr><tr><th></th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th></tr></thead><tbody><p>1,288 rows × 16 columns (omitted printing of 9 columns)</p><tr><th>1</th><td>-0.67349</td><td>-1.24951</td><td>1.11874</td><td>-0.150896</td><td>-0.573489</td><td>-0.628192</td><td>1.48831</td></tr><tr><th>2</th><td>-0.461853</td><td>-0.594011</td><td>1.11874</td><td>-0.150896</td><td>-0.573489</td><td>-0.628192</td><td>-0.671727</td></tr><tr><th>3</th><td>-0.555914</td><td>-0.855849</td><td>1.11874</td><td>-0.150896</td><td>-0.573489</td><td>1.59146</td><td>-0.671727</td></tr><tr><th>4</th><td>-0.498805</td><td>-0.692294</td><td>-0.893634</td><td>-0.150896</td><td>1.74326</td><td>-0.628192</td><td>-0.671727</td></tr><tr><th>5</th><td>-0.273731</td><td>-0.164221</td><td>1.11874</td><td>-0.150896</td><td>-0.573489</td><td>-0.628192</td><td>-0.671727</td></tr><tr><th>6</th><td>-0.346322</td><td>-0.317912</td><td>1.11874</td><td>-0.150896</td><td>-0.573489</td><td>1.59146</td><td>-0.671727</td></tr><tr><th>7</th><td>-0.556854</td><td>-0.858674</td><td>-0.893634</td><td>-0.150896</td><td>-0.573489</td><td>1.59146</td><td>-0.671727</td></tr><tr><th>8</th><td>-0.181686</td><td>0.0131863</td><td>-0.893634</td><td>-0.150896</td><td>-0.573489</td><td>-0.628192</td><td>1.48831</td></tr><tr><th>9</th><td>-0.558527</td><td>-0.863707</td><td>1.11874</td><td>-0.150896</td><td>1.74326</td><td>-0.628192</td><td>-0.671727</td></tr><tr><th>10</th><td>0.0319668</td><td>0.366979</td><td>1.11874</td><td>-0.150896</td><td>-0.573489</td><td>-0.628192</td><td>1.48831</td></tr><tr><th>11</th><td>0.871796</td><td>1.31786</td><td>1.11874</td><td>-0.150896</td><td>-0.573489</td><td>-0.628192</td><td>1.48831</td></tr><tr><th>12</th><td>-0.649975</td><td>-1.16344</td><td>-0.893634</td><td>-0.150896</td><td>1.74326</td><td>-0.628192</td><td>-0.671727</td></tr><tr><th>13</th><td>-0.791066</td><td>-1.75703</td><td>1.11874</td><td>-0.150896</td><td>-0.573489</td><td>1.59146</td><td>-0.671727</td></tr><tr><th>14</th><td>-0.511021</td><td>-0.726027</td><td>-0.893634</td><td>-0.150896</td><td>-0.573489</td><td>1.59146</td><td>-0.671727</td></tr><tr><th>15</th><td>-0.0432819</td><td>0.250297</td><td>1.11874</td><td>-0.150896</td><td>-0.573489</td><td>-0.628192</td><td>-0.671727</td></tr><tr><th>16</th><td>0.518677</td><td>0.978069</td><td>-0.893634</td><td>-0.150896</td><td>-0.573489</td><td>-0.628192</td><td>1.48831</td></tr><tr><th>17</th><td>-0.00249603</td><td>0.314496</td><td>-0.893634</td><td>-0.150896</td><td>-0.573489</td><td>-0.628192</td><td>1.48831</td></tr><tr><th>18</th><td>-0.848174</td><td>-2.06862</td><td>-0.893634</td><td>-0.150896</td><td>-0.573489</td><td>-0.628192</td><td>1.48831</td></tr><tr><th>19</th><td>-0.67349</td><td>-1.24951</td><td>-0.893634</td><td>-0.150896</td><td>1.74326</td><td>-0.628192</td><td>-0.671727</td></tr><tr><th>20</th><td>-0.725746</td><td>-1.4573</td><td>-0.893634</td><td>6.62538</td><td>-0.573489</td><td>-0.628192</td><td>-0.671727</td></tr><tr><th>21</th><td>-0.555914</td><td>-0.855849</td><td>1.11874</td><td>-0.150896</td><td>1.74326</td><td>-0.628192</td><td>-0.671727</td></tr><tr><th>22</th><td>-0.320762</td><td>-0.262255</td><td>-0.893634</td><td>-0.150896</td><td>-0.573489</td><td>1.59146</td><td>-0.671727</td></tr><tr><th>23</th><td>-0.0856093</td><td>0.181105</td><td>-0.893634</td><td>-0.150896</td><td>-0.573489</td><td>-0.628192</td><td>1.48831</td></tr><tr><th>24</th><td>-0.979188</td><td>-3.10157</td><td>-0.893634</td><td>-0.150896</td><td>-0.573489</td><td>-0.628192</td><td>1.48831</td></tr><tr><th>25</th><td>-0.203185</td><td>-0.0266836</td><td>-0.893634</td><td>-0.150896</td><td>-0.573489</td><td>1.59146</td><td>-0.671727</td></tr><tr><th>26</th><td>-0.256935</td><td>-0.130488</td><td>-0.893634</td><td>-0.150896</td><td>-0.573489</td><td>-0.628192</td><td>1.48831</td></tr><tr><th>27</th><td>-0.67349</td><td>-1.24951</td><td>1.11874</td><td>-0.150896</td><td>-0.573489</td><td>1.59146</td><td>-0.671727</td></tr><tr><th>28</th><td>-0.0620941</td><td>0.21988</td><td>1.11874</td><td>-0.150896</td><td>-0.573489</td><td>-0.628192</td><td>1.48831</td></tr><tr><th>29</th><td>-0.41221</td><td>-0.470044</td><td>1.11874</td><td>-0.150896</td><td>-0.573489</td><td>-0.628192</td><td>1.48831</td></tr><tr><th>30</th><td>-0.602944</td><td>-1.00295</td><td>-0.893634</td><td>-0.150896</td><td>-0.573489</td><td>-0.628192</td><td>1.48831</td></tr><tr><th>&vellip;</th><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td></tr></tbody></table></div></div>
+<div class="output text_html"><table class="data-frame"><thead><tr><th></th><th>wage</th><th>lwage</th><th>sex</th><th>shs</th><th>hsg</th><th>scl</th><th>clg</th></tr><tr><th></th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th></tr></thead><tbody><p>1,288 rows × 16 columns (omitted printing of 9 columns)</p><tr><th>1</th><td>-0.458311</td><td>-0.605119</td><td>1.11815</td><td>-0.154447</td><td>-0.559533</td><td>-0.624987</td><td>-0.688012</td></tr><tr><th>2</th><td>-0.209725</td><td>-0.0428149</td><td>1.11815</td><td>-0.154447</td><td>1.78674</td><td>-0.624987</td><td>-0.688012</td></tr><tr><th>3</th><td>-0.548705</td><td>-0.864639</td><td>-0.894103</td><td>-0.154447</td><td>1.78674</td><td>-0.624987</td><td>-0.688012</td></tr><tr><th>4</th><td>-0.0983591</td><td>0.160335</td><td>-0.894103</td><td>-0.154447</td><td>1.78674</td><td>-0.624987</td><td>-0.688012</td></tr><tr><th>5</th><td>-0.571304</td><td>-0.936018</td><td>1.11815</td><td>-0.154447</td><td>-0.559533</td><td>1.59962</td><td>-0.688012</td></tr><tr><th>6</th><td>-0.277521</td><td>-0.179134</td><td>1.11815</td><td>-0.154447</td><td>-0.559533</td><td>-0.624987</td><td>-0.688012</td></tr><tr><th>7</th><td>-0.549609</td><td>-0.867439</td><td>-0.894103</td><td>-0.154447</td><td>-0.559533</td><td>1.59962</td><td>-0.688012</td></tr><tr><th>8</th><td>-0.189064</td><td>-0.00329798</td><td>-0.894103</td><td>-0.154447</td><td>-0.559533</td><td>-0.624987</td><td>1.45309</td></tr><tr><th>9</th><td>-0.797291</td><td>-1.87848</td><td>1.11815</td><td>-0.154447</td><td>1.78674</td><td>-0.624987</td><td>-0.688012</td></tr><tr><th>10</th><td>-0.454544</td><td>-0.595099</td><td>-0.894103</td><td>-0.154447</td><td>1.78674</td><td>-0.624987</td><td>-0.688012</td></tr><tr><th>11</th><td>-0.390515</td><td>-0.432992</td><td>-0.894103</td><td>-0.154447</td><td>1.78674</td><td>-0.624987</td><td>-0.688012</td></tr><tr><th>12</th><td>-0.209725</td><td>-0.0428149</td><td>1.11815</td><td>-0.154447</td><td>1.78674</td><td>-0.624987</td><td>-0.688012</td></tr><tr><th>13</th><td>-0.374696</td><td>-0.395155</td><td>1.11815</td><td>-0.154447</td><td>-0.559533</td><td>-0.624987</td><td>1.45309</td></tr><tr><th>14</th><td>-0.0168583</td><td>0.295344</td><td>-0.894103</td><td>-0.154447</td><td>-0.559533</td><td>-0.624987</td><td>1.45309</td></tr><tr><th>15</th><td>-0.0515347</td><td>0.23917</td><td>1.11815</td><td>-0.154447</td><td>-0.559533</td><td>1.59962</td><td>-0.688012</td></tr><tr><th>16</th><td>0.242248</td><td>0.66616</td><td>-0.894103</td><td>-0.154447</td><td>1.78674</td><td>-0.624987</td><td>-0.688012</td></tr><tr><th>17</th><td>-0.310164</td><td>-0.248764</td><td>-0.894103</td><td>-0.154447</td><td>1.78674</td><td>-0.624987</td><td>-0.688012</td></tr><tr><th>18</th><td>-0.232324</td><td>-0.0870843</td><td>1.11815</td><td>-0.154447</td><td>-0.559533</td><td>1.59962</td><td>-0.688012</td></tr><tr><th>19</th><td>0.00183665</td><td>0.324897</td><td>-0.894103</td><td>-0.154447</td><td>1.78674</td><td>-0.624987</td><td>-0.688012</td></tr><tr><th>20</th><td>-0.096732</td><td>0.163134</td><td>-0.894103</td><td>-0.154447</td><td>-0.559533</td><td>-0.624987</td><td>1.45309</td></tr><tr><th>21</th><td>-0.283018</td><td>-0.190668</td><td>1.11815</td><td>-0.154447</td><td>-0.559533</td><td>-0.624987</td><td>1.45309</td></tr><tr><th>22</th><td>-0.0864599</td><td>0.180708</td><td>-0.894103</td><td>-0.154447</td><td>1.78674</td><td>-0.624987</td><td>-0.688012</td></tr><tr><th>23</th><td>0.0162613</td><td>0.347362</td><td>1.11815</td><td>-0.154447</td><td>-0.559533</td><td>1.59962</td><td>-0.688012</td></tr><tr><th>24</th><td>-0.548705</td><td>-0.864639</td><td>-0.894103</td><td>-0.154447</td><td>-0.559533</td><td>-0.624987</td><td>1.45309</td></tr><tr><th>25</th><td>-0.605396</td><td>-1.04953</td><td>-0.894103</td><td>-0.154447</td><td>-0.559533</td><td>-0.624987</td><td>1.45309</td></tr><tr><th>&vellip;</th><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td></tr></tbody></table></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -862,32 +842,27 @@ Stacktrace:
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1288×10 Matrix{Float64}:
- 1.0   1.11874   -0.634592   -0.150896  …  -0.596613  -0.649488  -0.524344
- 1.0   1.11874    1.07799    -0.150896     -0.596613  -0.649488  -0.524344
- 1.0   1.11874   -0.777306   -0.150896     -0.596613  -0.649488  -0.524344
- 1.0  -0.893634  -0.539448   -0.150896     -0.596613  -0.649488  -0.524344
- 1.0   1.11874   -0.254019   -0.150896     -0.596613  -0.649488  -0.524344
- 1.0   1.11874    1.03041    -0.150896  …  -0.596613  -0.649488  -0.524344
- 1.0  -0.893634  -0.87245    -0.150896     -0.596613  -0.649488  -0.524344
- 1.0  -0.893634   1.17313    -0.150896     -0.596613  -0.649488  -0.524344
- 1.0   1.11874    0.0314105  -0.150896     -0.596613  -0.649488  -0.524344
- 1.0   1.11874    1.64884    -0.150896     -0.596613  -0.649488  -0.524344
- 1.0   1.11874   -0.254019   -0.150896  …  -0.596613  -0.649488  -0.524344
- 1.0  -0.893634   1.26827    -0.150896     -0.596613  -0.649488  -0.524344
- 1.0   1.11874    0.364412   -0.150896     -0.596613  -0.649488  -0.524344
+ 1.0   1.11815    1.07346    -0.154447  …  -0.585846  -0.662003  -0.525548
+ 1.0   1.11815    2.68743    -0.154447     -0.585846  -0.662003  -0.525548
+ 1.0  -0.894103   1.54816    -0.154447     -0.585846  -0.662003  -0.525548
+ 1.0  -0.894103   1.26334    -0.154447     -0.585846  -0.662003  -0.525548
+ 1.0   1.11815   -0.493036   -0.154447     -0.585846  -0.662003  -0.525548
+ 1.0   1.11815   -0.255687   -0.154447  …  -0.585846  -0.662003  -0.525548
+ 1.0  -0.894103  -0.872794   -0.154447     -0.585846  -0.662003  -0.525548
+ 1.0  -0.894103   1.1684     -0.154447     -0.585846  -0.662003  -0.525548
+ 1.0   1.11815    0.12407    -0.154447     -0.585846  -0.662003  -0.525548
+ 1.0  -0.894103  -0.160748   -0.154447     -0.585846  -0.662003  -0.525548
  ⋮                                      ⋱                        
- 1.0  -0.893634   0.792556   -0.150896     -0.596613  -0.649488   1.90665
- 1.0  -0.893634  -0.349162   -0.150896     -0.596613  -0.649488   1.90665
- 1.0   1.11874   -1.11031    -0.150896     -0.596613  -0.649488   1.90665
- 1.0   1.11874    2.50513    -0.150896     -0.596613  -0.649488   1.90665
- 1.0  -0.893634   0.60227    -0.150896  …  -0.596613  -0.649488   1.90665
- 1.0  -0.893634   1.69642    -0.150896     -0.596613  -0.649488   1.90665
- 1.0   1.11874    1.93427    -0.150896     -0.596613  -0.649488   1.90665
- 1.0  -0.893634   0.126554   -0.150896     -0.596613  -0.649488   1.90665
- 1.0  -0.893634  -0.349162   -0.150896     -0.596613  -0.649488   1.90665
- 1.0  -0.893634  -0.444305   -0.150896  …  -0.596613  -0.649488   1.90665
- 1.0  -0.893634  -0.254019   -0.150896     -0.596613  -0.649488   1.90665
- 1.0  -0.893634  -0.349162   -0.150896     -0.596613  -0.649488   1.90665
+ 1.0   1.11815   -0.730384   -0.154447     -0.585846  -0.662003   1.90228
+ 1.0  -0.894103  -1.11014    -0.154447     -0.585846  -0.662003   1.90228
+ 1.0  -0.894103  -0.825324   -0.154447  …  -0.585846  -0.662003   1.90228
+ 1.0  -0.894103   0.503828   -0.154447     -0.585846  -0.662003   1.90228
+ 1.0  -0.894103   0.12407    -0.154447     -0.585846  -0.662003   1.90228
+ 1.0   1.11815   -0.540506   -0.154447     -0.585846  -0.662003   1.90228
+ 1.0   1.11815   -0.825324   -0.154447     -0.585846  -0.662003   1.90228
+ 1.0  -0.894103  -0.350627   -0.154447  …  -0.585846  -0.662003   1.90228
+ 1.0   1.11815   -0.160748   -0.154447     -0.585846  -0.662003   1.90228
+ 1.0  -0.894103   0.0291308  -0.154447     -0.585846  -0.662003   1.90228
 </pre></div>
 </div>
 </div>
@@ -901,32 +876,27 @@ Stacktrace:
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1288-element Vector{Float64}:
- -1.2495116701816313
- -0.5940111369079969
- -0.8558489593188235
- -0.6922940066202594
- -0.16422085652454593
- -0.3179120121732921
- -0.8586738886527183
-  0.013186299642166738
- -0.8637071816306149
-  0.36697911041067455
-  1.3178594848348544
- -1.1634376242266362
- -1.7570311742901377
+ -0.605119406888591
+ -0.04281487692459506
+ -0.8646389686875632
+  0.1603345431161625
+ -0.9360182017041262
+ -0.17913440516655335
+ -0.8674388866524138
+ -0.0032979770887609497
+ -1.8784796682015727
+ -0.5950990448214749
   ⋮
- -1.2495116701816313
-  0.43617103718140365
- -0.07134846692710259
- -0.3847866913343217
- -1.2495116701816313
- -0.8558489593188235
-  0.5351222789388115
-  0.25782050367552267
- -0.6062199606652643
- -0.4923631674195659
-  1.1961444692773646
-  0.9241967739720466
+ -0.8331327398028442
+ -0.37918644113875194
+  0.6661604872599762
+ -0.8646389686875632
+ -0.7300688636985172
+  0.0003613511992238476
+  1.4648246590421161
+ -0.6172201361201212
+  0.27598318865940913
+ -0.22704283751955406
 </pre></div>
 </div>
 </div>
@@ -973,32 +943,27 @@ Stacktrace:
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3862×10 Matrix{Float64}:
- 1.0  -0.893634   1.07799    -0.150896  …   1.67569   -0.649488  -0.524344
- 1.0  -0.893634  -0.444305   -0.150896     -0.596613   1.53928   -0.524344
- 1.0  -0.893634   1.12556    -0.150896     -0.596613  -0.649488   1.90665
- 1.0   1.11874   -0.920021   -0.150896     -0.596613   1.53928   -0.524344
- 1.0  -0.893634   2.17213    -0.150896     -0.596613  -0.649488  -0.524344
- 1.0  -0.893634  -0.158876   -0.150896  …   1.67569   -0.649488  -0.524344
- 1.0  -0.893634   0.411983    6.62538      -0.596613  -0.649488   1.90665
- 1.0   1.11874   -0.444305   -0.150896     -0.596613  -0.649488  -0.524344
- 1.0   1.11874   -1.20545    -0.150896     -0.596613  -0.649488  -0.524344
- 1.0   1.11874   -0.349162   -0.150896     -0.596613   1.53928   -0.524344
- 1.0  -0.893634   0.935271   -0.150896  …   1.67569   -0.649488  -0.524344
- 1.0   1.11874    0.507126   -0.150896     -0.596613  -0.649488  -0.524344
- 1.0  -0.893634   0.697413   -0.150896     -0.596613   1.53928   -0.524344
+ 1.0   1.11815   -0.445566   -0.154447  …   1.70649   -0.662003  -0.525548
+ 1.0   1.11815    0.0291308  -0.154447     -0.585846   1.51018   -0.525548
+ 1.0   1.11815    0.21901    -0.154447     -0.585846  -0.662003  -0.525548
+ 1.0  -0.894103  -1.0152     -0.154447     -0.585846  -0.662003   1.90228
+ 1.0   1.11815    1.6431     -0.154447      1.70649   -0.662003  -0.525548
+ 1.0  -0.894103  -0.635445   -0.154447  …   1.70649   -0.662003  -0.525548
+ 1.0  -0.894103   1.21587    -0.154447     -0.585846  -0.662003   1.90228
+ 1.0   1.11815    1.92792    -0.154447     -0.585846  -0.662003   1.90228
+ 1.0   1.11815    0.12407    -0.154447     -0.585846   1.51018   -0.525548
+ 1.0  -0.894103   0.788646   -0.154447     -0.585846   1.51018   -0.525548
  ⋮                                      ⋱                        
- 1.0   1.11874   -0.444305   -0.150896  …  -0.596613  -0.649488   1.90665
- 1.0  -0.893634   0.697413   -0.150896     -0.596613  -0.649488  -0.524344
- 1.0  -0.893634  -0.920021   -0.150896     -0.596613  -0.649488   1.90665
- 1.0   1.11874   -0.824878   -0.150896      1.67569   -0.649488  -0.524344
- 1.0  -0.893634  -0.824878   -0.150896     -0.596613   1.53928   -0.524344
- 1.0  -0.893634  -0.87245    -0.150896  …  -0.596613   1.53928   -0.524344
- 1.0  -0.893634  -0.539448   -0.150896     -0.596613  -0.649488   1.90665
- 1.0  -0.893634  -1.01516    -0.150896     -0.596613  -0.649488   1.90665
- 1.0  -0.893634  -0.444305   -0.150896     -0.596613   1.53928   -0.524344
- 1.0  -0.893634  -0.0637326  -0.150896     -0.596613   1.53928   -0.524344
- 1.0   1.11874   -1.20545    -0.150896  …  -0.596613  -0.649488  -0.524344
- 1.0   1.11874   -0.254019   -0.150896      1.67569   -0.649488  -0.524344
+ 1.0  -0.894103  -0.920263   -0.154447     -0.585846  -0.662003   1.90228
+ 1.0   1.11815   -0.350627   -0.154447     -0.585846  -0.662003  -0.525548
+ 1.0  -0.894103  -1.0152     -0.154447     -0.585846  -0.662003  -0.525548
+ 1.0  -0.894103   1.73804    -0.154447  …   1.70649   -0.662003  -0.525548
+ 1.0   1.11815   -1.0152     -0.154447     -0.585846  -0.662003  -0.525548
+ 1.0  -0.894103   2.49756    -0.154447     -0.585846  -0.662003  -0.525548
+ 1.0   1.11815    1.92792    -0.154447     -0.585846   1.51018   -0.525548
+ 1.0   1.11815    0.266479   -0.154447     -0.585846  -0.662003  -0.525548
+ 1.0  -0.894103  -0.825324   -0.154447  …  -0.585846  -0.662003  -0.525548
+ 1.0  -0.894103  -1.0152     -0.154447     -0.585846  -0.662003  -0.525548
 </pre></div>
 </div>
 </div>
@@ -1025,6 +990,21 @@ Stacktrace:
 <span class="k">using</span> <span class="n">Flux</span><span class="o">.</span><span class="n">Data</span><span class="o">:</span> <span class="n">DataLoader</span>
 <span class="k">using</span> <span class="n">Flux</span><span class="o">:</span> <span class="n">throttle</span>
 <span class="k">using</span> <span class="n">Flux</span><span class="o">:</span> <span class="n">onehotbatch</span><span class="p">,</span> <span class="n">onecold</span><span class="p">,</span> <span class="nd">@epochs</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>ArgumentError: Package Flux not found in current path:
+- Run `import Pkg; Pkg.add(&quot;Flux&quot;)` to install the Flux package.
+
+
+Stacktrace:
+ [1] require(into::Module, mod::Symbol)
+   @ Base .\loading.jl:967
+ [2] eval
+   @ .\boot.jl:373 [inlined]
+ [3] include_string(mapexpr::typeof(REPL.softscope), mod::Module, code::String, filename::String)
+   @ Base .\loading.jl:1196
 </pre></div>
 </div>
 </div>
@@ -8233,7 +8213,7 @@ The R^2 using NN is equal to [0.11516006433982762]
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">12. </span>Collider Bias</p>
+            <p class="prev-next-title"><span class="section-number">12. </span>ColliderBias Hollywood</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="14_jl_automl_wage.html" title="next page">
