@@ -1,15 +1,26 @@
+# !wget https://developer.nvidia.com/compute/cuda/9.0/Prod/local_installers/cuda-repo-ubuntu1604-9-0-local_9.0.176-1_amd64-deb
+# !dpkg -i cuda-repo-ubuntu1604-9-0-local_9.0.176-1_amd64-deb
+# !apt-key add /var/cuda-repo-9-0-local/7fa2af80.pub
+# !apt update -q
+# !apt install cuda gcc-6 g++-6 -y -q
+# !ln -s /usr/bin/gcc-6 /usr/local/cuda/bin/gcc
+# !ln -s /usr/bin/g++-6 /usr/local/cuda/bin/g++
+
+# !curl -sSL "https://julialang-s3.julialang.org/bin/linux/x64/1.7/julia-1.7.3-linux-x86_64.tar.gz" -o julia.tar.gz
+# !tar -xzf julia.tar.gz -C /usr --strip-components 1
+# !rm -rf julia.tar.gz*
+# !julia -e 'using Pkg; pkg"add IJulia; precompile"'
+
 # import Pkg; Pkg.add("Flux")
 
 using RData, LinearAlgebra, GLM, DataFrames, Statistics, Random, Distributions, DataStructures, NamedArrays, PrettyTables, Plots
 import CodecBzip2
 
 # Importing .Rdata file
-rdata_read = load("../data/wage2015_subsample_inference.RData")
-
-# Since rdata_read is a dictionary, we check if there is a key called "data", the one we need for our analyze
-haskey(rdata_read, "data")
-
-# Now we save that dataframe with a new name
+url = "https://github.com/d2cml-ai/14.388_jl/raw/github_data/data/wage2015_subsample_inference.RData"
+download(url, "data.RData")
+rdata_read = load("data.RData")
+rm("data.RData")
 data = rdata_read["data"]
 names(data)
 

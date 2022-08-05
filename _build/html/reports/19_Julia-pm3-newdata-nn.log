@@ -32,12 +32,12 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-using Pkg
-Pkg.add("CSV"), using CSV
-Pkg.add("DataFrames"), using DataFrames
-Pkg.add("StatsModels"), using StatsModels
-Pkg.add("GLM"), using GLM
-Pkg.add("Random"), using Random
-using Statistics, Plots, FixedEffectModels, MLDataUtils, MLBase
+# using Pkg
+# Pkg.add("CSV"), using CSV
+# Pkg.add("DataFrames"), using DataFrames
+# Pkg.add("StatsModels"), using StatsModels
+# Pkg.add("GLM"), using GLM
+# Pkg.add("Random"), using Random
+using Statistics, Plots, FixedEffectModels, MLDataUtils, MLBase, RData, Downloads
 -------------------
 

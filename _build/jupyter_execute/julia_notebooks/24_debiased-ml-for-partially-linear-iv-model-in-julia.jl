@@ -1,23 +1,41 @@
+# !wget https://developer.nvidia.com/compute/cuda/9.0/Prod/local_installers/cuda-repo-ubuntu1604-9-0-local_9.0.176-1_amd64-deb
+# !dpkg -i cuda-repo-ubuntu1604-9-0-local_9.0.176-1_amd64-deb
+# !apt-key add /var/cuda-repo-9-0-local/7fa2af80.pub
+# !apt update -q
+# !apt install cuda gcc-6 g++-6 -y -q
+# !ln -s /usr/bin/gcc-6 /usr/local/cuda/bin/gcc
+# !ln -s /usr/bin/g++-6 /usr/local/cuda/bin/g++
+
+# !curl -sSL "https://julialang-s3.julialang.org/bin/linux/x64/1.7/julia-1.7.3-linux-x86_64.tar.gz" -o julia.tar.gz
+# !tar -xzf julia.tar.gz -C /usr --strip-components 1
+# !rm -rf julia.tar.gz*
+# !julia -e 'using Pkg; pkg"add IJulia; precompile"'
+
 # Import relevant packages
-using Pkg
-Pkg.add("CSV"), using CSV
-Pkg.add("DataFrames"), using DataFrames
-Pkg.add("GLM"), using GLM
-Pkg.add("FixedEffectModels"), using FixedEffectModels
-Pkg.add("DecisionTree"), using DecisionTree
-Pkg.add("PrettyTables"), using PrettyTables
-Pkg.add("CovarianceMatrices"), using CovarianceMatrices
-Pkg.add("RegressionTables"), using RegressionTables
-Pkg.add("StatsFuns"), using StatsFuns
-Pkg.add("Plots"), using Plots
-Pkg.add("RData"), using RData
-Pkg.add("MLBase"), using MLBase
+# using Pkg
+# Pkg.add("CSV")
+# Pkg.add("DataFrames")
+# Pkg.add("GLM")
+# Pkg.add("FixedEffectModels")
+# Pkg.add("DecisionTree")
+# Pkg.add("PrettyTables")
+# Pkg.add("CovarianceMatrices")
+# Pkg.add("RegressionTables")
+# Pkg.add("StatsFuns")
+# Pkg.add("Plots")
+# Pkg.add("RData")
+# Pkg.add("MLBase")
+
+using CSV, DataFrames, FixedEffectModels, DecisionTree, PrettyTables, CovarianceMatrices, RegressionTables, StatsFuns, Plots, RData, MLBase, GLM
 
 # load data
-rdata_read = RData.load("../data/ajr.RData")
+url = "https://github.com/d2cml-ai/14.388_jl/raw/github_data/data/ajr.RData"
+download(url, "data.RData")
+rdata_read = RData.load("data.RData")
+rm("data.RData")
 AJR = rdata_read["AJR"]
-names(AJR)
-println("Number of Rows : ", size(AJR)[1],"\n","Number of Columns : ", size(AJR)[2],) #rows and columns
+names(data)
+println("Number of Rows : ", size(AJR)[1],"\n","Number of Columns : ", size(AJR)[2],) #rows and columnsRows : ", size(AJR)[1],"\n","Number of Columns : ", size(AJR)[2],) #rows and columns
 
 first(AJR, 5)
 

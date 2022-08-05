@@ -1,23 +1,38 @@
-using Pkg
-Pkg.add("CSV"), using CSV
-Pkg.add("DataFrames"), using DataFrames
-Pkg.add("StatsModels"), using StatsModels
-Pkg.add("GLM"), using GLM
-Pkg.add("Random"), using Random
-Pkg.add("MLDataUtils"), using MLDataUtils
-Pkg.add("MLBase"), using MLBase
-Pkg.add("FixedEffectModels"), using FixedEffectModels
-Pkg.add("Lasso"), using Lasso
-Pkg.add("MLJ"), using MLJ
-Pkg.add("DecisionTree"), using DecisionTree
-Pkg.add("RData"), using RData
-Pkg.add("GLMNet"), using GLMNet
-Pkg.add("PrettyTables"), using PrettyTables
+# !wget https://developer.nvidia.com/compute/cuda/9.0/Prod/local_installers/cuda-repo-ubuntu1604-9-0-local_9.0.176-1_amd64-deb
+# !dpkg -i cuda-repo-ubuntu1604-9-0-local_9.0.176-1_amd64-deb
+# !apt-key add /var/cuda-repo-9-0-local/7fa2af80.pub
+# !apt update -q
+# !apt install cuda gcc-6 g++-6 -y -q
+# !ln -s /usr/bin/gcc-6 /usr/local/cuda/bin/gcc
+# !ln -s /usr/bin/g++-6 /usr/local/cuda/bin/g++
+
+# !curl -sSL "https://julialang-s3.julialang.org/bin/linux/x64/1.7/julia-1.7.3-linux-x86_64.tar.gz" -o julia.tar.gz
+# !tar -xzf julia.tar.gz -C /usr --strip-components 1
+# !rm -rf julia.tar.gz*
+# !julia -e 'using Pkg; pkg"add IJulia; precompile"'
+
+# using Pkg
+# Pkg.add("CSV"), using CSV
+# Pkg.add("DataFrames"), using DataFrames
+# Pkg.add("StatsModels"), using StatsModels
+# Pkg.add("GLM"), using GLM
+# Pkg.add("Random"), using Random
+# Pkg.add("MLDataUtils"), using MLDataUtils
+# Pkg.add("MLBase"), using MLBase
+# Pkg.add("FixedEffectModels"), using FixedEffectModels
+# Pkg.add("Lasso"), using Lasso
+# Pkg.add("MLJ"), using MLJ
+# Pkg.add("DecisionTree"), using DecisionTree
+# Pkg.add("RData"), using RData
+# Pkg.add("GLMNet"), using GLMNet
+# Pkg.add("PrettyTables"), using PrettyTables
 
 using Pkg, CSV, DataFrames, StatsModels, GLM, Random, RData, MLDataUtils, MLBase, FixedEffectModels, Lasso, MLJ, DecisionTree, GLMNet, PrettyTables
 
-# load GrowthData
-rdata_read = RData.load("../data/wage2015_subsample_inference.RData")
+url = "https://github.com/d2cml-ai/14.388_jl/raw/github_data/data/wage2015_subsample_inference.RData"
+download(url, "data.RData")
+rdata_read = RData.load("data.RData")
+rm("data.RData")
 data = rdata_read["data"]
 names(data)
 println("Number of Rows : ", size(data)[1],"\n","Number of Columns : ", size(data)[2],) #rows and columns

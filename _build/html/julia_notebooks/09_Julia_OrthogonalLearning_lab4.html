@@ -52,8 +52,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="10. Testing the Convergence Hypothesis" href="10_Julia_pm2_notebook_jannis.html" />
-    <link rel="prev" title="8. Machine Learning Estimators for Wage Prediction" href="08_jl_ml_estimators_wage_pred.html" />
+    <link rel="next" title="10. Double Lasso for the convergence hypothesis" href="10_Julia_pm2_notebook_jannis.html" />
+    <link rel="prev" title="8. ML for wage prediction" href="08_jl_ml_estimators_wage_pred.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -109,14 +109,14 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="../intro.html">
-                    Welcome to your Jupyter Book
+                    Introduction
                 </a>
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="01_Julia_Notebook_Linear_Model_Overfitting.html">
-   1. Julia Notebook Linear Model Overfitting
+   1. Linear Model Overfiting
   </a>
  </li>
  <li class="toctree-l1">
@@ -126,17 +126,17 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="03_PM1_Notebook_Inference.html">
-   3. An inferential problem: The Gender Wage Gap
+   3. OLS and lasso for gender wage gap inference
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="04_Juli_Notebook_RCT-polio.html">
-   4. RCT application Polio  vaccination
+   4. Some RCT Examples
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="05_Julia_Analyzing_RCT_with_Precision.html">
-   5. Analyzing RCT with Precision by Adjusting for Baseline Covariates
+   5. Analyzing RCT reemployment experiment
   </a>
  </li>
  <li class="toctree-l1">
@@ -146,12 +146,12 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="07_julia-notebook-linear-penalized-regs.html">
-   7. Penalized Linear Regressions: A Simulation Experiment
+   7. Linear Penalized Regs
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="08_jl_ml_estimators_wage_pred.html">
-   8. Machine Learning Estimators for Wage Prediction
+   8. ML for wage prediction
   </a>
  </li>
  <li class="toctree-l1 current active">
@@ -161,17 +161,17 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="10_Julia_pm2_notebook_jannis.html">
-   10. Testing the Convergence Hypothesis
+   10. Double Lasso for the convergence hypothesis
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="11_py-heterogenous-wage-effects.html">
-   11. Application: Heterogeneous Effect of Gender on Wage Using Double Lasso
+   11. Heterogenous Wage Effects
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="12_jl_collider_bias.html">
-   12. Collider Bias
+   12. ColliderBias Hollywood
   </a>
  </li>
  <li class="toctree-l1">
@@ -186,27 +186,27 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="15_Functional-aproximation-by-nn-and-rf.html">
-   15. Functional Approximations by Trees and Neural Networks
+   15. Functional Approximations by NN and RF
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="16_Notebook_DAGitty.html">
-   16. Causal identification in DAGs using Backdoor and Swigs, Equivalence Classes, Falsiability Tests
+   16. Notebook-DAGitty
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="17_jl_dosearch.html">
-   17. Dosearch for Causal Identification in DAGs
+   17. Notebook-Dosearch
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="18_Julia_pm3_notebook_inference_clustering.html">
-   18. A Case Study: The Effect of Gun Ownership on Gun-Homicide Rates
+   18. DML inference for gun ownership
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="19_Julia-pm3-newdata-nn.html">
-   19. The Effect of Gun Ownership on Gun-Homicide Rates - proceeding
+   19. DML inference using NN for gun ownership
   </a>
  </li>
  <li class="toctree-l1">
@@ -221,7 +221,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="22_Julia_debiased-ml-for-partially-linear-model.html">
-   22. Double/Debiased Machine Learning for the Partially Linear Regression Model.
+   22. Debiased ML for Partially Linear Model in Julia
   </a>
  </li>
  <li class="toctree-l1">
@@ -231,12 +231,12 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="24_debiased-ml-for-partially-linear-iv-model-in-julia.html">
-   24. Double/Debiased ML for Partially Linear IV Model
+   24. Debiased ML for Partially Linear IV Model in Julia
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="25_Julia_weak_iv_experiments.html">
-   25. A Simple Example of Properties of IV estimator when Instruments are Weak
+   25. Weak IV Experiments
   </a>
  </li>
 </ul>
@@ -500,7 +500,30 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="experiment-on-orthogonal-learning">
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># !wget https://developer.nvidia.com/compute/cuda/9.0/Prod/local_installers/cuda-repo-ubuntu1604-9-0-local_9.0.176-1_amd64-deb</span>
+<span class="c"># !dpkg -i cuda-repo-ubuntu1604-9-0-local_9.0.176-1_amd64-deb</span>
+<span class="c"># !apt-key add /var/cuda-repo-9-0-local/7fa2af80.pub</span>
+<span class="c"># !apt update -q</span>
+<span class="c"># !apt install cuda gcc-6 g++-6 -y -q</span>
+<span class="c"># !ln -s /usr/bin/gcc-6 /usr/local/cuda/bin/gcc</span>
+<span class="c"># !ln -s /usr/bin/g++-6 /usr/local/cuda/bin/g++</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># !curl -sSL &quot;https://julialang-s3.julialang.org/bin/linux/x64/1.7/julia-1.7.3-linux-x86_64.tar.gz&quot; -o julia.tar.gz</span>
+<span class="c"># !tar -xzf julia.tar.gz -C /usr --strip-components 1</span>
+<span class="c"># !rm -rf julia.tar.gz*</span>
+<span class="c"># !julia -e &#39;using Pkg; pkg&quot;add IJulia; precompile&quot;&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="experiment-on-orthogonal-learning">
 <h1><span class="section-number">9. </span>Experiment on Orthogonal Learning<a class="headerlink" href="#experiment-on-orthogonal-learning" title="Permalink to this headline">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -524,21 +547,6 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>ArgumentError: Package Tables not found in current path:
-- Run `import Pkg; Pkg.add(&quot;Tables&quot;)` to install the Tables package.
-
-
-Stacktrace:
- [1] require(into::Module, mod::Symbol)
-   @ Base .\loading.jl:967
- [2] eval
-   @ .\boot.jl:373 [inlined]
- [3] include_string(mapexpr::typeof(REPL.softscope), mod::Module, code::String, filename::String)
-   @ Base .\loading.jl:1196
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -557,6 +565,39 @@ Stacktrace:
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c">#importamos hdmjl</span>
 <span class="n">include</span><span class="p">(</span><span class="s">&quot;../Julia_Notebooks/hdmjl/hdmjl.jl&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">SystemError</span>: opening file &quot;C:\\Users\\Work\\Documents\\Work\\d2cml-ai\\14.388_jl\\Julia_Notebooks\\hdmjl\\hdmjl.jl&quot;: No such file or directory
+
+<span class="ne">Stacktrace</span>:
+  <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">systemerror</span><span class="p">(</span><span class="n">p</span><span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="n">errno</span><span class="p">::</span><span class="n">Int32</span><span class="p">;</span> <span class="n">extrainfo</span><span class="p">::</span><span class="n">Nothing</span><span class="p">)</span>
+    <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">error</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">174</span>
+  <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="c1">#systemerror#68</span>
+    <span class="o">@</span> <span class="o">.</span>\<span class="n">error</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">173</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+  <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="n">systemerror</span>
+    <span class="o">@</span> <span class="o">.</span>\<span class="n">error</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">173</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+  <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="nb">open</span><span class="p">(</span><span class="n">fname</span><span class="p">::</span><span class="n">String</span><span class="p">;</span> <span class="n">lock</span><span class="p">::</span><span class="n">Bool</span><span class="p">,</span> <span class="n">read</span><span class="p">::</span><span class="n">Nothing</span><span class="p">,</span> <span class="n">write</span><span class="p">::</span><span class="n">Nothing</span><span class="p">,</span> <span class="n">create</span><span class="p">::</span><span class="n">Nothing</span><span class="p">,</span> <span class="n">truncate</span><span class="p">::</span><span class="n">Nothing</span><span class="p">,</span> <span class="n">append</span><span class="p">::</span><span class="n">Nothing</span><span class="p">)</span>
+    <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">iostream</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">293</span>
+  <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="nb">open</span>
+    <span class="o">@</span> <span class="o">.</span>\<span class="n">iostream</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">282</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+  <span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="nb">open</span><span class="p">(</span><span class="n">f</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">var</span><span class="s2">&quot;#364#365&quot;</span><span class="p">{</span><span class="n">String</span><span class="p">},</span> <span class="n">args</span><span class="p">::</span><span class="n">String</span><span class="p">;</span> <span class="n">kwargs</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">Pairs</span><span class="p">{</span><span class="n">Symbol</span><span class="p">,</span> <span class="n">Union</span><span class="p">{},</span> <span class="n">Tuple</span><span class="p">{},</span> <span class="n">NamedTuple</span><span class="p">{(),</span> <span class="n">Tuple</span><span class="p">{}}})</span>
+    <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">io</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">328</span>
+  <span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="nb">open</span>
+    <span class="o">@</span> <span class="o">.</span>\<span class="n">io</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">328</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+  <span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="n">read</span>
+    <span class="o">@</span> <span class="o">.</span>\<span class="n">io</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">436</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+  <span class="p">[</span><span class="mi">9</span><span class="p">]</span> <span class="n">_include</span><span class="p">(</span><span class="n">mapexpr</span><span class="p">::</span><span class="n">Function</span><span class="p">,</span> <span class="n">mod</span><span class="p">::</span><span class="n">Module</span><span class="p">,</span> <span class="n">_path</span><span class="p">::</span><span class="n">String</span><span class="p">)</span>
+    <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1249</span>
+ <span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="n">include</span><span class="p">(</span><span class="n">fname</span><span class="p">::</span><span class="n">String</span><span class="p">)</span>
+    <span class="o">@</span> <span class="n">Base</span><span class="o">.</span><span class="n">MainInclude</span> <span class="o">.</span>\<span class="n">client</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">451</span>
+ <span class="p">[</span><span class="mi">11</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
+    <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">6</span><span class="p">]:</span><span class="mi">2</span>
+ <span class="p">[</span><span class="mi">12</span><span class="p">]</span> <span class="nb">eval</span>
+    <span class="o">@</span> <span class="o">.</span>\<span class="n">boot</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">373</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">13</span><span class="p">]</span> <span class="n">include_string</span><span class="p">(</span><span class="n">mapexpr</span><span class="p">::</span><span class="n">typeof</span><span class="p">(</span><span class="n">REPL</span><span class="o">.</span><span class="n">softscope</span><span class="p">),</span> <span class="n">mod</span><span class="p">::</span><span class="n">Module</span><span class="p">,</span> <span class="n">code</span><span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="n">filename</span><span class="p">::</span><span class="n">String</span><span class="p">)</span>
+    <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1196</span>
 </pre></div>
 </div>
 </div>
@@ -15301,13 +15342,13 @@ fig.select("#img-fd9b2a92-352")
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">8. </span>Machine Learning Estimators for Wage Prediction</p>
+            <p class="prev-next-title"><span class="section-number">8. </span>ML for wage prediction</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="10_Julia_pm2_notebook_jannis.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">10. </span>Testing the Convergence Hypothesis</p>
+        <p class="prev-next-title"><span class="section-number">10. </span>Double Lasso for the convergence hypothesis</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

@@ -569,7 +569,30 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="analyzing-rct-reemployment-experiment">
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># !wget https://developer.nvidia.com/compute/cuda/9.0/Prod/local_installers/cuda-repo-ubuntu1604-9-0-local_9.0.176-1_amd64-deb</span>
+<span class="c"># !dpkg -i cuda-repo-ubuntu1604-9-0-local_9.0.176-1_amd64-deb</span>
+<span class="c"># !apt-key add /var/cuda-repo-9-0-local/7fa2af80.pub</span>
+<span class="c"># !apt update -q</span>
+<span class="c"># !apt install cuda gcc-6 g++-6 -y -q</span>
+<span class="c"># !ln -s /usr/bin/gcc-6 /usr/local/cuda/bin/gcc</span>
+<span class="c"># !ln -s /usr/bin/g++-6 /usr/local/cuda/bin/g++</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># !curl -sSL &quot;https://julialang-s3.julialang.org/bin/linux/x64/1.7/julia-1.7.3-linux-x86_64.tar.gz&quot; -o julia.tar.gz</span>
+<span class="c"># !tar -xzf julia.tar.gz -C /usr --strip-components 1</span>
+<span class="c"># !rm -rf julia.tar.gz*</span>
+<span class="c"># !julia -e &#39;using Pkg; pkg&quot;add IJulia; precompile&quot;&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="analyzing-rct-reemployment-experiment">
 <h1><span class="section-number">5. </span>Analyzing RCT reemployment experiment<a class="headerlink" href="#analyzing-rct-reemployment-experiment" title="Permalink to this headline">#</a></h1>
 <section id="jonathan-roth-s-dgp">
 <h2><span class="section-number">5.1. </span>Jonathan Roth’s DGP<a class="headerlink" href="#jonathan-roth-s-dgp" title="Permalink to this headline">#</a></h2>
@@ -609,21 +632,6 @@ E [Y(1) - Y(0) | Z ]= 2 Z.
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>ArgumentError: Package Tables not found in current path:
-- Run `import Pkg; Pkg.add(&quot;Tables&quot;)` to install the Tables package.
-
-
-Stacktrace:
- [1] require(into::Module, mod::Symbol)
-   @ Base .\loading.jl:967
- [2] eval
-   @ .\boot.jl:373 [inlined]
- [3] include_string(mapexpr::typeof(REPL.softscope), mod::Module, code::String, filename::String)
-   @ Base .\loading.jl:1196
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -642,7 +650,7 @@ Stacktrace:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.189
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.193
 </pre></div>
 </div>
 </div>
@@ -657,32 +665,27 @@ Stacktrace:
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1000×1 Matrix{Float64}:
-  1.726930592166616
-  2.6668920923293324
-  0.17260327143465098
-  0.22981794818549167
-  1.466898001424473
-  1.3529320088626253
-  0.1863114143889225
-  0.04369619043375853
- -0.5850402073066382
- -0.0643490070645289
- -1.10936088593052
- -0.8286904334211317
- -1.916406193712996
+ -0.28363285703372
+  0.9445462163297016
+  1.4041340606063741
+ -0.31938856407892297
+  0.025831391754146213
+  0.1959972014079981
+  0.8816207236671101
+ -0.39714743413485315
+  1.8376685506844046
+  0.7433093590338038
   ⋮
- -1.1865268777224587
- -0.3632408555708126
-  0.7893783341581972
-  2.875748293624403
-  0.8344513543325733
-  1.0072571424293475
-  0.4003202863359305
- -0.6043502214480204
-  0.09863327796173031
- -2.45008621581788
- -1.8543324535087402
- -0.48790168982563364
+  1.0523210386262114
+  2.0794634308388917
+ -0.5830287094568443
+  1.2658914618251444
+ -0.6210227063793656
+  0.5346326339491493
+ -1.0336059839504161
+  1.3334449811321292
+ -2.4689922728893436
+ -1.1552826022174127
 </pre></div>
 </div>
 </div>
@@ -707,7 +710,7 @@ Stacktrace:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div class="data-frame"><p>1,000 rows × 3 columns</p><table class="data-frame"><thead><tr><th></th><th>Z</th><th>D</th><th>Z_times_D</th></tr><tr><th></th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th></tr></thead><tbody><tr><th>1</th><td>-0.189</td><td>1.72693</td><td>-0.32639</td></tr><tr><th>2</th><td>0.811</td><td>2.66689</td><td>2.16285</td></tr><tr><th>3</th><td>-0.189</td><td>0.172603</td><td>-0.032622</td></tr><tr><th>4</th><td>-0.189</td><td>0.229818</td><td>-0.0434356</td></tr><tr><th>5</th><td>-0.189</td><td>1.4669</td><td>-0.277244</td></tr><tr><th>6</th><td>-0.189</td><td>1.35293</td><td>-0.255704</td></tr><tr><th>7</th><td>-0.189</td><td>0.186311</td><td>-0.0352129</td></tr><tr><th>8</th><td>-0.189</td><td>0.0436962</td><td>-0.00825858</td></tr><tr><th>9</th><td>-0.189</td><td>-0.58504</td><td>0.110573</td></tr><tr><th>10</th><td>-0.189</td><td>-0.064349</td><td>0.012162</td></tr><tr><th>11</th><td>0.811</td><td>-1.10936</td><td>-0.899692</td></tr><tr><th>12</th><td>-0.189</td><td>-0.82869</td><td>0.156622</td></tr><tr><th>13</th><td>-0.189</td><td>-1.91641</td><td>0.362201</td></tr><tr><th>14</th><td>-0.189</td><td>1.4849</td><td>-0.280646</td></tr><tr><th>15</th><td>0.811</td><td>0.0416816</td><td>0.0338038</td></tr><tr><th>16</th><td>0.811</td><td>0.100034</td><td>0.0811278</td></tr><tr><th>17</th><td>-0.189</td><td>1.72016</td><td>-0.325111</td></tr><tr><th>18</th><td>-0.189</td><td>-0.6192</td><td>0.117029</td></tr><tr><th>19</th><td>-0.189</td><td>-1.34098</td><td>0.253445</td></tr><tr><th>20</th><td>-0.189</td><td>-0.168009</td><td>0.0317538</td></tr><tr><th>21</th><td>0.811</td><td>0.283359</td><td>0.229804</td></tr><tr><th>22</th><td>-0.189</td><td>1.22439</td><td>-0.231409</td></tr><tr><th>23</th><td>-0.189</td><td>0.00721673</td><td>-0.00136396</td></tr><tr><th>24</th><td>-0.189</td><td>0.589938</td><td>-0.111498</td></tr><tr><th>25</th><td>-0.189</td><td>-1.7345</td><td>0.32782</td></tr><tr><th>26</th><td>0.811</td><td>1.02695</td><td>0.832854</td></tr><tr><th>27</th><td>-0.189</td><td>0.978308</td><td>-0.1849</td></tr><tr><th>28</th><td>-0.189</td><td>-0.992186</td><td>0.187523</td></tr><tr><th>29</th><td>-0.189</td><td>-0.128773</td><td>0.0243381</td></tr><tr><th>30</th><td>-0.189</td><td>2.17567</td><td>-0.411201</td></tr><tr><th>&vellip;</th><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td></tr></tbody></table></div></div></div>
+<div class="output text_html"><table class="data-frame"><thead><tr><th></th><th>Z</th><th>D</th><th>Z_times_D</th></tr><tr><th></th><th>Float64</th><th>Float64</th><th>Float64</th></tr></thead><tbody><p>1,000 rows × 3 columns</p><tr><th>1</th><td>-0.193</td><td>-0.283633</td><td>0.0547411</td></tr><tr><th>2</th><td>-0.193</td><td>0.944546</td><td>-0.182297</td></tr><tr><th>3</th><td>-0.193</td><td>1.40413</td><td>-0.270998</td></tr><tr><th>4</th><td>-0.193</td><td>-0.319389</td><td>0.061642</td></tr><tr><th>5</th><td>0.807</td><td>0.0258314</td><td>0.0208459</td></tr><tr><th>6</th><td>0.807</td><td>0.195997</td><td>0.15817</td></tr><tr><th>7</th><td>-0.193</td><td>0.881621</td><td>-0.170153</td></tr><tr><th>8</th><td>-0.193</td><td>-0.397147</td><td>0.0766495</td></tr><tr><th>9</th><td>-0.193</td><td>1.83767</td><td>-0.35467</td></tr><tr><th>10</th><td>0.807</td><td>0.743309</td><td>0.599851</td></tr><tr><th>11</th><td>-0.193</td><td>0.1446</td><td>-0.0279077</td></tr><tr><th>12</th><td>-0.193</td><td>-1.4793</td><td>0.285506</td></tr><tr><th>13</th><td>-0.193</td><td>0.500078</td><td>-0.096515</td></tr><tr><th>14</th><td>-0.193</td><td>-0.89187</td><td>0.172131</td></tr><tr><th>15</th><td>-0.193</td><td>-0.791121</td><td>0.152686</td></tr><tr><th>16</th><td>-0.193</td><td>-0.642243</td><td>0.123953</td></tr><tr><th>17</th><td>-0.193</td><td>0.046039</td><td>-0.00888552</td></tr><tr><th>18</th><td>-0.193</td><td>-0.707724</td><td>0.136591</td></tr><tr><th>19</th><td>0.807</td><td>-0.612646</td><td>-0.494405</td></tr><tr><th>20</th><td>0.807</td><td>2.08873</td><td>1.6856</td></tr><tr><th>21</th><td>-0.193</td><td>0.74218</td><td>-0.143241</td></tr><tr><th>22</th><td>-0.193</td><td>-0.572258</td><td>0.110446</td></tr><tr><th>23</th><td>-0.193</td><td>0.448602</td><td>-0.0865802</td></tr><tr><th>24</th><td>-0.193</td><td>-0.155892</td><td>0.0300871</td></tr><tr><th>25</th><td>-0.193</td><td>0.0580305</td><td>-0.0111999</td></tr><tr><th>&vellip;</th><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td></tr></tbody></table></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -725,7 +728,7 @@ Stacktrace:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div class="data-frame"><p>1,000 rows × 4 columns</p><table class="data-frame"><thead><tr><th></th><th>Y</th><th>D</th><th>Z</th><th>Z_times_D</th></tr><tr><th></th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th></tr></thead><tbody><tr><th>1</th><td>-1.57126</td><td>-0.189</td><td>1.72693</td><td>-0.32639</td></tr><tr><th>2</th><td>1.53851</td><td>0.811</td><td>2.66689</td><td>2.16285</td></tr><tr><th>3</th><td>-0.552237</td><td>-0.189</td><td>0.172603</td><td>-0.032622</td></tr><tr><th>4</th><td>0.241576</td><td>-0.189</td><td>0.229818</td><td>-0.0434356</td></tr><tr><th>5</th><td>-2.71474</td><td>-0.189</td><td>1.4669</td><td>-0.277244</td></tr><tr><th>6</th><td>-0.955155</td><td>-0.189</td><td>1.35293</td><td>-0.255704</td></tr><tr><th>7</th><td>-0.0891579</td><td>-0.189</td><td>0.186311</td><td>-0.0352129</td></tr><tr><th>8</th><td>-2.38482</td><td>-0.189</td><td>0.0436962</td><td>-0.00825858</td></tr><tr><th>9</th><td>2.28832</td><td>-0.189</td><td>-0.58504</td><td>0.110573</td></tr><tr><th>10</th><td>-0.101834</td><td>-0.189</td><td>-0.064349</td><td>0.012162</td></tr><tr><th>11</th><td>-1.31392</td><td>0.811</td><td>-1.10936</td><td>-0.899692</td></tr><tr><th>12</th><td>2.34802</td><td>-0.189</td><td>-0.82869</td><td>0.156622</td></tr><tr><th>13</th><td>3.90192</td><td>-0.189</td><td>-1.91641</td><td>0.362201</td></tr><tr><th>14</th><td>-3.48666</td><td>-0.189</td><td>1.4849</td><td>-0.280646</td></tr><tr><th>15</th><td>1.13804</td><td>0.811</td><td>0.0416816</td><td>0.0338038</td></tr><tr><th>16</th><td>0.290005</td><td>0.811</td><td>0.100034</td><td>0.0811278</td></tr><tr><th>17</th><td>-2.40993</td><td>-0.189</td><td>1.72016</td><td>-0.325111</td></tr><tr><th>18</th><td>-0.237082</td><td>-0.189</td><td>-0.6192</td><td>0.117029</td></tr><tr><th>19</th><td>2.8754</td><td>-0.189</td><td>-1.34098</td><td>0.253445</td></tr><tr><th>20</th><td>0.583754</td><td>-0.189</td><td>-0.168009</td><td>0.0317538</td></tr><tr><th>21</th><td>1.74147</td><td>0.811</td><td>0.283359</td><td>0.229804</td></tr><tr><th>22</th><td>-0.958462</td><td>-0.189</td><td>1.22439</td><td>-0.231409</td></tr><tr><th>23</th><td>0.422279</td><td>-0.189</td><td>0.00721673</td><td>-0.00136396</td></tr><tr><th>24</th><td>-0.913565</td><td>-0.189</td><td>0.589938</td><td>-0.111498</td></tr><tr><th>25</th><td>1.38136</td><td>-0.189</td><td>-1.7345</td><td>0.32782</td></tr><tr><th>26</th><td>1.1622</td><td>0.811</td><td>1.02695</td><td>0.832854</td></tr><tr><th>27</th><td>-1.97462</td><td>-0.189</td><td>0.978308</td><td>-0.1849</td></tr><tr><th>28</th><td>1.6689</td><td>-0.189</td><td>-0.992186</td><td>0.187523</td></tr><tr><th>29</th><td>0.730834</td><td>-0.189</td><td>-0.128773</td><td>0.0243381</td></tr><tr><th>30</th><td>-2.47703</td><td>-0.189</td><td>2.17567</td><td>-0.411201</td></tr><tr><th>&vellip;</th><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td></tr></tbody></table></div></div></div>
+<div class="output text_html"><table class="data-frame"><thead><tr><th></th><th>Y</th><th>D</th><th>Z</th><th>Z_times_D</th></tr><tr><th></th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th></tr></thead><tbody><p>1,000 rows × 4 columns</p><tr><th>1</th><td>1.11282</td><td>-0.193</td><td>-0.283633</td><td>0.0547411</td></tr><tr><th>2</th><td>-0.175068</td><td>-0.193</td><td>0.944546</td><td>-0.182297</td></tr><tr><th>3</th><td>-1.80793</td><td>-0.193</td><td>1.40413</td><td>-0.270998</td></tr><tr><th>4</th><td>1.19269</td><td>-0.193</td><td>-0.319389</td><td>0.061642</td></tr><tr><th>5</th><td>0.311297</td><td>0.807</td><td>0.0258314</td><td>0.0208459</td></tr><tr><th>6</th><td>0.560205</td><td>0.807</td><td>0.195997</td><td>0.15817</td></tr><tr><th>7</th><td>-2.48048</td><td>-0.193</td><td>0.881621</td><td>-0.170153</td></tr><tr><th>8</th><td>0.947113</td><td>-0.193</td><td>-0.397147</td><td>0.0766495</td></tr><tr><th>9</th><td>-1.03423</td><td>-0.193</td><td>1.83767</td><td>-0.35467</td></tr><tr><th>10</th><td>0.666118</td><td>0.807</td><td>0.743309</td><td>0.599851</td></tr><tr><th>11</th><td>1.29439</td><td>-0.193</td><td>0.1446</td><td>-0.0279077</td></tr><tr><th>12</th><td>0.976366</td><td>-0.193</td><td>-1.4793</td><td>0.285506</td></tr><tr><th>13</th><td>-0.491501</td><td>-0.193</td><td>0.500078</td><td>-0.096515</td></tr><tr><th>14</th><td>-1.10297</td><td>-0.193</td><td>-0.89187</td><td>0.172131</td></tr><tr><th>15</th><td>-0.764862</td><td>-0.193</td><td>-0.791121</td><td>0.152686</td></tr><tr><th>16</th><td>0.27324</td><td>-0.193</td><td>-0.642243</td><td>0.123953</td></tr><tr><th>17</th><td>0.587179</td><td>-0.193</td><td>0.046039</td><td>-0.00888552</td></tr><tr><th>18</th><td>1.37738</td><td>-0.193</td><td>-0.707724</td><td>0.136591</td></tr><tr><th>19</th><td>-1.47769</td><td>0.807</td><td>-0.612646</td><td>-0.494405</td></tr><tr><th>20</th><td>1.11557</td><td>0.807</td><td>2.08873</td><td>1.6856</td></tr><tr><th>21</th><td>-1.98951</td><td>-0.193</td><td>0.74218</td><td>-0.143241</td></tr><tr><th>22</th><td>-1.28537</td><td>-0.193</td><td>-0.572258</td><td>0.110446</td></tr><tr><th>23</th><td>-0.896034</td><td>-0.193</td><td>0.448602</td><td>-0.0865802</td></tr><tr><th>24</th><td>-0.171022</td><td>-0.193</td><td>-0.155892</td><td>0.0300871</td></tr><tr><th>25</th><td>0.842919</td><td>-0.193</td><td>0.0580305</td><td>-0.0111999</td></tr><tr><th>&vellip;</th><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td></tr></tbody></table></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -768,57 +771,23 @@ Predictors:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CL_model = StatsModels.TableRegressionModel{LinearModel{GLM.LmResp{Vector{Float64}}, GLM.DensePredChol{Float64, CholeskyPivoted{Float64, Matrix{Float64}}}}, Matrix{Float64}}
-
-Y ~ 1 + D
-
-Coefficients:
-─────────────────────────────────────────────────────────────────────────
-                 Coef.  Std. Error     t  Pr(&gt;|t|)   Lower 95%  Upper 95%
-─────────────────────────────────────────────────────────────────────────
-(Intercept)  0.0450644   0.0555981  0.81    0.4178  -0.0640381   0.154167
-D            0.0593067   0.14201    0.42    0.6763  -0.219366    0.337979
-─────────────────────────────────────────────────────────────────────────
-CRA_model = StatsModels.TableRegressionModel{LinearModel{GLM.LmResp{Vector{Float64}}, GLM.DensePredChol{Float64, CholeskyPivoted{Float64, Matrix{Float64}}}}, Matrix{Float64}}
-
-Y ~ 1 + D + Z
-
-Coefficients:
-────────────────────────────────────────────────────────────────────────────
-                  Coef.  Std. Error       t  Pr(&gt;|t|)   Lower 95%  Upper 95%
-────────────────────────────────────────────────────────────────────────────
-(Intercept)   0.0450644   0.0438522    1.03    0.3044  -0.0409888   0.131118
-D             0.118474    0.112034     1.06    0.2905  -0.101375    0.338324
-Z            -1.04527     0.0424182  -24.64    &lt;1e-99  -1.12851    -0.96203
-────────────────────────────────────────────────────────────────────────────
-IRA_model = StatsModels.TableRegressionModel{LinearModel{GLM.LmResp{Vector{Float64}}, GLM.DensePredChol{Float64, CholeskyPivoted{Float64, Matrix{Float64}}}}, Matrix{Float64}}
-
-Y ~ 1 + D + Z + Z_times_D
-
-Coefficients:
-───────────────────────────────────────────────────────────────────────────
-                  Coef.  Std. Error       t  Pr(&gt;|t|)  Lower 95%  Upper 95%
-───────────────────────────────────────────────────────────────────────────
-(Intercept)   0.0278515   0.0362395    0.77    0.4423  -0.043263   0.098966
-D             0.0471567   0.0926216    0.51    0.6108  -0.134599   0.228913
-Z            -1.01934     0.0350665  -29.07    &lt;1e-99  -1.08815   -0.950523
-Z_times_D     1.98389     0.0920421   21.55    &lt;1e-84   1.80327    2.16451
-───────────────────────────────────────────────────────────────────────────
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CL = 1.3933058979667916
+CRA = 1.282349167401232
+IRA = 1.0120998697288264
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>StatsModels.TableRegressionModel{LinearModel{GLM.LmResp{Vector{Float64}}, GLM.DensePredChol{Float64, CholeskyPivoted{Float64, Matrix{Float64}}}}, Matrix{Float64}}
-
-Y ~ 1 + D + Z + Z_times_D
-
-Coefficients:
-───────────────────────────────────────────────────────────────────────────
-                  Coef.  Std. Error       t  Pr(&gt;|t|)  Lower 95%  Upper 95%
-───────────────────────────────────────────────────────────────────────────
-(Intercept)   0.0278515   0.0362395    0.77    0.4423  -0.043263   0.098966
-D             0.0471567   0.0926216    0.51    0.6108  -0.134599   0.228913
-Z            -1.01934     0.0350665  -29.07    &lt;1e-99  -1.08815   -0.950523
-Z_times_D     1.98389     0.0920421   21.55    &lt;1e-84   1.80327    2.16451
-───────────────────────────────────────────────────────────────────────────
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(coeftable(CL_model)).cols[4] = [0.0998031131940856, 0.5557096926021292]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(coeftable(CRA_model)).cols[4] = [0.07392148519479515, 0.8080925829531757, 7.512800066286311e-38]
+(coeftable(IRA_model)).cols[4] = [0.11724102121374018, 0.177266312390378, 7.279259820512709e-65, 1.745728665485829e-104]
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4-element Vector{Float64}:
+ 0.11724102121374018
+ 0.177266312390378
+ 7.279259820512709e-65
+ 1.745728665485829e-104
 </pre></div>
 </div>
 </div>
@@ -832,13 +801,13 @@ Z_times_D     1.98389     0.0920421   21.55    &lt;1e-84   1.80327    2.16451
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>F-test: 3 models fitted on 1000 observations
-───────────────────────────────────────────────────────────────────────
-     DOF  ΔDOF        SSR        ΔSSR      R²     ΔR²        F*   p(&gt;F)
-───────────────────────────────────────────────────────────────────────
-[1]    3        3084.9642              0.0002                          
-[2]    4     1  1917.2505  -1167.7137  0.3786  0.3785  607.2293  &lt;1e-99
-[3]    5     1  1307.4120   -609.8385  0.5763  0.1976  464.5813  &lt;1e-84
-───────────────────────────────────────────────────────────────────────
+──────────────────────────────────────────────────────────────────────
+     DOF  ΔDOF        SSR       ΔSSR      R²     ΔR²        F*   p(&gt;F)
+──────────────────────────────────────────────────────────────────────
+[1]    3        1941.3013             0.0003                          
+[2]    4     1  1644.4194  -296.8819  0.1532  0.1529  179.9974  &lt;1e-37
+[3]    5     1  1024.3461  -620.0732  0.4725  0.3193  602.9143  &lt;1e-99
+──────────────────────────────────────────────────────────────────────
 </pre></div>
 </div>
 </div>
@@ -853,6 +822,63 @@ Z_times_D     1.98389     0.0920421   21.55    &lt;1e-84   1.80327    2.16451
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@show</span> <span class="n">CL_model</span>
 <span class="nd">@show</span> <span class="n">CRA_model</span>
 <span class="nd">@show</span> <span class="n">IRA_model</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CL_model = StatsModels.TableRegressionModel{LinearModel{GLM.LmResp{Vector{Float64}}, GLM.DensePredChol{Float64, CholeskyPivoted{Float64, Matrix{Float64}}}}, Matrix{Float64}}
+
+Y ~ 1 + D
+
+Coefficients:
+──────────────────────────────────────────────────────────────────────────
+                  Coef.  Std. Error      t  Pr(&gt;|t|)  Lower 95%  Upper 95%
+──────────────────────────────────────────────────────────────────────────
+(Intercept)  -0.0726548   0.0441043  -1.65    0.0998  -0.159203  0.0138931
+D             0.065871    0.111755    0.59    0.5557  -0.15343   0.285172
+──────────────────────────────────────────────────────────────────────────
+CRA_model = StatsModels.TableRegressionModel{LinearModel{GLM.LmResp{Vector{Float64}}, GLM.DensePredChol{Float64, CholeskyPivoted{Float64, Matrix{Float64}}}}, Matrix{Float64}}
+
+Y ~ 1 + D + Z
+
+Coefficients:
+─────────────────────────────────────────────────────────────────────────────
+                  Coef.  Std. Error       t  Pr(&gt;|t|)  Lower 95%    Upper 95%
+─────────────────────────────────────────────────────────────────────────────
+(Intercept)  -0.0726548   0.0406124   -1.79    0.0739  -0.15235    0.00704081
+D             0.0250123   0.102952     0.24    0.8081  -0.177015   0.227039
+Z            -0.550103    0.0410026  -13.42    &lt;1e-37  -0.630565  -0.469642
+─────────────────────────────────────────────────────────────────────────────
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>IRA_model = StatsModels.TableRegressionModel{LinearModel{GLM.LmResp{Vector{Float64}}, GLM.DensePredChol{Float64, CholeskyPivoted{Float64, Matrix{Float64}}}}, Matrix{Float64}}
+
+Y ~ 1 + D + Z + Z_times_D
+
+Coefficients:
+────────────────────────────────────────────────────────────────────────────
+                  Coef.  Std. Error       t  Pr(&gt;|t|)  Lower 95%   Upper 95%
+────────────────────────────────────────────────────────────────────────────
+(Intercept)  -0.0502996   0.0320825   -1.57    0.1172  -0.113257   0.0126575
+D             0.109863    0.0813693    1.35    0.1773  -0.049812   0.269538
+Z            -0.594236    0.0324276  -18.33    &lt;1e-64  -0.65787   -0.530602
+Z_times_D     1.93245     0.0787009   24.55    &lt;1e-99   1.77801    2.08689
+────────────────────────────────────────────────────────────────────────────
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>StatsModels.TableRegressionModel{LinearModel{GLM.LmResp{Vector{Float64}}, GLM.DensePredChol{Float64, CholeskyPivoted{Float64, Matrix{Float64}}}}, Matrix{Float64}}
+
+Y ~ 1 + D + Z + Z_times_D
+
+Coefficients:
+────────────────────────────────────────────────────────────────────────────
+                  Coef.  Std. Error       t  Pr(&gt;|t|)  Lower 95%   Upper 95%
+────────────────────────────────────────────────────────────────────────────
+(Intercept)  -0.0502996   0.0320825   -1.57    0.1172  -0.113257   0.0126575
+D             0.109863    0.0813693    1.35    0.1773  -0.049812   0.269538
+Z            -0.594236    0.0324276  -18.33    &lt;1e-64  -0.65787   -0.530602
+Z_times_D     1.93245     0.0787009   24.55    &lt;1e-99   1.77801    2.08689
+────────────────────────────────────────────────────────────────────────────
 </pre></div>
 </div>
 </div>
@@ -917,9 +943,12 @@ Z_times_D     1.98389     0.0920421   21.55    &lt;1e-84   1.80327    2.16451
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Standard deviations for estimators
-CL model: 1.4545726198637772
-CRA model: 1.3097621564719322
-IRA model: 1.0235301183486727
+CL model: 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.3691676947738234
+CRA model: 1.3682762995772266
+IRA model: 1.3553039955737827
 </pre></div>
 </div>
 </div>

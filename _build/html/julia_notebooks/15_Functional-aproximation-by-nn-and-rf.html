@@ -569,7 +569,30 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="functional-approximations-by-nn-and-rf">
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># !wget https://developer.nvidia.com/compute/cuda/9.0/Prod/local_installers/cuda-repo-ubuntu1604-9-0-local_9.0.176-1_amd64-deb</span>
+<span class="c"># !dpkg -i cuda-repo-ubuntu1604-9-0-local_9.0.176-1_amd64-deb</span>
+<span class="c"># !apt-key add /var/cuda-repo-9-0-local/7fa2af80.pub</span>
+<span class="c"># !apt update -q</span>
+<span class="c"># !apt install cuda gcc-6 g++-6 -y -q</span>
+<span class="c"># !ln -s /usr/bin/gcc-6 /usr/local/cuda/bin/gcc</span>
+<span class="c"># !ln -s /usr/bin/g++-6 /usr/local/cuda/bin/g++</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># !curl -sSL &quot;https://julialang-s3.julialang.org/bin/linux/x64/1.7/julia-1.7.3-linux-x86_64.tar.gz&quot; -o julia.tar.gz</span>
+<span class="c"># !tar -xzf julia.tar.gz -C /usr --strip-components 1</span>
+<span class="c"># !rm -rf julia.tar.gz*</span>
+<span class="c"># !julia -e &#39;using Pkg; pkg&quot;add IJulia; precompile&quot;&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="functional-approximations-by-nn-and-rf">
 <h1><span class="section-number">15. </span>Functional Approximations by NN and RF<a class="headerlink" href="#functional-approximations-by-nn-and-rf" title="Permalink to this headline">#</a></h1>
 <p>Here we show how the function
 $<span class="math notranslate nohighlight">\(
@@ -593,6 +616,16 @@ can be easily approximated by a tree-based methods (Trees, Random Forest) and a 
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">    Updating</span> registry at `C:\Users\Work\.julia\registries\General.toml`
 </pre></div>
 </div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">   Resolving</span> package versions...
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">  No Changes</span> to `C:\Users\Work\.julia\environments\v1.7\Project.toml`
+<span class=" -Color -Color-Bold -Color-Bold-Green">  No Changes</span> to `C:\Users\Work\.julia\environments\v1.7\Manifest.toml`
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">   Resolving</span> package versions...
+</pre></div>
+</div>
 </div>
 </div>
 <div class="cell docutils container">
@@ -613,7 +646,7 @@ can be easily approximated by a tree-based methods (Trees, Random Forest) and a 
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/15_Functional-aproximation-by-nn-and-rf_3_0.svg" src="../_images/15_Functional-aproximation-by-nn-and-rf_3_0.svg" /></div>
+<img alt="../_images/15_Functional-aproximation-by-nn-and-rf_5_0.svg" src="../_images/15_Functional-aproximation-by-nn-and-rf_5_0.svg" /></div>
 </div>
 <hr class="docutils" />
 <p>Another method</p>
@@ -697,7 +730,7 @@ Depth:  10
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/15_Functional-aproximation-by-nn-and-rf_10_0.svg" src="../_images/15_Functional-aproximation-by-nn-and-rf_10_0.svg" /></div>
+<img alt="../_images/15_Functional-aproximation-by-nn-and-rf_12_0.svg" src="../_images/15_Functional-aproximation-by-nn-and-rf_12_0.svg" /></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -710,7 +743,7 @@ Depth:  10
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/15_Functional-aproximation-by-nn-and-rf_11_0.svg" src="../_images/15_Functional-aproximation-by-nn-and-rf_11_0.svg" /></div>
+<img alt="../_images/15_Functional-aproximation-by-nn-and-rf_13_0.svg" src="../_images/15_Functional-aproximation-by-nn-and-rf_13_0.svg" /></div>
 </div>
 </section>
 <hr class="docutils" />
@@ -731,7 +764,7 @@ can be easily approximated by a tree-based method (Random Forest) and a neural n
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/15_Functional-aproximation-by-nn-and-rf_15_0.svg" src="../_images/15_Functional-aproximation-by-nn-and-rf_15_0.svg" /></div>
+<img alt="../_images/15_Functional-aproximation-by-nn-and-rf_17_0.svg" src="../_images/15_Functional-aproximation-by-nn-and-rf_17_0.svg" /></div>
 </div>
 </section>
 <section id="boosted-trees">
@@ -841,7 +874,7 @@ can be easily approximated by a tree-based method (Random Forest) and a neural n
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/15_Functional-aproximation-by-nn-and-rf_22_0.svg" src="../_images/15_Functional-aproximation-by-nn-and-rf_22_0.svg" /></div>
+<img alt="../_images/15_Functional-aproximation-by-nn-and-rf_24_0.svg" src="../_images/15_Functional-aproximation-by-nn-and-rf_24_0.svg" /></div>
 </div>
 <hr class="docutils" />
 <div class="cell docutils container">
@@ -986,7 +1019,7 @@ can be easily approximated by a tree-based method (Random Forest) and a neural n
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/15_Functional-aproximation-by-nn-and-rf_27_0.svg" src="../_images/15_Functional-aproximation-by-nn-and-rf_27_0.svg" /></div>
+<img alt="../_images/15_Functional-aproximation-by-nn-and-rf_29_0.svg" src="../_images/15_Functional-aproximation-by-nn-and-rf_29_0.svg" /></div>
 </div>
 </section>
 <section id="same-example-with-a-neural-network">
@@ -1056,7 +1089,7 @@ can be easily approximated by a tree-based method (Random Forest) and a neural n
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/15_Functional-aproximation-by-nn-and-rf_32_0.svg" src="../_images/15_Functional-aproximation-by-nn-and-rf_32_0.svg" /></div>
+<img alt="../_images/15_Functional-aproximation-by-nn-and-rf_34_0.svg" src="../_images/15_Functional-aproximation-by-nn-and-rf_34_0.svg" /></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1141,7 +1174,7 @@ can be easily approximated by a tree-based method (Random Forest) and a neural n
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The MSE for this second model with optimizer is 295.23456080214163
 </pre></div>
 </div>
-<img alt="../_images/15_Functional-aproximation-by-nn-and-rf_39_1.svg" src="../_images/15_Functional-aproximation-by-nn-and-rf_39_1.svg" /></div>
+<img alt="../_images/15_Functional-aproximation-by-nn-and-rf_41_1.svg" src="../_images/15_Functional-aproximation-by-nn-and-rf_41_1.svg" /></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1166,7 +1199,7 @@ can be easily approximated by a tree-based method (Random Forest) and a neural n
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The MSE with 100 epochs is 0.0005048678966490891
 </pre></div>
 </div>
-<img alt="../_images/15_Functional-aproximation-by-nn-and-rf_41_1.svg" src="../_images/15_Functional-aproximation-by-nn-and-rf_41_1.svg" /></div>
+<img alt="../_images/15_Functional-aproximation-by-nn-and-rf_43_1.svg" src="../_images/15_Functional-aproximation-by-nn-and-rf_43_1.svg" /></div>
 </div>
 </section>
 </section>

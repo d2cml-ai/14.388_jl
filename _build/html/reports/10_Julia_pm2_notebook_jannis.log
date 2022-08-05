@@ -17,22 +17,22 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-using RData, LinearAlgebra, GLM, DataFrames, Statistics, Random, Distributions, DataStructures, NamedArrays, PrettyTables
-import CodecBzip2
+header = (["Model", "Estimator", "Std. Error", "lower bound CI", "upper bound CI"])
+pretty_table(table_1_pandas; backend = Val(:html), header = header, formatters=ft_round(6), alignment=:c)
 ------------------
 
-ArgumentError: Package DataStructures not found in current path:
-- Run `import Pkg; Pkg.add("DataStructures")` to install the DataStructures package.
-
+TypeError: in keyword argument backend, expected Union{Nothing, Symbol}, got a value of type Val{:html}
 
 Stacktrace:
- [1] require(into::Module, mod::Symbol)
-   @ Base .\loading.jl:967
- [2] eval
+ [1] _pretty_table(io::IJulia.IJuliaStdio{Base.PipeEndpoint}, data::DataFrame, header::Vector{String}; kwargs::Base.Pairs{Symbol, Any, NTuple{4, Symbol}, NamedTuple{(:backend, :header, :formatters, :alignment), Tuple{Val{:html}, Vector{String}, PrettyTables.var"#36#38"{Vector{Int64}}, Symbol}}})
+   @ PrettyTables C:\Users\Work\.julia\packages\PrettyTables\ayuQh\src\private.jl:357
+ [2] #pretty_table#46
+   @ C:\Users\Work\.julia\packages\PrettyTables\ayuQh\src\print.jl:718 [inlined]
+ [3] top-level scope
+   @ In[20]:2
+ [4] eval
    @ .\boot.jl:373 [inlined]
- [3] include_string(mapexpr::typeof(REPL.softscope), mod::Module, code::String, filename::String)
+ [5] include_string(mapexpr::typeof(REPL.softscope), mod::Module, code::String, filename::String)
    @ Base .\loading.jl:1196
-LoadError: ArgumentError: Package DataStructures not found in current path:
-- Run `import Pkg; Pkg.add("DataStructures")` to install the DataStructures package.
-
+LoadError: TypeError: in keyword argument backend, expected Union{Nothing, Symbol}, got a value of type Val{:html}
 

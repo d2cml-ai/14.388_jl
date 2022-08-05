@@ -32,8 +32,11 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-['# using Pkg', '# Pkg.add("CSV")', '# Pkg.add("DataFrames")', '# Pkg.add("Dates")', '# Pkg.add("Plots")']
-...
-['using CSV', 'using DataFrames', 'using Dates', 'using Plots', 'using Statistics,RData']
+flex = @formula(lwage ~ sex + (exp1+exp2+exp3+exp4) * (shs+hsg+scl+clg+occ2+ind2+mw+so+we))
+control_model = lm(flex , data)
+control_est = GLM.coef(control_model)[2]
+control_se = GLM.coeftable(control_model).cols[2][2]
+println(control_model)
+println("Coefficient for OLS with controls " , control_est)
 -------------------
 

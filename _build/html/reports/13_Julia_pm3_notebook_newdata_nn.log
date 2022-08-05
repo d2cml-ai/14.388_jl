@@ -17,12 +17,15 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-using RData, LinearAlgebra, GLM, DataFrames, Statistics, Random, Distributions, DataStructures, NamedArrays, PrettyTables, Plots
-import CodecBzip2
+using Flux
+using Flux: crossentropy, @epochs
+using Flux.Data: DataLoader
+using Flux: throttle
+using Flux: onehotbatch, onecold, @epochs
 ------------------
 
-ArgumentError: Package DataStructures not found in current path:
-- Run `import Pkg; Pkg.add("DataStructures")` to install the DataStructures package.
+ArgumentError: Package Flux not found in current path:
+- Run `import Pkg; Pkg.add("Flux")` to install the Flux package.
 
 
 Stacktrace:
@@ -32,7 +35,7 @@ Stacktrace:
    @ .\boot.jl:373 [inlined]
  [3] include_string(mapexpr::typeof(REPL.softscope), mod::Module, code::String, filename::String)
    @ Base .\loading.jl:1196
-LoadError: ArgumentError: Package DataStructures not found in current path:
-- Run `import Pkg; Pkg.add("DataStructures")` to install the DataStructures package.
+LoadError: ArgumentError: Package Flux not found in current path:
+- Run `import Pkg; Pkg.add("Flux")` to install the Flux package.
 
 

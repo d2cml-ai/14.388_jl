@@ -1,12 +1,27 @@
+# !wget https://developer.nvidia.com/compute/cuda/9.0/Prod/local_installers/cuda-repo-ubuntu1604-9-0-local_9.0.176-1_amd64-deb
+# !dpkg -i cuda-repo-ubuntu1604-9-0-local_9.0.176-1_amd64-deb
+# !apt-key add /var/cuda-repo-9-0-local/7fa2af80.pub
+# !apt update -q
+# !apt install cuda gcc-6 g++-6 -y -q
+# !ln -s /usr/bin/gcc-6 /usr/local/cuda/bin/gcc
+# !ln -s /usr/bin/g++-6 /usr/local/cuda/bin/g++
+
+# !curl -sSL "https://julialang-s3.julialang.org/bin/linux/x64/1.7/julia-1.7.3-linux-x86_64.tar.gz" -o julia.tar.gz
+# !tar -xzf julia.tar.gz -C /usr --strip-components 1
+# !rm -rf julia.tar.gz*
+# !julia -e 'using Pkg; pkg"add IJulia; precompile"'
+
 # to_install = ["CSV", "DataFrames", "Dates", "Plots"]
 # using Pkg 
 # Pkg.add(to_install)
-
-using CSV, DataFrames, Dates, Plots, Lathe, GLM, Statistics, MLBase
+# PKG.add("Lathe")
+# Pkg.add("HTTP")
+using CSV, DataFrames, Dates, Plots, Lathe, GLM, Statistics, MLBase, HTTP
 
 #Reading the CSV file into a DataFrame
 #We have to set the category type for some variable
-data = CSV.File("../data/wage2015_subsample_inference.csv"; types = Dict("occ" => String,"occ2"=> String,"ind"=>String,"ind2"=>String)) |> DataFrame
+url = "https://github.com/d2cml-ai/14.388_jl/raw/main/data/wage2015_subsample_inference.csv"
+data = CSV.File(download(url); types = Dict("occ" => String,"occ2"=> String,"ind"=>String,"ind2"=>String)) |> DataFrame
 size(data)
 
 #a quick decribe of the data

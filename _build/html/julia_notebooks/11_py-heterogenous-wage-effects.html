@@ -537,31 +537,38 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="heterogenous-wage-effects">
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># !wget https://developer.nvidia.com/compute/cuda/9.0/Prod/local_installers/cuda-repo-ubuntu1604-9-0-local_9.0.176-1_amd64-deb</span>
+<span class="c"># !dpkg -i cuda-repo-ubuntu1604-9-0-local_9.0.176-1_amd64-deb</span>
+<span class="c"># !apt-key add /var/cuda-repo-9-0-local/7fa2af80.pub</span>
+<span class="c"># !apt update -q</span>
+<span class="c"># !apt install cuda gcc-6 g++-6 -y -q</span>
+<span class="c"># !ln -s /usr/bin/gcc-6 /usr/local/cuda/bin/gcc</span>
+<span class="c"># !ln -s /usr/bin/g++-6 /usr/local/cuda/bin/g++</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># !curl -sSL &quot;https://julialang-s3.julialang.org/bin/linux/x64/1.7/julia-1.7.3-linux-x86_64.tar.gz&quot; -o julia.tar.gz</span>
+<span class="c"># !tar -xzf julia.tar.gz -C /usr --strip-components 1</span>
+<span class="c"># !rm -rf julia.tar.gz*</span>
+<span class="c"># !julia -e &#39;using Pkg; pkg&quot;add IJulia; precompile&quot;&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="heterogenous-wage-effects">
 <h1><span class="section-number">11. </span>Heterogenous Wage Effects<a class="headerlink" href="#heterogenous-wage-effects" title="Permalink to this headline">#</a></h1>
 <p>We use US census data from the year 2012 to analyse the effect of gender and interaction effects of other variables with gender on wage jointly. The dependent variable is the logarithm of the wage, the target variable is <em>female</em> (in combination with other variables). All other variables denote some other socio-economic characteristics, e.g. marital status, education, and experience.  For a detailed description of the variables we refer to the help page.</p>
 <p>This analysis allows a closer look how discrimination according to gender is related to other socio-economic variables.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">RData</span><span class="p">,</span> <span class="n">LinearAlgebra</span><span class="p">,</span> <span class="n">GLM</span><span class="p">,</span> <span class="n">DataFrames</span><span class="p">,</span> <span class="n">Statistics</span><span class="p">,</span> <span class="n">Random</span><span class="p">,</span> <span class="n">Distributions</span><span class="p">,</span> 
-<span class="n">DataStructures</span><span class="p">,</span> <span class="n">NamedArrays</span><span class="p">,</span> <span class="n">PrettyTables</span><span class="p">,</span> <span class="n">StatsModels</span><span class="p">,</span> <span class="n">Combinatorics</span><span class="p">,</span> <span class="n">Plots</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">RData</span><span class="p">,</span> <span class="n">LinearAlgebra</span><span class="p">,</span> <span class="n">GLM</span><span class="p">,</span> <span class="n">DataFrames</span><span class="p">,</span> <span class="n">Statistics</span><span class="p">,</span> <span class="n">Random</span><span class="p">,</span> <span class="n">Distributions</span><span class="p">,</span> <span class="n">DataStructures</span><span class="p">,</span> <span class="n">NamedArrays</span><span class="p">,</span> <span class="n">PrettyTables</span><span class="p">,</span> <span class="n">StatsModels</span><span class="p">,</span> <span class="n">Combinatorics</span><span class="p">,</span> <span class="n">Plots</span>
 
 <span class="k">import</span> <span class="n">CodecBzip2</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>ArgumentError: Package DataStructures not found in current path:
-- Run `import Pkg; Pkg.add(&quot;DataStructures&quot;)` to install the DataStructures package.
-
-
-Stacktrace:
- [1] require(into::Module, mod::Symbol)
-   @ Base .\loading.jl:967
- [2] eval
-   @ .\boot.jl:373 [inlined]
- [3] include_string(mapexpr::typeof(REPL.softscope), mod::Module, code::String, filename::String)
-   @ Base .\loading.jl:1196
 </pre></div>
 </div>
 </div>
@@ -569,48 +576,11 @@ Stacktrace:
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Importing .Rdata file</span>
-
-<span class="n">cps2012</span> <span class="o">=</span> <span class="n">load</span><span class="p">(</span><span class="s">&quot;../data/cps2012.RData&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dict{String, Any} with 1 entry:
-  &quot;data&quot; =&gt; <span class=" -Color -Color-Bold">29217×23 DataFrame</span>…
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">keys</span><span class="p">(</span><span class="n">cps2012</span><span class="p">)</span>   <span class="c"># get information from key</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>KeySet for a Dict{String, Any} with 1 entry. Keys:
-  &quot;data&quot;
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">cps2012</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dict{String, Any} with 1 entry:
-  &quot;data&quot; =&gt; <span class=" -Color -Color-Bold">29217×23 DataFrame</span>…
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">cps2012</span> <span class="o">=</span> <span class="n">cps2012</span><span class="p">[</span><span class="s">&quot;data&quot;</span><span class="p">]</span>
-
+<span class="n">url</span> <span class="o">=</span> <span class="s">&quot;https://github.com/d2cml-ai/14.388_jl/raw/github_data/data/cps2012.RData&quot;</span>
+<span class="n">download</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="s">&quot;cps2012.RData&quot;</span><span class="p">)</span>
+<span class="n">cps2012</span> <span class="o">=</span> <span class="n">load</span><span class="p">(</span><span class="s">&quot;cps2012.RData&quot;</span><span class="p">)</span>
+<span class="n">rm</span><span class="p">(</span><span class="s">&quot;cps2012.RData&quot;</span><span class="p">)</span>
+<span class="n">cps2012</span> <span class="o">=</span> <span class="n">cps2012</span><span class="p">[</span><span class="s">&quot;data&quot;</span><span class="p">]</span>
 <span class="n">names</span><span class="p">(</span><span class="n">cps2012</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -627,9 +597,7 @@ Stacktrace:
  &quot;hsd08&quot;
  &quot;hsd911&quot;
  &quot;hsg&quot;
- &quot;cg&quot;
- &quot;ad&quot;
- &quot;mw&quot;
+ ⋮
  &quot;so&quot;
  &quot;we&quot;
  &quot;exp1&quot;
@@ -671,151 +639,6 @@ Stacktrace:
 
 
 <span class="n">formula_basic</span> <span class="o">=</span> <span class="n">apply_schema</span><span class="p">(</span><span class="n">reg</span><span class="p">,</span> <span class="n">schema</span><span class="p">(</span><span class="n">reg</span><span class="p">,</span> <span class="n">cps2012</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>FormulaTerm
-Response:
-  lnw(continuous)
-Predictors:
-  0
-  female(continuous)
-  widowed(continuous)
-  divorced(continuous)
-  separated(continuous)
-  nevermarried(continuous)
-  hsd08(continuous)
-  hsd911(continuous)
-  hsg(continuous)
-  cg(continuous)
-  ad(continuous)
-  mw(continuous)
-  so(continuous)
-  we(continuous)
-  exp1(continuous)
-  exp2(continuous)
-  exp3(continuous)
-  widowed(continuous) &amp; divorced(continuous)
-  widowed(continuous) &amp; separated(continuous)
-  widowed(continuous) &amp; nevermarried(continuous)
-  widowed(continuous) &amp; hsd08(continuous)
-  widowed(continuous) &amp; hsd911(continuous)
-  widowed(continuous) &amp; hsg(continuous)
-  widowed(continuous) &amp; cg(continuous)
-  widowed(continuous) &amp; ad(continuous)
-  widowed(continuous) &amp; mw(continuous)
-  widowed(continuous) &amp; so(continuous)
-  widowed(continuous) &amp; we(continuous)
-  widowed(continuous) &amp; exp1(continuous)
-  widowed(continuous) &amp; exp2(continuous)
-  widowed(continuous) &amp; exp3(continuous)
-  divorced(continuous) &amp; separated(continuous)
-  divorced(continuous) &amp; nevermarried(continuous)
-  divorced(continuous) &amp; hsd08(continuous)
-  divorced(continuous) &amp; hsd911(continuous)
-  divorced(continuous) &amp; hsg(continuous)
-  divorced(continuous) &amp; cg(continuous)
-  divorced(continuous) &amp; ad(continuous)
-  divorced(continuous) &amp; mw(continuous)
-  divorced(continuous) &amp; so(continuous)
-  divorced(continuous) &amp; we(continuous)
-  divorced(continuous) &amp; exp1(continuous)
-  divorced(continuous) &amp; exp2(continuous)
-  divorced(continuous) &amp; exp3(continuous)
-  separated(continuous) &amp; nevermarried(continuous)
-  separated(continuous) &amp; hsd08(continuous)
-  separated(continuous) &amp; hsd911(continuous)
-  separated(continuous) &amp; hsg(continuous)
-  separated(continuous) &amp; cg(continuous)
-  separated(continuous) &amp; ad(continuous)
-  separated(continuous) &amp; mw(continuous)
-  separated(continuous) &amp; so(continuous)
-  separated(continuous) &amp; we(continuous)
-  separated(continuous) &amp; exp1(continuous)
-  separated(continuous) &amp; exp2(continuous)
-  separated(continuous) &amp; exp3(continuous)
-  nevermarried(continuous) &amp; hsd08(continuous)
-  nevermarried(continuous) &amp; hsd911(continuous)
-  nevermarried(continuous) &amp; hsg(continuous)
-  nevermarried(continuous) &amp; cg(continuous)
-  nevermarried(continuous) &amp; ad(continuous)
-  nevermarried(continuous) &amp; mw(continuous)
-  nevermarried(continuous) &amp; so(continuous)
-  nevermarried(continuous) &amp; we(continuous)
-  nevermarried(continuous) &amp; exp1(continuous)
-  nevermarried(continuous) &amp; exp2(continuous)
-  nevermarried(continuous) &amp; exp3(continuous)
-  hsd08(continuous) &amp; hsd911(continuous)
-  hsd08(continuous) &amp; hsg(continuous)
-  hsd08(continuous) &amp; cg(continuous)
-  hsd08(continuous) &amp; ad(continuous)
-  hsd08(continuous) &amp; mw(continuous)
-  hsd08(continuous) &amp; so(continuous)
-  hsd08(continuous) &amp; we(continuous)
-  hsd08(continuous) &amp; exp1(continuous)
-  hsd08(continuous) &amp; exp2(continuous)
-  hsd08(continuous) &amp; exp3(continuous)
-  hsd911(continuous) &amp; hsg(continuous)
-  hsd911(continuous) &amp; cg(continuous)
-  hsd911(continuous) &amp; ad(continuous)
-  hsd911(continuous) &amp; mw(continuous)
-  hsd911(continuous) &amp; so(continuous)
-  hsd911(continuous) &amp; we(continuous)
-  hsd911(continuous) &amp; exp1(continuous)
-  hsd911(continuous) &amp; exp2(continuous)
-  hsd911(continuous) &amp; exp3(continuous)
-  hsg(continuous) &amp; cg(continuous)
-  hsg(continuous) &amp; ad(continuous)
-  hsg(continuous) &amp; mw(continuous)
-  hsg(continuous) &amp; so(continuous)
-  hsg(continuous) &amp; we(continuous)
-  hsg(continuous) &amp; exp1(continuous)
-  hsg(continuous) &amp; exp2(continuous)
-  hsg(continuous) &amp; exp3(continuous)
-  cg(continuous) &amp; ad(continuous)
-  cg(continuous) &amp; mw(continuous)
-  cg(continuous) &amp; so(continuous)
-  cg(continuous) &amp; we(continuous)
-  cg(continuous) &amp; exp1(continuous)
-  cg(continuous) &amp; exp2(continuous)
-  cg(continuous) &amp; exp3(continuous)
-  ad(continuous) &amp; mw(continuous)
-  ad(continuous) &amp; so(continuous)
-  ad(continuous) &amp; we(continuous)
-  ad(continuous) &amp; exp1(continuous)
-  ad(continuous) &amp; exp2(continuous)
-  ad(continuous) &amp; exp3(continuous)
-  mw(continuous) &amp; so(continuous)
-  mw(continuous) &amp; we(continuous)
-  mw(continuous) &amp; exp1(continuous)
-  mw(continuous) &amp; exp2(continuous)
-  mw(continuous) &amp; exp3(continuous)
-  so(continuous) &amp; we(continuous)
-  so(continuous) &amp; exp1(continuous)
-  so(continuous) &amp; exp2(continuous)
-  so(continuous) &amp; exp3(continuous)
-  we(continuous) &amp; exp1(continuous)
-  we(continuous) &amp; exp2(continuous)
-  we(continuous) &amp; exp3(continuous)
-  exp1(continuous) &amp; exp2(continuous)
-  exp1(continuous) &amp; exp3(continuous)
-  exp2(continuous) &amp; exp3(continuous)
-  female(continuous) &amp; widowed(continuous)
-  female(continuous) &amp; divorced(continuous)
-  female(continuous) &amp; separated(continuous)
-  female(continuous) &amp; nevermarried(continuous)
-  female(continuous) &amp; hsd08(continuous)
-  female(continuous) &amp; hsd911(continuous)
-  female(continuous) &amp; hsg(continuous)
-  female(continuous) &amp; cg(continuous)
-  female(continuous) &amp; ad(continuous)
-  female(continuous) &amp; mw(continuous)
-  female(continuous) &amp; so(continuous)
-  female(continuous) &amp; we(continuous)
-  female(continuous) &amp; exp1(continuous)
-  female(continuous) &amp; exp2(continuous)
-  female(continuous) &amp; exp3(continuous)
 </pre></div>
 </div>
 </div>
@@ -1681,7 +1504,7 @@ A  │
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/11_py-heterogenous-wage-effects_31_0.svg" src="../_images/11_py-heterogenous-wage-effects_31_0.svg" /></div>
+<img alt="../_images/11_py-heterogenous-wage-effects_30_0.svg" src="../_images/11_py-heterogenous-wage-effects_30_0.svg" /></div>
 </div>
 </section>
 </section>

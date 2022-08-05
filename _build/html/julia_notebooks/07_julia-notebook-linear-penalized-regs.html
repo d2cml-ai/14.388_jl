@@ -575,7 +575,30 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="linear-penalized-regs">
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># !wget https://developer.nvidia.com/compute/cuda/9.0/Prod/local_installers/cuda-repo-ubuntu1604-9-0-local_9.0.176-1_amd64-deb</span>
+<span class="c"># !dpkg -i cuda-repo-ubuntu1604-9-0-local_9.0.176-1_amd64-deb</span>
+<span class="c"># !apt-key add /var/cuda-repo-9-0-local/7fa2af80.pub</span>
+<span class="c"># !apt update -q</span>
+<span class="c"># !apt install cuda gcc-6 g++-6 -y -q</span>
+<span class="c"># !ln -s /usr/bin/gcc-6 /usr/local/cuda/bin/gcc</span>
+<span class="c"># !ln -s /usr/bin/g++-6 /usr/local/cuda/bin/g++</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># !curl -sSL &quot;https://julialang-s3.julialang.org/bin/linux/x64/1.7/julia-1.7.3-linux-x86_64.tar.gz&quot; -o julia.tar.gz</span>
+<span class="c"># !tar -xzf julia.tar.gz -C /usr --strip-components 1</span>
+<span class="c"># !rm -rf julia.tar.gz*</span>
+<span class="c"># !julia -e &#39;using Pkg; pkg&quot;add IJulia; precompile&quot;&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="linear-penalized-regs">
 <h1><span class="section-number">7. </span>Linear Penalized Regs<a class="headerlink" href="#linear-penalized-regs" title="Permalink to this headline">#</a></h1>
 <section id="data-generating-process-approximately-sparse">
 <h2><span class="section-number">7.1. </span>Data Generating Process: Approximately Sparse<a class="headerlink" href="#data-generating-process-approximately-sparse" title="Permalink to this headline">#</a></h2>
@@ -627,50 +650,10 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>┌ Info: Precompiling Plots [91a5bcdd-55d7-5caf-9e0b-520d859cae80]
-└ @ Base loading.jl:1423
-</pre></div>
-</div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">InterruptException</span>:
-
-<span class="ne">Stacktrace</span>:
-  <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">try_yieldto</span><span class="p">(</span><span class="n">undo</span><span class="p">::</span><span class="n">typeof</span><span class="p">(</span><span class="n">Base</span><span class="o">.</span><span class="n">ensure_rescheduled</span><span class="p">))</span>
-    <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">task</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">812</span>
-  <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">wait</span><span class="p">()</span>
-    <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">task</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">872</span>
-  <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="n">wait</span><span class="p">(</span><span class="n">c</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">GenericCondition</span><span class="p">{</span><span class="n">Base</span><span class="o">.</span><span class="n">Threads</span><span class="o">.</span><span class="n">SpinLock</span><span class="p">})</span>
-    <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">condition</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">123</span>
-  <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="n">wait</span><span class="p">(</span><span class="n">x</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">Process</span><span class="p">)</span>
-    <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">process</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">636</span>
-  <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="n">success</span><span class="p">(</span><span class="n">x</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">Process</span><span class="p">)</span>
-    <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">process</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">498</span>
-  <span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="n">compilecache</span><span class="p">(</span><span class="n">pkg</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">PkgId</span><span class="p">,</span> <span class="n">path</span><span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="n">internal_stderr</span><span class="p">::</span><span class="n">IO</span><span class="p">,</span> <span class="n">internal_stdout</span><span class="p">::</span><span class="n">IO</span><span class="p">,</span> <span class="n">ignore_loaded_modules</span><span class="p">::</span><span class="n">Bool</span><span class="p">)</span>
-    <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1433</span>
-  <span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="n">compilecache</span><span class="p">(</span><span class="n">pkg</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">PkgId</span><span class="p">,</span> <span class="n">path</span><span class="p">::</span><span class="n">String</span><span class="p">)</span>
-    <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1410</span>
-  <span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="n">_require</span><span class="p">(</span><span class="n">pkg</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">PkgId</span><span class="p">)</span>
-    <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1120</span>
-  <span class="p">[</span><span class="mi">9</span><span class="p">]</span> <span class="n">require</span><span class="p">(</span><span class="n">uuidkey</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">PkgId</span><span class="p">)</span>
-    <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1013</span>
- <span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="n">require</span><span class="p">(</span><span class="n">into</span><span class="p">::</span><span class="n">Module</span><span class="p">,</span> <span class="n">mod</span><span class="p">::</span><span class="n">Symbol</span><span class="p">)</span>
-    <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">997</span>
- <span class="p">[</span><span class="mi">11</span><span class="p">]</span> <span class="nb">eval</span>
-    <span class="o">@</span> <span class="o">.</span>\<span class="n">boot</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">373</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
- <span class="p">[</span><span class="mi">12</span><span class="p">]</span> <span class="n">include_string</span><span class="p">(</span><span class="n">mapexpr</span><span class="p">::</span><span class="n">typeof</span><span class="p">(</span><span class="n">REPL</span><span class="o">.</span><span class="n">softscope</span><span class="p">),</span> <span class="n">mod</span><span class="p">::</span><span class="n">Module</span><span class="p">,</span> <span class="n">code</span><span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="n">filename</span><span class="p">::</span><span class="n">String</span><span class="p">)</span>
-    <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1196</span>
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Random.seed!(1234)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>TaskLocalRNG()
 </pre></div>
 </div>
 </div>
@@ -707,10 +690,10 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>theoretical R2:0.8840363165570461
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>theoretical R2:0.9896065018869897
 </pre></div>
 </div>
-<img alt="../_images/07_julia-notebook-linear-penalized-regs_5_1.svg" src="../_images/07_julia-notebook-linear-penalized-regs_5_1.svg" /></div>
+</div>
 </div>
 <p>We use package Glmnet to carry out predictions using cross-validated lasso, ridge, and elastic net</p>
 <div class="cell docutils container">
@@ -841,7 +824,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/07_julia-notebook-linear-penalized-regs_14_0.svg" src="../_images/07_julia-notebook-linear-penalized-regs_14_0.svg" /></div>
+<img alt="../_images/07_julia-notebook-linear-penalized-regs_16_0.svg" src="../_images/07_julia-notebook-linear-penalized-regs_16_0.svg" /></div>
 </div>
 </section>
 </section>
@@ -878,7 +861,7 @@ title="Print to PDF"
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>theoretical R2:0.5849412836462625
 </pre></div>
 </div>
-<img alt="../_images/07_julia-notebook-linear-penalized-regs_16_1.svg" src="../_images/07_julia-notebook-linear-penalized-regs_16_1.svg" /></div>
+<img alt="../_images/07_julia-notebook-linear-penalized-regs_18_1.svg" src="../_images/07_julia-notebook-linear-penalized-regs_18_1.svg" /></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1009,7 +992,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/07_julia-notebook-linear-penalized-regs_24_0.svg" src="../_images/07_julia-notebook-linear-penalized-regs_24_0.svg" /></div>
+<img alt="../_images/07_julia-notebook-linear-penalized-regs_26_0.svg" src="../_images/07_julia-notebook-linear-penalized-regs_26_0.svg" /></div>
 </div>
 </section>
 </section>

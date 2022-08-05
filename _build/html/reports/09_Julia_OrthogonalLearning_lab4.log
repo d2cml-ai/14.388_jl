@@ -17,28 +17,38 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-using Distributions
-using DataFrames
-using CSV
-using Tables
-using GLM
-using CovarianceMatrices
-
-using Gadfly
+#importamos hdmjl
+include("../Julia_Notebooks/hdmjl/hdmjl.jl")
 ------------------
 
-ArgumentError: Package Tables not found in current path:
-- Run `import Pkg; Pkg.add("Tables")` to install the Tables package.
-
+SystemError: opening file "C:\\Users\\Work\\Documents\\Work\\d2cml-ai\\14.388_jl\\Julia_Notebooks\\hdmjl\\hdmjl.jl": No such file or directory
 
 Stacktrace:
- [1] require(into::Module, mod::Symbol)
-   @ Base .\loading.jl:967
- [2] eval
-   @ .\boot.jl:373 [inlined]
- [3] include_string(mapexpr::typeof(REPL.softscope), mod::Module, code::String, filename::String)
-   @ Base .\loading.jl:1196
-LoadError: ArgumentError: Package Tables not found in current path:
-- Run `import Pkg; Pkg.add("Tables")` to install the Tables package.
-
+  [1] systemerror(p::String, errno::Int32; extrainfo::Nothing)
+    @ Base .\error.jl:174
+  [2] #systemerror#68
+    @ .\error.jl:173 [inlined]
+  [3] systemerror
+    @ .\error.jl:173 [inlined]
+  [4] open(fname::String; lock::Bool, read::Nothing, write::Nothing, create::Nothing, truncate::Nothing, append::Nothing)
+    @ Base .\iostream.jl:293
+  [5] open
+    @ .\iostream.jl:282 [inlined]
+  [6] open(f::Base.var"#364#365"{String}, args::String; kwargs::Base.Pairs{Symbol, Union{}, Tuple{}, NamedTuple{(), Tuple{}}})
+    @ Base .\io.jl:328
+  [7] open
+    @ .\io.jl:328 [inlined]
+  [8] read
+    @ .\io.jl:436 [inlined]
+  [9] _include(mapexpr::Function, mod::Module, _path::String)
+    @ Base .\loading.jl:1249
+ [10] include(fname::String)
+    @ Base.MainInclude .\client.jl:451
+ [11] top-level scope
+    @ In[6]:2
+ [12] eval
+    @ .\boot.jl:373 [inlined]
+ [13] include_string(mapexpr::typeof(REPL.softscope), mod::Module, code::String, filename::String)
+    @ Base .\loading.jl:1196
+LoadError: SystemError: opening file "C:\\Users\\Work\\Documents\\Work\\d2cml-ai\\14.388_jl\\Julia_Notebooks\\hdmjl\\hdmjl.jl": No such file or directory
 
