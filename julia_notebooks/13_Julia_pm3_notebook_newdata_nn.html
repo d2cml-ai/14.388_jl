@@ -1,48 +1,60 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>13. Deep Neural Networks for Wage Prediction &#8212; Inference on Causal and Structural Parametters Using ML and AI</title>
-    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
-    
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
@@ -50,63 +62,95 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'julia_notebooks/13_Julia_pm3_notebook_newdata_nn';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="14. AutoML for wage prediction" href="14_jl_automl_wage.html" />
     <link rel="prev" title="12. ColliderBias Hollywood" href="12_jl_collider_bias.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
-    <div class="container-fluid" id="banner"></div>
-
-    
-
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="../_static/logo.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">Inference on Causal and Structural Parametters Using ML and AI</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
@@ -116,443 +160,305 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="01_Julia_Notebook_Linear_Model_Overfitting.html">
-   1. Linear Model Overfiting
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="02_PM1_Notebook1_Prediction_newdata.html">
-   2. OLS and lasso for wage prediction
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="03_PM1_Notebook_Inference.html">
-   3. OLS and lasso for gender wage gap inference
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="04_Juli_Notebook_RCT-polio.html">
-   4. Some RCT Examples
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="05_Julia_Analyzing_RCT_with_Precision.html">
-   5. Analyzing RCT reemployment experiment
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="06_RCT_Precision_Adjustment.html">
-   6. Analyzing RCT reemployment experiment
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="07_julia-notebook-linear-penalized-regs.html">
-   7. Linear Penalized Regs
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="08_jl_ml_estimators_wage_pred.html">
-   8. ML for wage prediction
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="09_Julia_OrthogonalLearning_lab4.html">
-   9. Experiment on Orthogonal Learning
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="10_Julia_pm2_notebook_jannis.html">
-   10. Double Lasso for the convergence hypothesis
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="11_py-heterogenous-wage-effects.html">
-   11. Heterogenous Wage Effects
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="12_jl_collider_bias.html">
-   12. ColliderBias Hollywood
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   13. Deep Neural Networks for Wage Prediction
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="14_jl_automl_wage.html">
-   14. AutoML for wage prediction
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="15_Functional-aproximation-by-nn-and-rf.html">
-   15. Functional Approximations by NN and RF
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="16_Notebook_DAGitty.html">
-   16. Notebook-DAGitty
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="17_jl_dosearch.html">
-   17. Notebook-Dosearch
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="18_Julia_pm3_notebook_inference_clustering.html">
-   18. DML inference for gun ownership
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="19_Julia-pm3-newdata-nn.html">
-   19. DML inference using NN for gun ownership
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="20_jl_dml_401k.html">
-   20. DML for ATE and LATE of 401(k) on Wealth
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="21_jl_dag_401k.html">
-   21. Identification Analysis of 401(k) Example w DAGs
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="22_Julia_debiased-ml-for-partially-linear-model.html">
-   22. Debiased ML for Partially Linear Model in Julia
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="23_jl_sensmakr_dml.html">
-   23. Sensitivity Analysis with Sensmakr and Debiased ML
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="24_debiased-ml-for-partially-linear-iv-model-in-julia.html">
-   24. Debiased ML for Partially Linear IV Model in Julia
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="25_Julia_weak_iv_experiments.html">
-   25. Weak IV Experiments
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="01_Julia_Notebook_Linear_Model_Overfitting.html">1. Linear Model Overfiting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_PM1_Notebook1_Prediction_newdata.html">2. OLS and lasso for wage prediction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_PM1_Notebook_Inference.html">3. OLS and lasso for gender wage gap inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_Juli_Notebook_RCT-polio.html">4. Some RCT Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_Julia_Analyzing_RCT_with_Precision.html">5. Analyzing RCT reemployment experiment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_RCT_Precision_Adjustment.html">6. Analyzing RCT reemployment experiment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_julia-notebook-linear-penalized-regs.html">7. Linear Penalized Regs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_jl_ml_estimators_wage_pred.html">8. ML for wage prediction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_Julia_OrthogonalLearning_lab4.html">9. Experiment on Orthogonal Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_Julia_pm2_notebook_jannis.html">10. Double Lasso for the convergence hypothesis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_py-heterogenous-wage-effects.html">11. Heterogenous Wage Effects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_jl_collider_bias.html">12. ColliderBias Hollywood</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">13. Deep Neural Networks for Wage Prediction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14_jl_automl_wage.html">14. AutoML for wage prediction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15_Functional-aproximation-by-nn-and-rf.html">15. Functional Approximations by NN and RF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="16_Notebook_DAGitty.html">16. Notebook-DAGitty</a></li>
+<li class="toctree-l1"><a class="reference internal" href="17_jl_dosearch.html">17. Notebook-Dosearch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="18_Julia_pm3_notebook_inference_clustering.html">18. DML inference for gun ownership</a></li>
+<li class="toctree-l1"><a class="reference internal" href="19_Julia-pm3-newdata-nn.html">19. DML inference using NN for gun ownership</a></li>
+<li class="toctree-l1"><a class="reference internal" href="20_jl_dml_401k.html">20. DML for ATE and LATE of 401(k) on Wealth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="21_jl_dag_401k.html">21. Identification Analysis of 401(k) Example w DAGs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="22_Julia_debiased-ml-for-partially-linear-model.html">22. Debiased ML for Partially Linear Model in Julia</a></li>
+<li class="toctree-l1"><a class="reference internal" href="23_jl_sensmakr_dml.html">23. Sensitivity Analysis with Sensmakr and Debiased ML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="24_debiased-ml-for-partially-linear-iv-model-in-julia.html">24. Debiased ML for Partially Linear IV Model in Julia</a></li>
+<li class="toctree-l1"><a class="reference internal" href="25_Julia_weak_iv_experiments.html">25. Weak IV Experiments</a></li>
 </ul>
 
     </div>
 </nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-            </div>
-            
-        </div>
     </div>
-    <div id="rtd-footer-container"></div>
-</div>
-
-
-          
-
-
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
-        
-
-
-
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
   
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://mybinder.org/v2/gh/d2cml-ai/14.388_jl/main?urlpath=tree/_build/jupyter_execute/julia_notebooks/13_Julia_pm3_notebook_newdata_nn.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Binder"
->
   
-
-<span class="headerbtn__icon-container">
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
   
-    <img src="../_static/images/logo_binder.svg">
-  </span>
-<span class="headerbtn__text-container">Binder</span>
-</a>
+  <div id="rtd-footer-container"></div>
 
-      </li>
+
+      </div>
       
-      <li>
-        <a href="https://colab.research.google.com/github/d2cml-ai/14.388_jl/blob/main/_build/jupyter_execute/julia_notebooks/13_Julia_pm3_notebook_newdata_nn.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Colab"
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/d2cml-ai/14.388_jl/blob/main/_build/jupyter_execute/julia_notebooks/13_Julia_pm3_notebook_newdata_nn.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   
     <img src="../_static/images/logo_colab.png">
   </span>
-<span class="headerbtn__text-container">Colab</span>
+<span class="btn__text-container">Colab</span>
 </a>
-
-      </li>
+</li>
+      
+      
+      
       
       <li>
-        
 <button onclick="initThebeSBT()"
-  class="headerbtn headerbtn-launch-thebe"
-  data-toggle="tooltip"
-data-placement="left"
-title="Launch Thebe"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-play"></i>
   </span>
-<span class="headerbtn__text-container">Live Code</span>
+<span class="btn__text-container">Live Code</span>
 </button>
-
-      </li>
+</li>
       
-    </ul>
-  </div>
+  </ul>
 </div>
 
-<button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/d2cml-ai/14.388_jl" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/d2cml-ai/14.388_jl/edit/main/_build/jupyter_execute/julia_notebooks/13_Julia_pm3_notebook_newdata_nn.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/d2cml-ai/14.388_jl/issues/new?title=Issue%20on%20page%20%2Fjulia_notebooks/13_Julia_pm3_notebook_newdata_nn.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/julia_notebooks/13_Julia_pm3_notebook_newdata_nn.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-<div class="menu-dropdown menu-dropdown-repository-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Source repositories">
-      <i class="fab fa-github"></i>
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://github.com/d2cml-ai/14.388_jl"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Source repository"
->
-  
+`);
+</script>
 
-<span class="headerbtn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="headerbtn__text-container">repository</span>
-</a>
-
-      </li>
-      
-      <li>
-        <a href="https://github.com/d2cml-ai/14.388_jl/issues/new?title=Issue%20on%20page%20%2Fjulia_notebooks/13_Julia_pm3_notebook_newdata_nn.html&body=Your%20issue%20content%20here."
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Open an issue"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="headerbtn__text-container">open issue</span>
-</a>
-
-      </li>
-      
-      <li>
-        <a href="https://github.com/d2cml-ai/14.388_jl/edit/main/_build/jupyter_execute/julia_notebooks/13_Julia_pm3_notebook_newdata_nn.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Edit this page"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-pencil-alt"></i>
-  </span>
-<span class="headerbtn__text-container">suggest edit</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="../_sources/julia_notebooks/13_Julia_pm3_notebook_newdata_nn.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.ipynb</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
-</button>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
 </label>
-
+</div></div>
+      
     </div>
+  
 </div>
-
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#data-preparation">
-   13.1. Data preparation
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#neural-networks">
-     13.1.1. Neural Networks
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
-
-    </nav>
 </div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Deep Neural Networks for Wage Prediction</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#data-preparation">
-   13.1. Data preparation
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#neural-networks">
-     13.1.1. Neural Networks
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
+              
+              
 
-                        </nav>
-                    </div>
-                </div>
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Deep Neural Networks for Wage Prediction</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
             </div>
-            <main id="main-content" role="main">
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preparation">13.1. Data preparation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#neural-networks">13.1.1. Neural Networks</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
                 
-              <div>
-                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
   <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># !wget https://developer.nvidia.com/compute/cuda/9.0/Prod/local_installers/cuda-repo-ubuntu1604-9-0-local_9.0.176-1_amd64-deb</span>
@@ -578,10 +484,10 @@ title="Print to PDF"
 </div>
 <p>This notebook contains an example for teaching.</p>
 <section class="tex2jax_ignore mathjax_ignore" id="deep-neural-networks-for-wage-prediction">
-<h1><span class="section-number">13. </span>Deep Neural Networks for Wage Prediction<a class="headerlink" href="#deep-neural-networks-for-wage-prediction" title="Permalink to this headline">#</a></h1>
+<h1><span class="section-number">13. </span>Deep Neural Networks for Wage Prediction<a class="headerlink" href="#deep-neural-networks-for-wage-prediction" title="Permalink to this heading">#</a></h1>
 <p>So far we considered many machine learning method, e.g Lasso and Random Forests, to build a predictive model. In this lab, we extend our toolbox by predicting wages by a neural network.</p>
 <section id="data-preparation">
-<h2><span class="section-number">13.1. </span>Data preparation<a class="headerlink" href="#data-preparation" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">13.1. </span>Data preparation<a class="headerlink" href="#data-preparation" title="Permalink to this heading">#</a></h2>
 <p>Again, we consider data from the U.S. March Supplement of the Current Population Survey (CPS) in 2015.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -592,8 +498,8 @@ title="Print to PDF"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">RData</span><span class="p">,</span> <span class="n">LinearAlgebra</span><span class="p">,</span> <span class="n">GLM</span><span class="p">,</span> <span class="n">DataFrames</span><span class="p">,</span> <span class="n">Statistics</span><span class="p">,</span> <span class="n">Random</span><span class="p">,</span> <span class="n">Distributions</span><span class="p">,</span> <span class="n">DataStructures</span><span class="p">,</span> <span class="n">NamedArrays</span><span class="p">,</span> <span class="n">PrettyTables</span><span class="p">,</span> <span class="n">Plots</span>
-<span class="k">import</span> <span class="n">CodecBzip2</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">RData</span><span class="p">,</span><span class="w"> </span><span class="n">LinearAlgebra</span><span class="p">,</span><span class="w"> </span><span class="n">GLM</span><span class="p">,</span><span class="w"> </span><span class="n">DataFrames</span><span class="p">,</span><span class="w"> </span><span class="n">Statistics</span><span class="p">,</span><span class="w"> </span><span class="n">Random</span><span class="p">,</span><span class="w"> </span><span class="n">Distributions</span><span class="p">,</span><span class="w"> </span><span class="n">DataStructures</span><span class="p">,</span><span class="w"> </span><span class="n">NamedArrays</span><span class="p">,</span><span class="w"> </span><span class="n">PrettyTables</span><span class="p">,</span><span class="w"> </span><span class="n">Plots</span>
+<span class="k">import</span><span class="w"> </span><span class="n">CodecBzip2</span>
 </pre></div>
 </div>
 </div>
@@ -601,11 +507,11 @@ title="Print to PDF"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Importing .Rdata file</span>
-<span class="n">url</span> <span class="o">=</span> <span class="s">&quot;https://github.com/d2cml-ai/14.388_jl/raw/github_data/data/wage2015_subsample_inference.RData&quot;</span>
-<span class="n">download</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="s">&quot;data.RData&quot;</span><span class="p">)</span>
-<span class="n">rdata_read</span> <span class="o">=</span> <span class="n">load</span><span class="p">(</span><span class="s">&quot;data.RData&quot;</span><span class="p">)</span>
+<span class="n">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;https://github.com/d2cml-ai/14.388_jl/raw/github_data/data/wage2015_subsample_inference.RData&quot;</span>
+<span class="n">download</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;data.RData&quot;</span><span class="p">)</span>
+<span class="n">rdata_read</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">load</span><span class="p">(</span><span class="s">&quot;data.RData&quot;</span><span class="p">)</span>
 <span class="n">rm</span><span class="p">(</span><span class="s">&quot;data.RData&quot;</span><span class="p">)</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">rdata_read</span><span class="p">[</span><span class="s">&quot;data&quot;</span><span class="p">]</span>
+<span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rdata_read</span><span class="p">[</span><span class="s">&quot;data&quot;</span><span class="p">]</span>
 <span class="n">names</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -638,7 +544,7 @@ title="Print to PDF"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">typeof</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">size</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">typeof</span><span class="p">(</span><span class="n">data</span><span class="p">),</span><span class="w"> </span><span class="n">size</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -650,62 +556,67 @@ title="Print to PDF"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Z</span> <span class="o">=</span>  <span class="n">select</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="p">[</span><span class="s">&quot;lwage&quot;</span><span class="p">,</span> <span class="s">&quot;wage&quot;</span><span class="p">])</span>     <span class="c"># regressors</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Z</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="n">select</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;lwage&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;wage&quot;</span><span class="p">])</span><span class="w">     </span><span class="c"># regressors</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><table class="data-frame"><thead><tr><th></th><th>lwage</th><th>wage</th></tr><tr><th></th><th>Float64</th><th>Float64</th></tr></thead><tbody><p>5,150 rows × 2 columns</p><tr><th>1</th><td>2.26336</td><td>9.61538</td></tr><tr><th>2</th><td>3.8728</td><td>48.0769</td></tr><tr><th>3</th><td>2.40313</td><td>11.0577</td></tr><tr><th>4</th><td>2.63493</td><td>13.9423</td></tr><tr><th>5</th><td>3.36198</td><td>28.8462</td></tr><tr><th>6</th><td>2.46222</td><td>11.7308</td></tr><tr><th>7</th><td>2.95651</td><td>19.2308</td></tr><tr><th>8</th><td>2.95651</td><td>19.2308</td></tr><tr><th>9</th><td>2.48491</td><td>12.0</td></tr><tr><th>10</th><td>2.95651</td><td>19.2308</td></tr><tr><th>11</th><td>2.85115</td><td>17.3077</td></tr><tr><th>12</th><td>2.48651</td><td>12.0192</td></tr><tr><th>13</th><td>2.48651</td><td>12.0192</td></tr><tr><th>14</th><td>2.59984</td><td>13.4615</td></tr><tr><th>15</th><td>2.79399</td><td>16.3462</td></tr><tr><th>16</th><td>3.32808</td><td>27.8846</td></tr><tr><th>17</th><td>3.07269</td><td>21.6</td></tr><tr><th>18</th><td>2.158</td><td>8.65385</td></tr><tr><th>19</th><td>2.95651</td><td>19.2308</td></tr><tr><th>20</th><td>2.57922</td><td>13.1868</td></tr><tr><th>21</th><td>2.36872</td><td>10.6838</td></tr><tr><th>22</th><td>2.44569</td><td>11.5385</td></tr><tr><th>23</th><td>2.87855</td><td>17.7885</td></tr><tr><th>24</th><td>2.95651</td><td>19.2308</td></tr><tr><th>25</th><td>2.79143</td><td>16.3043</td></tr><tr><th>&vellip;</th><td>&vellip;</td><td>&vellip;</td></tr></tbody></table></div></div>
+<div class="output text_html"><table class="data-frame"><thead><tr><th></th><th>lwage</th><th>wage</th></tr><tr><th></th><th>Float64</th><th>Float64</th></tr></thead><tbody><p>5,150 rows × 2 columns</p><tr><th>1</th><td>2.26336</td><td>9.61538</td></tr><tr><th>2</th><td>3.8728</td><td>48.0769</td></tr><tr><th>3</th><td>2.40313</td><td>11.0577</td></tr><tr><th>4</th><td>2.63493</td><td>13.9423</td></tr><tr><th>5</th><td>3.36198</td><td>28.8462</td></tr><tr><th>6</th><td>2.46222</td><td>11.7308</td></tr><tr><th>7</th><td>2.95651</td><td>19.2308</td></tr><tr><th>8</th><td>2.95651</td><td>19.2308</td></tr><tr><th>9</th><td>2.48491</td><td>12.0</td></tr><tr><th>10</th><td>2.95651</td><td>19.2308</td></tr><tr><th>11</th><td>2.85115</td><td>17.3077</td></tr><tr><th>12</th><td>2.48651</td><td>12.0192</td></tr><tr><th>13</th><td>2.48651</td><td>12.0192</td></tr><tr><th>14</th><td>2.59984</td><td>13.4615</td></tr><tr><th>15</th><td>2.79399</td><td>16.3462</td></tr><tr><th>16</th><td>3.32808</td><td>27.8846</td></tr><tr><th>17</th><td>3.07269</td><td>21.6</td></tr><tr><th>18</th><td>2.158</td><td>8.65385</td></tr><tr><th>19</th><td>2.95651</td><td>19.2308</td></tr><tr><th>20</th><td>2.57922</td><td>13.1868</td></tr><tr><th>21</th><td>2.36872</td><td>10.6838</td></tr><tr><th>22</th><td>2.44569</td><td>11.5385</td></tr><tr><th>23</th><td>2.87855</td><td>17.7885</td></tr><tr><th>24</th><td>2.95651</td><td>19.2308</td></tr><tr><th>25</th><td>2.79143</td><td>16.3043</td></tr><tr><th>26</th><td>2.95651</td><td>19.2308</td></tr><tr><th>27</th><td>2.66883</td><td>14.4231</td></tr><tr><th>28</th><td>2.48491</td><td>12.0</td></tr><tr><th>29</th><td>2.82298</td><td>16.8269</td></tr><tr><th>30</th><td>2.97911</td><td>19.6703</td></tr><tr><th>&vellip;</th><td>&vellip;</td><td>&vellip;</td></tr></tbody></table></div></div>
 </div>
 <p>Firt, we split the data first and normalize it.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Random</span><span class="o">.</span><span class="n">seed!</span><span class="p">(</span><span class="mi">1234</span><span class="p">)</span> 
-<span class="n">training</span> <span class="o">=</span> <span class="n">sample</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="n">nrow</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="kt">Int</span><span class="p">(</span><span class="n">floor</span><span class="p">(</span><span class="n">nrow</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">3</span><span class="o">/</span><span class="mi">4</span><span class="p">))),</span> <span class="n">replace</span> <span class="o">=</span> <span class="nb">false</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Random</span><span class="o">.</span><span class="n">seed!</span><span class="p">(</span><span class="mi">1234</span><span class="p">)</span><span class="w"> </span>
+<span class="n">training</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sample</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="n">nrow</span><span class="p">(</span><span class="n">data</span><span class="p">),</span><span class="w"> </span><span class="kt">Int</span><span class="p">(</span><span class="n">floor</span><span class="p">(</span><span class="n">nrow</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">3</span><span class="o">/</span><span class="mi">4</span><span class="p">))),</span><span class="w"> </span><span class="n">replace</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3862-element Vector{Int64}:
- 1679
- 2829
- 1128
- 4606
- 1822
- 2034
- 4909
- 4099
- 2550
- 3857
+ 2455
+ 3109
+ 4807
+ 3107
+  617
+ 2230
+ 4697
+  755
+  771
+ 3729
+ 2063
+  528
+ 3238
     ⋮
- 4589
- 1136
- 1027
- 2431
-  770
-  402
- 3702
- 1053
- 1149
-  241
+ 4057
+  973
+ 4183
+ 1230
+ 3228
+ 3687
+ 4789
+ 4060
+ 2723
+ 3610
+  899
+ 1273
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">data_train</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">training</span><span class="p">,</span><span class="mi">1</span><span class="o">:</span><span class="mi">16</span><span class="p">]</span>
-<span class="n">data_test</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">Not</span><span class="p">(</span><span class="n">training</span><span class="p">),</span><span class="mi">1</span><span class="o">:</span><span class="mi">16</span><span class="p">]</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">data_train</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="n">training</span><span class="p">,</span><span class="mi">1</span><span class="o">:</span><span class="mi">16</span><span class="p">]</span>
+<span class="n">data_test</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="n">Not</span><span class="p">(</span><span class="n">training</span><span class="p">),</span><span class="mi">1</span><span class="o">:</span><span class="mi">16</span><span class="p">]</span>
 <span class="n">data_train</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><table class="data-frame"><thead><tr><th></th><th>wage</th><th>lwage</th><th>sex</th><th>shs</th><th>hsg</th><th>scl</th><th>clg</th><th>ad</th><th>mw</th></tr><tr><th></th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th></tr></thead><tbody><p>3,862 rows × 16 columns (omitted printing of 7 columns)</p><tr><th>1</th><td>14.9573</td><td>2.7052</td><td>1.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>1.0</td></tr><tr><th>2</th><td>76.0073</td><td>4.33083</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td></tr><tr><th>3</th><td>30.0</td><td>3.4012</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td></tr><tr><th>4</th><td>22.1154</td><td>3.09627</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td></tr><tr><th>5</th><td>40.1709</td><td>3.69314</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>1.0</td></tr><tr><th>6</th><td>24.9202</td><td>3.21568</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>1.0</td></tr><tr><th>7</th><td>34.6154</td><td>3.5443</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>8</th><td>13.4615</td><td>2.59984</td><td>1.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>9</th><td>7.21154</td><td>1.97568</td><td>1.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>10</th><td>17.094</td><td>2.83873</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>11</th><td>9.61538</td><td>2.26336</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>12</th><td>12.5</td><td>2.52573</td><td>1.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>13</th><td>12.9371</td><td>2.5601</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>14</th><td>10.5769</td><td>2.35867</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>15</th><td>13.6752</td><td>2.61558</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td></tr><tr><th>16</th><td>16.25</td><td>2.78809</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td></tr><tr><th>17</th><td>22.5962</td><td>3.11778</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>18</th><td>29.021</td><td>3.36802</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td></tr><tr><th>19</th><td>9.61538</td><td>2.26336</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>20</th><td>48.0769</td><td>3.8728</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>21</th><td>43.2692</td><td>3.76744</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td></tr><tr><th>22</th><td>14.4231</td><td>2.66883</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>23</th><td>13.7363</td><td>2.62004</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td></tr><tr><th>24</th><td>8.24176</td><td>2.10921</td><td>1.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td></tr><tr><th>25</th><td>86.5385</td><td>4.46059</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td></tr><tr><th>&vellip;</th><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td></tr></tbody></table></div></div>
+<div class="output text_html"><table class="data-frame"><thead><tr><th></th><th>wage</th><th>lwage</th><th>sex</th><th>shs</th><th>hsg</th><th>scl</th><th>clg</th><th>ad</th><th>mw</th></tr><tr><th></th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th></tr></thead><tbody><p>3,862 rows × 16 columns (omitted printing of 7 columns)</p><tr><th>1</th><td>12.0192</td><td>2.48651</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>1.0</td></tr><tr><th>2</th><td>10.2857</td><td>2.33076</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>3</th><td>10.5769</td><td>2.35867</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>4</th><td>17.3077</td><td>2.85115</td><td>1.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>5</th><td>25.641</td><td>3.24419</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>6</th><td>42.3077</td><td>3.74497</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>1.0</td></tr><tr><th>7</th><td>15.8654</td><td>2.76414</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>8</th><td>72.1154</td><td>4.27827</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td></tr><tr><th>9</th><td>35.7143</td><td>3.57555</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td></tr><tr><th>10</th><td>15.3846</td><td>2.73337</td><td>1.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>11</th><td>16.5385</td><td>2.80569</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>1.0</td></tr><tr><th>12</th><td>16.8269</td><td>2.82298</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td></tr><tr><th>13</th><td>36.0577</td><td>3.58512</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td></tr><tr><th>14</th><td>19.2308</td><td>2.95651</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td></tr><tr><th>15</th><td>36.0577</td><td>3.58512</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td></tr><tr><th>16</th><td>26.4423</td><td>3.27497</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td></tr><tr><th>17</th><td>14.4231</td><td>2.66883</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>18</th><td>45.1923</td><td>3.81093</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td></tr><tr><th>19</th><td>30.7692</td><td>3.42652</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td></tr><tr><th>20</th><td>25.0</td><td>3.21888</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td></tr><tr><th>21</th><td>18.4615</td><td>2.91569</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td></tr><tr><th>22</th><td>8.71795</td><td>2.16538</td><td>1.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>1.0</td></tr><tr><th>23</th><td>19.2308</td><td>2.95651</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>24</th><td>13.4615</td><td>2.59984</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td></tr><tr><th>25</th><td>22.5962</td><td>3.11778</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td></tr><tr><th>26</th><td>10.6838</td><td>2.36872</td><td>1.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>27</th><td>48.0769</td><td>3.8728</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td></tr><tr><th>28</th><td>23.5577</td><td>3.15945</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr><tr><th>29</th><td>48.7179</td><td>3.88605</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td></tr><tr><th>30</th><td>14.4712</td><td>2.67216</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>0.0</td><td>0.0</td></tr><tr><th>&vellip;</th><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td></tr></tbody></table></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">size</span><span class="p">(</span><span class="n">data_train</span><span class="p">),</span> <span class="n">size</span><span class="p">(</span><span class="n">data_test</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">size</span><span class="p">(</span><span class="n">data_train</span><span class="p">),</span><span class="w"> </span><span class="n">size</span><span class="p">(</span><span class="n">data_test</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -719,97 +630,97 @@ title="Print to PDF"
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># normalize the data</span>
 
-<span class="n">mean_1</span> <span class="o">=</span> <span class="n">mean</span><span class="o">.</span><span class="p">(</span><span class="n">eachcol</span><span class="p">(</span><span class="n">data_train</span><span class="p">))</span>
-<span class="n">mean_1</span> <span class="o">=</span> <span class="p">[</span><span class="n">names</span><span class="p">(</span><span class="n">data_train</span><span class="p">)</span> <span class="n">mean_1</span><span class="p">]</span>
+<span class="n">mean_1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mean</span><span class="o">.</span><span class="p">(</span><span class="n">eachcol</span><span class="p">(</span><span class="n">data_train</span><span class="p">))</span>
+<span class="n">mean_1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">names</span><span class="p">(</span><span class="n">data_train</span><span class="p">)</span><span class="w"> </span><span class="n">mean_1</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>16×2 Matrix{Any}:
- &quot;wage&quot;   23.6925
- &quot;lwage&quot;   2.981
- &quot;sex&quot;     0.444329
- &quot;shs&quot;     0.023304
- &quot;hsg&quot;     0.238477
- &quot;scl&quot;     0.280943
- &quot;clg&quot;     0.321336
- &quot;ad&quot;      0.13594
- &quot;mw&quot;      0.255567
- &quot;so&quot;      0.304764
- &quot;we&quot;      0.216468
- &quot;ne&quot;      0.2232
- &quot;exp1&quot;   13.6932
- &quot;exp2&quot;    2.98419
- &quot;exp3&quot;    8.10838
- &quot;exp4&quot;   24.6962
+ &quot;wage&quot;   23.3849
+ &quot;lwage&quot;   2.97164
+ &quot;sex&quot;     0.44407
+ &quot;shs&quot;     0.0222683
+ &quot;hsg&quot;     0.24754
+ &quot;scl&quot;     0.283014
+ &quot;clg&quot;     0.310979
+ &quot;ad&quot;      0.136199
+ &quot;mw&quot;      0.262558
+ &quot;so&quot;      0.296737
+ &quot;we&quot;      0.215691
+ &quot;ne&quot;      0.225013
+ &quot;exp1&quot;   13.6699
+ &quot;exp2&quot;    2.97307
+ &quot;exp3&quot;    8.05316
+ &quot;exp4&quot;   24.4216
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">std_1</span> <span class="o">=</span> <span class="n">std</span><span class="o">.</span><span class="p">(</span><span class="n">eachcol</span><span class="p">(</span><span class="n">data_train</span><span class="p">))</span>
-<span class="n">std_1</span> <span class="o">=</span> <span class="p">[</span><span class="n">names</span><span class="p">(</span><span class="n">data_train</span><span class="p">)</span> <span class="n">std_1</span><span class="p">]</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">std_1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">.</span><span class="p">(</span><span class="n">eachcol</span><span class="p">(</span><span class="n">data_train</span><span class="p">))</span>
+<span class="n">std_1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">names</span><span class="p">(</span><span class="n">data_train</span><span class="p">)</span><span class="w"> </span><span class="n">std_1</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>16×2 Matrix{Any}:
- &quot;wage&quot;   21.2742
- &quot;lwage&quot;   0.571903
- &quot;sex&quot;     0.496955
- &quot;shs&quot;     0.150887
- &quot;hsg&quot;     0.426208
- &quot;scl&quot;     0.449518
- &quot;clg&quot;     0.46705
- &quot;ad&quot;      0.342769
- &quot;mw&quot;      0.436236
- &quot;so&quot;      0.460367
- &quot;we&quot;      0.41189
- &quot;ne&quot;      0.416446
- &quot;exp1&quot;   10.533
- &quot;exp2&quot;    3.97428
- &quot;exp3&quot;   14.4163
- &quot;exp4&quot;   53.3581
+ &quot;wage&quot;   20.445
+ &quot;lwage&quot;   0.566839
+ &quot;sex&quot;     0.496926
+ &quot;shs&quot;     0.147574
+ &quot;hsg&quot;     0.431639
+ &quot;scl&quot;     0.450522
+ &quot;clg&quot;     0.462954
+ &quot;ad&quot;      0.343044
+ &quot;mw&quot;      0.440081
+ &quot;so&quot;      0.456879
+ &quot;we&quot;      0.411354
+ &quot;ne&quot;      0.417645
+ &quot;exp1&quot;   10.5105
+ &quot;exp2&quot;    3.94797
+ &quot;exp3&quot;   14.2448
+ &quot;exp4&quot;   52.4952
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">()</span>
-<span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="n">size</span><span class="p">(</span><span class="n">data_train</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span>
-     <span class="n">p</span> <span class="o">=</span> <span class="p">(</span><span class="n">data_train</span><span class="p">[</span><span class="o">!</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">.-</span> <span class="n">mean_1</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span> <span class="o">/</span> <span class="n">std_1</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
-     <span class="n">colname</span> <span class="o">=</span> <span class="n">names</span><span class="p">(</span><span class="n">data_train</span><span class="p">)[</span><span class="n">i</span><span class="p">]</span>
-     <span class="n">df</span><span class="p">[</span><span class="o">!</span><span class="p">,</span><span class="n">colname</span><span class="p">]</span> <span class="o">=</span> <span class="n">p</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">size</span><span class="p">(</span><span class="n">data_train</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span>
+<span class="w">     </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">data_train</span><span class="p">[</span><span class="o">!</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">.-</span><span class="w"> </span><span class="n">mean_1</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">std_1</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+<span class="w">     </span><span class="n">colname</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">names</span><span class="p">(</span><span class="n">data_train</span><span class="p">)[</span><span class="n">i</span><span class="p">]</span>
+<span class="w">     </span><span class="n">df</span><span class="p">[</span><span class="o">!</span><span class="p">,</span><span class="n">colname</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span>
 <span class="k">end</span>
-<span class="n">data_train</span> <span class="o">=</span> <span class="n">df</span>
+<span class="n">data_train</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df</span>
 <span class="n">data_train</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><table class="data-frame"><thead><tr><th></th><th>wage</th><th>lwage</th><th>sex</th><th>shs</th><th>hsg</th><th>scl</th><th>clg</th><th>ad</th></tr><tr><th></th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th></tr></thead><tbody><p>3,862 rows × 16 columns (omitted printing of 8 columns)</p><tr><th>1</th><td>-0.410602</td><td>-0.48225</td><td>1.11815</td><td>-0.154447</td><td>-0.559533</td><td>1.59962</td><td>-0.688012</td><td>-0.396593</td></tr><tr><th>2</th><td>2.45907</td><td>2.36025</td><td>1.11815</td><td>-0.154447</td><td>-0.559533</td><td>-0.624987</td><td>-0.688012</td><td>2.52082</td></tr><tr><th>3</th><td>0.296485</td><td>0.73474</td><td>1.11815</td><td>-0.154447</td><td>-0.559533</td><td>-0.624987</td><td>1.45309</td><td>-0.396593</td></tr><tr><th>4</th><td>-0.0741333</td><td>0.201566</td><td>-0.894103</td><td>-0.154447</td><td>-0.559533</td><td>-0.624987</td><td>-0.688012</td><td>2.52082</td></tr><tr><th>5</th><td>0.774572</td><td>1.24522</td><td>1.11815</td><td>-0.154447</td><td>-0.559533</td><td>-0.624987</td><td>1.45309</td><td>-0.396593</td></tr><tr><th>6</th><td>0.0577073</td><td>0.410351</td><td>-0.894103</td><td>-0.154447</td><td>-0.559533</td><td>-0.624987</td><td>-0.688012</td><td>2.52082</td></tr><tr><th>7</th><td>0.513432</td><td>0.984959</td><td>-0.894103</td><td>-0.154447</td><td>-0.559533</td><td>1.59962</td><td>-0.688012</td><td>-0.396593</td></tr><tr><th>8</th><td>-0.480909</td><td>-0.666478</td><td>1.11815</td><td>-0.154447</td><td>1.78674</td><td>-0.624987</td><td>-0.688012</td><td>-0.396593</td></tr><tr><th>9</th><td>-0.774692</td><td>-1.75784</td><td>1.11815</td><td>-0.154447</td><td>1.78674</td><td>-0.624987</td><td>-0.688012</td><td>-0.396593</td></tr><tr><th>10</th><td>-0.310164</td><td>-0.248764</td><td>-0.894103</td><td>-0.154447</td><td>1.78674</td><td>-0.624987</td><td>-0.688012</td><td>-0.396593</td></tr><tr><th>11</th><td>-0.661699</td><td>-1.25482</td><td>-0.894103</td><td>-0.154447</td><td>1.78674</td><td>-0.624987</td><td>-0.688012</td><td>-0.396593</td></tr><tr><th>12</th><td>-0.526107</td><td>-0.79606</td><td>1.11815</td><td>-0.154447</td><td>1.78674</td><td>-0.624987</td><td>-0.688012</td><td>-0.396593</td></tr><tr><th>13</th><td>-0.505562</td><td>-0.735966</td><td>-0.894103</td><td>-0.154447</td><td>-0.559533</td><td>1.59962</td><td>-0.688012</td><td>-0.396593</td></tr><tr><th>14</th><td>-0.616501</td><td>-1.08816</td><td>-0.894103</td><td>-0.154447</td><td>1.78674</td><td>-0.624987</td><td>-0.688012</td><td>-0.396593</td></tr><tr><th>15</th><td>-0.470866</td><td>-0.638942</td><td>-0.894103</td><td>-0.154447</td><td>1.78674</td><td>-0.624987</td><td>-0.688012</td><td>-0.396593</td></tr><tr><th>16</th><td>-0.349837</td><td>-0.337303</td><td>1.11815</td><td>-0.154447</td><td>-0.559533</td><td>-0.624987</td><td>1.45309</td><td>-0.396593</td></tr><tr><th>17</th><td>-0.0515347</td><td>0.23917</td><td>-0.894103</td><td>-0.154447</td><td>-0.559533</td><td>1.59962</td><td>-0.688012</td><td>-0.396593</td></tr><tr><th>18</th><td>0.250466</td><td>0.676726</td><td>-0.894103</td><td>-0.154447</td><td>-0.559533</td><td>-0.624987</td><td>-0.688012</td><td>2.52082</td></tr><tr><th>19</th><td>-0.661699</td><td>-1.25482</td><td>-0.894103</td><td>-0.154447</td><td>1.78674</td><td>-0.624987</td><td>-0.688012</td><td>-0.396593</td></tr><tr><th>20</th><td>1.14619</td><td>1.55936</td><td>-0.894103</td><td>-0.154447</td><td>-0.559533</td><td>1.59962</td><td>-0.688012</td><td>-0.396593</td></tr><tr><th>21</th><td>0.920208</td><td>1.37514</td><td>-0.894103</td><td>-0.154447</td><td>-0.559533</td><td>-0.624987</td><td>1.45309</td><td>-0.396593</td></tr><tr><th>22</th><td>-0.435712</td><td>-0.545841</td><td>-0.894103</td><td>-0.154447</td><td>1.78674</td><td>-0.624987</td><td>-0.688012</td><td>-0.396593</td></tr><tr><th>23</th><td>-0.467996</td><td>-0.631153</td><td>1.11815</td><td>-0.154447</td><td>-0.559533</td><td>-0.624987</td><td>1.45309</td><td>-0.396593</td></tr><tr><th>24</th><td>-0.726266</td><td>-1.52436</td><td>1.11815</td><td>-0.154447</td><td>1.78674</td><td>-0.624987</td><td>-0.688012</td><td>-0.396593</td></tr><tr><th>25</th><td>2.95409</td><td>2.58714</td><td>-0.894103</td><td>-0.154447</td><td>-0.559533</td><td>-0.624987</td><td>-0.688012</td><td>2.52082</td></tr><tr><th>&vellip;</th><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td></tr></tbody></table></div></div>
+<div class="output text_html"><table class="data-frame"><thead><tr><th></th><th>wage</th><th>lwage</th><th>sex</th><th>shs</th><th>hsg</th><th>scl</th><th>clg</th><th>ad</th></tr><tr><th></th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th></tr></thead><tbody><p>3,862 rows × 16 columns (omitted printing of 8 columns)</p><tr><th>1</th><td>-0.555914</td><td>-0.855849</td><td>-0.893634</td><td>-0.150896</td><td>-0.573489</td><td>-0.628192</td><td>1.48831</td><td>-0.39703</td></tr><tr><th>2</th><td>-0.640703</td><td>-1.13062</td><td>-0.893634</td><td>-0.150896</td><td>1.74326</td><td>-0.628192</td><td>-0.671727</td><td>-0.39703</td></tr><tr><th>3</th><td>-0.62646</td><td>-1.08137</td><td>-0.893634</td><td>-0.150896</td><td>-0.573489</td><td>1.59146</td><td>-0.671727</td><td>-0.39703</td></tr><tr><th>4</th><td>-0.297246</td><td>-0.212557</td><td>1.11874</td><td>-0.150896</td><td>-0.573489</td><td>1.59146</td><td>-0.671727</td><td>-0.39703</td></tr><tr><th>5</th><td>0.110351</td><td>0.480836</td><td>-0.893634</td><td>-0.150896</td><td>-0.573489</td><td>1.59146</td><td>-0.671727</td><td>-0.39703</td></tr><tr><th>6</th><td>0.925545</td><td>1.36429</td><td>-0.893634</td><td>-0.150896</td><td>-0.573489</td><td>-0.628192</td><td>1.48831</td><td>-0.39703</td></tr><tr><th>7</th><td>-0.367792</td><td>-0.36606</td><td>-0.893634</td><td>6.62538</td><td>-0.573489</td><td>-0.628192</td><td>-0.671727</td><td>-0.39703</td></tr><tr><th>8</th><td>2.38349</td><td>2.30512</td><td>1.11874</td><td>-0.150896</td><td>-0.573489</td><td>-0.628192</td><td>1.48831</td><td>-0.39703</td></tr><tr><th>9</th><td>0.603051</td><td>1.06541</td><td>1.11874</td><td>-0.150896</td><td>-0.573489</td><td>-0.628192</td><td>-0.671727</td><td>2.51805</td></tr><tr><th>10</th><td>-0.391307</td><td>-0.420346</td><td>1.11874</td><td>-0.150896</td><td>1.74326</td><td>-0.628192</td><td>-0.671727</td><td>-0.39703</td></tr><tr><th>11</th><td>-0.334871</td><td>-0.292761</td><td>-0.893634</td><td>-0.150896</td><td>-0.573489</td><td>1.59146</td><td>-0.671727</td><td>-0.39703</td></tr><tr><th>12</th><td>-0.320762</td><td>-0.262255</td><td>1.11874</td><td>-0.150896</td><td>-0.573489</td><td>-0.628192</td><td>1.48831</td><td>-0.39703</td></tr><tr><th>13</th><td>0.619847</td><td>1.08229</td><td>-0.893634</td><td>-0.150896</td><td>-0.573489</td><td>-0.628192</td><td>-0.671727</td><td>2.51805</td></tr><tr><th>14</th><td>-0.203185</td><td>-0.0266836</td><td>1.11874</td><td>-0.150896</td><td>-0.573489</td><td>-0.628192</td><td>1.48831</td><td>-0.39703</td></tr><tr><th>15</th><td>0.619847</td><td>1.08229</td><td>-0.893634</td><td>-0.150896</td><td>1.74326</td><td>-0.628192</td><td>-0.671727</td><td>-0.39703</td></tr><tr><th>16</th><td>0.149543</td><td>0.535122</td><td>-0.893634</td><td>-0.150896</td><td>-0.573489</td><td>-0.628192</td><td>1.48831</td><td>-0.39703</td></tr><tr><th>17</th><td>-0.438338</td><td>-0.534203</td><td>-0.893634</td><td>-0.150896</td><td>-0.573489</td><td>1.59146</td><td>-0.671727</td><td>-0.39703</td></tr><tr><th>18</th><td>1.06664</td><td>1.48065</td><td>-0.893634</td><td>-0.150896</td><td>-0.573489</td><td>-0.628192</td><td>1.48831</td><td>-0.39703</td></tr><tr><th>19</th><td>0.36118</td><td>0.802482</td><td>-0.893634</td><td>-0.150896</td><td>-0.573489</td><td>-0.628192</td><td>-0.671727</td><td>2.51805</td></tr><tr><th>20</th><td>0.0789973</td><td>0.436171</td><td>-0.893634</td><td>-0.150896</td><td>-0.573489</td><td>-0.628192</td><td>1.48831</td><td>-0.39703</td></tr><tr><th>21</th><td>-0.24081</td><td>-0.0987005</td><td>1.11874</td><td>-0.150896</td><td>-0.573489</td><td>-0.628192</td><td>1.48831</td><td>-0.39703</td></tr><tr><th>22</th><td>-0.717385</td><td>-1.42237</td><td>1.11874</td><td>-0.150896</td><td>-0.573489</td><td>1.59146</td><td>-0.671727</td><td>-0.39703</td></tr><tr><th>23</th><td>-0.203185</td><td>-0.0266836</td><td>-0.893634</td><td>-0.150896</td><td>1.74326</td><td>-0.628192</td><td>-0.671727</td><td>-0.39703</td></tr><tr><th>24</th><td>-0.485368</td><td>-0.655918</td><td>-0.893634</td><td>-0.150896</td><td>1.74326</td><td>-0.628192</td><td>-0.671727</td><td>-0.39703</td></tr><tr><th>25</th><td>-0.0385788</td><td>0.257821</td><td>-0.893634</td><td>-0.150896</td><td>1.74326</td><td>-0.628192</td><td>-0.671727</td><td>-0.39703</td></tr><tr><th>26</th><td>-0.621234</td><td>-1.06364</td><td>1.11874</td><td>-0.150896</td><td>1.74326</td><td>-0.628192</td><td>-0.671727</td><td>-0.39703</td></tr><tr><th>27</th><td>1.20773</td><td>1.58981</td><td>-0.893634</td><td>-0.150896</td><td>-0.573489</td><td>-0.628192</td><td>1.48831</td><td>-0.39703</td></tr><tr><th>28</th><td>0.00845161</td><td>0.331338</td><td>-0.893634</td><td>-0.150896</td><td>-0.573489</td><td>1.59146</td><td>-0.671727</td><td>-0.39703</td></tr><tr><th>29</th><td>1.23908</td><td>1.61317</td><td>-0.893634</td><td>-0.150896</td><td>-0.573489</td><td>-0.628192</td><td>-0.671727</td><td>2.51805</td></tr><tr><th>30</th><td>-0.435986</td><td>-0.528332</td><td>-0.893634</td><td>-0.150896</td><td>-0.573489</td><td>-0.628192</td><td>1.48831</td><td>-0.39703</td></tr><tr><th>&vellip;</th><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td></tr></tbody></table></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">()</span>
-<span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="n">size</span><span class="p">(</span><span class="n">data_test</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span>
-     <span class="n">p</span> <span class="o">=</span> <span class="p">(</span><span class="n">data_test</span><span class="p">[</span><span class="o">!</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">.-</span> <span class="n">mean_1</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span> <span class="o">/</span> <span class="n">std_1</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
-     <span class="n">colname</span> <span class="o">=</span> <span class="n">names</span><span class="p">(</span><span class="n">data_test</span><span class="p">)[</span><span class="n">i</span><span class="p">]</span>
-     <span class="n">df</span><span class="p">[</span><span class="o">!</span><span class="p">,</span><span class="n">colname</span><span class="p">]</span> <span class="o">=</span> <span class="n">p</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">size</span><span class="p">(</span><span class="n">data_test</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span>
+<span class="w">     </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">data_test</span><span class="p">[</span><span class="o">!</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">.-</span><span class="w"> </span><span class="n">mean_1</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">std_1</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+<span class="w">     </span><span class="n">colname</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">names</span><span class="p">(</span><span class="n">data_test</span><span class="p">)[</span><span class="n">i</span><span class="p">]</span>
+<span class="w">     </span><span class="n">df</span><span class="p">[</span><span class="o">!</span><span class="p">,</span><span class="n">colname</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span>
 <span class="k">end</span>
-<span class="n">data_test</span> <span class="o">=</span> <span class="n">df</span>
+<span class="n">data_test</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df</span>
 <span class="n">data_test</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><table class="data-frame"><thead><tr><th></th><th>wage</th><th>lwage</th><th>sex</th><th>shs</th><th>hsg</th><th>scl</th><th>clg</th></tr><tr><th></th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th></tr></thead><tbody><p>1,288 rows × 16 columns (omitted printing of 9 columns)</p><tr><th>1</th><td>-0.458311</td><td>-0.605119</td><td>1.11815</td><td>-0.154447</td><td>-0.559533</td><td>-0.624987</td><td>-0.688012</td></tr><tr><th>2</th><td>-0.209725</td><td>-0.0428149</td><td>1.11815</td><td>-0.154447</td><td>1.78674</td><td>-0.624987</td><td>-0.688012</td></tr><tr><th>3</th><td>-0.548705</td><td>-0.864639</td><td>-0.894103</td><td>-0.154447</td><td>1.78674</td><td>-0.624987</td><td>-0.688012</td></tr><tr><th>4</th><td>-0.0983591</td><td>0.160335</td><td>-0.894103</td><td>-0.154447</td><td>1.78674</td><td>-0.624987</td><td>-0.688012</td></tr><tr><th>5</th><td>-0.571304</td><td>-0.936018</td><td>1.11815</td><td>-0.154447</td><td>-0.559533</td><td>1.59962</td><td>-0.688012</td></tr><tr><th>6</th><td>-0.277521</td><td>-0.179134</td><td>1.11815</td><td>-0.154447</td><td>-0.559533</td><td>-0.624987</td><td>-0.688012</td></tr><tr><th>7</th><td>-0.549609</td><td>-0.867439</td><td>-0.894103</td><td>-0.154447</td><td>-0.559533</td><td>1.59962</td><td>-0.688012</td></tr><tr><th>8</th><td>-0.189064</td><td>-0.00329798</td><td>-0.894103</td><td>-0.154447</td><td>-0.559533</td><td>-0.624987</td><td>1.45309</td></tr><tr><th>9</th><td>-0.797291</td><td>-1.87848</td><td>1.11815</td><td>-0.154447</td><td>1.78674</td><td>-0.624987</td><td>-0.688012</td></tr><tr><th>10</th><td>-0.454544</td><td>-0.595099</td><td>-0.894103</td><td>-0.154447</td><td>1.78674</td><td>-0.624987</td><td>-0.688012</td></tr><tr><th>11</th><td>-0.390515</td><td>-0.432992</td><td>-0.894103</td><td>-0.154447</td><td>1.78674</td><td>-0.624987</td><td>-0.688012</td></tr><tr><th>12</th><td>-0.209725</td><td>-0.0428149</td><td>1.11815</td><td>-0.154447</td><td>1.78674</td><td>-0.624987</td><td>-0.688012</td></tr><tr><th>13</th><td>-0.374696</td><td>-0.395155</td><td>1.11815</td><td>-0.154447</td><td>-0.559533</td><td>-0.624987</td><td>1.45309</td></tr><tr><th>14</th><td>-0.0168583</td><td>0.295344</td><td>-0.894103</td><td>-0.154447</td><td>-0.559533</td><td>-0.624987</td><td>1.45309</td></tr><tr><th>15</th><td>-0.0515347</td><td>0.23917</td><td>1.11815</td><td>-0.154447</td><td>-0.559533</td><td>1.59962</td><td>-0.688012</td></tr><tr><th>16</th><td>0.242248</td><td>0.66616</td><td>-0.894103</td><td>-0.154447</td><td>1.78674</td><td>-0.624987</td><td>-0.688012</td></tr><tr><th>17</th><td>-0.310164</td><td>-0.248764</td><td>-0.894103</td><td>-0.154447</td><td>1.78674</td><td>-0.624987</td><td>-0.688012</td></tr><tr><th>18</th><td>-0.232324</td><td>-0.0870843</td><td>1.11815</td><td>-0.154447</td><td>-0.559533</td><td>1.59962</td><td>-0.688012</td></tr><tr><th>19</th><td>0.00183665</td><td>0.324897</td><td>-0.894103</td><td>-0.154447</td><td>1.78674</td><td>-0.624987</td><td>-0.688012</td></tr><tr><th>20</th><td>-0.096732</td><td>0.163134</td><td>-0.894103</td><td>-0.154447</td><td>-0.559533</td><td>-0.624987</td><td>1.45309</td></tr><tr><th>21</th><td>-0.283018</td><td>-0.190668</td><td>1.11815</td><td>-0.154447</td><td>-0.559533</td><td>-0.624987</td><td>1.45309</td></tr><tr><th>22</th><td>-0.0864599</td><td>0.180708</td><td>-0.894103</td><td>-0.154447</td><td>1.78674</td><td>-0.624987</td><td>-0.688012</td></tr><tr><th>23</th><td>0.0162613</td><td>0.347362</td><td>1.11815</td><td>-0.154447</td><td>-0.559533</td><td>1.59962</td><td>-0.688012</td></tr><tr><th>24</th><td>-0.548705</td><td>-0.864639</td><td>-0.894103</td><td>-0.154447</td><td>-0.559533</td><td>-0.624987</td><td>1.45309</td></tr><tr><th>25</th><td>-0.605396</td><td>-1.04953</td><td>-0.894103</td><td>-0.154447</td><td>-0.559533</td><td>-0.624987</td><td>1.45309</td></tr><tr><th>&vellip;</th><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td></tr></tbody></table></div></div>
+<div class="output text_html"><table class="data-frame"><thead><tr><th></th><th>wage</th><th>lwage</th><th>sex</th><th>shs</th><th>hsg</th><th>scl</th><th>clg</th></tr><tr><th></th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th></tr></thead><tbody><p>1,288 rows × 16 columns (omitted printing of 9 columns)</p><tr><th>1</th><td>-0.67349</td><td>-1.24951</td><td>1.11874</td><td>-0.150896</td><td>-0.573489</td><td>-0.628192</td><td>1.48831</td></tr><tr><th>2</th><td>-0.461853</td><td>-0.594011</td><td>1.11874</td><td>-0.150896</td><td>-0.573489</td><td>-0.628192</td><td>-0.671727</td></tr><tr><th>3</th><td>-0.555914</td><td>-0.855849</td><td>1.11874</td><td>-0.150896</td><td>-0.573489</td><td>1.59146</td><td>-0.671727</td></tr><tr><th>4</th><td>-0.498805</td><td>-0.692294</td><td>-0.893634</td><td>-0.150896</td><td>1.74326</td><td>-0.628192</td><td>-0.671727</td></tr><tr><th>5</th><td>-0.273731</td><td>-0.164221</td><td>1.11874</td><td>-0.150896</td><td>-0.573489</td><td>-0.628192</td><td>-0.671727</td></tr><tr><th>6</th><td>-0.346322</td><td>-0.317912</td><td>1.11874</td><td>-0.150896</td><td>-0.573489</td><td>1.59146</td><td>-0.671727</td></tr><tr><th>7</th><td>-0.556854</td><td>-0.858674</td><td>-0.893634</td><td>-0.150896</td><td>-0.573489</td><td>1.59146</td><td>-0.671727</td></tr><tr><th>8</th><td>-0.181686</td><td>0.0131863</td><td>-0.893634</td><td>-0.150896</td><td>-0.573489</td><td>-0.628192</td><td>1.48831</td></tr><tr><th>9</th><td>-0.558527</td><td>-0.863707</td><td>1.11874</td><td>-0.150896</td><td>1.74326</td><td>-0.628192</td><td>-0.671727</td></tr><tr><th>10</th><td>0.0319668</td><td>0.366979</td><td>1.11874</td><td>-0.150896</td><td>-0.573489</td><td>-0.628192</td><td>1.48831</td></tr><tr><th>11</th><td>0.871796</td><td>1.31786</td><td>1.11874</td><td>-0.150896</td><td>-0.573489</td><td>-0.628192</td><td>1.48831</td></tr><tr><th>12</th><td>-0.649975</td><td>-1.16344</td><td>-0.893634</td><td>-0.150896</td><td>1.74326</td><td>-0.628192</td><td>-0.671727</td></tr><tr><th>13</th><td>-0.791066</td><td>-1.75703</td><td>1.11874</td><td>-0.150896</td><td>-0.573489</td><td>1.59146</td><td>-0.671727</td></tr><tr><th>14</th><td>-0.511021</td><td>-0.726027</td><td>-0.893634</td><td>-0.150896</td><td>-0.573489</td><td>1.59146</td><td>-0.671727</td></tr><tr><th>15</th><td>-0.0432819</td><td>0.250297</td><td>1.11874</td><td>-0.150896</td><td>-0.573489</td><td>-0.628192</td><td>-0.671727</td></tr><tr><th>16</th><td>0.518677</td><td>0.978069</td><td>-0.893634</td><td>-0.150896</td><td>-0.573489</td><td>-0.628192</td><td>1.48831</td></tr><tr><th>17</th><td>-0.00249603</td><td>0.314496</td><td>-0.893634</td><td>-0.150896</td><td>-0.573489</td><td>-0.628192</td><td>1.48831</td></tr><tr><th>18</th><td>-0.848174</td><td>-2.06862</td><td>-0.893634</td><td>-0.150896</td><td>-0.573489</td><td>-0.628192</td><td>1.48831</td></tr><tr><th>19</th><td>-0.67349</td><td>-1.24951</td><td>-0.893634</td><td>-0.150896</td><td>1.74326</td><td>-0.628192</td><td>-0.671727</td></tr><tr><th>20</th><td>-0.725746</td><td>-1.4573</td><td>-0.893634</td><td>6.62538</td><td>-0.573489</td><td>-0.628192</td><td>-0.671727</td></tr><tr><th>21</th><td>-0.555914</td><td>-0.855849</td><td>1.11874</td><td>-0.150896</td><td>1.74326</td><td>-0.628192</td><td>-0.671727</td></tr><tr><th>22</th><td>-0.320762</td><td>-0.262255</td><td>-0.893634</td><td>-0.150896</td><td>-0.573489</td><td>1.59146</td><td>-0.671727</td></tr><tr><th>23</th><td>-0.0856093</td><td>0.181105</td><td>-0.893634</td><td>-0.150896</td><td>-0.573489</td><td>-0.628192</td><td>1.48831</td></tr><tr><th>24</th><td>-0.979188</td><td>-3.10157</td><td>-0.893634</td><td>-0.150896</td><td>-0.573489</td><td>-0.628192</td><td>1.48831</td></tr><tr><th>25</th><td>-0.203185</td><td>-0.0266836</td><td>-0.893634</td><td>-0.150896</td><td>-0.573489</td><td>1.59146</td><td>-0.671727</td></tr><tr><th>26</th><td>-0.256935</td><td>-0.130488</td><td>-0.893634</td><td>-0.150896</td><td>-0.573489</td><td>-0.628192</td><td>1.48831</td></tr><tr><th>27</th><td>-0.67349</td><td>-1.24951</td><td>1.11874</td><td>-0.150896</td><td>-0.573489</td><td>1.59146</td><td>-0.671727</td></tr><tr><th>28</th><td>-0.0620941</td><td>0.21988</td><td>1.11874</td><td>-0.150896</td><td>-0.573489</td><td>-0.628192</td><td>1.48831</td></tr><tr><th>29</th><td>-0.41221</td><td>-0.470044</td><td>1.11874</td><td>-0.150896</td><td>-0.573489</td><td>-0.628192</td><td>1.48831</td></tr><tr><th>30</th><td>-0.602944</td><td>-1.00295</td><td>-0.893634</td><td>-0.150896</td><td>-0.573489</td><td>-0.628192</td><td>1.48831</td></tr><tr><th>&vellip;</th><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td></tr></tbody></table></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">typeof</span><span class="p">(</span><span class="n">data_train</span><span class="p">),</span> <span class="n">typeof</span><span class="p">(</span><span class="n">data_test</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">typeof</span><span class="p">(</span><span class="n">data_train</span><span class="p">),</span><span class="w"> </span><span class="n">typeof</span><span class="p">(</span><span class="n">data_test</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -822,7 +733,7 @@ title="Print to PDF"
 <p>Then, we construct the inputs for our network.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">formula_basic</span> <span class="o">=</span> <span class="nd">@formula</span><span class="p">(</span><span class="n">lwage</span> <span class="o">~</span> <span class="n">sex</span> <span class="o">+</span> <span class="n">exp1</span> <span class="o">+</span> <span class="n">shs</span> <span class="o">+</span> <span class="n">hsg</span><span class="o">+</span> <span class="n">scl</span> <span class="o">+</span> <span class="n">clg</span> <span class="o">+</span> <span class="n">mw</span> <span class="o">+</span> <span class="n">so</span> <span class="o">+</span> <span class="n">we</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">formula_basic</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nd">@formula</span><span class="p">(</span><span class="n">lwage</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">sex</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">exp1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">shs</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">hsg</span><span class="o">+</span><span class="w"> </span><span class="n">scl</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">clg</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">mw</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">so</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">we</span><span class="p">)</span>
 <span class="n">println</span><span class="p">(</span><span class="n">formula_basic</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -835,68 +746,78 @@ title="Print to PDF"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">model_X_basic_train</span> <span class="o">=</span> <span class="n">ModelMatrix</span><span class="p">(</span><span class="n">ModelFrame</span><span class="p">(</span><span class="n">formula_basic</span><span class="p">,</span> <span class="n">data_train</span><span class="p">))</span><span class="o">.</span><span class="n">m</span>
-<span class="n">model_X_basic_test</span> <span class="o">=</span> <span class="n">ModelMatrix</span><span class="p">(</span><span class="n">ModelFrame</span><span class="p">(</span><span class="n">formula_basic</span><span class="p">,</span> <span class="n">data_test</span><span class="p">))</span><span class="o">.</span><span class="n">m</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">model_X_basic_train</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ModelMatrix</span><span class="p">(</span><span class="n">ModelFrame</span><span class="p">(</span><span class="n">formula_basic</span><span class="p">,</span><span class="w"> </span><span class="n">data_train</span><span class="p">))</span><span class="o">.</span><span class="n">m</span>
+<span class="n">model_X_basic_test</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ModelMatrix</span><span class="p">(</span><span class="n">ModelFrame</span><span class="p">(</span><span class="n">formula_basic</span><span class="p">,</span><span class="w"> </span><span class="n">data_test</span><span class="p">))</span><span class="o">.</span><span class="n">m</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1288×10 Matrix{Float64}:
- 1.0   1.11815    1.07346    -0.154447  …  -0.585846  -0.662003  -0.525548
- 1.0   1.11815    2.68743    -0.154447     -0.585846  -0.662003  -0.525548
- 1.0  -0.894103   1.54816    -0.154447     -0.585846  -0.662003  -0.525548
- 1.0  -0.894103   1.26334    -0.154447     -0.585846  -0.662003  -0.525548
- 1.0   1.11815   -0.493036   -0.154447     -0.585846  -0.662003  -0.525548
- 1.0   1.11815   -0.255687   -0.154447  …  -0.585846  -0.662003  -0.525548
- 1.0  -0.894103  -0.872794   -0.154447     -0.585846  -0.662003  -0.525548
- 1.0  -0.894103   1.1684     -0.154447     -0.585846  -0.662003  -0.525548
- 1.0   1.11815    0.12407    -0.154447     -0.585846  -0.662003  -0.525548
- 1.0  -0.894103  -0.160748   -0.154447     -0.585846  -0.662003  -0.525548
+ 1.0   1.11874   -0.634592   -0.150896  …  -0.596613  -0.649488  -0.524344
+ 1.0   1.11874    1.07799    -0.150896     -0.596613  -0.649488  -0.524344
+ 1.0   1.11874   -0.777306   -0.150896     -0.596613  -0.649488  -0.524344
+ 1.0  -0.893634  -0.539448   -0.150896     -0.596613  -0.649488  -0.524344
+ 1.0   1.11874   -0.254019   -0.150896     -0.596613  -0.649488  -0.524344
+ 1.0   1.11874    1.03041    -0.150896  …  -0.596613  -0.649488  -0.524344
+ 1.0  -0.893634  -0.87245    -0.150896     -0.596613  -0.649488  -0.524344
+ 1.0  -0.893634   1.17313    -0.150896     -0.596613  -0.649488  -0.524344
+ 1.0   1.11874    0.0314105  -0.150896     -0.596613  -0.649488  -0.524344
+ 1.0   1.11874    1.64884    -0.150896     -0.596613  -0.649488  -0.524344
+ 1.0   1.11874   -0.254019   -0.150896  …  -0.596613  -0.649488  -0.524344
+ 1.0  -0.893634   1.26827    -0.150896     -0.596613  -0.649488  -0.524344
+ 1.0   1.11874    0.364412   -0.150896     -0.596613  -0.649488  -0.524344
  ⋮                                      ⋱                        
- 1.0   1.11815   -0.730384   -0.154447     -0.585846  -0.662003   1.90228
- 1.0  -0.894103  -1.11014    -0.154447     -0.585846  -0.662003   1.90228
- 1.0  -0.894103  -0.825324   -0.154447  …  -0.585846  -0.662003   1.90228
- 1.0  -0.894103   0.503828   -0.154447     -0.585846  -0.662003   1.90228
- 1.0  -0.894103   0.12407    -0.154447     -0.585846  -0.662003   1.90228
- 1.0   1.11815   -0.540506   -0.154447     -0.585846  -0.662003   1.90228
- 1.0   1.11815   -0.825324   -0.154447     -0.585846  -0.662003   1.90228
- 1.0  -0.894103  -0.350627   -0.154447  …  -0.585846  -0.662003   1.90228
- 1.0   1.11815   -0.160748   -0.154447     -0.585846  -0.662003   1.90228
- 1.0  -0.894103   0.0291308  -0.154447     -0.585846  -0.662003   1.90228
+ 1.0  -0.893634   0.792556   -0.150896     -0.596613  -0.649488   1.90665
+ 1.0  -0.893634  -0.349162   -0.150896     -0.596613  -0.649488   1.90665
+ 1.0   1.11874   -1.11031    -0.150896     -0.596613  -0.649488   1.90665
+ 1.0   1.11874    2.50513    -0.150896     -0.596613  -0.649488   1.90665
+ 1.0  -0.893634   0.60227    -0.150896  …  -0.596613  -0.649488   1.90665
+ 1.0  -0.893634   1.69642    -0.150896     -0.596613  -0.649488   1.90665
+ 1.0   1.11874    1.93427    -0.150896     -0.596613  -0.649488   1.90665
+ 1.0  -0.893634   0.126554   -0.150896     -0.596613  -0.649488   1.90665
+ 1.0  -0.893634  -0.349162   -0.150896     -0.596613  -0.649488   1.90665
+ 1.0  -0.893634  -0.444305   -0.150896  …  -0.596613  -0.649488   1.90665
+ 1.0  -0.893634  -0.254019   -0.150896     -0.596613  -0.649488   1.90665
+ 1.0  -0.893634  -0.349162   -0.150896     -0.596613  -0.649488   1.90665
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Y_train</span> <span class="o">=</span> <span class="n">data_train</span><span class="p">[</span><span class="o">!</span><span class="p">,</span><span class="s">&quot;lwage&quot;</span><span class="p">]</span>
-<span class="n">Y_test</span> <span class="o">=</span> <span class="n">data_test</span><span class="p">[</span><span class="o">!</span><span class="p">,</span><span class="s">&quot;lwage&quot;</span><span class="p">]</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Y_train</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data_train</span><span class="p">[</span><span class="o">!</span><span class="p">,</span><span class="s">&quot;lwage&quot;</span><span class="p">]</span>
+<span class="n">Y_test</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data_test</span><span class="p">[</span><span class="o">!</span><span class="p">,</span><span class="s">&quot;lwage&quot;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1288-element Vector{Float64}:
- -0.605119406888591
- -0.04281487692459506
- -0.8646389686875632
-  0.1603345431161625
- -0.9360182017041262
- -0.17913440516655335
- -0.8674388866524138
- -0.0032979770887609497
- -1.8784796682015727
- -0.5950990448214749
+ -1.2495116701816313
+ -0.5940111369079969
+ -0.8558489593188235
+ -0.6922940066202594
+ -0.16422085652454593
+ -0.3179120121732921
+ -0.8586738886527183
+  0.013186299642166738
+ -0.8637071816306149
+  0.36697911041067455
+  1.3178594848348544
+ -1.1634376242266362
+ -1.7570311742901377
   ⋮
- -0.8331327398028442
- -0.37918644113875194
-  0.6661604872599762
- -0.8646389686875632
- -0.7300688636985172
-  0.0003613511992238476
-  1.4648246590421161
- -0.6172201361201212
-  0.27598318865940913
- -0.22704283751955406
+ -1.2495116701816313
+  0.43617103718140365
+ -0.07134846692710259
+ -0.3847866913343217
+ -1.2495116701816313
+ -0.8558489593188235
+  0.5351222789388115
+  0.25782050367552267
+ -0.6062199606652643
+ -0.4923631674195659
+  1.1961444692773646
+  0.9241967739720466
 </pre></div>
 </div>
 </div>
@@ -943,33 +864,38 @@ title="Print to PDF"
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3862×10 Matrix{Float64}:
- 1.0   1.11815   -0.445566   -0.154447  …   1.70649   -0.662003  -0.525548
- 1.0   1.11815    0.0291308  -0.154447     -0.585846   1.51018   -0.525548
- 1.0   1.11815    0.21901    -0.154447     -0.585846  -0.662003  -0.525548
- 1.0  -0.894103  -1.0152     -0.154447     -0.585846  -0.662003   1.90228
- 1.0   1.11815    1.6431     -0.154447      1.70649   -0.662003  -0.525548
- 1.0  -0.894103  -0.635445   -0.154447  …   1.70649   -0.662003  -0.525548
- 1.0  -0.894103   1.21587    -0.154447     -0.585846  -0.662003   1.90228
- 1.0   1.11815    1.92792    -0.154447     -0.585846  -0.662003   1.90228
- 1.0   1.11815    0.12407    -0.154447     -0.585846   1.51018   -0.525548
- 1.0  -0.894103   0.788646   -0.154447     -0.585846   1.51018   -0.525548
+ 1.0  -0.893634   1.07799    -0.150896  …   1.67569   -0.649488  -0.524344
+ 1.0  -0.893634  -0.444305   -0.150896     -0.596613   1.53928   -0.524344
+ 1.0  -0.893634   1.12556    -0.150896     -0.596613  -0.649488   1.90665
+ 1.0   1.11874   -0.920021   -0.150896     -0.596613   1.53928   -0.524344
+ 1.0  -0.893634   2.17213    -0.150896     -0.596613  -0.649488  -0.524344
+ 1.0  -0.893634  -0.158876   -0.150896  …   1.67569   -0.649488  -0.524344
+ 1.0  -0.893634   0.411983    6.62538      -0.596613  -0.649488   1.90665
+ 1.0   1.11874   -0.444305   -0.150896     -0.596613  -0.649488  -0.524344
+ 1.0   1.11874   -1.20545    -0.150896     -0.596613  -0.649488  -0.524344
+ 1.0   1.11874   -0.349162   -0.150896     -0.596613   1.53928   -0.524344
+ 1.0  -0.893634   0.935271   -0.150896  …   1.67569   -0.649488  -0.524344
+ 1.0   1.11874    0.507126   -0.150896     -0.596613  -0.649488  -0.524344
+ 1.0  -0.893634   0.697413   -0.150896     -0.596613   1.53928   -0.524344
  ⋮                                      ⋱                        
- 1.0  -0.894103  -0.920263   -0.154447     -0.585846  -0.662003   1.90228
- 1.0   1.11815   -0.350627   -0.154447     -0.585846  -0.662003  -0.525548
- 1.0  -0.894103  -1.0152     -0.154447     -0.585846  -0.662003  -0.525548
- 1.0  -0.894103   1.73804    -0.154447  …   1.70649   -0.662003  -0.525548
- 1.0   1.11815   -1.0152     -0.154447     -0.585846  -0.662003  -0.525548
- 1.0  -0.894103   2.49756    -0.154447     -0.585846  -0.662003  -0.525548
- 1.0   1.11815    1.92792    -0.154447     -0.585846   1.51018   -0.525548
- 1.0   1.11815    0.266479   -0.154447     -0.585846  -0.662003  -0.525548
- 1.0  -0.894103  -0.825324   -0.154447  …  -0.585846  -0.662003  -0.525548
- 1.0  -0.894103  -1.0152     -0.154447     -0.585846  -0.662003  -0.525548
+ 1.0   1.11874   -0.444305   -0.150896  …  -0.596613  -0.649488   1.90665
+ 1.0  -0.893634   0.697413   -0.150896     -0.596613  -0.649488  -0.524344
+ 1.0  -0.893634  -0.920021   -0.150896     -0.596613  -0.649488   1.90665
+ 1.0   1.11874   -0.824878   -0.150896      1.67569   -0.649488  -0.524344
+ 1.0  -0.893634  -0.824878   -0.150896     -0.596613   1.53928   -0.524344
+ 1.0  -0.893634  -0.87245    -0.150896  …  -0.596613   1.53928   -0.524344
+ 1.0  -0.893634  -0.539448   -0.150896     -0.596613  -0.649488   1.90665
+ 1.0  -0.893634  -1.01516    -0.150896     -0.596613  -0.649488   1.90665
+ 1.0  -0.893634  -0.444305   -0.150896     -0.596613   1.53928   -0.524344
+ 1.0  -0.893634  -0.0637326  -0.150896     -0.596613   1.53928   -0.524344
+ 1.0   1.11874   -1.20545    -0.150896  …  -0.596613  -0.649488  -0.524344
+ 1.0   1.11874   -0.254019   -0.150896      1.67569   -0.649488  -0.524344
 </pre></div>
 </div>
 </div>
 </div>
 <section id="neural-networks">
-<h3><span class="section-number">13.1.1. </span>Neural Networks<a class="headerlink" href="#neural-networks" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">13.1.1. </span>Neural Networks<a class="headerlink" href="#neural-networks" title="Permalink to this heading">#</a></h3>
 <p>First, we need to determine the structure of our network. We are using the R package <em>keras</em> to build a simple sequential neural network with three dense layers.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -985,35 +911,20 @@ title="Print to PDF"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">Flux</span>
-<span class="k">using</span> <span class="n">Flux</span><span class="o">:</span> <span class="n">crossentropy</span><span class="p">,</span> <span class="nd">@epochs</span>
-<span class="k">using</span> <span class="n">Flux</span><span class="o">.</span><span class="n">Data</span><span class="o">:</span> <span class="n">DataLoader</span>
-<span class="k">using</span> <span class="n">Flux</span><span class="o">:</span> <span class="n">throttle</span>
-<span class="k">using</span> <span class="n">Flux</span><span class="o">:</span> <span class="n">onehotbatch</span><span class="p">,</span> <span class="n">onecold</span><span class="p">,</span> <span class="nd">@epochs</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>ArgumentError: Package Flux not found in current path:
-- Run `import Pkg; Pkg.add(&quot;Flux&quot;)` to install the Flux package.
-
-
-Stacktrace:
- [1] require(into::Module, mod::Symbol)
-   @ Base .\loading.jl:967
- [2] eval
-   @ .\boot.jl:373 [inlined]
- [3] include_string(mapexpr::typeof(REPL.softscope), mod::Module, code::String, filename::String)
-   @ Base .\loading.jl:1196
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Flux</span>
+<span class="k">using</span><span class="w"> </span><span class="n">Flux</span><span class="o">:</span><span class="w"> </span><span class="n">crossentropy</span><span class="p">,</span><span class="w"> </span><span class="nd">@epochs</span>
+<span class="k">using</span><span class="w"> </span><span class="n">Flux</span><span class="o">.</span><span class="n">Data</span><span class="o">:</span><span class="w"> </span><span class="n">DataLoader</span>
+<span class="k">using</span><span class="w"> </span><span class="n">Flux</span><span class="o">:</span><span class="w"> </span><span class="n">throttle</span>
+<span class="k">using</span><span class="w"> </span><span class="n">Flux</span><span class="o">:</span><span class="w"> </span><span class="n">onehotbatch</span><span class="p">,</span><span class="w"> </span><span class="n">onecold</span><span class="p">,</span><span class="w"> </span><span class="nd">@epochs</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">model_nn</span> <span class="o">=</span> <span class="n">Chain</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="n">size</span><span class="p">(</span><span class="n">model_X_basic_train</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="mi">20</span><span class="p">,</span> <span class="n">relu</span><span class="p">),</span> 
-              <span class="n">Dense</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="n">size</span><span class="p">(</span><span class="n">model_X_basic_train</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="n">relu</span><span class="p">),</span>
-              <span class="n">Dense</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">model_nn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Chain</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="n">size</span><span class="p">(</span><span class="n">model_X_basic_train</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="n">relu</span><span class="p">),</span><span class="w"> </span>
+<span class="w">              </span><span class="n">Dense</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="p">(</span><span class="n">model_X_basic_train</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="n">relu</span><span class="p">),</span>
+<span class="w">              </span><span class="n">Dense</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -1026,11 +937,11 @@ Stacktrace:
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># compile the Flux model</span>
-<span class="n">model</span> <span class="o">=</span> <span class="n">model_nn</span>
+<span class="n">model</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">model_nn</span>
 <span class="c">#opt(x, y) = Descent()</span>
-<span class="n">opt1</span> <span class="o">=</span> <span class="n">ADAM</span><span class="p">()</span>
-<span class="n">loss</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="o">=</span> <span class="n">Flux</span><span class="o">.</span><span class="n">Losses</span><span class="o">.</span><span class="n">mse</span><span class="p">(</span><span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">y</span><span class="p">)</span>
-<span class="n">metrics</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="o">=</span> <span class="n">Flux</span><span class="o">.</span><span class="n">mae</span><span class="p">(</span><span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">opt1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ADAM</span><span class="p">()</span>
+<span class="n">loss</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Flux</span><span class="o">.</span><span class="n">Losses</span><span class="o">.</span><span class="n">mse</span><span class="p">(</span><span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="w"> </span><span class="n">y</span><span class="p">)</span>
+<span class="n">metrics</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Flux</span><span class="o">.</span><span class="n">mae</span><span class="p">(</span><span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="w"> </span><span class="n">y</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1042,7 +953,7 @@ Stacktrace:
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">ps</span> <span class="o">=</span> <span class="n">Flux</span><span class="o">.</span><span class="n">params</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">ps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Flux</span><span class="o">.</span><span class="n">params</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1077,7 +988,7 @@ Stacktrace:
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">loss</span><span class="p">(</span><span class="n">model_X_basic_train</span><span class="o">&#39;</span><span class="p">,</span> <span class="n">Y_train</span><span class="o">&#39;</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">loss</span><span class="p">(</span><span class="n">model_X_basic_train</span><span class="o">&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">Y_train</span><span class="o">&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1089,7 +1000,7 @@ Stacktrace:
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">opt</span><span class="p">(</span><span class="n">model_X_basic_train</span><span class="o">&#39;</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">opt</span><span class="p">(</span><span class="n">model_X_basic_train</span><span class="o">&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">Y_train</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1101,7 +1012,7 @@ Stacktrace:
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">((</span><span class="n">model_X_basic_train</span><span class="o">&#39;</span><span class="p">,</span> <span class="n">Y_train</span><span class="o">&#39;</span><span class="p">))</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DataLoader</span><span class="p">((</span><span class="n">model_X_basic_train</span><span class="o">&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">Y_train</span><span class="o">&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -1116,7 +1027,7 @@ Stacktrace:
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># training the network </span>
 
 <span class="c">#@epochs 1000 Flux.train!(loss, ps, data, opt, cb = throttle(() -&gt; println(&quot;training&quot;), 10))</span>
-<span class="nd">@epochs</span> <span class="mi">1000</span> <span class="n">Flux</span><span class="o">.</span><span class="n">train!</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="n">ps</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">opt1</span><span class="p">,</span> <span class="n">cb</span> <span class="o">=</span> <span class="n">throttle</span><span class="p">(()</span> <span class="o">-&gt;</span> <span class="n">println</span><span class="p">(</span><span class="s">&quot;training&quot;</span><span class="p">),</span> <span class="mi">10</span><span class="p">))</span>
+<span class="nd">@epochs</span><span class="w"> </span><span class="mi">1000</span><span class="w"> </span><span class="n">Flux</span><span class="o">.</span><span class="n">train!</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span><span class="w"> </span><span class="n">ps</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="n">opt1</span><span class="p">,</span><span class="w"> </span><span class="n">cb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">throttle</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;training&quot;</span><span class="p">),</span><span class="w"> </span><span class="mi">10</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -8134,28 +8045,28 @@ training
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Calculating the performance measures </span>
 
-<span class="n">pred_nn</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">model_X_basic_test</span><span class="sc">&#39;)&#39;</span>
+<span class="n">pred_nn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">model</span><span class="p">(</span><span class="n">model_X_basic_test</span><span class="sc">&#39;)&#39;</span>
 <span class="c"># We change the type of this variable in order to make numeric operations</span>
-<span class="n">pred_nn</span> <span class="o">=</span> <span class="n">vec</span><span class="p">(</span><span class="n">pred_nn</span><span class="p">)</span>
+<span class="n">pred_nn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vec</span><span class="p">(</span><span class="n">pred_nn</span><span class="p">)</span>
 
-<span class="n">resid_basic</span> <span class="o">=</span> <span class="p">(</span><span class="n">Y_test</span> <span class="o">.-</span> <span class="n">pred_nn</span><span class="p">)</span><span class="o">.^</span><span class="mi">2</span>
+<span class="n">resid_basic</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">Y_test</span><span class="w"> </span><span class="o">.-</span><span class="w"> </span><span class="n">pred_nn</span><span class="p">)</span><span class="o">.^</span><span class="mi">2</span>
 
-<span class="n">one</span> <span class="o">=</span> <span class="n">vec</span><span class="p">(</span><span class="n">ones</span><span class="p">(</span><span class="n">size</span><span class="p">(</span><span class="n">Y_test</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">one</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vec</span><span class="p">(</span><span class="n">ones</span><span class="p">(</span><span class="n">size</span><span class="p">(</span><span class="n">Y_test</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span><span class="mi">1</span><span class="p">))</span>
 
-<span class="n">resid_basic</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">([</span><span class="n">resid_basic</span><span class="p">],</span> <span class="p">[</span><span class="ss">:resid_basic</span><span class="p">])</span>
+<span class="n">resid_basic</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DataFrame</span><span class="p">([</span><span class="n">resid_basic</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="ss">:resid_basic</span><span class="p">])</span>
 
-<span class="n">one</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">([</span><span class="n">one</span><span class="p">],</span> <span class="p">[</span><span class="ss">:one</span><span class="p">])</span>
-<span class="n">data_aux</span> <span class="o">=</span> <span class="p">[</span><span class="n">resid_basic</span> <span class="n">one</span><span class="p">]</span>
+<span class="n">one</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DataFrame</span><span class="p">([</span><span class="n">one</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="ss">:one</span><span class="p">])</span>
+<span class="n">data_aux</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">resid_basic</span><span class="w"> </span><span class="n">one</span><span class="p">]</span>
 
-<span class="n">fm</span> <span class="o">=</span> <span class="nd">@formula</span><span class="p">(</span><span class="n">resid_basic</span> <span class="o">~</span> <span class="mi">0</span> <span class="o">+</span> <span class="n">one</span><span class="p">)</span>
+<span class="n">fm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nd">@formula</span><span class="p">(</span><span class="n">resid_basic</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">one</span><span class="p">)</span>
 
-<span class="n">MSE_nn_basic</span> <span class="o">=</span> <span class="n">lm</span><span class="p">(</span><span class="n">fm</span><span class="p">,</span> <span class="n">data_aux</span><span class="p">,</span> <span class="n">dropcollinear</span><span class="o">=</span><span class="nb">false</span><span class="p">)</span>
+<span class="n">MSE_nn_basic</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lm</span><span class="p">(</span><span class="n">fm</span><span class="p">,</span><span class="w"> </span><span class="n">data_aux</span><span class="p">,</span><span class="w"> </span><span class="n">dropcollinear</span><span class="o">=</span><span class="nb">false</span><span class="p">)</span>
 
-<span class="nd">@show</span> <span class="n">coef</span><span class="p">(</span><span class="n">MSE_nn_basic</span><span class="p">)</span>
-<span class="nd">@show</span> <span class="n">stderror</span><span class="p">(</span><span class="n">MSE_nn_basic</span><span class="p">)</span>
+<span class="nd">@show</span><span class="w"> </span><span class="n">coef</span><span class="p">(</span><span class="n">MSE_nn_basic</span><span class="p">)</span>
+<span class="nd">@show</span><span class="w"> </span><span class="n">stderror</span><span class="p">(</span><span class="n">MSE_nn_basic</span><span class="p">)</span>
 
-<span class="n">R2_nn_basic</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">.-</span> <span class="p">(</span><span class="n">coef</span><span class="p">(</span><span class="n">MSE_nn_basic</span><span class="p">)</span> <span class="o">/</span> <span class="n">var</span><span class="p">(</span><span class="n">Y_test</span><span class="p">))</span>
-<span class="n">println</span><span class="p">(</span><span class="s">&quot;The R^2 using NN is equal to &quot;</span><span class="p">,</span> <span class="n">R2_nn_basic</span><span class="p">)</span> <span class="c"># MSE NN (basic model) </span>
+<span class="n">R2_nn_basic</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">.-</span><span class="w"> </span><span class="p">(</span><span class="n">coef</span><span class="p">(</span><span class="n">MSE_nn_basic</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">var</span><span class="p">(</span><span class="n">Y_test</span><span class="p">))</span>
+<span class="n">println</span><span class="p">(</span><span class="s">&quot;The R^2 using NN is equal to &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">R2_nn_basic</span><span class="p">)</span><span class="w"> </span><span class="c"># MSE NN (basic model) </span>
 </pre></div>
 </div>
 </div>
@@ -8169,14 +8080,14 @@ The R^2 using NN is equal to [0.11516006433982762]
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">Y_test</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">&quot;Y_test&quot;</span><span class="p">)</span>
-<span class="n">plot!</span><span class="p">(</span><span class="n">pred_nn</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">&quot;pred_nn&quot;</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">Y_test</span><span class="p">,</span><span class="w"> </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Y_test&quot;</span><span class="p">)</span>
+<span class="n">plot!</span><span class="p">(</span><span class="n">pred_nn</span><span class="p">,</span><span class="w"> </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;pred_nn&quot;</span><span class="p">)</span>
 <span class="n">plot!</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">950</span><span class="p">,</span><span class="mi">600</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/13_Julia_pm3_notebook_newdata_nn_48_0.svg" src="../_images/13_Julia_pm3_notebook_newdata_nn_48_0.svg" /></div>
+<img alt="../_images/4bee55f79e4d229a70ae4cab5d3b46e4ea98e79811f4432ee29af0cb15dd66c7.svg" src="../_images/4bee55f79e4d229a70ae4cab5d3b46e4ea98e79811f4432ee29af0cb15dd66c7.svg" /></div>
 </div>
 </section>
 </section>
@@ -8194,7 +8105,7 @@ The R^2 using NN is equal to [0.11516006433982762]
             mode: "julia-1.7"
         },
         kernelOptions: {
-            kernelName: "julia-1.7",
+            name: "julia-1.7",
             path: "./julia_notebooks"
         },
         predefinedOutput: true
@@ -8202,49 +8113,101 @@ The R^2 using NN is equal to [0.11516006433982762]
     </script>
     <script>kernelName = 'julia-1.7'</script>
 
-              </div>
+                </article>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="12_jl_collider_bias.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">12. </span>ColliderBias Hollywood</p>
-        </div>
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="12_jl_collider_bias.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">12. </span>ColliderBias Hollywood</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="14_jl_automl_wage.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="14_jl_automl_wage.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title"><span class="section-number">14. </span>AutoML for wage prediction</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
-</div>
-            </footer>
-        </div>
-    </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
-  
-    By Victor Chernozhukov<br/>
-  
-</p>
-        </footer>
-    </div>
-    
-</div>
-
-
       </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preparation">13.1. Data preparation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#neural-networks">13.1.1. Neural Networks</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Victor Chernozhukov & Jannis Kueck. Translated into Julia by Alexander Quispe
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
     </div>
+  </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
 
-
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

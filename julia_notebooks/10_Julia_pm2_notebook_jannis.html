@@ -1,48 +1,60 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>10. Double Lasso for the convergence hypothesis &#8212; Inference on Causal and Structural Parametters Using ML and AI</title>
-    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
-    
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
@@ -50,63 +62,95 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'julia_notebooks/10_Julia_pm2_notebook_jannis';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="11. Heterogenous Wage Effects" href="11_py-heterogenous-wage-effects.html" />
     <link rel="prev" title="9. Experiment on Orthogonal Learning" href="09_Julia_OrthogonalLearning_lab4.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
-    <div class="container-fluid" id="banner"></div>
-
-    
-
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="../_static/logo.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">Inference on Causal and Structural Parametters Using ML and AI</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
@@ -116,551 +160,315 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="01_Julia_Notebook_Linear_Model_Overfitting.html">
-   1. Linear Model Overfiting
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="02_PM1_Notebook1_Prediction_newdata.html">
-   2. OLS and lasso for wage prediction
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="03_PM1_Notebook_Inference.html">
-   3. OLS and lasso for gender wage gap inference
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="04_Juli_Notebook_RCT-polio.html">
-   4. Some RCT Examples
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="05_Julia_Analyzing_RCT_with_Precision.html">
-   5. Analyzing RCT reemployment experiment
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="06_RCT_Precision_Adjustment.html">
-   6. Analyzing RCT reemployment experiment
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="07_julia-notebook-linear-penalized-regs.html">
-   7. Linear Penalized Regs
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="08_jl_ml_estimators_wage_pred.html">
-   8. ML for wage prediction
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="09_Julia_OrthogonalLearning_lab4.html">
-   9. Experiment on Orthogonal Learning
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   10. Double Lasso for the convergence hypothesis
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="11_py-heterogenous-wage-effects.html">
-   11. Heterogenous Wage Effects
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="12_jl_collider_bias.html">
-   12. ColliderBias Hollywood
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="13_Julia_pm3_notebook_newdata_nn.html">
-   13. Deep Neural Networks for Wage Prediction
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="14_jl_automl_wage.html">
-   14. AutoML for wage prediction
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="15_Functional-aproximation-by-nn-and-rf.html">
-   15. Functional Approximations by NN and RF
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="16_Notebook_DAGitty.html">
-   16. Notebook-DAGitty
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="17_jl_dosearch.html">
-   17. Notebook-Dosearch
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="18_Julia_pm3_notebook_inference_clustering.html">
-   18. DML inference for gun ownership
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="19_Julia-pm3-newdata-nn.html">
-   19. DML inference using NN for gun ownership
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="20_jl_dml_401k.html">
-   20. DML for ATE and LATE of 401(k) on Wealth
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="21_jl_dag_401k.html">
-   21. Identification Analysis of 401(k) Example w DAGs
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="22_Julia_debiased-ml-for-partially-linear-model.html">
-   22. Debiased ML for Partially Linear Model in Julia
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="23_jl_sensmakr_dml.html">
-   23. Sensitivity Analysis with Sensmakr and Debiased ML
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="24_debiased-ml-for-partially-linear-iv-model-in-julia.html">
-   24. Debiased ML for Partially Linear IV Model in Julia
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="25_Julia_weak_iv_experiments.html">
-   25. Weak IV Experiments
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="01_Julia_Notebook_Linear_Model_Overfitting.html">1. Linear Model Overfiting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_PM1_Notebook1_Prediction_newdata.html">2. OLS and lasso for wage prediction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_PM1_Notebook_Inference.html">3. OLS and lasso for gender wage gap inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_Juli_Notebook_RCT-polio.html">4. Some RCT Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_Julia_Analyzing_RCT_with_Precision.html">5. Analyzing RCT reemployment experiment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_RCT_Precision_Adjustment.html">6. Analyzing RCT reemployment experiment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_julia-notebook-linear-penalized-regs.html">7. Linear Penalized Regs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_jl_ml_estimators_wage_pred.html">8. ML for wage prediction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_Julia_OrthogonalLearning_lab4.html">9. Experiment on Orthogonal Learning</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">10. Double Lasso for the convergence hypothesis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_py-heterogenous-wage-effects.html">11. Heterogenous Wage Effects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_jl_collider_bias.html">12. ColliderBias Hollywood</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_Julia_pm3_notebook_newdata_nn.html">13. Deep Neural Networks for Wage Prediction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14_jl_automl_wage.html">14. AutoML for wage prediction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15_Functional-aproximation-by-nn-and-rf.html">15. Functional Approximations by NN and RF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="16_Notebook_DAGitty.html">16. Notebook-DAGitty</a></li>
+<li class="toctree-l1"><a class="reference internal" href="17_jl_dosearch.html">17. Notebook-Dosearch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="18_Julia_pm3_notebook_inference_clustering.html">18. DML inference for gun ownership</a></li>
+<li class="toctree-l1"><a class="reference internal" href="19_Julia-pm3-newdata-nn.html">19. DML inference using NN for gun ownership</a></li>
+<li class="toctree-l1"><a class="reference internal" href="20_jl_dml_401k.html">20. DML for ATE and LATE of 401(k) on Wealth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="21_jl_dag_401k.html">21. Identification Analysis of 401(k) Example w DAGs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="22_Julia_debiased-ml-for-partially-linear-model.html">22. Debiased ML for Partially Linear Model in Julia</a></li>
+<li class="toctree-l1"><a class="reference internal" href="23_jl_sensmakr_dml.html">23. Sensitivity Analysis with Sensmakr and Debiased ML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="24_debiased-ml-for-partially-linear-iv-model-in-julia.html">24. Debiased ML for Partially Linear IV Model in Julia</a></li>
+<li class="toctree-l1"><a class="reference internal" href="25_Julia_weak_iv_experiments.html">25. Weak IV Experiments</a></li>
 </ul>
 
     </div>
 </nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-            </div>
-            
-        </div>
     </div>
-    <div id="rtd-footer-container"></div>
-</div>
-
-
-          
-
-
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
-        
-
-
-
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
   
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://mybinder.org/v2/gh/d2cml-ai/14.388_jl/main?urlpath=tree/_build/jupyter_execute/julia_notebooks/10_Julia_pm2_notebook_jannis.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Binder"
->
   
-
-<span class="headerbtn__icon-container">
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
   
-    <img src="../_static/images/logo_binder.svg">
-  </span>
-<span class="headerbtn__text-container">Binder</span>
-</a>
+  <div id="rtd-footer-container"></div>
 
-      </li>
+
+      </div>
       
-      <li>
-        <a href="https://colab.research.google.com/github/d2cml-ai/14.388_jl/blob/main/_build/jupyter_execute/julia_notebooks/10_Julia_pm2_notebook_jannis.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Colab"
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/d2cml-ai/14.388_jl/blob/main/_build/jupyter_execute/julia_notebooks/10_Julia_pm2_notebook_jannis.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   
     <img src="../_static/images/logo_colab.png">
   </span>
-<span class="headerbtn__text-container">Colab</span>
+<span class="btn__text-container">Colab</span>
 </a>
-
-      </li>
+</li>
+      
+      
+      
       
       <li>
-        
 <button onclick="initThebeSBT()"
-  class="headerbtn headerbtn-launch-thebe"
-  data-toggle="tooltip"
-data-placement="left"
-title="Launch Thebe"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-play"></i>
   </span>
-<span class="headerbtn__text-container">Live Code</span>
+<span class="btn__text-container">Live Code</span>
 </button>
-
-      </li>
+</li>
       
-    </ul>
-  </div>
+  </ul>
 </div>
 
-<button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/d2cml-ai/14.388_jl" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/d2cml-ai/14.388_jl/edit/main/_build/jupyter_execute/julia_notebooks/10_Julia_pm2_notebook_jannis.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/d2cml-ai/14.388_jl/issues/new?title=Issue%20on%20page%20%2Fjulia_notebooks/10_Julia_pm2_notebook_jannis.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/julia_notebooks/10_Julia_pm2_notebook_jannis.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-<div class="menu-dropdown menu-dropdown-repository-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Source repositories">
-      <i class="fab fa-github"></i>
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://github.com/d2cml-ai/14.388_jl"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Source repository"
->
-  
+`);
+</script>
 
-<span class="headerbtn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="headerbtn__text-container">repository</span>
-</a>
-
-      </li>
-      
-      <li>
-        <a href="https://github.com/d2cml-ai/14.388_jl/issues/new?title=Issue%20on%20page%20%2Fjulia_notebooks/10_Julia_pm2_notebook_jannis.html&body=Your%20issue%20content%20here."
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Open an issue"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="headerbtn__text-container">open issue</span>
-</a>
-
-      </li>
-      
-      <li>
-        <a href="https://github.com/d2cml-ai/14.388_jl/edit/main/_build/jupyter_execute/julia_notebooks/10_Julia_pm2_notebook_jannis.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Edit this page"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-pencil-alt"></i>
-  </span>
-<span class="headerbtn__text-container">suggest edit</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="../_sources/julia_notebooks/10_Julia_pm2_notebook_jannis.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.ipynb</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
-</button>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
 </label>
-
+</div></div>
+      
     </div>
+  
 </div>
-
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#introduction">
-   10.1. Introduction
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#data-analysis">
-   10.2. Data analysis
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#summarize-ols-results">
-   10.3. Summarize OLS results
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#method-1-using-lasso">
-   10.4. Method 1 - Using Lasso
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#summary-lasso-results">
-   10.5. Summary LASSO results
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#using-hdmjl">
-   10.6. Using HDMJL
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#first-we-need-to-call-hdmjl-jl-script-to-use-all-the-functions-mainly-rlasso-function">
-     10.6.1. First we need to call hdmjl.jl script to use all the functions, mainly rlasso function
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#you-use-the-rlasso-arg-to-declare-the-parameters-that-we-use-and-the-matrixes-need-you-only-need-to-change-the-first-two-arguments">
-     10.6.2. You use the
-     <strong>
-      rlasso_arg
-     </strong>
-     to declare the parameters that we use and the matrixes need.  You only need to change the first two arguments!
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#then-we-need-to-use-the-rlasso-function-including-the-arguments-declared-above">
-     10.6.3. Then we need to use the rlasso function including the arguments declared above
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-output-is-a-dictionary-so-you-can-access-using-the-main-keys-in-our-case-we-need-the-residuals">
-     10.6.4. The output is a dictionary, so you can access using the main keys. In our case we need the residuals
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#we-do-the-same-for-the-second-equation">
-     10.6.5. We do the same for the second equation
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#regress-errors">
-     10.6.6. Regress errors
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
-
-    </nav>
 </div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Double Lasso for the convergence hypothesis</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#introduction">
-   10.1. Introduction
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#data-analysis">
-   10.2. Data analysis
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#summarize-ols-results">
-   10.3. Summarize OLS results
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#method-1-using-lasso">
-   10.4. Method 1 - Using Lasso
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#summary-lasso-results">
-   10.5. Summary LASSO results
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#using-hdmjl">
-   10.6. Using HDMJL
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#first-we-need-to-call-hdmjl-jl-script-to-use-all-the-functions-mainly-rlasso-function">
-     10.6.1. First we need to call hdmjl.jl script to use all the functions, mainly rlasso function
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#you-use-the-rlasso-arg-to-declare-the-parameters-that-we-use-and-the-matrixes-need-you-only-need-to-change-the-first-two-arguments">
-     10.6.2. You use the
-     <strong>
-      rlasso_arg
-     </strong>
-     to declare the parameters that we use and the matrixes need.  You only need to change the first two arguments!
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#then-we-need-to-use-the-rlasso-function-including-the-arguments-declared-above">
-     10.6.3. Then we need to use the rlasso function including the arguments declared above
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-output-is-a-dictionary-so-you-can-access-using-the-main-keys-in-our-case-we-need-the-residuals">
-     10.6.4. The output is a dictionary, so you can access using the main keys. In our case we need the residuals
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#we-do-the-same-for-the-second-equation">
-     10.6.5. We do the same for the second equation
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#regress-errors">
-     10.6.6. Regress errors
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
+              
+              
 
-                        </nav>
-                    </div>
-                </div>
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Double Lasso for the convergence hypothesis</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
             </div>
-            <main id="main-content" role="main">
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">10.1. Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-analysis">10.2. Data analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summarize-ols-results">10.3. Summarize OLS results</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#method-1-using-lasso">10.4. Method 1 - Using Lasso</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-lasso-results">10.5. Summary LASSO results</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-hdmjl">10.6. Using HDMJL</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#first-we-need-to-call-hdmjl-jl-script-to-use-all-the-functions-mainly-rlasso-function">10.6.1. First we need to call hdmjl.jl script to use all the functions, mainly rlasso function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#you-use-the-rlasso-arg-to-declare-the-parameters-that-we-use-and-the-matrixes-need-you-only-need-to-change-the-first-two-arguments">10.6.2. You use the <strong>rlasso_arg</strong> to declare the parameters that we use and the matrixes need.  You only need to change the first two arguments!</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#then-we-need-to-use-the-rlasso-function-including-the-arguments-declared-above">10.6.3. Then we need to use the rlasso function including the arguments declared above</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-output-is-a-dictionary-so-you-can-access-using-the-main-keys-in-our-case-we-need-the-residuals">10.6.4. The output is a dictionary, so you can access using the main keys. In our case we need the residuals</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#we-do-the-same-for-the-second-equation">10.6.5. We do the same for the second equation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regress-errors">10.6.6. Regress errors</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
                 
-              <div>
-                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
   <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># !wget https://developer.nvidia.com/compute/cuda/9.0/Prod/local_installers/cuda-repo-ubuntu1604-9-0-local_9.0.176-1_amd64-deb</span>
@@ -685,9 +493,9 @@ title="Print to PDF"
 </div>
 </div>
 <section class="tex2jax_ignore mathjax_ignore" id="double-lasso-for-the-convergence-hypothesis">
-<h1><span class="section-number">10. </span>Double Lasso for the convergence hypothesis<a class="headerlink" href="#double-lasso-for-the-convergence-hypothesis" title="Permalink to this headline">#</a></h1>
+<h1><span class="section-number">10. </span>Double Lasso for the convergence hypothesis<a class="headerlink" href="#double-lasso-for-the-convergence-hypothesis" title="Permalink to this heading">#</a></h1>
 <section id="introduction">
-<h2><span class="section-number">10.1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">10.1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
 <p>We provide an additional empirical example of partialling-out with Lasso to estimate the regression coefficient <span class="math notranslate nohighlight">\(\beta_1\)</span> in the high-dimensional linear regression model:
 $<span class="math notranslate nohighlight">\(
   Y = \beta_1 D +  \beta_2'W + \epsilon.
@@ -697,7 +505,7 @@ $<span class="math notranslate nohighlight">\(
 <p>The outcome <span class="math notranslate nohighlight">\(Y\)</span> is the realized annual growth rate of a country’s wealth  (Gross Domestic Product per capita). The target regressor (<span class="math notranslate nohighlight">\(D\)</span>) is the initial level of the country’s wealth. The target parameter <span class="math notranslate nohighlight">\(\beta_1\)</span> is the speed of convergence, which measures the speed at which poor countries catch up with rich countries. The controls (<span class="math notranslate nohighlight">\(W\)</span>) include measures of education levels, quality of institutions, trade openness, and political stability in the country.</p>
 </section>
 <section id="data-analysis">
-<h2><span class="section-number">10.2. </span>Data analysis<a class="headerlink" href="#data-analysis" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">10.2. </span>Data analysis<a class="headerlink" href="#data-analysis" title="Permalink to this heading">#</a></h2>
 <p>We consider the data set GrowthData which is included in the package <em>hdm</em>. First, let us load the data set to get familiar with the data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -713,8 +521,8 @@ $<span class="math notranslate nohighlight">\(
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">RData</span><span class="p">,</span> <span class="n">LinearAlgebra</span><span class="p">,</span> <span class="n">GLM</span><span class="p">,</span> <span class="n">DataFrames</span><span class="p">,</span> <span class="n">Statistics</span><span class="p">,</span> <span class="n">Random</span><span class="p">,</span> <span class="n">Distributions</span><span class="p">,</span> <span class="n">DataStructures</span><span class="p">,</span> <span class="n">NamedArrays</span><span class="p">,</span> <span class="n">PrettyTables</span>
-<span class="k">import</span> <span class="n">CodecBzip2</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">RData</span><span class="p">,</span><span class="w"> </span><span class="n">LinearAlgebra</span><span class="p">,</span><span class="w"> </span><span class="n">GLM</span><span class="p">,</span><span class="w"> </span><span class="n">DataFrames</span><span class="p">,</span><span class="w"> </span><span class="n">Statistics</span><span class="p">,</span><span class="w"> </span><span class="n">Random</span><span class="p">,</span><span class="w"> </span><span class="n">Distributions</span><span class="p">,</span><span class="w"> </span><span class="n">DataStructures</span><span class="p">,</span><span class="w"> </span><span class="n">NamedArrays</span><span class="p">,</span><span class="w"> </span><span class="n">PrettyTables</span>
+<span class="k">import</span><span class="w"> </span><span class="n">CodecBzip2</span>
 </pre></div>
 </div>
 </div>
@@ -722,9 +530,9 @@ $<span class="math notranslate nohighlight">\(
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Importing .Rdata file</span>
-<span class="n">url</span> <span class="o">=</span> <span class="s">&quot;https://github.com/d2cml-ai/14.388_jl/raw/github_data/data/GrowthData.RData&quot;</span>
-<span class="n">download</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="s">&quot;GrowthData.RData&quot;</span><span class="p">)</span>
-<span class="n">growth_read</span> <span class="o">=</span> <span class="n">load</span><span class="p">(</span><span class="s">&quot;GrowthData.RData&quot;</span><span class="p">)</span>
+<span class="n">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;https://github.com/d2cml-ai/14.388_jl/raw/github_data/data/GrowthData.RData&quot;</span>
+<span class="n">download</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;GrowthData.RData&quot;</span><span class="p">)</span>
+<span class="n">growth_read</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">load</span><span class="p">(</span><span class="s">&quot;GrowthData.RData&quot;</span><span class="p">)</span>
 <span class="n">rm</span><span class="p">(</span><span class="s">&quot;GrowthData.RData&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -733,7 +541,7 @@ $<span class="math notranslate nohighlight">\(
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Since growth_read is a dictionary, we check if there is a key called &quot;GrowthData&quot;, the one we need for our analyze</span>
-<span class="n">haskey</span><span class="p">(</span><span class="n">growth_read</span><span class="p">,</span> <span class="s">&quot;GrowthData&quot;</span><span class="p">)</span>
+<span class="n">haskey</span><span class="p">(</span><span class="n">growth_read</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;GrowthData&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -746,17 +554,17 @@ $<span class="math notranslate nohighlight">\(
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Now we save that dataframe with a new name</span>
-<span class="n">growth</span> <span class="o">=</span> <span class="n">growth_read</span><span class="p">[</span><span class="s">&quot;GrowthData&quot;</span><span class="p">]</span>
+<span class="n">growth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">growth_read</span><span class="p">[</span><span class="s">&quot;GrowthData&quot;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><table class="data-frame"><thead><tr><th></th><th>Outcome</th><th>intercept</th><th>gdpsh465</th><th>bmp1l</th><th>freeop</th><th>freetar</th><th>h65</th><th>hm65</th></tr><tr><th></th><th>Float64</th><th>Int32</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th></tr></thead><tbody><p>90 rows × 63 columns (omitted printing of 55 columns)</p><tr><th>1</th><td>-0.0243358</td><td>1</td><td>6.59167</td><td>0.2837</td><td>0.153491</td><td>0.043888</td><td>0.007</td><td>0.013</td></tr><tr><th>2</th><td>0.100473</td><td>1</td><td>6.82979</td><td>0.6141</td><td>0.313509</td><td>0.061827</td><td>0.019</td><td>0.032</td></tr><tr><th>3</th><td>0.0670515</td><td>1</td><td>8.89508</td><td>0.0</td><td>0.204244</td><td>0.009186</td><td>0.26</td><td>0.325</td></tr><tr><th>4</th><td>0.0640892</td><td>1</td><td>7.56528</td><td>0.1997</td><td>0.248714</td><td>0.03627</td><td>0.061</td><td>0.07</td></tr><tr><th>5</th><td>0.0279295</td><td>1</td><td>7.1624</td><td>0.174</td><td>0.299252</td><td>0.037367</td><td>0.017</td><td>0.027</td></tr><tr><th>6</th><td>0.0464074</td><td>1</td><td>7.21891</td><td>0.0</td><td>0.258865</td><td>0.02088</td><td>0.023</td><td>0.038</td></tr><tr><th>7</th><td>0.0673323</td><td>1</td><td>7.8536</td><td>0.0</td><td>0.182525</td><td>0.014385</td><td>0.039</td><td>0.063</td></tr><tr><th>8</th><td>0.0209777</td><td>1</td><td>7.70391</td><td>0.2776</td><td>0.215275</td><td>0.029713</td><td>0.024</td><td>0.035</td></tr><tr><th>9</th><td>0.0335512</td><td>1</td><td>9.06346</td><td>0.0</td><td>0.109614</td><td>0.002171</td><td>0.402</td><td>0.488</td></tr><tr><th>10</th><td>0.0391465</td><td>1</td><td>8.15191</td><td>0.1484</td><td>0.110885</td><td>0.028579</td><td>0.145</td><td>0.173</td></tr><tr><th>11</th><td>0.0761265</td><td>1</td><td>6.92952</td><td>0.0296</td><td>0.165784</td><td>0.020115</td><td>0.046</td><td>0.066</td></tr><tr><th>12</th><td>0.127951</td><td>1</td><td>7.23778</td><td>0.2151</td><td>0.078488</td><td>0.011581</td><td>0.022</td><td>0.031</td></tr><tr><th>13</th><td>-0.0243261</td><td>1</td><td>8.11582</td><td>0.4318</td><td>0.137482</td><td>0.026547</td><td>0.059</td><td>0.073</td></tr><tr><th>14</th><td>0.0782934</td><td>1</td><td>7.2717</td><td>0.1689</td><td>0.164598</td><td>0.044446</td><td>0.029</td><td>0.045</td></tr><tr><th>15</th><td>0.112912</td><td>1</td><td>7.12125</td><td>0.1832</td><td>0.188016</td><td>0.045678</td><td>0.033</td><td>0.051</td></tr><tr><th>16</th><td>0.0523082</td><td>1</td><td>6.97728</td><td>0.0962</td><td>0.204611</td><td>0.077852</td><td>0.037</td><td>0.043</td></tr><tr><th>17</th><td>0.0363909</td><td>1</td><td>7.64969</td><td>0.0227</td><td>0.136287</td><td>0.04673</td><td>0.081</td><td>0.105</td></tr><tr><th>18</th><td>0.0297382</td><td>1</td><td>8.05674</td><td>0.0208</td><td>0.197853</td><td>0.037224</td><td>0.083</td><td>0.097</td></tr><tr><th>19</th><td>-0.0566436</td><td>1</td><td>8.78094</td><td>0.2654</td><td>0.189867</td><td>0.031747</td><td>0.068</td><td>0.089</td></tr><tr><th>20</th><td>0.0192048</td><td>1</td><td>6.28786</td><td>0.4207</td><td>0.130682</td><td>0.109921</td><td>0.053</td><td>0.039</td></tr><tr><th>21</th><td>0.085206</td><td>1</td><td>6.13773</td><td>0.1371</td><td>0.123818</td><td>0.015897</td><td>0.028</td><td>0.025</td></tr><tr><th>22</th><td>0.133982</td><td>1</td><td>8.12888</td><td>0.0</td><td>0.16721</td><td>0.003311</td><td>0.129</td><td>0.196</td></tr><tr><th>23</th><td>0.173025</td><td>1</td><td>6.68085</td><td>0.4713</td><td>0.228424</td><td>0.029328</td><td>0.062</td><td>0.09</td></tr><tr><th>24</th><td>0.109699</td><td>1</td><td>7.17702</td><td>0.0178</td><td>0.18524</td><td>0.015453</td><td>0.02</td><td>0.026</td></tr><tr><th>25</th><td>0.0159899</td><td>1</td><td>6.64898</td><td>0.4762</td><td>0.171181</td><td>0.058937</td><td>0.018</td><td>0.028</td></tr><tr><th>&vellip;</th><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td></tr></tbody></table></div></div>
+<div class="output text_html"><table class="data-frame"><thead><tr><th></th><th>Outcome</th><th>intercept</th><th>gdpsh465</th><th>bmp1l</th><th>freeop</th><th>freetar</th><th>h65</th><th>hm65</th></tr><tr><th></th><th>Float64</th><th>Int32</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th></tr></thead><tbody><p>90 rows × 63 columns (omitted printing of 55 columns)</p><tr><th>1</th><td>-0.0243358</td><td>1</td><td>6.59167</td><td>0.2837</td><td>0.153491</td><td>0.043888</td><td>0.007</td><td>0.013</td></tr><tr><th>2</th><td>0.100473</td><td>1</td><td>6.82979</td><td>0.6141</td><td>0.313509</td><td>0.061827</td><td>0.019</td><td>0.032</td></tr><tr><th>3</th><td>0.0670515</td><td>1</td><td>8.89508</td><td>0.0</td><td>0.204244</td><td>0.009186</td><td>0.26</td><td>0.325</td></tr><tr><th>4</th><td>0.0640892</td><td>1</td><td>7.56528</td><td>0.1997</td><td>0.248714</td><td>0.03627</td><td>0.061</td><td>0.07</td></tr><tr><th>5</th><td>0.0279295</td><td>1</td><td>7.1624</td><td>0.174</td><td>0.299252</td><td>0.037367</td><td>0.017</td><td>0.027</td></tr><tr><th>6</th><td>0.0464074</td><td>1</td><td>7.21891</td><td>0.0</td><td>0.258865</td><td>0.02088</td><td>0.023</td><td>0.038</td></tr><tr><th>7</th><td>0.0673323</td><td>1</td><td>7.8536</td><td>0.0</td><td>0.182525</td><td>0.014385</td><td>0.039</td><td>0.063</td></tr><tr><th>8</th><td>0.0209777</td><td>1</td><td>7.70391</td><td>0.2776</td><td>0.215275</td><td>0.029713</td><td>0.024</td><td>0.035</td></tr><tr><th>9</th><td>0.0335512</td><td>1</td><td>9.06346</td><td>0.0</td><td>0.109614</td><td>0.002171</td><td>0.402</td><td>0.488</td></tr><tr><th>10</th><td>0.0391465</td><td>1</td><td>8.15191</td><td>0.1484</td><td>0.110885</td><td>0.028579</td><td>0.145</td><td>0.173</td></tr><tr><th>11</th><td>0.0761265</td><td>1</td><td>6.92952</td><td>0.0296</td><td>0.165784</td><td>0.020115</td><td>0.046</td><td>0.066</td></tr><tr><th>12</th><td>0.127951</td><td>1</td><td>7.23778</td><td>0.2151</td><td>0.078488</td><td>0.011581</td><td>0.022</td><td>0.031</td></tr><tr><th>13</th><td>-0.0243261</td><td>1</td><td>8.11582</td><td>0.4318</td><td>0.137482</td><td>0.026547</td><td>0.059</td><td>0.073</td></tr><tr><th>14</th><td>0.0782934</td><td>1</td><td>7.2717</td><td>0.1689</td><td>0.164598</td><td>0.044446</td><td>0.029</td><td>0.045</td></tr><tr><th>15</th><td>0.112912</td><td>1</td><td>7.12125</td><td>0.1832</td><td>0.188016</td><td>0.045678</td><td>0.033</td><td>0.051</td></tr><tr><th>16</th><td>0.0523082</td><td>1</td><td>6.97728</td><td>0.0962</td><td>0.204611</td><td>0.077852</td><td>0.037</td><td>0.043</td></tr><tr><th>17</th><td>0.0363909</td><td>1</td><td>7.64969</td><td>0.0227</td><td>0.136287</td><td>0.04673</td><td>0.081</td><td>0.105</td></tr><tr><th>18</th><td>0.0297382</td><td>1</td><td>8.05674</td><td>0.0208</td><td>0.197853</td><td>0.037224</td><td>0.083</td><td>0.097</td></tr><tr><th>19</th><td>-0.0566436</td><td>1</td><td>8.78094</td><td>0.2654</td><td>0.189867</td><td>0.031747</td><td>0.068</td><td>0.089</td></tr><tr><th>20</th><td>0.0192048</td><td>1</td><td>6.28786</td><td>0.4207</td><td>0.130682</td><td>0.109921</td><td>0.053</td><td>0.039</td></tr><tr><th>21</th><td>0.085206</td><td>1</td><td>6.13773</td><td>0.1371</td><td>0.123818</td><td>0.015897</td><td>0.028</td><td>0.025</td></tr><tr><th>22</th><td>0.133982</td><td>1</td><td>8.12888</td><td>0.0</td><td>0.16721</td><td>0.003311</td><td>0.129</td><td>0.196</td></tr><tr><th>23</th><td>0.173025</td><td>1</td><td>6.68085</td><td>0.4713</td><td>0.228424</td><td>0.029328</td><td>0.062</td><td>0.09</td></tr><tr><th>24</th><td>0.109699</td><td>1</td><td>7.17702</td><td>0.0178</td><td>0.18524</td><td>0.015453</td><td>0.02</td><td>0.026</td></tr><tr><th>25</th><td>0.0159899</td><td>1</td><td>6.64898</td><td>0.4762</td><td>0.171181</td><td>0.058937</td><td>0.018</td><td>0.028</td></tr><tr><th>26</th><td>0.0622498</td><td>1</td><td>6.87936</td><td>0.2927</td><td>0.179508</td><td>0.035842</td><td>0.188</td><td>0.169</td></tr><tr><th>27</th><td>0.109871</td><td>1</td><td>7.3473</td><td>0.1017</td><td>0.247626</td><td>0.037392</td><td>0.08</td><td>0.133</td></tr><tr><th>28</th><td>0.0921063</td><td>1</td><td>6.72503</td><td>0.0266</td><td>0.179933</td><td>0.046376</td><td>0.015</td><td>0.02</td></tr><tr><th>29</th><td>0.083376</td><td>1</td><td>8.45105</td><td>0.0</td><td>0.358556</td><td>0.016468</td><td>0.09</td><td>0.133</td></tr><tr><th>30</th><td>0.0762335</td><td>1</td><td>8.60245</td><td>0.0</td><td>0.416234</td><td>0.014721</td><td>0.148</td><td>0.194</td></tr><tr><th>&vellip;</th><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td></tr></tbody></table></div></div>
 </div>
 <p>We determine the type and the dimension of our data set.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">typeof</span><span class="p">(</span><span class="n">growth</span><span class="p">),</span> <span class="n">size</span><span class="p">(</span><span class="n">growth</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">typeof</span><span class="p">(</span><span class="n">growth</span><span class="p">),</span><span class="w"> </span><span class="n">size</span><span class="p">(</span><span class="n">growth</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -770,22 +578,22 @@ $<span class="math notranslate nohighlight">\(
 <p>To check this hypothesis, we analyze the relation between the output variable <span class="math notranslate nohighlight">\(Y\)</span> and the other country’s characteristics by running a linear regression in the first step.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">growth</span><span class="p">[</span><span class="o">!</span><span class="p">,</span> <span class="s">&quot;Outcome&quot;</span><span class="p">]</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">([</span><span class="n">y</span><span class="p">],</span> <span class="p">[</span><span class="ss">:y</span><span class="p">])</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">growth</span><span class="p">[</span><span class="o">!</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Outcome&quot;</span><span class="p">]</span>
+<span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DataFrame</span><span class="p">([</span><span class="n">y</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="ss">:y</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><table class="data-frame"><thead><tr><th></th><th>y</th></tr><tr><th></th><th>Float64</th></tr></thead><tbody><p>90 rows × 1 columns</p><tr><th>1</th><td>-0.0243358</td></tr><tr><th>2</th><td>0.100473</td></tr><tr><th>3</th><td>0.0670515</td></tr><tr><th>4</th><td>0.0640892</td></tr><tr><th>5</th><td>0.0279295</td></tr><tr><th>6</th><td>0.0464074</td></tr><tr><th>7</th><td>0.0673323</td></tr><tr><th>8</th><td>0.0209777</td></tr><tr><th>9</th><td>0.0335512</td></tr><tr><th>10</th><td>0.0391465</td></tr><tr><th>11</th><td>0.0761265</td></tr><tr><th>12</th><td>0.127951</td></tr><tr><th>13</th><td>-0.0243261</td></tr><tr><th>14</th><td>0.0782934</td></tr><tr><th>15</th><td>0.112912</td></tr><tr><th>16</th><td>0.0523082</td></tr><tr><th>17</th><td>0.0363909</td></tr><tr><th>18</th><td>0.0297382</td></tr><tr><th>19</th><td>-0.0566436</td></tr><tr><th>20</th><td>0.0192048</td></tr><tr><th>21</th><td>0.085206</td></tr><tr><th>22</th><td>0.133982</td></tr><tr><th>23</th><td>0.173025</td></tr><tr><th>24</th><td>0.109699</td></tr><tr><th>25</th><td>0.0159899</td></tr><tr><th>&vellip;</th><td>&vellip;</td></tr></tbody></table></div></div>
+<div class="output text_html"><div class="data-frame"><p>90 rows × 1 columns</p><table class="data-frame"><thead><tr><th></th><th>y</th></tr><tr><th></th><th title="Float64">Float64</th></tr></thead><tbody><tr><th>1</th><td>-0.0243358</td></tr><tr><th>2</th><td>0.100473</td></tr><tr><th>3</th><td>0.0670515</td></tr><tr><th>4</th><td>0.0640892</td></tr><tr><th>5</th><td>0.0279295</td></tr><tr><th>6</th><td>0.0464074</td></tr><tr><th>7</th><td>0.0673323</td></tr><tr><th>8</th><td>0.0209777</td></tr><tr><th>9</th><td>0.0335512</td></tr><tr><th>10</th><td>0.0391465</td></tr><tr><th>11</th><td>0.0761265</td></tr><tr><th>12</th><td>0.127951</td></tr><tr><th>13</th><td>-0.0243261</td></tr><tr><th>14</th><td>0.0782934</td></tr><tr><th>15</th><td>0.112912</td></tr><tr><th>16</th><td>0.0523082</td></tr><tr><th>17</th><td>0.0363909</td></tr><tr><th>18</th><td>0.0297382</td></tr><tr><th>19</th><td>-0.0566436</td></tr><tr><th>20</th><td>0.0192048</td></tr><tr><th>21</th><td>0.085206</td></tr><tr><th>22</th><td>0.133982</td></tr><tr><th>23</th><td>0.173025</td></tr><tr><th>24</th><td>0.109699</td></tr><tr><th>25</th><td>0.0159899</td></tr><tr><th>26</th><td>0.0622498</td></tr><tr><th>27</th><td>0.109871</td></tr><tr><th>28</th><td>0.0921063</td></tr><tr><th>29</th><td>0.083376</td></tr><tr><th>30</th><td>0.0762335</td></tr><tr><th>&vellip;</th><td>&vellip;</td></tr></tbody></table></div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">select</span><span class="p">(</span><span class="n">growth</span><span class="p">,</span> <span class="n">Not</span><span class="p">([</span><span class="s">&quot;Outcome&quot;</span><span class="p">]))</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">X</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">select</span><span class="p">(</span><span class="n">growth</span><span class="p">,</span><span class="w"> </span><span class="n">Not</span><span class="p">([</span><span class="s">&quot;Outcome&quot;</span><span class="p">]))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><table class="data-frame"><thead><tr><th></th><th>intercept</th><th>gdpsh465</th><th>bmp1l</th><th>freeop</th><th>freetar</th><th>h65</th><th>hm65</th><th>hf65</th><th>p65</th></tr><tr><th></th><th>Int32</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th></tr></thead><tbody><p>90 rows × 62 columns (omitted printing of 53 columns)</p><tr><th>1</th><td>1</td><td>6.59167</td><td>0.2837</td><td>0.153491</td><td>0.043888</td><td>0.007</td><td>0.013</td><td>0.001</td><td>0.29</td></tr><tr><th>2</th><td>1</td><td>6.82979</td><td>0.6141</td><td>0.313509</td><td>0.061827</td><td>0.019</td><td>0.032</td><td>0.007</td><td>0.91</td></tr><tr><th>3</th><td>1</td><td>8.89508</td><td>0.0</td><td>0.204244</td><td>0.009186</td><td>0.26</td><td>0.325</td><td>0.201</td><td>1.0</td></tr><tr><th>4</th><td>1</td><td>7.56528</td><td>0.1997</td><td>0.248714</td><td>0.03627</td><td>0.061</td><td>0.07</td><td>0.051</td><td>1.0</td></tr><tr><th>5</th><td>1</td><td>7.1624</td><td>0.174</td><td>0.299252</td><td>0.037367</td><td>0.017</td><td>0.027</td><td>0.007</td><td>0.82</td></tr><tr><th>6</th><td>1</td><td>7.21891</td><td>0.0</td><td>0.258865</td><td>0.02088</td><td>0.023</td><td>0.038</td><td>0.006</td><td>0.5</td></tr><tr><th>7</th><td>1</td><td>7.8536</td><td>0.0</td><td>0.182525</td><td>0.014385</td><td>0.039</td><td>0.063</td><td>0.014</td><td>0.92</td></tr><tr><th>8</th><td>1</td><td>7.70391</td><td>0.2776</td><td>0.215275</td><td>0.029713</td><td>0.024</td><td>0.035</td><td>0.013</td><td>0.69</td></tr><tr><th>9</th><td>1</td><td>9.06346</td><td>0.0</td><td>0.109614</td><td>0.002171</td><td>0.402</td><td>0.488</td><td>0.314</td><td>1.0</td></tr><tr><th>10</th><td>1</td><td>8.15191</td><td>0.1484</td><td>0.110885</td><td>0.028579</td><td>0.145</td><td>0.173</td><td>0.114</td><td>1.0</td></tr><tr><th>11</th><td>1</td><td>6.92952</td><td>0.0296</td><td>0.165784</td><td>0.020115</td><td>0.046</td><td>0.066</td><td>0.025</td><td>0.73</td></tr><tr><th>12</th><td>1</td><td>7.23778</td><td>0.2151</td><td>0.078488</td><td>0.011581</td><td>0.022</td><td>0.031</td><td>0.014</td><td>1.0</td></tr><tr><th>13</th><td>1</td><td>8.11582</td><td>0.4318</td><td>0.137482</td><td>0.026547</td><td>0.059</td><td>0.073</td><td>0.045</td><td>1.0</td></tr><tr><th>14</th><td>1</td><td>7.2717</td><td>0.1689</td><td>0.164598</td><td>0.044446</td><td>0.029</td><td>0.045</td><td>0.013</td><td>0.84</td></tr><tr><th>15</th><td>1</td><td>7.12125</td><td>0.1832</td><td>0.188016</td><td>0.045678</td><td>0.033</td><td>0.051</td><td>0.015</td><td>0.91</td></tr><tr><th>16</th><td>1</td><td>6.97728</td><td>0.0962</td><td>0.204611</td><td>0.077852</td><td>0.037</td><td>0.043</td><td>0.03</td><td>1.0</td></tr><tr><th>17</th><td>1</td><td>7.64969</td><td>0.0227</td><td>0.136287</td><td>0.04673</td><td>0.081</td><td>0.105</td><td>0.056</td><td>0.99</td></tr><tr><th>18</th><td>1</td><td>8.05674</td><td>0.0208</td><td>0.197853</td><td>0.037224</td><td>0.083</td><td>0.097</td><td>0.069</td><td>1.0</td></tr><tr><th>19</th><td>1</td><td>8.78094</td><td>0.2654</td><td>0.189867</td><td>0.031747</td><td>0.068</td><td>0.089</td><td>0.046</td><td>0.94</td></tr><tr><th>20</th><td>1</td><td>6.28786</td><td>0.4207</td><td>0.130682</td><td>0.109921</td><td>0.053</td><td>0.039</td><td>0.011</td><td>0.74</td></tr><tr><th>21</th><td>1</td><td>6.13773</td><td>0.1371</td><td>0.123818</td><td>0.015897</td><td>0.028</td><td>0.025</td><td>0.007</td><td>0.72</td></tr><tr><th>22</th><td>1</td><td>8.12888</td><td>0.0</td><td>0.16721</td><td>0.003311</td><td>0.129</td><td>0.196</td><td>0.063</td><td>1.0</td></tr><tr><th>23</th><td>1</td><td>6.68085</td><td>0.4713</td><td>0.228424</td><td>0.029328</td><td>0.062</td><td>0.09</td><td>0.032</td><td>1.0</td></tr><tr><th>24</th><td>1</td><td>7.17702</td><td>0.0178</td><td>0.18524</td><td>0.015453</td><td>0.02</td><td>0.026</td><td>0.013</td><td>0.9</td></tr><tr><th>25</th><td>1</td><td>6.64898</td><td>0.4762</td><td>0.171181</td><td>0.058937</td><td>0.018</td><td>0.028</td><td>0.007</td><td>0.4</td></tr><tr><th>&vellip;</th><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td></tr></tbody></table></div></div>
+<div class="output text_html"><div class="data-frame"><p>90 rows × 62 columns (omitted printing of 53 columns)</p><table class="data-frame"><thead><tr><th></th><th>intercept</th><th>gdpsh465</th><th>bmp1l</th><th>freeop</th><th>freetar</th><th>h65</th><th>hm65</th><th>hf65</th><th>p65</th></tr><tr><th></th><th title="Int32">Int32</th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th></tr></thead><tbody><tr><th>1</th><td>1</td><td>6.59167</td><td>0.2837</td><td>0.153491</td><td>0.043888</td><td>0.007</td><td>0.013</td><td>0.001</td><td>0.29</td></tr><tr><th>2</th><td>1</td><td>6.82979</td><td>0.6141</td><td>0.313509</td><td>0.061827</td><td>0.019</td><td>0.032</td><td>0.007</td><td>0.91</td></tr><tr><th>3</th><td>1</td><td>8.89508</td><td>0.0</td><td>0.204244</td><td>0.009186</td><td>0.26</td><td>0.325</td><td>0.201</td><td>1.0</td></tr><tr><th>4</th><td>1</td><td>7.56528</td><td>0.1997</td><td>0.248714</td><td>0.03627</td><td>0.061</td><td>0.07</td><td>0.051</td><td>1.0</td></tr><tr><th>5</th><td>1</td><td>7.1624</td><td>0.174</td><td>0.299252</td><td>0.037367</td><td>0.017</td><td>0.027</td><td>0.007</td><td>0.82</td></tr><tr><th>6</th><td>1</td><td>7.21891</td><td>0.0</td><td>0.258865</td><td>0.02088</td><td>0.023</td><td>0.038</td><td>0.006</td><td>0.5</td></tr><tr><th>7</th><td>1</td><td>7.8536</td><td>0.0</td><td>0.182525</td><td>0.014385</td><td>0.039</td><td>0.063</td><td>0.014</td><td>0.92</td></tr><tr><th>8</th><td>1</td><td>7.70391</td><td>0.2776</td><td>0.215275</td><td>0.029713</td><td>0.024</td><td>0.035</td><td>0.013</td><td>0.69</td></tr><tr><th>9</th><td>1</td><td>9.06346</td><td>0.0</td><td>0.109614</td><td>0.002171</td><td>0.402</td><td>0.488</td><td>0.314</td><td>1.0</td></tr><tr><th>10</th><td>1</td><td>8.15191</td><td>0.1484</td><td>0.110885</td><td>0.028579</td><td>0.145</td><td>0.173</td><td>0.114</td><td>1.0</td></tr><tr><th>11</th><td>1</td><td>6.92952</td><td>0.0296</td><td>0.165784</td><td>0.020115</td><td>0.046</td><td>0.066</td><td>0.025</td><td>0.73</td></tr><tr><th>12</th><td>1</td><td>7.23778</td><td>0.2151</td><td>0.078488</td><td>0.011581</td><td>0.022</td><td>0.031</td><td>0.014</td><td>1.0</td></tr><tr><th>13</th><td>1</td><td>8.11582</td><td>0.4318</td><td>0.137482</td><td>0.026547</td><td>0.059</td><td>0.073</td><td>0.045</td><td>1.0</td></tr><tr><th>14</th><td>1</td><td>7.2717</td><td>0.1689</td><td>0.164598</td><td>0.044446</td><td>0.029</td><td>0.045</td><td>0.013</td><td>0.84</td></tr><tr><th>15</th><td>1</td><td>7.12125</td><td>0.1832</td><td>0.188016</td><td>0.045678</td><td>0.033</td><td>0.051</td><td>0.015</td><td>0.91</td></tr><tr><th>16</th><td>1</td><td>6.97728</td><td>0.0962</td><td>0.204611</td><td>0.077852</td><td>0.037</td><td>0.043</td><td>0.03</td><td>1.0</td></tr><tr><th>17</th><td>1</td><td>7.64969</td><td>0.0227</td><td>0.136287</td><td>0.04673</td><td>0.081</td><td>0.105</td><td>0.056</td><td>0.99</td></tr><tr><th>18</th><td>1</td><td>8.05674</td><td>0.0208</td><td>0.197853</td><td>0.037224</td><td>0.083</td><td>0.097</td><td>0.069</td><td>1.0</td></tr><tr><th>19</th><td>1</td><td>8.78094</td><td>0.2654</td><td>0.189867</td><td>0.031747</td><td>0.068</td><td>0.089</td><td>0.046</td><td>0.94</td></tr><tr><th>20</th><td>1</td><td>6.28786</td><td>0.4207</td><td>0.130682</td><td>0.109921</td><td>0.053</td><td>0.039</td><td>0.011</td><td>0.74</td></tr><tr><th>21</th><td>1</td><td>6.13773</td><td>0.1371</td><td>0.123818</td><td>0.015897</td><td>0.028</td><td>0.025</td><td>0.007</td><td>0.72</td></tr><tr><th>22</th><td>1</td><td>8.12888</td><td>0.0</td><td>0.16721</td><td>0.003311</td><td>0.129</td><td>0.196</td><td>0.063</td><td>1.0</td></tr><tr><th>23</th><td>1</td><td>6.68085</td><td>0.4713</td><td>0.228424</td><td>0.029328</td><td>0.062</td><td>0.09</td><td>0.032</td><td>1.0</td></tr><tr><th>24</th><td>1</td><td>7.17702</td><td>0.0178</td><td>0.18524</td><td>0.015453</td><td>0.02</td><td>0.026</td><td>0.013</td><td>0.9</td></tr><tr><th>25</th><td>1</td><td>6.64898</td><td>0.4762</td><td>0.171181</td><td>0.058937</td><td>0.018</td><td>0.028</td><td>0.007</td><td>0.4</td></tr><tr><th>26</th><td>1</td><td>6.87936</td><td>0.2927</td><td>0.179508</td><td>0.035842</td><td>0.188</td><td>0.169</td><td>0.208</td><td>1.0</td></tr><tr><th>27</th><td>1</td><td>7.3473</td><td>0.1017</td><td>0.247626</td><td>0.037392</td><td>0.08</td><td>0.133</td><td>0.027</td><td>0.78</td></tr><tr><th>28</th><td>1</td><td>6.72503</td><td>0.0266</td><td>0.179933</td><td>0.046376</td><td>0.015</td><td>0.02</td><td>0.01</td><td>0.78</td></tr><tr><th>29</th><td>1</td><td>8.45105</td><td>0.0</td><td>0.358556</td><td>0.016468</td><td>0.09</td><td>0.133</td><td>0.044</td><td>1.0</td></tr><tr><th>30</th><td>1</td><td>8.60245</td><td>0.0</td><td>0.416234</td><td>0.014721</td><td>0.148</td><td>0.194</td><td>0.1</td><td>1.0</td></tr><tr><th>&vellip;</th><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td></tr></tbody></table></div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -801,7 +609,7 @@ $<span class="math notranslate nohighlight">\(
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">typeof</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="n">typeof</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">typeof</span><span class="p">(</span><span class="n">y</span><span class="p">),</span><span class="w"> </span><span class="n">typeof</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -813,17 +621,17 @@ $<span class="math notranslate nohighlight">\(
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">y</span> <span class="n">X</span><span class="p">]</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">y</span><span class="w"> </span><span class="n">X</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><table class="data-frame"><thead><tr><th></th><th>y</th><th>intercept</th><th>gdpsh465</th><th>bmp1l</th><th>freeop</th><th>freetar</th><th>h65</th><th>hm65</th></tr><tr><th></th><th>Float64</th><th>Int32</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th></tr></thead><tbody><p>90 rows × 63 columns (omitted printing of 55 columns)</p><tr><th>1</th><td>-0.0243358</td><td>1</td><td>6.59167</td><td>0.2837</td><td>0.153491</td><td>0.043888</td><td>0.007</td><td>0.013</td></tr><tr><th>2</th><td>0.100473</td><td>1</td><td>6.82979</td><td>0.6141</td><td>0.313509</td><td>0.061827</td><td>0.019</td><td>0.032</td></tr><tr><th>3</th><td>0.0670515</td><td>1</td><td>8.89508</td><td>0.0</td><td>0.204244</td><td>0.009186</td><td>0.26</td><td>0.325</td></tr><tr><th>4</th><td>0.0640892</td><td>1</td><td>7.56528</td><td>0.1997</td><td>0.248714</td><td>0.03627</td><td>0.061</td><td>0.07</td></tr><tr><th>5</th><td>0.0279295</td><td>1</td><td>7.1624</td><td>0.174</td><td>0.299252</td><td>0.037367</td><td>0.017</td><td>0.027</td></tr><tr><th>6</th><td>0.0464074</td><td>1</td><td>7.21891</td><td>0.0</td><td>0.258865</td><td>0.02088</td><td>0.023</td><td>0.038</td></tr><tr><th>7</th><td>0.0673323</td><td>1</td><td>7.8536</td><td>0.0</td><td>0.182525</td><td>0.014385</td><td>0.039</td><td>0.063</td></tr><tr><th>8</th><td>0.0209777</td><td>1</td><td>7.70391</td><td>0.2776</td><td>0.215275</td><td>0.029713</td><td>0.024</td><td>0.035</td></tr><tr><th>9</th><td>0.0335512</td><td>1</td><td>9.06346</td><td>0.0</td><td>0.109614</td><td>0.002171</td><td>0.402</td><td>0.488</td></tr><tr><th>10</th><td>0.0391465</td><td>1</td><td>8.15191</td><td>0.1484</td><td>0.110885</td><td>0.028579</td><td>0.145</td><td>0.173</td></tr><tr><th>11</th><td>0.0761265</td><td>1</td><td>6.92952</td><td>0.0296</td><td>0.165784</td><td>0.020115</td><td>0.046</td><td>0.066</td></tr><tr><th>12</th><td>0.127951</td><td>1</td><td>7.23778</td><td>0.2151</td><td>0.078488</td><td>0.011581</td><td>0.022</td><td>0.031</td></tr><tr><th>13</th><td>-0.0243261</td><td>1</td><td>8.11582</td><td>0.4318</td><td>0.137482</td><td>0.026547</td><td>0.059</td><td>0.073</td></tr><tr><th>14</th><td>0.0782934</td><td>1</td><td>7.2717</td><td>0.1689</td><td>0.164598</td><td>0.044446</td><td>0.029</td><td>0.045</td></tr><tr><th>15</th><td>0.112912</td><td>1</td><td>7.12125</td><td>0.1832</td><td>0.188016</td><td>0.045678</td><td>0.033</td><td>0.051</td></tr><tr><th>16</th><td>0.0523082</td><td>1</td><td>6.97728</td><td>0.0962</td><td>0.204611</td><td>0.077852</td><td>0.037</td><td>0.043</td></tr><tr><th>17</th><td>0.0363909</td><td>1</td><td>7.64969</td><td>0.0227</td><td>0.136287</td><td>0.04673</td><td>0.081</td><td>0.105</td></tr><tr><th>18</th><td>0.0297382</td><td>1</td><td>8.05674</td><td>0.0208</td><td>0.197853</td><td>0.037224</td><td>0.083</td><td>0.097</td></tr><tr><th>19</th><td>-0.0566436</td><td>1</td><td>8.78094</td><td>0.2654</td><td>0.189867</td><td>0.031747</td><td>0.068</td><td>0.089</td></tr><tr><th>20</th><td>0.0192048</td><td>1</td><td>6.28786</td><td>0.4207</td><td>0.130682</td><td>0.109921</td><td>0.053</td><td>0.039</td></tr><tr><th>21</th><td>0.085206</td><td>1</td><td>6.13773</td><td>0.1371</td><td>0.123818</td><td>0.015897</td><td>0.028</td><td>0.025</td></tr><tr><th>22</th><td>0.133982</td><td>1</td><td>8.12888</td><td>0.0</td><td>0.16721</td><td>0.003311</td><td>0.129</td><td>0.196</td></tr><tr><th>23</th><td>0.173025</td><td>1</td><td>6.68085</td><td>0.4713</td><td>0.228424</td><td>0.029328</td><td>0.062</td><td>0.09</td></tr><tr><th>24</th><td>0.109699</td><td>1</td><td>7.17702</td><td>0.0178</td><td>0.18524</td><td>0.015453</td><td>0.02</td><td>0.026</td></tr><tr><th>25</th><td>0.0159899</td><td>1</td><td>6.64898</td><td>0.4762</td><td>0.171181</td><td>0.058937</td><td>0.018</td><td>0.028</td></tr><tr><th>&vellip;</th><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td></tr></tbody></table></div></div>
+<div class="output text_html"><div class="data-frame"><p>90 rows × 63 columns (omitted printing of 55 columns)</p><table class="data-frame"><thead><tr><th></th><th>y</th><th>intercept</th><th>gdpsh465</th><th>bmp1l</th><th>freeop</th><th>freetar</th><th>h65</th><th>hm65</th></tr><tr><th></th><th title="Float64">Float64</th><th title="Int32">Int32</th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th></tr></thead><tbody><tr><th>1</th><td>-0.0243358</td><td>1</td><td>6.59167</td><td>0.2837</td><td>0.153491</td><td>0.043888</td><td>0.007</td><td>0.013</td></tr><tr><th>2</th><td>0.100473</td><td>1</td><td>6.82979</td><td>0.6141</td><td>0.313509</td><td>0.061827</td><td>0.019</td><td>0.032</td></tr><tr><th>3</th><td>0.0670515</td><td>1</td><td>8.89508</td><td>0.0</td><td>0.204244</td><td>0.009186</td><td>0.26</td><td>0.325</td></tr><tr><th>4</th><td>0.0640892</td><td>1</td><td>7.56528</td><td>0.1997</td><td>0.248714</td><td>0.03627</td><td>0.061</td><td>0.07</td></tr><tr><th>5</th><td>0.0279295</td><td>1</td><td>7.1624</td><td>0.174</td><td>0.299252</td><td>0.037367</td><td>0.017</td><td>0.027</td></tr><tr><th>6</th><td>0.0464074</td><td>1</td><td>7.21891</td><td>0.0</td><td>0.258865</td><td>0.02088</td><td>0.023</td><td>0.038</td></tr><tr><th>7</th><td>0.0673323</td><td>1</td><td>7.8536</td><td>0.0</td><td>0.182525</td><td>0.014385</td><td>0.039</td><td>0.063</td></tr><tr><th>8</th><td>0.0209777</td><td>1</td><td>7.70391</td><td>0.2776</td><td>0.215275</td><td>0.029713</td><td>0.024</td><td>0.035</td></tr><tr><th>9</th><td>0.0335512</td><td>1</td><td>9.06346</td><td>0.0</td><td>0.109614</td><td>0.002171</td><td>0.402</td><td>0.488</td></tr><tr><th>10</th><td>0.0391465</td><td>1</td><td>8.15191</td><td>0.1484</td><td>0.110885</td><td>0.028579</td><td>0.145</td><td>0.173</td></tr><tr><th>11</th><td>0.0761265</td><td>1</td><td>6.92952</td><td>0.0296</td><td>0.165784</td><td>0.020115</td><td>0.046</td><td>0.066</td></tr><tr><th>12</th><td>0.127951</td><td>1</td><td>7.23778</td><td>0.2151</td><td>0.078488</td><td>0.011581</td><td>0.022</td><td>0.031</td></tr><tr><th>13</th><td>-0.0243261</td><td>1</td><td>8.11582</td><td>0.4318</td><td>0.137482</td><td>0.026547</td><td>0.059</td><td>0.073</td></tr><tr><th>14</th><td>0.0782934</td><td>1</td><td>7.2717</td><td>0.1689</td><td>0.164598</td><td>0.044446</td><td>0.029</td><td>0.045</td></tr><tr><th>15</th><td>0.112912</td><td>1</td><td>7.12125</td><td>0.1832</td><td>0.188016</td><td>0.045678</td><td>0.033</td><td>0.051</td></tr><tr><th>16</th><td>0.0523082</td><td>1</td><td>6.97728</td><td>0.0962</td><td>0.204611</td><td>0.077852</td><td>0.037</td><td>0.043</td></tr><tr><th>17</th><td>0.0363909</td><td>1</td><td>7.64969</td><td>0.0227</td><td>0.136287</td><td>0.04673</td><td>0.081</td><td>0.105</td></tr><tr><th>18</th><td>0.0297382</td><td>1</td><td>8.05674</td><td>0.0208</td><td>0.197853</td><td>0.037224</td><td>0.083</td><td>0.097</td></tr><tr><th>19</th><td>-0.0566436</td><td>1</td><td>8.78094</td><td>0.2654</td><td>0.189867</td><td>0.031747</td><td>0.068</td><td>0.089</td></tr><tr><th>20</th><td>0.0192048</td><td>1</td><td>6.28786</td><td>0.4207</td><td>0.130682</td><td>0.109921</td><td>0.053</td><td>0.039</td></tr><tr><th>21</th><td>0.085206</td><td>1</td><td>6.13773</td><td>0.1371</td><td>0.123818</td><td>0.015897</td><td>0.028</td><td>0.025</td></tr><tr><th>22</th><td>0.133982</td><td>1</td><td>8.12888</td><td>0.0</td><td>0.16721</td><td>0.003311</td><td>0.129</td><td>0.196</td></tr><tr><th>23</th><td>0.173025</td><td>1</td><td>6.68085</td><td>0.4713</td><td>0.228424</td><td>0.029328</td><td>0.062</td><td>0.09</td></tr><tr><th>24</th><td>0.109699</td><td>1</td><td>7.17702</td><td>0.0178</td><td>0.18524</td><td>0.015453</td><td>0.02</td><td>0.026</td></tr><tr><th>25</th><td>0.0159899</td><td>1</td><td>6.64898</td><td>0.4762</td><td>0.171181</td><td>0.058937</td><td>0.018</td><td>0.028</td></tr><tr><th>26</th><td>0.0622498</td><td>1</td><td>6.87936</td><td>0.2927</td><td>0.179508</td><td>0.035842</td><td>0.188</td><td>0.169</td></tr><tr><th>27</th><td>0.109871</td><td>1</td><td>7.3473</td><td>0.1017</td><td>0.247626</td><td>0.037392</td><td>0.08</td><td>0.133</td></tr><tr><th>28</th><td>0.0921063</td><td>1</td><td>6.72503</td><td>0.0266</td><td>0.179933</td><td>0.046376</td><td>0.015</td><td>0.02</td></tr><tr><th>29</th><td>0.083376</td><td>1</td><td>8.45105</td><td>0.0</td><td>0.358556</td><td>0.016468</td><td>0.09</td><td>0.133</td></tr><tr><th>30</th><td>0.0762335</td><td>1</td><td>8.60245</td><td>0.0</td><td>0.416234</td><td>0.014721</td><td>0.148</td><td>0.194</td></tr><tr><th>&vellip;</th><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td></tr></tbody></table></div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># OLS regression</span>
-<span class="n">reg_ols</span>  <span class="o">=</span> <span class="n">lm</span><span class="p">(</span><span class="n">term</span><span class="p">(</span><span class="ss">:Outcome</span><span class="p">)</span> <span class="o">~</span> <span class="n">sum</span><span class="p">(</span><span class="n">term</span><span class="o">.</span><span class="p">(</span><span class="n">names</span><span class="p">(</span><span class="n">growth</span><span class="p">[</span><span class="o">!</span><span class="p">,</span> <span class="n">Not</span><span class="p">([</span><span class="s">&quot;Outcome&quot;</span><span class="p">,</span> <span class="s">&quot;intercept&quot;</span><span class="p">])]))),</span> <span class="n">growth</span><span class="p">,</span> <span class="n">dropcollinear</span><span class="o">=</span><span class="nb">false</span><span class="p">)</span>
+<span class="n">reg_ols</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">lm</span><span class="p">(</span><span class="n">term</span><span class="p">(</span><span class="ss">:Outcome</span><span class="p">)</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">sum</span><span class="p">(</span><span class="n">term</span><span class="o">.</span><span class="p">(</span><span class="n">names</span><span class="p">(</span><span class="n">growth</span><span class="p">[</span><span class="o">!</span><span class="p">,</span><span class="w"> </span><span class="n">Not</span><span class="p">([</span><span class="s">&quot;Outcome&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;intercept&quot;</span><span class="p">])]))),</span><span class="w"> </span><span class="n">growth</span><span class="p">,</span><span class="w"> </span><span class="n">dropcollinear</span><span class="o">=</span><span class="nb">false</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -906,7 +714,7 @@ tot1         -0.127901      0.112595     -1.14    0.2656   -0.358542       0.102
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># OLS regression</span>
-<span class="n">reg_ols</span>  <span class="o">=</span> <span class="n">lm</span><span class="p">(</span><span class="n">term</span><span class="p">(</span><span class="ss">:y</span><span class="p">)</span> <span class="o">~</span> <span class="n">sum</span><span class="p">(</span><span class="n">term</span><span class="o">.</span><span class="p">(</span><span class="n">names</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="o">!</span><span class="p">,</span> <span class="n">Not</span><span class="p">([</span><span class="s">&quot;y&quot;</span><span class="p">,</span> <span class="s">&quot;intercept&quot;</span><span class="p">])]))),</span> <span class="n">data</span><span class="p">,</span> <span class="n">dropcollinear</span><span class="o">=</span><span class="nb">false</span><span class="p">)</span>
+<span class="n">reg_ols</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">lm</span><span class="p">(</span><span class="n">term</span><span class="p">(</span><span class="ss">:y</span><span class="p">)</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">sum</span><span class="p">(</span><span class="n">term</span><span class="o">.</span><span class="p">(</span><span class="n">names</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="o">!</span><span class="p">,</span><span class="w"> </span><span class="n">Not</span><span class="p">([</span><span class="s">&quot;y&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;intercept&quot;</span><span class="p">])]))),</span><span class="w"> </span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="n">dropcollinear</span><span class="o">=</span><span class="nb">false</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -989,30 +797,30 @@ tot1         -0.127901      0.112595     -1.14    0.2656   -0.358542       0.102
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># output: estimated regression coefficient corresponding to the target regressor</span>
-<span class="n">est_ols</span> <span class="o">=</span> <span class="n">coef</span><span class="p">(</span><span class="n">reg_ols</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">est_ols</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">coef</span><span class="p">(</span><span class="n">reg_ols</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span>
 
 <span class="c"># output: std. error</span>
-<span class="n">std_ols</span> <span class="o">=</span> <span class="n">stderror</span><span class="p">(</span><span class="n">reg_ols</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">std_ols</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stderror</span><span class="p">(</span><span class="n">reg_ols</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span>
 
 <span class="c"># output: 95% confidence interval</span>
-<span class="n">lower_ci</span> <span class="o">=</span> <span class="n">coeftable</span><span class="p">(</span><span class="n">reg_ols</span><span class="p">)</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="mi">5</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
-<span class="n">upper_ci</span> <span class="o">=</span> <span class="n">coeftable</span><span class="p">(</span><span class="n">reg_ols</span><span class="p">)</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="mi">6</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">lower_ci</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">coeftable</span><span class="p">(</span><span class="n">reg_ols</span><span class="p">)</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="mi">5</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">upper_ci</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">coeftable</span><span class="p">(</span><span class="n">reg_ols</span><span class="p">)</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="mi">6</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.05184424328137179
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.05184424349589355
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="summarize-ols-results">
-<h2><span class="section-number">10.3. </span>Summarize OLS results<a class="headerlink" href="#summarize-ols-results" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">10.3. </span>Summarize OLS results<a class="headerlink" href="#summarize-ols-results" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">table_1</span> <span class="o">=</span> <span class="n">NamedArray</span><span class="p">(</span><span class="n">zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
-<span class="n">setnames!</span><span class="p">(</span><span class="n">table_1</span><span class="p">,</span> <span class="p">[</span><span class="s">&quot;OLS&quot;</span><span class="p">],</span> <span class="mi">1</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">table_1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NamedArray</span><span class="p">(</span><span class="n">zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">))</span>
+<span class="n">setnames!</span><span class="p">(</span><span class="n">table_1</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;OLS&quot;</span><span class="p">],</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
 <span class="n">table_1</span>
 </pre></div>
 </div>
@@ -1028,11 +836,11 @@ OLS   │ 0.0  0.0  0.0  0.0
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">table_1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">est_ols</span>
-<span class="n">table_1</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">std_ols</span>   
-<span class="n">table_1</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">lower_ci</span>
-<span class="n">table_1</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="n">upper_ci</span>    
- 
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">table_1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">est_ols</span>
+<span class="n">table_1</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std_ols</span><span class="w">   </span>
+<span class="n">table_1</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lower_ci</span>
+<span class="n">table_1</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">upper_ci</span><span class="w">    </span>
+<span class="w"> </span>
 <span class="n">table_1</span>
 </pre></div>
 </div>
@@ -1048,40 +856,90 @@ OLS   │ -0.00937799    0.0298877   -0.0706002    0.0518442
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">table_1_pandas</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">(</span> <span class="n">table_1</span><span class="p">,</span> <span class="p">[</span> <span class="o">:</span><span class="s">&quot;Estimator&quot;</span><span class="p">,</span> <span class="o">:</span><span class="s">&quot;Std. Error&quot;</span><span class="p">,</span> <span class="o">:</span><span class="s">&quot;lower bound CI&quot;</span><span class="p">,</span> <span class="o">:</span><span class="s">&quot;upper bound CI&quot;</span><span class="p">])</span>
-<span class="n">model_1</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">(</span><span class="n">model</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;OLS&quot;</span><span class="p">])</span>
-<span class="n">table_1_pandas</span> <span class="o">=</span> <span class="n">hcat</span><span class="p">(</span><span class="n">model_1</span><span class="p">,</span><span class="n">table_1_pandas</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">table_1_pandas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DataFrame</span><span class="p">(</span><span class="w"> </span><span class="n">table_1</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="o">:</span><span class="s">&quot;Estimator&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">:</span><span class="s">&quot;Std. Error&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">:</span><span class="s">&quot;lower bound CI&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">:</span><span class="s">&quot;upper bound CI&quot;</span><span class="p">])</span>
+<span class="n">model_1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DataFrame</span><span class="p">(</span><span class="n">model</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;OLS&quot;</span><span class="p">])</span>
+<span class="n">table_1_pandas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hcat</span><span class="p">(</span><span class="n">model_1</span><span class="p">,</span><span class="n">table_1_pandas</span><span class="p">)</span>
 <span class="n">table_1_pandas</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><table class="data-frame"><thead><tr><th></th><th>model</th><th>Estimator</th><th>Std. Error</th><th>lower bound CI</th><th>upper bound CI</th></tr><tr><th></th><th>String</th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th></tr></thead><tbody><p>1 rows × 5 columns</p><tr><th>1</th><td>OLS</td><td>-0.00937799</td><td>0.0298877</td><td>-0.0706002</td><td>0.0518442</td></tr></tbody></table></div></div>
+<div class="output text_html"><div class="data-frame"><p>1 rows × 5 columns</p><table class="data-frame"><thead><tr><th></th><th>model</th><th>Estimator</th><th>Std. Error</th><th>lower bound CI</th><th>upper bound CI</th></tr><tr><th></th><th title="String">String</th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th></tr></thead><tbody><tr><th>1</th><td>OLS</td><td>-0.00937799</td><td>0.0298877</td><td>-0.0706002</td><td>0.0518442</td></tr></tbody></table></div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">header</span> <span class="o">=</span> <span class="p">([</span><span class="s">&quot;Model&quot;</span><span class="p">,</span> <span class="s">&quot;Estimator&quot;</span><span class="p">,</span> <span class="s">&quot;Std. Error&quot;</span><span class="p">,</span> <span class="s">&quot;lower bound CI&quot;</span><span class="p">,</span> <span class="s">&quot;upper bound CI&quot;</span><span class="p">])</span>
-<span class="n">pretty_table</span><span class="p">(</span><span class="n">table_1_pandas</span><span class="p">;</span> <span class="n">backend</span> <span class="o">=</span> <span class="kt">Val</span><span class="p">(</span><span class="ss">:html</span><span class="p">),</span> <span class="n">header</span> <span class="o">=</span> <span class="n">header</span><span class="p">,</span> <span class="n">formatters</span><span class="o">=</span><span class="n">ft_round</span><span class="p">(</span><span class="mi">6</span><span class="p">),</span> <span class="n">alignment</span><span class="o">=</span><span class="ss">:c</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">header</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">([</span><span class="s">&quot;Model&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Estimator&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Std. Error&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;lower bound CI&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;upper bound CI&quot;</span><span class="p">])</span>
+<span class="n">pretty_table</span><span class="p">(</span><span class="n">table_1_pandas</span><span class="p">;</span><span class="w"> </span><span class="n">backend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">Val</span><span class="p">(</span><span class="ss">:html</span><span class="p">),</span><span class="w"> </span><span class="n">header</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">header</span><span class="p">,</span><span class="w"> </span><span class="n">formatters</span><span class="o">=</span><span class="n">ft_round</span><span class="p">(</span><span class="mi">6</span><span class="p">),</span><span class="w"> </span><span class="n">alignment</span><span class="o">=</span><span class="ss">:c</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">TypeError</span>: in keyword argument backend, expected Union{Nothing, Symbol}, got a value of type Val{:html}
+<div class="output text_html"><!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<style>
+  table, td, th {
+      border-collapse: collapse;
+      font-family: sans-serif;
+  }
 
-<span class="ne">Stacktrace</span>:
- <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">_pretty_table</span><span class="p">(</span><span class="n">io</span><span class="p">::</span><span class="n">IJulia</span><span class="o">.</span><span class="n">IJuliaStdio</span><span class="p">{</span><span class="n">Base</span><span class="o">.</span><span class="n">PipeEndpoint</span><span class="p">},</span> <span class="n">data</span><span class="p">::</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">header</span><span class="p">::</span><span class="n">Vector</span><span class="p">{</span><span class="n">String</span><span class="p">};</span> <span class="n">kwargs</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">Pairs</span><span class="p">{</span><span class="n">Symbol</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">NTuple</span><span class="p">{</span><span class="mi">4</span><span class="p">,</span> <span class="n">Symbol</span><span class="p">},</span> <span class="n">NamedTuple</span><span class="p">{(:</span><span class="n">backend</span><span class="p">,</span> <span class="p">:</span><span class="n">header</span><span class="p">,</span> <span class="p">:</span><span class="n">formatters</span><span class="p">,</span> <span class="p">:</span><span class="n">alignment</span><span class="p">),</span> <span class="n">Tuple</span><span class="p">{</span><span class="n">Val</span><span class="p">{:</span><span class="n">html</span><span class="p">},</span> <span class="n">Vector</span><span class="p">{</span><span class="n">String</span><span class="p">},</span> <span class="n">PrettyTables</span><span class="o">.</span><span class="n">var</span><span class="s2">&quot;#36#38&quot;</span><span class="p">{</span><span class="n">Vector</span><span class="p">{</span><span class="n">Int64</span><span class="p">}},</span> <span class="n">Symbol</span><span class="p">}}})</span>
-   <span class="o">@</span> <span class="n">PrettyTables</span> <span class="n">C</span><span class="p">:</span>\<span class="n">Users</span>\<span class="n">Work</span>\<span class="o">.</span><span class="n">julia</span>\<span class="n">packages</span>\<span class="n">PrettyTables</span>\<span class="n">ayuQh</span>\<span class="n">src</span>\<span class="n">private</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">357</span>
- <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="c1">#pretty_table#46</span>
-   <span class="o">@</span> <span class="n">C</span><span class="p">:</span>\<span class="n">Users</span>\<span class="n">Work</span>\<span class="o">.</span><span class="n">julia</span>\<span class="n">packages</span>\<span class="n">PrettyTables</span>\<span class="n">ayuQh</span>\<span class="n">src</span>\<span class="nb">print</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">718</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
- <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
-   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">20</span><span class="p">]:</span><span class="mi">2</span>
- <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="nb">eval</span>
-   <span class="o">@</span> <span class="o">.</span>\<span class="n">boot</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">373</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
- <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="n">include_string</span><span class="p">(</span><span class="n">mapexpr</span><span class="p">::</span><span class="n">typeof</span><span class="p">(</span><span class="n">REPL</span><span class="o">.</span><span class="n">softscope</span><span class="p">),</span> <span class="n">mod</span><span class="p">::</span><span class="n">Module</span><span class="p">,</span> <span class="n">code</span><span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="n">filename</span><span class="p">::</span><span class="n">String</span><span class="p">)</span>
-   <span class="o">@</span> <span class="n">Base</span> <span class="o">.</span>\<span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1196</span>
-</pre></div>
-</div>
-</div>
+  td, th {
+      border-bottom: 0;
+      padding: 4px
+  }
+
+  tr:nth-child(odd) {
+      background: #eee;
+  }
+
+  tr:nth-child(even) {
+      background: #fff;
+  }
+
+  tr.header {
+      background: navy !important;
+      color: white;
+      font-weight: bold;
+  }
+
+  tr.subheader {
+      background: lightgray !important;
+      color: black;
+  }
+
+  tr.headerLastRow {
+      border-bottom: 2px solid black;
+  }
+
+  th.rowNumber, td.rowNumber {
+      text-align: right;
+  }
+
+</style>
+<body>
+<table>
+  <thead>
+    <tr class = "header headerLastRow">
+      <th style = "text-align: center;">Model</th>
+      <th style = "text-align: center;">Estimator</th>
+      <th style = "text-align: center;">Std. Error</th>
+      <th style = "text-align: center;">lower bound CI</th>
+      <th style = "text-align: center;">upper bound CI</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style = "text-align: center;">OLS</td>
+      <td style = "text-align: center;">-0.009378</td>
+      <td style = "text-align: center;">0.029888</td>
+      <td style = "text-align: center;">-0.0706</td>
+      <td style = "text-align: center;">0.051844</td>
+    </tr>
+  </tbody>
+</table>
+</body>
+</html>
+</div></div>
 </div>
 <p>Least squares provides a rather noisy estimate (high standard error) of the
 speed of convergence, and does not allow us to answer the question
@@ -1090,17 +948,17 @@ about the convergence hypothesis since the confidence interval includes zero.</p
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Importing .Rdata file</span>
-<span class="n">growth_read</span> <span class="o">=</span> <span class="n">load</span><span class="p">(</span><span class="s">&quot;../data/GrowthData.RData&quot;</span><span class="p">)</span>
+<span class="n">growth_read</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">load</span><span class="p">(</span><span class="s">&quot;../data/GrowthData.RData&quot;</span><span class="p">)</span>
 <span class="c"># Now we save that dataframe with a new name</span>
-<span class="n">growth</span> <span class="o">=</span> <span class="n">growth_read</span><span class="p">[</span><span class="s">&quot;GrowthData&quot;</span><span class="p">]</span>
+<span class="n">growth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">growth_read</span><span class="p">[</span><span class="s">&quot;GrowthData&quot;</span><span class="p">]</span>
 
 <span class="c"># Create main variables</span>
-<span class="n">Y</span> <span class="o">=</span> <span class="n">growth</span><span class="p">[</span><span class="o">!</span><span class="p">,</span> <span class="s">&quot;Outcome&quot;</span><span class="p">]</span>
-<span class="n">Y</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">([</span><span class="n">Y</span><span class="p">],</span> <span class="p">[</span><span class="ss">:Y</span><span class="p">])</span>
-<span class="n">D</span> <span class="o">=</span> <span class="n">growth</span><span class="p">[</span><span class="o">!</span><span class="p">,</span> <span class="s">&quot;gdpsh465&quot;</span><span class="p">]</span>
-<span class="n">D</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">([</span><span class="n">D</span><span class="p">],</span> <span class="p">[</span><span class="ss">:D</span><span class="p">])</span>
-<span class="n">W</span> <span class="o">=</span> <span class="n">select</span><span class="p">(</span><span class="n">growth</span><span class="p">,</span> <span class="n">Not</span><span class="p">([</span><span class="s">&quot;Outcome&quot;</span><span class="p">,</span> <span class="s">&quot;intercept&quot;</span><span class="p">,</span> <span class="s">&quot;gdpsh465&quot;</span><span class="p">]))</span>
-<span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">Y</span> <span class="n">D</span> <span class="n">W</span><span class="p">]</span>
+<span class="n">Y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">growth</span><span class="p">[</span><span class="o">!</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Outcome&quot;</span><span class="p">]</span>
+<span class="n">Y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DataFrame</span><span class="p">([</span><span class="n">Y</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="ss">:Y</span><span class="p">])</span>
+<span class="n">D</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">growth</span><span class="p">[</span><span class="o">!</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;gdpsh465&quot;</span><span class="p">]</span>
+<span class="n">D</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DataFrame</span><span class="p">([</span><span class="n">D</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="ss">:D</span><span class="p">])</span>
+<span class="n">W</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">select</span><span class="p">(</span><span class="n">growth</span><span class="p">,</span><span class="w"> </span><span class="n">Not</span><span class="p">([</span><span class="s">&quot;Outcome&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;intercept&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;gdpsh465&quot;</span><span class="p">]))</span>
+<span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">Y</span><span class="w"> </span><span class="n">D</span><span class="w"> </span><span class="n">W</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1109,10 +967,10 @@ about the convergence hypothesis since the confidence interval includes zero.</p
 </div>
 </section>
 <section id="method-1-using-lasso">
-<h2><span class="section-number">10.4. </span>Method 1 - Using Lasso<a class="headerlink" href="#method-1-using-lasso" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">10.4. </span>Method 1 - Using Lasso<a class="headerlink" href="#method-1-using-lasso" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">Lasso</span><span class="p">,</span> <span class="n">GLM</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Lasso</span><span class="p">,</span><span class="w"> </span><span class="n">GLM</span>
 </pre></div>
 </div>
 </div>
@@ -1121,20 +979,20 @@ about the convergence hypothesis since the confidence interval includes zero.</p
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Seat values for Lasso</span>
 
-<span class="n">lasso_model</span> <span class="o">=</span> <span class="n">fit</span><span class="p">(</span><span class="n">LassoModel</span><span class="p">,</span> <span class="n">term</span><span class="p">(</span><span class="ss">:Y</span><span class="p">)</span> <span class="o">~</span>  <span class="n">sum</span><span class="p">(</span><span class="n">term</span><span class="o">.</span><span class="p">(</span><span class="n">names</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="o">!</span><span class="p">,</span> <span class="n">Not</span><span class="p">([</span><span class="s">&quot;Y&quot;</span><span class="p">,</span> <span class="s">&quot;D&quot;</span><span class="p">])]))),</span> <span class="n">data</span><span class="p">;</span> <span class="n">α</span> <span class="o">=</span> <span class="mf">0.8</span><span class="p">)</span>
-<span class="n">r_Y</span> <span class="o">=</span> <span class="n">residuals</span><span class="p">(</span><span class="n">lasso_model</span><span class="p">)</span>
-<span class="n">r_Y</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">([</span><span class="n">r_Y</span><span class="p">],</span> <span class="p">[</span><span class="ss">:r_Y</span><span class="p">])</span>
+<span class="n">lasso_model</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fit</span><span class="p">(</span><span class="n">LassoModel</span><span class="p">,</span><span class="w"> </span><span class="n">term</span><span class="p">(</span><span class="ss">:Y</span><span class="p">)</span><span class="w"> </span><span class="o">~</span><span class="w">  </span><span class="n">sum</span><span class="p">(</span><span class="n">term</span><span class="o">.</span><span class="p">(</span><span class="n">names</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="o">!</span><span class="p">,</span><span class="w"> </span><span class="n">Not</span><span class="p">([</span><span class="s">&quot;Y&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;D&quot;</span><span class="p">])]))),</span><span class="w"> </span><span class="n">data</span><span class="p">;</span><span class="w"> </span><span class="n">α</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.8</span><span class="p">)</span>
+<span class="n">r_Y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">residuals</span><span class="p">(</span><span class="n">lasso_model</span><span class="p">)</span>
+<span class="n">r_Y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DataFrame</span><span class="p">([</span><span class="n">r_Y</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="ss">:r_Y</span><span class="p">])</span>
 
 <span class="c"># Part. out d</span>
 
-<span class="n">lasso_model</span> <span class="o">=</span> <span class="n">fit</span><span class="p">(</span><span class="n">LassoModel</span><span class="p">,</span> <span class="n">term</span><span class="p">(</span><span class="ss">:D</span><span class="p">)</span> <span class="o">~</span>  <span class="n">sum</span><span class="p">(</span><span class="n">term</span><span class="o">.</span><span class="p">(</span><span class="n">names</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="o">!</span><span class="p">,</span> <span class="n">Not</span><span class="p">([</span><span class="s">&quot;Y&quot;</span><span class="p">,</span> <span class="s">&quot;D&quot;</span><span class="p">])]))),</span> <span class="n">data</span><span class="p">;</span>  <span class="n">α</span> <span class="o">=</span> <span class="mf">0.8</span><span class="p">)</span>
-<span class="n">r_D</span> <span class="o">=</span> <span class="n">residuals</span><span class="p">(</span><span class="n">lasso_model</span><span class="p">)</span>
-<span class="n">r_D</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">([</span><span class="n">r_D</span><span class="p">],</span> <span class="p">[</span><span class="ss">:r_D</span><span class="p">])</span>
+<span class="n">lasso_model</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fit</span><span class="p">(</span><span class="n">LassoModel</span><span class="p">,</span><span class="w"> </span><span class="n">term</span><span class="p">(</span><span class="ss">:D</span><span class="p">)</span><span class="w"> </span><span class="o">~</span><span class="w">  </span><span class="n">sum</span><span class="p">(</span><span class="n">term</span><span class="o">.</span><span class="p">(</span><span class="n">names</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="o">!</span><span class="p">,</span><span class="w"> </span><span class="n">Not</span><span class="p">([</span><span class="s">&quot;Y&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;D&quot;</span><span class="p">])]))),</span><span class="w"> </span><span class="n">data</span><span class="p">;</span><span class="w">  </span><span class="n">α</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.8</span><span class="p">)</span>
+<span class="n">r_D</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">residuals</span><span class="p">(</span><span class="n">lasso_model</span><span class="p">)</span>
+<span class="n">r_D</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DataFrame</span><span class="p">([</span><span class="n">r_D</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="ss">:r_D</span><span class="p">])</span>
 
 <span class="c"># ols </span>
-<span class="n">data_aux</span> <span class="o">=</span> <span class="p">[</span><span class="n">r_Y</span> <span class="n">r_D</span><span class="p">]</span>
-<span class="n">fm_1</span> <span class="o">=</span> <span class="nd">@formula</span><span class="p">(</span><span class="n">r_Y</span> <span class="o">~</span> <span class="n">r_D</span><span class="p">)</span>
-<span class="n">partial_lasso_fit</span> <span class="o">=</span> <span class="n">lm</span><span class="p">(</span><span class="n">fm_1</span><span class="p">,</span> <span class="n">data_aux</span><span class="p">)</span>
+<span class="n">data_aux</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">r_Y</span><span class="w"> </span><span class="n">r_D</span><span class="p">]</span>
+<span class="n">fm_1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nd">@formula</span><span class="p">(</span><span class="n">r_Y</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">r_D</span><span class="p">)</span>
+<span class="n">partial_lasso_fit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lm</span><span class="p">(</span><span class="n">fm_1</span><span class="p">,</span><span class="w"> </span><span class="n">data_aux</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1157,14 +1015,14 @@ r_D          -0.0500007    0.0152165   -3.29    0.0015  -0.0802403   -0.0197611
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># output: estimated regression coefficient corresponding to the target regressor</span>
-<span class="n">est_lasso</span> <span class="o">=</span> <span class="n">coef</span><span class="p">(</span><span class="n">partial_lasso_fit</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">est_lasso</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">coef</span><span class="p">(</span><span class="n">partial_lasso_fit</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span>
 
 <span class="c"># output: std. error</span>
-<span class="n">std_lasso</span> <span class="o">=</span> <span class="n">stderror</span><span class="p">(</span><span class="n">partial_lasso_fit</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">std_lasso</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stderror</span><span class="p">(</span><span class="n">partial_lasso_fit</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span>
 
 <span class="c"># output: 95% confidence interval</span>
-<span class="n">lower_ci_lasso</span> <span class="o">=</span> <span class="n">coeftable</span><span class="p">(</span><span class="n">partial_lasso_fit</span><span class="p">)</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="mi">5</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
-<span class="n">upper_ci_lasso</span> <span class="o">=</span> <span class="n">coeftable</span><span class="p">(</span><span class="n">partial_lasso_fit</span><span class="p">)</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="mi">6</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">lower_ci_lasso</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">coeftable</span><span class="p">(</span><span class="n">partial_lasso_fit</span><span class="p">)</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="mi">5</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">upper_ci_lasso</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">coeftable</span><span class="p">(</span><span class="n">partial_lasso_fit</span><span class="p">)</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="mi">6</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1177,10 +1035,10 @@ r_D          -0.0500007    0.0152165   -3.29    0.0015  -0.0802403   -0.0197611
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Regress residuales</span>
-<span class="n">partial_lasso_fit</span> <span class="o">=</span> <span class="n">lm</span><span class="p">(</span><span class="n">fm_1</span><span class="p">,</span> <span class="n">data_aux</span><span class="p">)</span>
-<span class="n">partial_lasso_est</span> <span class="o">=</span> <span class="n">coef</span><span class="p">(</span><span class="n">partial_lasso_fit</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">partial_lasso_fit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lm</span><span class="p">(</span><span class="n">fm_1</span><span class="p">,</span><span class="w"> </span><span class="n">data_aux</span><span class="p">)</span>
+<span class="n">partial_lasso_est</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">coef</span><span class="p">(</span><span class="n">partial_lasso_fit</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span>
 
-<span class="n">println</span><span class="p">(</span><span class="s">&quot;Coefficient for D via partialling-out using lasso is: &quot;</span><span class="p">,</span> <span class="n">partial_lasso_est</span> <span class="p">)</span>
+<span class="n">println</span><span class="p">(</span><span class="s">&quot;Coefficient for D via partialling-out using lasso is: &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">partial_lasso_est</span><span class="w"> </span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1192,12 +1050,12 @@ r_D          -0.0500007    0.0152165   -3.29    0.0015  -0.0802403   -0.0197611
 </div>
 </section>
 <section id="summary-lasso-results">
-<h2><span class="section-number">10.5. </span>Summary LASSO results<a class="headerlink" href="#summary-lasso-results" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">10.5. </span>Summary LASSO results<a class="headerlink" href="#summary-lasso-results" title="Permalink to this heading">#</a></h2>
 <p>Finally, let us have a look at the results.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">table_2</span> <span class="o">=</span> <span class="n">NamedArray</span><span class="p">(</span><span class="n">zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
-<span class="n">setnames!</span><span class="p">(</span><span class="n">table_2</span><span class="p">,</span> <span class="p">[</span><span class="s">&quot;DOUBLE LASSO&quot;</span><span class="p">],</span> <span class="mi">1</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">table_2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NamedArray</span><span class="p">(</span><span class="n">zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">))</span>
+<span class="n">setnames!</span><span class="p">(</span><span class="n">table_2</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;DOUBLE LASSO&quot;</span><span class="p">],</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
 <span class="n">table_2</span>
 </pre></div>
 </div>
@@ -1213,11 +1071,11 @@ DOUBLE LASSO │ 0.0  0.0  0.0  0.0
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">table_2</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">est_lasso</span>
-<span class="n">table_2</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">std_lasso</span>   
-<span class="n">table_2</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">lower_ci_lasso</span>
-<span class="n">table_2</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="n">upper_ci_lasso</span>    
- 
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">table_2</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">est_lasso</span>
+<span class="n">table_2</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std_lasso</span><span class="w">   </span>
+<span class="n">table_2</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lower_ci_lasso</span>
+<span class="n">table_2</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">upper_ci_lasso</span><span class="w">    </span>
+<span class="w"> </span>
 <span class="n">table_2</span>
 </pre></div>
 </div>
@@ -1233,9 +1091,9 @@ DOUBLE LASSO │ -0.0500007   0.0152165  -0.0802403  -0.0197611
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">table_2_pandas</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">(</span> <span class="n">table_2</span><span class="p">,</span> <span class="p">[</span> <span class="o">:</span><span class="s">&quot;Estimator&quot;</span><span class="p">,</span> <span class="o">:</span><span class="s">&quot;Std. Error&quot;</span><span class="p">,</span> <span class="o">:</span><span class="s">&quot;lower bound CI&quot;</span><span class="p">,</span> <span class="o">:</span><span class="s">&quot;upper bound CI&quot;</span><span class="p">])</span>
-<span class="n">model_2</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">(</span><span class="n">model</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;DOUBLE LASSO&quot;</span><span class="p">])</span>
-<span class="n">table_2_pandas</span> <span class="o">=</span> <span class="n">hcat</span><span class="p">(</span><span class="n">model_2</span><span class="p">,</span><span class="n">table_2_pandas</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">table_2_pandas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DataFrame</span><span class="p">(</span><span class="w"> </span><span class="n">table_2</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="o">:</span><span class="s">&quot;Estimator&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">:</span><span class="s">&quot;Std. Error&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">:</span><span class="s">&quot;lower bound CI&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">:</span><span class="s">&quot;upper bound CI&quot;</span><span class="p">])</span>
+<span class="n">model_2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DataFrame</span><span class="p">(</span><span class="n">model</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;DOUBLE LASSO&quot;</span><span class="p">])</span>
+<span class="n">table_2_pandas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hcat</span><span class="p">(</span><span class="n">model_2</span><span class="p">,</span><span class="n">table_2_pandas</span><span class="p">)</span>
 <span class="n">table_2_pandas</span>
 </pre></div>
 </div>
@@ -1245,8 +1103,8 @@ DOUBLE LASSO │ -0.0500007   0.0152165  -0.0802403  -0.0197611
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">header</span> <span class="o">=</span> <span class="p">([</span><span class="s">&quot;Model&quot;</span><span class="p">,</span> <span class="s">&quot;Estimator&quot;</span><span class="p">,</span> <span class="s">&quot;Std. Error&quot;</span><span class="p">,</span> <span class="s">&quot;lower bound CI&quot;</span><span class="p">,</span> <span class="s">&quot;upper bound CI&quot;</span><span class="p">])</span>
-<span class="n">pretty_table</span><span class="p">(</span><span class="n">table_2_pandas</span><span class="p">;</span> <span class="n">backend</span> <span class="o">=</span> <span class="kt">Val</span><span class="p">(</span><span class="ss">:html</span><span class="p">),</span> <span class="n">header</span> <span class="o">=</span> <span class="n">header</span><span class="p">,</span> <span class="n">formatters</span><span class="o">=</span><span class="n">ft_round</span><span class="p">(</span><span class="mi">6</span><span class="p">),</span> <span class="n">alignment</span><span class="o">=</span><span class="ss">:c</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">header</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">([</span><span class="s">&quot;Model&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Estimator&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Std. Error&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;lower bound CI&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;upper bound CI&quot;</span><span class="p">])</span>
+<span class="n">pretty_table</span><span class="p">(</span><span class="n">table_2_pandas</span><span class="p">;</span><span class="w"> </span><span class="n">backend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">Val</span><span class="p">(</span><span class="ss">:html</span><span class="p">),</span><span class="w"> </span><span class="n">header</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">header</span><span class="p">,</span><span class="w"> </span><span class="n">formatters</span><span class="o">=</span><span class="n">ft_round</span><span class="p">(</span><span class="mi">6</span><span class="p">),</span><span class="w"> </span><span class="n">alignment</span><span class="o">=</span><span class="ss">:c</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1320,8 +1178,8 @@ DOUBLE LASSO │ -0.0500007   0.0152165  -0.0802403  -0.0197611
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">table_3</span> <span class="o">=</span> <span class="n">vcat</span><span class="p">(</span><span class="n">table_1</span><span class="p">,</span> <span class="n">table_2</span><span class="p">)</span>
-<span class="n">setnames!</span><span class="p">(</span><span class="n">table_3</span><span class="p">,</span> <span class="p">[</span><span class="s">&quot;OLS&quot;</span><span class="p">,</span> <span class="s">&quot;DOUBLE LASSO&quot;</span><span class="p">],</span> <span class="mi">1</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">table_3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vcat</span><span class="p">(</span><span class="n">table_1</span><span class="p">,</span><span class="w"> </span><span class="n">table_2</span><span class="p">)</span>
+<span class="n">setnames!</span><span class="p">(</span><span class="n">table_3</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;OLS&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;DOUBLE LASSO&quot;</span><span class="p">],</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
 <span class="n">table_3</span>
 </pre></div>
 </div>
@@ -1338,9 +1196,9 @@ DOUBLE LASSO │  -0.0500007    0.0152165   -0.0802403   -0.0197611
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">table_3_pandas</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">(</span> <span class="n">table_3</span><span class="p">,</span> <span class="p">[</span> <span class="o">:</span><span class="s">&quot;Estimator&quot;</span><span class="p">,</span> <span class="o">:</span><span class="s">&quot;Std. Error&quot;</span><span class="p">,</span> <span class="o">:</span><span class="s">&quot;lower bound CI&quot;</span><span class="p">,</span> <span class="o">:</span><span class="s">&quot;upper bound CI&quot;</span><span class="p">])</span>
-<span class="n">model_3</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">(</span><span class="n">model</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;OLS&quot;</span><span class="p">,</span> <span class="s">&quot;DOUBLE LASSO&quot;</span><span class="p">])</span>
-<span class="n">table_3_pandas</span> <span class="o">=</span> <span class="n">hcat</span><span class="p">(</span><span class="n">model_3</span><span class="p">,</span> <span class="n">table_3_pandas</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">table_3_pandas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DataFrame</span><span class="p">(</span><span class="w"> </span><span class="n">table_3</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="o">:</span><span class="s">&quot;Estimator&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">:</span><span class="s">&quot;Std. Error&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">:</span><span class="s">&quot;lower bound CI&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">:</span><span class="s">&quot;upper bound CI&quot;</span><span class="p">])</span>
+<span class="n">model_3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DataFrame</span><span class="p">(</span><span class="n">model</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;OLS&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;DOUBLE LASSO&quot;</span><span class="p">])</span>
+<span class="n">table_3_pandas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hcat</span><span class="p">(</span><span class="n">model_3</span><span class="p">,</span><span class="w"> </span><span class="n">table_3_pandas</span><span class="p">)</span>
 <span class="n">table_3_pandas</span>
 </pre></div>
 </div>
@@ -1350,8 +1208,8 @@ DOUBLE LASSO │  -0.0500007    0.0152165   -0.0802403   -0.0197611
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">header</span> <span class="o">=</span> <span class="p">([</span><span class="s">&quot;Model&quot;</span><span class="p">,</span> <span class="s">&quot;Estimator&quot;</span><span class="p">,</span> <span class="s">&quot;Std. Error&quot;</span><span class="p">,</span> <span class="s">&quot;lower bound CI&quot;</span><span class="p">,</span> <span class="s">&quot;upper bound CI&quot;</span><span class="p">])</span>
-<span class="n">pretty_table</span><span class="p">(</span><span class="n">table_3_pandas</span><span class="p">;</span> <span class="n">backend</span> <span class="o">=</span> <span class="kt">Val</span><span class="p">(</span><span class="ss">:html</span><span class="p">),</span> <span class="n">header</span> <span class="o">=</span> <span class="n">header</span><span class="p">,</span> <span class="n">formatters</span><span class="o">=</span><span class="n">ft_round</span><span class="p">(</span><span class="mi">6</span><span class="p">),</span> <span class="n">alignment</span><span class="o">=</span><span class="ss">:c</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">header</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">([</span><span class="s">&quot;Model&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Estimator&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Std. Error&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;lower bound CI&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;upper bound CI&quot;</span><span class="p">])</span>
+<span class="n">pretty_table</span><span class="p">(</span><span class="n">table_3_pandas</span><span class="p">;</span><span class="w"> </span><span class="n">backend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">Val</span><span class="p">(</span><span class="ss">:html</span><span class="p">),</span><span class="w"> </span><span class="n">header</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">header</span><span class="p">,</span><span class="w"> </span><span class="n">formatters</span><span class="o">=</span><span class="n">ft_round</span><span class="p">(</span><span class="mi">6</span><span class="p">),</span><span class="w"> </span><span class="n">alignment</span><span class="o">=</span><span class="ss">:c</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1460,14 +1318,14 @@ DOUBLE LASSO │  -0.0500007    0.0152165   -0.0802403   -0.0197611
   </tbody>
 </table><div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">Plots</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Plots</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">xerror</span> <span class="o">=</span> <span class="n">table_3_pandas</span><span class="p">[</span><span class="o">!</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span> <span class="o">.-</span> <span class="n">table_3_pandas</span><span class="p">[</span><span class="o">!</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">xerror</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">table_3_pandas</span><span class="p">[</span><span class="o">!</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">.-</span><span class="w"> </span><span class="n">table_3_pandas</span><span class="p">[</span><span class="o">!</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1483,20 +1341,20 @@ DOUBLE LASSO │ 0.0302396
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">scatter</span><span class="p">(</span><span class="n">table_3_pandas</span><span class="p">[</span><span class="o">!</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="s">&quot;OLS&quot;</span><span class="p">,</span> <span class="s">&quot;Double Lasso&quot;</span><span class="p">],</span> <span class="n">label</span> <span class="o">=</span> <span class="s">&quot;Estimator&quot;</span><span class="p">,</span> <span class="n">xerrors</span> <span class="o">=</span> <span class="n">xerror</span><span class="p">,</span> 
-        <span class="n">xtick</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="o">:</span><span class="mf">0.008</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="ss">:dash</span><span class="p">,</span> <span class="n">seriescolor</span><span class="o">=</span><span class="ss">:orange</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">scatter</span><span class="p">(</span><span class="n">table_3_pandas</span><span class="p">[</span><span class="o">!</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;OLS&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Double Lasso&quot;</span><span class="p">],</span><span class="w"> </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Estimator&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">xerrors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xerror</span><span class="p">,</span><span class="w"> </span>
+<span class="w">        </span><span class="n">xtick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="o">:</span><span class="mf">0.008</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">linestyle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">:dash</span><span class="p">,</span><span class="w"> </span><span class="n">seriescolor</span><span class="o">=</span><span class="ss">:orange</span><span class="p">)</span>
 <span class="n">plot!</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">950</span><span class="p">,</span><span class="mi">400</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/10_Julia_pm2_notebook_jannis_50_0.svg" src="../_images/10_Julia_pm2_notebook_jannis_50_0.svg" /></div>
+<img alt="../_images/dc76eed3df00da284fa3683499fc75f778e61f33d1bda13311b62c9843b824f3.svg" src="../_images/dc76eed3df00da284fa3683499fc75f778e61f33d1bda13311b62c9843b824f3.svg" /></div>
 </div>
 </section>
 <section id="using-hdmjl">
-<h2><span class="section-number">10.6. </span>Using HDMJL<a class="headerlink" href="#using-hdmjl" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">10.6. </span>Using HDMJL<a class="headerlink" href="#using-hdmjl" title="Permalink to this heading">#</a></h2>
 <section id="first-we-need-to-call-hdmjl-jl-script-to-use-all-the-functions-mainly-rlasso-function">
-<h3><span class="section-number">10.6.1. </span>First we need to call hdmjl.jl script to use all the functions, mainly rlasso function<a class="headerlink" href="#first-we-need-to-call-hdmjl-jl-script-to-use-all-the-functions-mainly-rlasso-function" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">10.6.1. </span>First we need to call hdmjl.jl script to use all the functions, mainly rlasso function<a class="headerlink" href="#first-we-need-to-call-hdmjl-jl-script-to-use-all-the-functions-mainly-rlasso-function" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">include</span><span class="p">(</span><span class="s">&quot;hdmjl/hdmjl.jl&quot;</span><span class="p">)</span>
@@ -1506,11 +1364,11 @@ DOUBLE LASSO │ 0.0302396
 </div>
 </section>
 <section id="you-use-the-rlasso-arg-to-declare-the-parameters-that-we-use-and-the-matrixes-need-you-only-need-to-change-the-first-two-arguments">
-<h3><span class="section-number">10.6.2. </span>You use the <strong>rlasso_arg</strong> to declare the parameters that we use and the matrixes need.  You only need to change the first two arguments!<a class="headerlink" href="#you-use-the-rlasso-arg-to-declare-the-parameters-that-we-use-and-the-matrixes-need-you-only-need-to-change-the-first-two-arguments" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">10.6.2. </span>You use the <strong>rlasso_arg</strong> to declare the parameters that we use and the matrixes need.  You only need to change the first two arguments!<a class="headerlink" href="#you-use-the-rlasso-arg-to-declare-the-parameters-that-we-use-and-the-matrixes-need-you-only-need-to-change-the-first-two-arguments" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">res_Y_0</span> <span class="o">=</span> <span class="n">rlasso_arg</span><span class="p">(</span> <span class="n">W</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="nb">nothing</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> 
-                    <span class="nb">nothing</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="nb">nothing</span><span class="p">,</span> <span class="mi">5000</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="o">^</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">),</span> <span class="o">-</span><span class="nb">Inf</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="nb">Inf</span><span class="p">,</span> <span class="nb">true</span> <span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">res_Y_0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rlasso_arg</span><span class="p">(</span><span class="w"> </span><span class="n">W</span><span class="p">,</span><span class="w"> </span><span class="n">Y</span><span class="p">,</span><span class="w"> </span><span class="nb">nothing</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                    </span><span class="nb">nothing</span><span class="p">,</span><span class="w"> </span><span class="mf">1.1</span><span class="p">,</span><span class="w"> </span><span class="nb">nothing</span><span class="p">,</span><span class="w"> </span><span class="mi">5000</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="o">^</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">),</span><span class="w"> </span><span class="o">-</span><span class="nb">Inf</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="nb">Inf</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="w"> </span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1574,10 +1432,10 @@ DOUBLE LASSO │ 0.0302396
 </div>
 </section>
 <section id="then-we-need-to-use-the-rlasso-function-including-the-arguments-declared-above">
-<h3><span class="section-number">10.6.3. </span>Then we need to use the rlasso function including the arguments declared above<a class="headerlink" href="#then-we-need-to-use-the-rlasso-function-including-the-arguments-declared-above" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">10.6.3. </span>Then we need to use the rlasso function including the arguments declared above<a class="headerlink" href="#then-we-need-to-use-the-rlasso-function-including-the-arguments-declared-above" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">res_Y</span> <span class="o">=</span> <span class="n">rlasso</span><span class="p">(</span><span class="n">res_Y_0</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">res_Y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rlasso</span><span class="p">(</span><span class="n">res_Y_0</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1608,10 +1466,10 @@ DOUBLE LASSO │ 0.0302396
 </div>
 </section>
 <section id="the-output-is-a-dictionary-so-you-can-access-using-the-main-keys-in-our-case-we-need-the-residuals">
-<h3><span class="section-number">10.6.4. </span>The output is a dictionary, so you can access using the main keys. In our case we need the residuals<a class="headerlink" href="#the-output-is-a-dictionary-so-you-can-access-using-the-main-keys-in-our-case-we-need-the-residuals" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">10.6.4. </span>The output is a dictionary, so you can access using the main keys. In our case we need the residuals<a class="headerlink" href="#the-output-is-a-dictionary-so-you-can-access-using-the-main-keys-in-our-case-we-need-the-residuals" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">res_Y</span> <span class="o">=</span> <span class="n">res_Y</span><span class="p">[</span><span class="s">&quot;residuals&quot;</span><span class="p">]</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">res_Y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">res_Y</span><span class="p">[</span><span class="s">&quot;residuals&quot;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1649,14 +1507,14 @@ DOUBLE LASSO │ 0.0302396
 </div>
 </section>
 <section id="we-do-the-same-for-the-second-equation">
-<h3><span class="section-number">10.6.5. </span>We do the same for the second equation<a class="headerlink" href="#we-do-the-same-for-the-second-equation" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">10.6.5. </span>We do the same for the second equation<a class="headerlink" href="#we-do-the-same-for-the-second-equation" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">res_D_0</span> <span class="o">=</span> <span class="n">rlasso_arg</span><span class="p">(</span> <span class="n">W</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="nb">nothing</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> 
-                    <span class="nb">nothing</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="nb">nothing</span><span class="p">,</span> <span class="mi">5000</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="o">^</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">),</span> <span class="o">-</span><span class="nb">Inf</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="nb">Inf</span><span class="p">,</span> <span class="nb">true</span> <span class="p">)</span>
-<span class="n">res_D</span> <span class="o">=</span> <span class="n">rlasso</span><span class="p">(</span><span class="n">res_D_0</span><span class="p">)[</span><span class="s">&quot;residuals&quot;</span><span class="p">]</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">res_D_0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rlasso_arg</span><span class="p">(</span><span class="w"> </span><span class="n">W</span><span class="p">,</span><span class="w"> </span><span class="n">D</span><span class="p">,</span><span class="w"> </span><span class="nb">nothing</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                    </span><span class="nb">nothing</span><span class="p">,</span><span class="w"> </span><span class="mf">1.1</span><span class="p">,</span><span class="w"> </span><span class="nb">nothing</span><span class="p">,</span><span class="w"> </span><span class="mi">5000</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="o">^</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">),</span><span class="w"> </span><span class="o">-</span><span class="nb">Inf</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="nb">Inf</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="w"> </span><span class="p">)</span>
+<span class="n">res_D</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rlasso</span><span class="p">(</span><span class="n">res_D_0</span><span class="p">)[</span><span class="s">&quot;residuals&quot;</span><span class="p">]</span>
 <span class="c"># We need to convert the vector into matrix because the lm function requires &quot;X&quot; to be matrix </span>
-<span class="n">res_D</span> <span class="o">=</span> <span class="n">reshape</span><span class="p">(</span><span class="n">res_D</span><span class="p">,</span> <span class="n">length</span><span class="p">(</span><span class="n">res_D</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">res_D</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reshape</span><span class="p">(</span><span class="n">res_D</span><span class="p">,</span><span class="w"> </span><span class="n">length</span><span class="p">(</span><span class="n">res_D</span><span class="p">),</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1694,10 +1552,10 @@ DOUBLE LASSO │ 0.0302396
 </div>
 </section>
 <section id="regress-errors">
-<h3><span class="section-number">10.6.6. </span>Regress errors<a class="headerlink" href="#regress-errors" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">10.6.6. </span>Regress errors<a class="headerlink" href="#regress-errors" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">lm</span><span class="p">(</span><span class="n">res_D</span><span class="p">,</span> <span class="n">res_Y</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">lm</span><span class="p">(</span><span class="n">res_D</span><span class="p">,</span><span class="w"> </span><span class="n">res_Y</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1730,7 +1588,7 @@ x1  -0.0498115   0.0138578  -3.59    0.0005  -0.0773467  -0.0222762
             mode: "julia-1.7"
         },
         kernelOptions: {
-            kernelName: "julia-1.7",
+            name: "julia-1.7",
             path: "./julia_notebooks"
         },
         predefinedOutput: true
@@ -1738,49 +1596,111 @@ x1  -0.0498115   0.0138578  -3.59    0.0005  -0.0773467  -0.0222762
     </script>
     <script>kernelName = 'julia-1.7'</script>
 
-              </div>
+                </article>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="09_Julia_OrthogonalLearning_lab4.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">9. </span>Experiment on Orthogonal Learning</p>
-        </div>
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="09_Julia_OrthogonalLearning_lab4.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">9. </span>Experiment on Orthogonal Learning</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="11_py-heterogenous-wage-effects.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="11_py-heterogenous-wage-effects.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title"><span class="section-number">11. </span>Heterogenous Wage Effects</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
-</div>
-            </footer>
-        </div>
-    </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
-  
-    By Victor Chernozhukov<br/>
-  
-</p>
-        </footer>
-    </div>
-    
-</div>
-
-
       </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">10.1. Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-analysis">10.2. Data analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summarize-ols-results">10.3. Summarize OLS results</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#method-1-using-lasso">10.4. Method 1 - Using Lasso</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-lasso-results">10.5. Summary LASSO results</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-hdmjl">10.6. Using HDMJL</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#first-we-need-to-call-hdmjl-jl-script-to-use-all-the-functions-mainly-rlasso-function">10.6.1. First we need to call hdmjl.jl script to use all the functions, mainly rlasso function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#you-use-the-rlasso-arg-to-declare-the-parameters-that-we-use-and-the-matrixes-need-you-only-need-to-change-the-first-two-arguments">10.6.2. You use the <strong>rlasso_arg</strong> to declare the parameters that we use and the matrixes need.  You only need to change the first two arguments!</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#then-we-need-to-use-the-rlasso-function-including-the-arguments-declared-above">10.6.3. Then we need to use the rlasso function including the arguments declared above</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-output-is-a-dictionary-so-you-can-access-using-the-main-keys-in-our-case-we-need-the-residuals">10.6.4. The output is a dictionary, so you can access using the main keys. In our case we need the residuals</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#we-do-the-same-for-the-second-equation">10.6.5. We do the same for the second equation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regress-errors">10.6.6. Regress errors</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Victor Chernozhukov & Jannis Kueck. Translated into Julia by Alexander Quispe
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
     </div>
+  </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
 
-
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

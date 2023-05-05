@@ -1,48 +1,60 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>5. Analyzing RCT reemployment experiment &#8212; Inference on Causal and Structural Parametters Using ML and AI</title>
-    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
-    
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
@@ -50,63 +62,95 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'julia_notebooks/05_Julia_Analyzing_RCT_with_Precision';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="6. Analyzing RCT reemployment experiment" href="06_RCT_Precision_Adjustment.html" />
     <link rel="prev" title="4. Some RCT Examples" href="04_Juli_Notebook_RCT-polio.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
-    <div class="container-fluid" id="banner"></div>
-
-    
-
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="../_static/logo.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">Inference on Causal and Structural Parametters Using ML and AI</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
@@ -116,459 +160,305 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="01_Julia_Notebook_Linear_Model_Overfitting.html">
-   1. Linear Model Overfiting
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="02_PM1_Notebook1_Prediction_newdata.html">
-   2. OLS and lasso for wage prediction
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="03_PM1_Notebook_Inference.html">
-   3. OLS and lasso for gender wage gap inference
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="04_Juli_Notebook_RCT-polio.html">
-   4. Some RCT Examples
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   5. Analyzing RCT reemployment experiment
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="06_RCT_Precision_Adjustment.html">
-   6. Analyzing RCT reemployment experiment
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="07_julia-notebook-linear-penalized-regs.html">
-   7. Linear Penalized Regs
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="08_jl_ml_estimators_wage_pred.html">
-   8. ML for wage prediction
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="09_Julia_OrthogonalLearning_lab4.html">
-   9. Experiment on Orthogonal Learning
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="10_Julia_pm2_notebook_jannis.html">
-   10. Double Lasso for the convergence hypothesis
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="11_py-heterogenous-wage-effects.html">
-   11. Heterogenous Wage Effects
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="12_jl_collider_bias.html">
-   12. ColliderBias Hollywood
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="13_Julia_pm3_notebook_newdata_nn.html">
-   13. Deep Neural Networks for Wage Prediction
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="14_jl_automl_wage.html">
-   14. AutoML for wage prediction
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="15_Functional-aproximation-by-nn-and-rf.html">
-   15. Functional Approximations by NN and RF
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="16_Notebook_DAGitty.html">
-   16. Notebook-DAGitty
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="17_jl_dosearch.html">
-   17. Notebook-Dosearch
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="18_Julia_pm3_notebook_inference_clustering.html">
-   18. DML inference for gun ownership
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="19_Julia-pm3-newdata-nn.html">
-   19. DML inference using NN for gun ownership
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="20_jl_dml_401k.html">
-   20. DML for ATE and LATE of 401(k) on Wealth
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="21_jl_dag_401k.html">
-   21. Identification Analysis of 401(k) Example w DAGs
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="22_Julia_debiased-ml-for-partially-linear-model.html">
-   22. Debiased ML for Partially Linear Model in Julia
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="23_jl_sensmakr_dml.html">
-   23. Sensitivity Analysis with Sensmakr and Debiased ML
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="24_debiased-ml-for-partially-linear-iv-model-in-julia.html">
-   24. Debiased ML for Partially Linear IV Model in Julia
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="25_Julia_weak_iv_experiments.html">
-   25. Weak IV Experiments
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="01_Julia_Notebook_Linear_Model_Overfitting.html">1. Linear Model Overfiting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_PM1_Notebook1_Prediction_newdata.html">2. OLS and lasso for wage prediction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_PM1_Notebook_Inference.html">3. OLS and lasso for gender wage gap inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_Juli_Notebook_RCT-polio.html">4. Some RCT Examples</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">5. Analyzing RCT reemployment experiment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_RCT_Precision_Adjustment.html">6. Analyzing RCT reemployment experiment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_julia-notebook-linear-penalized-regs.html">7. Linear Penalized Regs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_jl_ml_estimators_wage_pred.html">8. ML for wage prediction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_Julia_OrthogonalLearning_lab4.html">9. Experiment on Orthogonal Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_Julia_pm2_notebook_jannis.html">10. Double Lasso for the convergence hypothesis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_py-heterogenous-wage-effects.html">11. Heterogenous Wage Effects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_jl_collider_bias.html">12. ColliderBias Hollywood</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_Julia_pm3_notebook_newdata_nn.html">13. Deep Neural Networks for Wage Prediction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14_jl_automl_wage.html">14. AutoML for wage prediction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15_Functional-aproximation-by-nn-and-rf.html">15. Functional Approximations by NN and RF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="16_Notebook_DAGitty.html">16. Notebook-DAGitty</a></li>
+<li class="toctree-l1"><a class="reference internal" href="17_jl_dosearch.html">17. Notebook-Dosearch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="18_Julia_pm3_notebook_inference_clustering.html">18. DML inference for gun ownership</a></li>
+<li class="toctree-l1"><a class="reference internal" href="19_Julia-pm3-newdata-nn.html">19. DML inference using NN for gun ownership</a></li>
+<li class="toctree-l1"><a class="reference internal" href="20_jl_dml_401k.html">20. DML for ATE and LATE of 401(k) on Wealth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="21_jl_dag_401k.html">21. Identification Analysis of 401(k) Example w DAGs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="22_Julia_debiased-ml-for-partially-linear-model.html">22. Debiased ML for Partially Linear Model in Julia</a></li>
+<li class="toctree-l1"><a class="reference internal" href="23_jl_sensmakr_dml.html">23. Sensitivity Analysis with Sensmakr and Debiased ML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="24_debiased-ml-for-partially-linear-iv-model-in-julia.html">24. Debiased ML for Partially Linear IV Model in Julia</a></li>
+<li class="toctree-l1"><a class="reference internal" href="25_Julia_weak_iv_experiments.html">25. Weak IV Experiments</a></li>
 </ul>
 
     </div>
 </nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-            </div>
-            
-        </div>
     </div>
-    <div id="rtd-footer-container"></div>
-</div>
-
-
-          
-
-
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
-        
-
-
-
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
   
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://mybinder.org/v2/gh/d2cml-ai/14.388_jl/main?urlpath=tree/_build/jupyter_execute/julia_notebooks/05_Julia_Analyzing_RCT_with_Precision.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Binder"
->
   
-
-<span class="headerbtn__icon-container">
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
   
-    <img src="../_static/images/logo_binder.svg">
-  </span>
-<span class="headerbtn__text-container">Binder</span>
-</a>
+  <div id="rtd-footer-container"></div>
 
-      </li>
+
+      </div>
       
-      <li>
-        <a href="https://colab.research.google.com/github/d2cml-ai/14.388_jl/blob/main/_build/jupyter_execute/julia_notebooks/05_Julia_Analyzing_RCT_with_Precision.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Colab"
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/d2cml-ai/14.388_jl/blob/main/_build/jupyter_execute/julia_notebooks/05_Julia_Analyzing_RCT_with_Precision.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   
     <img src="../_static/images/logo_colab.png">
   </span>
-<span class="headerbtn__text-container">Colab</span>
+<span class="btn__text-container">Colab</span>
 </a>
-
-      </li>
+</li>
+      
+      
+      
       
       <li>
-        
 <button onclick="initThebeSBT()"
-  class="headerbtn headerbtn-launch-thebe"
-  data-toggle="tooltip"
-data-placement="left"
-title="Launch Thebe"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-play"></i>
   </span>
-<span class="headerbtn__text-container">Live Code</span>
+<span class="btn__text-container">Live Code</span>
 </button>
-
-      </li>
+</li>
       
-    </ul>
-  </div>
+  </ul>
 </div>
 
-<button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/d2cml-ai/14.388_jl" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/d2cml-ai/14.388_jl/edit/main/_build/jupyter_execute/julia_notebooks/05_Julia_Analyzing_RCT_with_Precision.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/d2cml-ai/14.388_jl/issues/new?title=Issue%20on%20page%20%2Fjulia_notebooks/05_Julia_Analyzing_RCT_with_Precision.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/julia_notebooks/05_Julia_Analyzing_RCT_with_Precision.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-<div class="menu-dropdown menu-dropdown-repository-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Source repositories">
-      <i class="fab fa-github"></i>
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://github.com/d2cml-ai/14.388_jl"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Source repository"
->
-  
+`);
+</script>
 
-<span class="headerbtn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="headerbtn__text-container">repository</span>
-</a>
-
-      </li>
-      
-      <li>
-        <a href="https://github.com/d2cml-ai/14.388_jl/issues/new?title=Issue%20on%20page%20%2Fjulia_notebooks/05_Julia_Analyzing_RCT_with_Precision.html&body=Your%20issue%20content%20here."
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Open an issue"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="headerbtn__text-container">open issue</span>
-</a>
-
-      </li>
-      
-      <li>
-        <a href="https://github.com/d2cml-ai/14.388_jl/edit/main/_build/jupyter_execute/julia_notebooks/05_Julia_Analyzing_RCT_with_Precision.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Edit this page"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-pencil-alt"></i>
-  </span>
-<span class="headerbtn__text-container">suggest edit</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="../_sources/julia_notebooks/05_Julia_Analyzing_RCT_with_Precision.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.ipynb</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
-</button>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
 </label>
-
+</div></div>
+      
     </div>
+  
 </div>
-
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#jonathan-roth-s-dgp">
-   5.1. Jonathan Roth’s DGP
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#analyze-the-rct-data-with-precision-adjustment">
-   5.2. Analyze the RCT data with Precision Adjustment
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#using-classical-standard-errors-non-robust-is-misleading-here">
-   5.3. Using classical standard errors (non-robust) is misleading here.
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#verify-asymptotic-approximations-hold-in-finite-sample-simulation-experiment">
-   5.4. Verify Asymptotic Approximations Hold in Finite-Sample Simulation Experiment
-  </a>
- </li>
-</ul>
-
-    </nav>
 </div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Analyzing RCT reemployment experiment</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#jonathan-roth-s-dgp">
-   5.1. Jonathan Roth’s DGP
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#analyze-the-rct-data-with-precision-adjustment">
-   5.2. Analyze the RCT data with Precision Adjustment
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#using-classical-standard-errors-non-robust-is-misleading-here">
-   5.3. Using classical standard errors (non-robust) is misleading here.
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#verify-asymptotic-approximations-hold-in-finite-sample-simulation-experiment">
-   5.4. Verify Asymptotic Approximations Hold in Finite-Sample Simulation Experiment
-  </a>
- </li>
-</ul>
+              
+              
 
-                        </nav>
-                    </div>
-                </div>
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Analyzing RCT reemployment experiment</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
             </div>
-            <main id="main-content" role="main">
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jonathan-roth-s-dgp">5.1. Jonathan Roth’s DGP</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analyze-the-rct-data-with-precision-adjustment">5.2. Analyze the RCT data with Precision Adjustment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-classical-standard-errors-non-robust-is-misleading-here">5.3. Using classical standard errors (non-robust) is misleading here.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#verify-asymptotic-approximations-hold-in-finite-sample-simulation-experiment">5.4. Verify Asymptotic Approximations Hold in Finite-Sample Simulation Experiment</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
                 
-              <div>
-                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
   <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># !wget https://developer.nvidia.com/compute/cuda/9.0/Prod/local_installers/cuda-repo-ubuntu1604-9-0-local_9.0.176-1_amd64-deb</span>
@@ -593,9 +483,9 @@ title="Print to PDF"
 </div>
 </div>
 <section class="tex2jax_ignore mathjax_ignore" id="analyzing-rct-reemployment-experiment">
-<h1><span class="section-number">5. </span>Analyzing RCT reemployment experiment<a class="headerlink" href="#analyzing-rct-reemployment-experiment" title="Permalink to this headline">#</a></h1>
+<h1><span class="section-number">5. </span>Analyzing RCT reemployment experiment<a class="headerlink" href="#analyzing-rct-reemployment-experiment" title="Permalink to this heading">#</a></h1>
 <section id="jonathan-roth-s-dgp">
-<h2><span class="section-number">5.1. </span>Jonathan Roth’s DGP<a class="headerlink" href="#jonathan-roth-s-dgp" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">5.1. </span>Jonathan Roth’s DGP<a class="headerlink" href="#jonathan-roth-s-dgp" title="Permalink to this heading">#</a></h2>
 <p>Here we set up a DGP with heterogenous effects. In this example, with is due to Jonathan Roth, we have</p>
 <div class="math notranslate nohighlight">
 \[
@@ -628,7 +518,7 @@ E [Y(1) - Y(0) | Z ]= 2 Z.
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Import relevant packages for splitting data</span>
-<span class="k">using</span> <span class="n">LinearAlgebra</span><span class="p">,</span> <span class="n">GLM</span><span class="p">,</span> <span class="n">DataFrames</span><span class="p">,</span> <span class="n">Statistics</span><span class="p">,</span> <span class="n">Random</span><span class="p">,</span> <span class="n">Distributions</span><span class="p">,</span> <span class="n">Tables</span><span class="p">,</span> <span class="n">TableOperations</span><span class="p">,</span> <span class="n">StatsBase</span><span class="p">,</span> <span class="n">FreqTables</span><span class="p">,</span> <span class="n">DataFrames</span>
+<span class="k">using</span><span class="w"> </span><span class="n">LinearAlgebra</span><span class="p">,</span><span class="w"> </span><span class="n">GLM</span><span class="p">,</span><span class="w"> </span><span class="n">DataFrames</span><span class="p">,</span><span class="w"> </span><span class="n">Statistics</span><span class="p">,</span><span class="w"> </span><span class="n">Random</span><span class="p">,</span><span class="w"> </span><span class="n">Distributions</span><span class="p">,</span><span class="w"> </span><span class="n">Tables</span><span class="p">,</span><span class="w"> </span><span class="n">TableOperations</span><span class="p">,</span><span class="w"> </span><span class="n">StatsBase</span><span class="p">,</span><span class="w"> </span><span class="n">FreqTables</span><span class="p">,</span><span class="w"> </span><span class="n">DataFrames</span>
 </pre></div>
 </div>
 </div>
@@ -637,62 +527,67 @@ E [Y(1) - Y(0) | Z ]= 2 Z.
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Set Seed</span>
 <span class="c"># to make the results replicable (generating random numbers)</span>
-<span class="n">Random</span><span class="o">.</span><span class="n">seed!</span><span class="p">(</span><span class="mi">12345676</span><span class="p">)</span>     <span class="c"># set MC seed</span>
+<span class="n">Random</span><span class="o">.</span><span class="n">seed!</span><span class="p">(</span><span class="mi">12345676</span><span class="p">)</span><span class="w">     </span><span class="c"># set MC seed</span>
 
-<span class="n">n</span> <span class="o">=</span> <span class="mi">1000</span>                <span class="c"># sample size</span>
-<span class="n">Z</span> <span class="o">=</span> <span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>         <span class="c"># generate Z</span>
-<span class="n">Y0</span> <span class="o">=</span> <span class="o">-</span><span class="n">Z</span> <span class="o">+</span> <span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>   <span class="c"># conditional average baseline response is -Z</span>
-<span class="n">Y1</span> <span class="o">=</span> <span class="n">Z</span> <span class="o">+</span> <span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>    <span class="c"># conditional average treatment effect is +Z</span>
-<span class="n">D</span> <span class="o">=</span> <span class="kt">Int</span><span class="o">.</span><span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="n">Uniform</span><span class="p">(),</span> <span class="n">n</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">.&lt;</span> <span class="mf">0.2</span><span class="p">)</span>   <span class="c"># treatment indicator; only 23% get treated</span>
-<span class="n">length</span><span class="p">(</span><span class="n">D</span><span class="p">[</span><span class="n">D</span> <span class="o">.==</span> <span class="mi">1</span><span class="p">])</span><span class="o">*</span><span class="mi">100</span><span class="o">/</span><span class="n">length</span><span class="p">(</span><span class="n">D</span><span class="p">[</span><span class="n">D</span> <span class="o">.==</span> <span class="mi">0</span><span class="p">])</span>  <span class="c"># treatment indicator; only 23% get treated</span>
+<span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1000</span><span class="w">                </span><span class="c"># sample size</span>
+<span class="n">Z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w">         </span><span class="c"># generate Z</span>
+<span class="n">Y0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="n">Z</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w">   </span><span class="c"># conditional average baseline response is -Z</span>
+<span class="n">Y1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Z</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w">    </span><span class="c"># conditional average treatment effect is +Z</span>
+<span class="n">D</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">Int</span><span class="o">.</span><span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="n">Uniform</span><span class="p">(),</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">.&lt;</span><span class="w"> </span><span class="mf">0.2</span><span class="p">)</span><span class="w">   </span><span class="c"># treatment indicator; only 23% get treated</span>
+<span class="n">length</span><span class="p">(</span><span class="n">D</span><span class="p">[</span><span class="n">D</span><span class="w"> </span><span class="o">.==</span><span class="w"> </span><span class="mi">1</span><span class="p">])</span><span class="o">*</span><span class="mi">100</span><span class="o">/</span><span class="n">length</span><span class="p">(</span><span class="n">D</span><span class="p">[</span><span class="n">D</span><span class="w"> </span><span class="o">.==</span><span class="w"> </span><span class="mi">0</span><span class="p">])</span><span class="w">  </span><span class="c"># treatment indicator; only 23% get treated</span>
 <span class="n">mean</span><span class="p">(</span><span class="n">D</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.193
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.189
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Y</span> <span class="o">=</span> <span class="p">(</span><span class="n">Y1</span><span class="o">.*</span><span class="n">D</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">Y0</span><span class="o">.*</span><span class="p">(</span><span class="n">ones</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="n">D</span><span class="p">))</span>    <span class="c"># observed Y</span>
-<span class="n">D</span> <span class="o">=</span> <span class="n">D</span> <span class="o">-</span> <span class="n">fill</span><span class="p">(</span><span class="n">mean</span><span class="p">(</span><span class="n">D</span><span class="p">),</span><span class="n">n</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>            <span class="c"># demean D</span>
-<span class="n">Z</span> <span class="o">=</span> <span class="n">Z</span> <span class="o">-</span> <span class="n">fill</span><span class="p">(</span><span class="n">mean</span><span class="p">(</span><span class="n">Z</span><span class="p">),</span><span class="n">n</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>            <span class="c"># demean Z</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">Y1</span><span class="o">.*</span><span class="n">D</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">Y0</span><span class="o">.*</span><span class="p">(</span><span class="n">ones</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="n">D</span><span class="p">))</span><span class="w">    </span><span class="c"># observed Y</span>
+<span class="n">D</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">D</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">fill</span><span class="p">(</span><span class="n">mean</span><span class="p">(</span><span class="n">D</span><span class="p">),</span><span class="n">n</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="w">            </span><span class="c"># demean D</span>
+<span class="n">Z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Z</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">fill</span><span class="p">(</span><span class="n">mean</span><span class="p">(</span><span class="n">Z</span><span class="p">),</span><span class="n">n</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="w">            </span><span class="c"># demean Z</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1000×1 Matrix{Float64}:
- -0.28363285703372
-  0.9445462163297016
-  1.4041340606063741
- -0.31938856407892297
-  0.025831391754146213
-  0.1959972014079981
-  0.8816207236671101
- -0.39714743413485315
-  1.8376685506844046
-  0.7433093590338038
+  1.726930592166616
+  2.6668920923293324
+  0.17260327143465098
+  0.22981794818549167
+  1.466898001424473
+  1.3529320088626253
+  0.1863114143889225
+  0.04369619043375853
+ -0.5850402073066382
+ -0.0643490070645289
+ -1.10936088593052
+ -0.8286904334211317
+ -1.916406193712996
   ⋮
-  1.0523210386262114
-  2.0794634308388917
- -0.5830287094568443
-  1.2658914618251444
- -0.6210227063793656
-  0.5346326339491493
- -1.0336059839504161
-  1.3334449811321292
- -2.4689922728893436
- -1.1552826022174127
+ -1.1865268777224587
+ -0.3632408555708126
+  0.7893783341581972
+  2.875748293624403
+  0.8344513543325733
+  1.0072571424293475
+  0.4003202863359305
+ -0.6043502214480204
+  0.09863327796173031
+ -2.45008621581788
+ -1.8543324535087402
+ -0.48790168982563364
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="analyze-the-rct-data-with-precision-adjustment">
-<h2><span class="section-number">5.2. </span>Analyze the RCT data with Precision Adjustment<a class="headerlink" href="#analyze-the-rct-data-with-precision-adjustment" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">5.2. </span>Analyze the RCT data with Precision Adjustment<a class="headerlink" href="#analyze-the-rct-data-with-precision-adjustment" title="Permalink to this heading">#</a></h2>
 <p>Consider</p>
 <ul class="simple">
 <li><p>classical 2-sample approach, no adjustment (CL)</p></li>
@@ -703,38 +598,38 @@ E [Y(1) - Y(0) | Z ]= 2 Z.
 <p>Observe that CRA delivers estimates that are less efficient than CL (pointed out by Freedman), whereas IRA delivers more efficient approach (pointed out by Lin). In order for CRA to be more efficient than CL, we need the CRA to be a correct model of the conditional expectation function of Y given D and X, which is not the case here.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Z_times_D</span> <span class="o">=</span> <span class="n">Z</span><span class="o">.*</span><span class="n">D</span>
-<span class="n">X</span> <span class="o">=</span> <span class="n">hcat</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">Z_times_D</span><span class="p">)</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="p">[</span><span class="ss">:Z</span><span class="p">,</span> <span class="ss">:D</span><span class="p">,</span> <span class="ss">:Z_times_D</span><span class="p">])</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Z_times_D</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Z</span><span class="o">.*</span><span class="n">D</span>
+<span class="n">X</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hcat</span><span class="p">(</span><span class="n">D</span><span class="p">,</span><span class="w"> </span><span class="n">Z</span><span class="p">,</span><span class="w"> </span><span class="n">Z_times_D</span><span class="p">)</span>
+<span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="ss">:Z</span><span class="p">,</span><span class="w"> </span><span class="ss">:D</span><span class="p">,</span><span class="w"> </span><span class="ss">:Z_times_D</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><table class="data-frame"><thead><tr><th></th><th>Z</th><th>D</th><th>Z_times_D</th></tr><tr><th></th><th>Float64</th><th>Float64</th><th>Float64</th></tr></thead><tbody><p>1,000 rows × 3 columns</p><tr><th>1</th><td>-0.193</td><td>-0.283633</td><td>0.0547411</td></tr><tr><th>2</th><td>-0.193</td><td>0.944546</td><td>-0.182297</td></tr><tr><th>3</th><td>-0.193</td><td>1.40413</td><td>-0.270998</td></tr><tr><th>4</th><td>-0.193</td><td>-0.319389</td><td>0.061642</td></tr><tr><th>5</th><td>0.807</td><td>0.0258314</td><td>0.0208459</td></tr><tr><th>6</th><td>0.807</td><td>0.195997</td><td>0.15817</td></tr><tr><th>7</th><td>-0.193</td><td>0.881621</td><td>-0.170153</td></tr><tr><th>8</th><td>-0.193</td><td>-0.397147</td><td>0.0766495</td></tr><tr><th>9</th><td>-0.193</td><td>1.83767</td><td>-0.35467</td></tr><tr><th>10</th><td>0.807</td><td>0.743309</td><td>0.599851</td></tr><tr><th>11</th><td>-0.193</td><td>0.1446</td><td>-0.0279077</td></tr><tr><th>12</th><td>-0.193</td><td>-1.4793</td><td>0.285506</td></tr><tr><th>13</th><td>-0.193</td><td>0.500078</td><td>-0.096515</td></tr><tr><th>14</th><td>-0.193</td><td>-0.89187</td><td>0.172131</td></tr><tr><th>15</th><td>-0.193</td><td>-0.791121</td><td>0.152686</td></tr><tr><th>16</th><td>-0.193</td><td>-0.642243</td><td>0.123953</td></tr><tr><th>17</th><td>-0.193</td><td>0.046039</td><td>-0.00888552</td></tr><tr><th>18</th><td>-0.193</td><td>-0.707724</td><td>0.136591</td></tr><tr><th>19</th><td>0.807</td><td>-0.612646</td><td>-0.494405</td></tr><tr><th>20</th><td>0.807</td><td>2.08873</td><td>1.6856</td></tr><tr><th>21</th><td>-0.193</td><td>0.74218</td><td>-0.143241</td></tr><tr><th>22</th><td>-0.193</td><td>-0.572258</td><td>0.110446</td></tr><tr><th>23</th><td>-0.193</td><td>0.448602</td><td>-0.0865802</td></tr><tr><th>24</th><td>-0.193</td><td>-0.155892</td><td>0.0300871</td></tr><tr><th>25</th><td>-0.193</td><td>0.0580305</td><td>-0.0111999</td></tr><tr><th>&vellip;</th><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td></tr></tbody></table></div></div>
+<div class="output text_html"><div class="data-frame"><p>1,000 rows × 3 columns</p><table class="data-frame"><thead><tr><th></th><th>Z</th><th>D</th><th>Z_times_D</th></tr><tr><th></th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th></tr></thead><tbody><tr><th>1</th><td>-0.189</td><td>1.72693</td><td>-0.32639</td></tr><tr><th>2</th><td>0.811</td><td>2.66689</td><td>2.16285</td></tr><tr><th>3</th><td>-0.189</td><td>0.172603</td><td>-0.032622</td></tr><tr><th>4</th><td>-0.189</td><td>0.229818</td><td>-0.0434356</td></tr><tr><th>5</th><td>-0.189</td><td>1.4669</td><td>-0.277244</td></tr><tr><th>6</th><td>-0.189</td><td>1.35293</td><td>-0.255704</td></tr><tr><th>7</th><td>-0.189</td><td>0.186311</td><td>-0.0352129</td></tr><tr><th>8</th><td>-0.189</td><td>0.0436962</td><td>-0.00825858</td></tr><tr><th>9</th><td>-0.189</td><td>-0.58504</td><td>0.110573</td></tr><tr><th>10</th><td>-0.189</td><td>-0.064349</td><td>0.012162</td></tr><tr><th>11</th><td>0.811</td><td>-1.10936</td><td>-0.899692</td></tr><tr><th>12</th><td>-0.189</td><td>-0.82869</td><td>0.156622</td></tr><tr><th>13</th><td>-0.189</td><td>-1.91641</td><td>0.362201</td></tr><tr><th>14</th><td>-0.189</td><td>1.4849</td><td>-0.280646</td></tr><tr><th>15</th><td>0.811</td><td>0.0416816</td><td>0.0338038</td></tr><tr><th>16</th><td>0.811</td><td>0.100034</td><td>0.0811278</td></tr><tr><th>17</th><td>-0.189</td><td>1.72016</td><td>-0.325111</td></tr><tr><th>18</th><td>-0.189</td><td>-0.6192</td><td>0.117029</td></tr><tr><th>19</th><td>-0.189</td><td>-1.34098</td><td>0.253445</td></tr><tr><th>20</th><td>-0.189</td><td>-0.168009</td><td>0.0317538</td></tr><tr><th>21</th><td>0.811</td><td>0.283359</td><td>0.229804</td></tr><tr><th>22</th><td>-0.189</td><td>1.22439</td><td>-0.231409</td></tr><tr><th>23</th><td>-0.189</td><td>0.00721673</td><td>-0.00136396</td></tr><tr><th>24</th><td>-0.189</td><td>0.589938</td><td>-0.111498</td></tr><tr><th>25</th><td>-0.189</td><td>-1.7345</td><td>0.32782</td></tr><tr><th>26</th><td>0.811</td><td>1.02695</td><td>0.832854</td></tr><tr><th>27</th><td>-0.189</td><td>0.978308</td><td>-0.1849</td></tr><tr><th>28</th><td>-0.189</td><td>-0.992186</td><td>0.187523</td></tr><tr><th>29</th><td>-0.189</td><td>-0.128773</td><td>0.0243381</td></tr><tr><th>30</th><td>-0.189</td><td>2.17567</td><td>-0.411201</td></tr><tr><th>&vellip;</th><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td></tr></tbody></table></div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Import packages for OLS regression</span>
-<span class="k">using</span> <span class="n">GLM</span><span class="p">,</span> <span class="n">Plots</span>
+<span class="k">using</span><span class="w"> </span><span class="n">GLM</span><span class="p">,</span><span class="w"> </span><span class="n">Plots</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">data_aux</span> <span class="o">=</span> <span class="p">[</span><span class="n">Y</span> <span class="n">D</span> <span class="n">Z</span> <span class="n">Z_times_D</span><span class="p">]</span>
-<span class="n">data_aux</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">(</span><span class="n">data_aux</span><span class="p">,</span> <span class="p">[</span><span class="ss">:Y</span><span class="p">,</span> <span class="ss">:D</span><span class="p">,</span> <span class="ss">:Z</span><span class="p">,</span> <span class="ss">:Z_times_D</span><span class="p">])</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">data_aux</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">Y</span><span class="w"> </span><span class="n">D</span><span class="w"> </span><span class="n">Z</span><span class="w"> </span><span class="n">Z_times_D</span><span class="p">]</span>
+<span class="n">data_aux</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data_aux</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="ss">:Y</span><span class="p">,</span><span class="w"> </span><span class="ss">:D</span><span class="p">,</span><span class="w"> </span><span class="ss">:Z</span><span class="p">,</span><span class="w"> </span><span class="ss">:Z_times_D</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><table class="data-frame"><thead><tr><th></th><th>Y</th><th>D</th><th>Z</th><th>Z_times_D</th></tr><tr><th></th><th>Float64</th><th>Float64</th><th>Float64</th><th>Float64</th></tr></thead><tbody><p>1,000 rows × 4 columns</p><tr><th>1</th><td>1.11282</td><td>-0.193</td><td>-0.283633</td><td>0.0547411</td></tr><tr><th>2</th><td>-0.175068</td><td>-0.193</td><td>0.944546</td><td>-0.182297</td></tr><tr><th>3</th><td>-1.80793</td><td>-0.193</td><td>1.40413</td><td>-0.270998</td></tr><tr><th>4</th><td>1.19269</td><td>-0.193</td><td>-0.319389</td><td>0.061642</td></tr><tr><th>5</th><td>0.311297</td><td>0.807</td><td>0.0258314</td><td>0.0208459</td></tr><tr><th>6</th><td>0.560205</td><td>0.807</td><td>0.195997</td><td>0.15817</td></tr><tr><th>7</th><td>-2.48048</td><td>-0.193</td><td>0.881621</td><td>-0.170153</td></tr><tr><th>8</th><td>0.947113</td><td>-0.193</td><td>-0.397147</td><td>0.0766495</td></tr><tr><th>9</th><td>-1.03423</td><td>-0.193</td><td>1.83767</td><td>-0.35467</td></tr><tr><th>10</th><td>0.666118</td><td>0.807</td><td>0.743309</td><td>0.599851</td></tr><tr><th>11</th><td>1.29439</td><td>-0.193</td><td>0.1446</td><td>-0.0279077</td></tr><tr><th>12</th><td>0.976366</td><td>-0.193</td><td>-1.4793</td><td>0.285506</td></tr><tr><th>13</th><td>-0.491501</td><td>-0.193</td><td>0.500078</td><td>-0.096515</td></tr><tr><th>14</th><td>-1.10297</td><td>-0.193</td><td>-0.89187</td><td>0.172131</td></tr><tr><th>15</th><td>-0.764862</td><td>-0.193</td><td>-0.791121</td><td>0.152686</td></tr><tr><th>16</th><td>0.27324</td><td>-0.193</td><td>-0.642243</td><td>0.123953</td></tr><tr><th>17</th><td>0.587179</td><td>-0.193</td><td>0.046039</td><td>-0.00888552</td></tr><tr><th>18</th><td>1.37738</td><td>-0.193</td><td>-0.707724</td><td>0.136591</td></tr><tr><th>19</th><td>-1.47769</td><td>0.807</td><td>-0.612646</td><td>-0.494405</td></tr><tr><th>20</th><td>1.11557</td><td>0.807</td><td>2.08873</td><td>1.6856</td></tr><tr><th>21</th><td>-1.98951</td><td>-0.193</td><td>0.74218</td><td>-0.143241</td></tr><tr><th>22</th><td>-1.28537</td><td>-0.193</td><td>-0.572258</td><td>0.110446</td></tr><tr><th>23</th><td>-0.896034</td><td>-0.193</td><td>0.448602</td><td>-0.0865802</td></tr><tr><th>24</th><td>-0.171022</td><td>-0.193</td><td>-0.155892</td><td>0.0300871</td></tr><tr><th>25</th><td>0.842919</td><td>-0.193</td><td>0.0580305</td><td>-0.0111999</td></tr><tr><th>&vellip;</th><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td></tr></tbody></table></div></div>
+<div class="output text_html"><div class="data-frame"><p>1,000 rows × 4 columns</p><table class="data-frame"><thead><tr><th></th><th>Y</th><th>D</th><th>Z</th><th>Z_times_D</th></tr><tr><th></th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th><th title="Float64">Float64</th></tr></thead><tbody><tr><th>1</th><td>-1.57126</td><td>-0.189</td><td>1.72693</td><td>-0.32639</td></tr><tr><th>2</th><td>1.53851</td><td>0.811</td><td>2.66689</td><td>2.16285</td></tr><tr><th>3</th><td>-0.552237</td><td>-0.189</td><td>0.172603</td><td>-0.032622</td></tr><tr><th>4</th><td>0.241576</td><td>-0.189</td><td>0.229818</td><td>-0.0434356</td></tr><tr><th>5</th><td>-2.71474</td><td>-0.189</td><td>1.4669</td><td>-0.277244</td></tr><tr><th>6</th><td>-0.955155</td><td>-0.189</td><td>1.35293</td><td>-0.255704</td></tr><tr><th>7</th><td>-0.0891579</td><td>-0.189</td><td>0.186311</td><td>-0.0352129</td></tr><tr><th>8</th><td>-2.38482</td><td>-0.189</td><td>0.0436962</td><td>-0.00825858</td></tr><tr><th>9</th><td>2.28832</td><td>-0.189</td><td>-0.58504</td><td>0.110573</td></tr><tr><th>10</th><td>-0.101834</td><td>-0.189</td><td>-0.064349</td><td>0.012162</td></tr><tr><th>11</th><td>-1.31392</td><td>0.811</td><td>-1.10936</td><td>-0.899692</td></tr><tr><th>12</th><td>2.34802</td><td>-0.189</td><td>-0.82869</td><td>0.156622</td></tr><tr><th>13</th><td>3.90192</td><td>-0.189</td><td>-1.91641</td><td>0.362201</td></tr><tr><th>14</th><td>-3.48666</td><td>-0.189</td><td>1.4849</td><td>-0.280646</td></tr><tr><th>15</th><td>1.13804</td><td>0.811</td><td>0.0416816</td><td>0.0338038</td></tr><tr><th>16</th><td>0.290005</td><td>0.811</td><td>0.100034</td><td>0.0811278</td></tr><tr><th>17</th><td>-2.40993</td><td>-0.189</td><td>1.72016</td><td>-0.325111</td></tr><tr><th>18</th><td>-0.237082</td><td>-0.189</td><td>-0.6192</td><td>0.117029</td></tr><tr><th>19</th><td>2.8754</td><td>-0.189</td><td>-1.34098</td><td>0.253445</td></tr><tr><th>20</th><td>0.583754</td><td>-0.189</td><td>-0.168009</td><td>0.0317538</td></tr><tr><th>21</th><td>1.74147</td><td>0.811</td><td>0.283359</td><td>0.229804</td></tr><tr><th>22</th><td>-0.958462</td><td>-0.189</td><td>1.22439</td><td>-0.231409</td></tr><tr><th>23</th><td>0.422279</td><td>-0.189</td><td>0.00721673</td><td>-0.00136396</td></tr><tr><th>24</th><td>-0.913565</td><td>-0.189</td><td>0.589938</td><td>-0.111498</td></tr><tr><th>25</th><td>1.38136</td><td>-0.189</td><td>-1.7345</td><td>0.32782</td></tr><tr><th>26</th><td>1.1622</td><td>0.811</td><td>1.02695</td><td>0.832854</td></tr><tr><th>27</th><td>-1.97462</td><td>-0.189</td><td>0.978308</td><td>-0.1849</td></tr><tr><th>28</th><td>1.6689</td><td>-0.189</td><td>-0.992186</td><td>0.187523</td></tr><tr><th>29</th><td>0.730834</td><td>-0.189</td><td>-0.128773</td><td>0.0243381</td></tr><tr><th>30</th><td>-2.47703</td><td>-0.189</td><td>2.17567</td><td>-0.411201</td></tr><tr><th>&vellip;</th><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td><td>&vellip;</td></tr></tbody></table></div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">fm_1</span> <span class="o">=</span> <span class="nd">@formula</span><span class="p">(</span><span class="n">Y</span> <span class="o">~</span> <span class="n">D</span><span class="p">)</span>
-<span class="n">fm_2</span> <span class="o">=</span> <span class="nd">@formula</span><span class="p">(</span><span class="n">Y</span> <span class="o">~</span> <span class="n">D</span> <span class="o">+</span> <span class="n">Z</span><span class="p">)</span>
-<span class="n">fm_3</span> <span class="o">=</span> <span class="nd">@formula</span><span class="p">(</span><span class="n">Y</span> <span class="o">~</span> <span class="n">D</span> <span class="o">+</span> <span class="n">Z</span> <span class="o">+</span> <span class="n">Z_times_D</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">fm_1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nd">@formula</span><span class="p">(</span><span class="n">Y</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">D</span><span class="p">)</span>
+<span class="n">fm_2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nd">@formula</span><span class="p">(</span><span class="n">Y</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">D</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Z</span><span class="p">)</span>
+<span class="n">fm_3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nd">@formula</span><span class="p">(</span><span class="n">Y</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">D</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Z</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Z_times_D</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -752,76 +647,21 @@ Predictors:
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">CL_model</span> <span class="o">=</span> <span class="n">lm</span><span class="p">(</span><span class="n">fm_1</span><span class="p">,</span> <span class="n">data_aux</span><span class="p">)</span>
-<span class="n">CRA_model</span> <span class="o">=</span> <span class="n">lm</span><span class="p">(</span><span class="n">fm_2</span><span class="p">,</span> <span class="n">data_aux</span><span class="p">)</span>  <span class="c">#classical</span>
-<span class="n">IRA_model</span> <span class="o">=</span> <span class="n">lm</span><span class="p">(</span><span class="n">fm_3</span><span class="p">,</span> <span class="n">data_aux</span><span class="p">)</span>  <span class="c">#interactive approach</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">CL_model</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lm</span><span class="p">(</span><span class="n">fm_1</span><span class="p">,</span><span class="w"> </span><span class="n">data_aux</span><span class="p">)</span>
+<span class="n">CRA_model</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lm</span><span class="p">(</span><span class="n">fm_2</span><span class="p">,</span><span class="w"> </span><span class="n">data_aux</span><span class="p">)</span><span class="w">  </span><span class="c">#classical</span>
+<span class="n">IRA_model</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lm</span><span class="p">(</span><span class="n">fm_3</span><span class="p">,</span><span class="w"> </span><span class="n">data_aux</span><span class="p">)</span><span class="w">  </span><span class="c">#interactive approach</span>
 <span class="c"># Standard deviations for estimators</span>
-<span class="n">CL</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">sum</span><span class="p">((</span><span class="n">Y</span> <span class="o">-</span> <span class="n">predict</span><span class="p">(</span><span class="n">CL_model</span><span class="p">))</span><span class="o">.*</span><span class="p">(</span><span class="n">Y</span> <span class="o">-</span> <span class="n">predict</span><span class="p">(</span><span class="n">CL_model</span><span class="p">)))</span><span class="o">./</span><span class="n">length</span><span class="p">(</span><span class="n">Y</span><span class="p">))</span>
-<span class="n">CRA</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">sum</span><span class="p">((</span><span class="n">Y</span> <span class="o">-</span> <span class="n">predict</span><span class="p">(</span><span class="n">CRA_model</span><span class="p">))</span><span class="o">.*</span><span class="p">(</span><span class="n">Y</span> <span class="o">-</span> <span class="n">predict</span><span class="p">(</span><span class="n">CRA_model</span><span class="p">)))</span><span class="o">./</span><span class="n">length</span><span class="p">(</span><span class="n">Y</span><span class="p">))</span>
-<span class="n">IRA</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">sum</span><span class="p">((</span><span class="n">Y</span> <span class="o">-</span> <span class="n">predict</span><span class="p">(</span><span class="n">IRA_model</span><span class="p">))</span><span class="o">.*</span><span class="p">(</span><span class="n">Y</span> <span class="o">-</span> <span class="n">predict</span><span class="p">(</span><span class="n">IRA_model</span><span class="p">)))</span><span class="o">./</span><span class="n">length</span><span class="p">(</span><span class="n">Y</span><span class="p">))</span>
-<span class="nd">@show</span> <span class="n">CL</span>
-<span class="nd">@show</span> <span class="n">CRA</span>
-<span class="nd">@show</span> <span class="n">IRA</span>
+<span class="n">CL</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sqrt</span><span class="p">(</span><span class="n">sum</span><span class="p">((</span><span class="n">Y</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">predict</span><span class="p">(</span><span class="n">CL_model</span><span class="p">))</span><span class="o">.*</span><span class="p">(</span><span class="n">Y</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">predict</span><span class="p">(</span><span class="n">CL_model</span><span class="p">)))</span><span class="o">./</span><span class="n">length</span><span class="p">(</span><span class="n">Y</span><span class="p">))</span>
+<span class="n">CRA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sqrt</span><span class="p">(</span><span class="n">sum</span><span class="p">((</span><span class="n">Y</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">predict</span><span class="p">(</span><span class="n">CRA_model</span><span class="p">))</span><span class="o">.*</span><span class="p">(</span><span class="n">Y</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">predict</span><span class="p">(</span><span class="n">CRA_model</span><span class="p">)))</span><span class="o">./</span><span class="n">length</span><span class="p">(</span><span class="n">Y</span><span class="p">))</span>
+<span class="n">IRA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sqrt</span><span class="p">(</span><span class="n">sum</span><span class="p">((</span><span class="n">Y</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">predict</span><span class="p">(</span><span class="n">IRA_model</span><span class="p">))</span><span class="o">.*</span><span class="p">(</span><span class="n">Y</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">predict</span><span class="p">(</span><span class="n">IRA_model</span><span class="p">)))</span><span class="o">./</span><span class="n">length</span><span class="p">(</span><span class="n">Y</span><span class="p">))</span>
+<span class="nd">@show</span><span class="w"> </span><span class="n">CL</span>
+<span class="nd">@show</span><span class="w"> </span><span class="n">CRA</span>
+<span class="nd">@show</span><span class="w"> </span><span class="n">IRA</span>
 
 <span class="c"># Check t values of regressors </span>
-<span class="nd">@show</span> <span class="n">coeftable</span><span class="p">(</span><span class="n">CL_model</span><span class="p">)</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
-<span class="nd">@show</span> <span class="n">coeftable</span><span class="p">(</span><span class="n">CRA_model</span><span class="p">)</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
-<span class="nd">@show</span> <span class="n">coeftable</span><span class="p">(</span><span class="n">IRA_model</span><span class="p">)</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CL = 1.3933058979667916
-CRA = 1.282349167401232
-IRA = 1.0120998697288264
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(coeftable(CL_model)).cols[4] = [0.0998031131940856, 0.5557096926021292]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(coeftable(CRA_model)).cols[4] = [0.07392148519479515, 0.8080925829531757, 7.512800066286311e-38]
-(coeftable(IRA_model)).cols[4] = [0.11724102121374018, 0.177266312390378, 7.279259820512709e-65, 1.745728665485829e-104]
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4-element Vector{Float64}:
- 0.11724102121374018
- 0.177266312390378
- 7.279259820512709e-65
- 1.745728665485829e-104
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Comparing models</span>
-<span class="n">ftest</span><span class="p">(</span><span class="n">CL_model</span><span class="o">.</span><span class="n">model</span><span class="p">,</span> <span class="n">CRA_model</span><span class="o">.</span><span class="n">model</span><span class="p">,</span> <span class="n">IRA_model</span><span class="o">.</span><span class="n">model</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>F-test: 3 models fitted on 1000 observations
-──────────────────────────────────────────────────────────────────────
-     DOF  ΔDOF        SSR       ΔSSR      R²     ΔR²        F*   p(&gt;F)
-──────────────────────────────────────────────────────────────────────
-[1]    3        1941.3013             0.0003                          
-[2]    4     1  1644.4194  -296.8819  0.1532  0.1529  179.9974  &lt;1e-37
-[3]    5     1  1024.3461  -620.0732  0.4725  0.3193  602.9143  &lt;1e-99
-──────────────────────────────────────────────────────────────────────
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="using-classical-standard-errors-non-robust-is-misleading-here">
-<h2><span class="section-number">5.3. </span>Using classical standard errors (non-robust) is misleading here.<a class="headerlink" href="#using-classical-standard-errors-non-robust-is-misleading-here" title="Permalink to this headline">#</a></h2>
-<p>We don’t teach non-robust standard errors in econometrics courses, but the default statistical inference for lm() procedure in R, summary.lm(), still uses 100-year old concepts, perhaps in part due to historical legacy.</p>
-<p>Here the non-robust standard errors suggest that there is not much difference between the different approaches, contrary to the conclusions reached using the robust standard errors.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@show</span> <span class="n">CL_model</span>
-<span class="nd">@show</span> <span class="n">CRA_model</span>
-<span class="nd">@show</span> <span class="n">IRA_model</span>
+<span class="nd">@show</span><span class="w"> </span><span class="n">coeftable</span><span class="p">(</span><span class="n">CL_model</span><span class="p">)</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+<span class="nd">@show</span><span class="w"> </span><span class="n">coeftable</span><span class="p">(</span><span class="n">CRA_model</span><span class="p">)</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+<span class="nd">@show</span><span class="w"> </span><span class="n">coeftable</span><span class="p">(</span><span class="n">IRA_model</span><span class="p">)</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -831,39 +671,37 @@ IRA = 1.0120998697288264
 Y ~ 1 + D
 
 Coefficients:
-──────────────────────────────────────────────────────────────────────────
-                  Coef.  Std. Error      t  Pr(&gt;|t|)  Lower 95%  Upper 95%
-──────────────────────────────────────────────────────────────────────────
-(Intercept)  -0.0726548   0.0441043  -1.65    0.0998  -0.159203  0.0138931
-D             0.065871    0.111755    0.59    0.5557  -0.15343   0.285172
-──────────────────────────────────────────────────────────────────────────
+─────────────────────────────────────────────────────────────────────────
+                 Coef.  Std. Error     t  Pr(&gt;|t|)   Lower 95%  Upper 95%
+─────────────────────────────────────────────────────────────────────────
+(Intercept)  0.0450644   0.0555981  0.81    0.4178  -0.0640381   0.154167
+D            0.0593067   0.14201    0.42    0.6763  -0.219366    0.337979
+─────────────────────────────────────────────────────────────────────────
 CRA_model = StatsModels.TableRegressionModel{LinearModel{GLM.LmResp{Vector{Float64}}, GLM.DensePredChol{Float64, CholeskyPivoted{Float64, Matrix{Float64}}}}, Matrix{Float64}}
 
 Y ~ 1 + D + Z
 
 Coefficients:
-─────────────────────────────────────────────────────────────────────────────
-                  Coef.  Std. Error       t  Pr(&gt;|t|)  Lower 95%    Upper 95%
-─────────────────────────────────────────────────────────────────────────────
-(Intercept)  -0.0726548   0.0406124   -1.79    0.0739  -0.15235    0.00704081
-D             0.0250123   0.102952     0.24    0.8081  -0.177015   0.227039
-Z            -0.550103    0.0410026  -13.42    &lt;1e-37  -0.630565  -0.469642
-─────────────────────────────────────────────────────────────────────────────
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>IRA_model = StatsModels.TableRegressionModel{LinearModel{GLM.LmResp{Vector{Float64}}, GLM.DensePredChol{Float64, CholeskyPivoted{Float64, Matrix{Float64}}}}, Matrix{Float64}}
+────────────────────────────────────────────────────────────────────────────
+                  Coef.  Std. Error       t  Pr(&gt;|t|)   Lower 95%  Upper 95%
+────────────────────────────────────────────────────────────────────────────
+(Intercept)   0.0450644   0.0438522    1.03    0.3044  -0.0409888   0.131118
+D             0.118474    0.112034     1.06    0.2905  -0.101375    0.338324
+Z            -1.04527     0.0424182  -24.64    &lt;1e-99  -1.12851    -0.96203
+────────────────────────────────────────────────────────────────────────────
+IRA_model = StatsModels.TableRegressionModel{LinearModel{GLM.LmResp{Vector{Float64}}, GLM.DensePredChol{Float64, CholeskyPivoted{Float64, Matrix{Float64}}}}, Matrix{Float64}}
 
 Y ~ 1 + D + Z + Z_times_D
 
 Coefficients:
-────────────────────────────────────────────────────────────────────────────
-                  Coef.  Std. Error       t  Pr(&gt;|t|)  Lower 95%   Upper 95%
-────────────────────────────────────────────────────────────────────────────
-(Intercept)  -0.0502996   0.0320825   -1.57    0.1172  -0.113257   0.0126575
-D             0.109863    0.0813693    1.35    0.1773  -0.049812   0.269538
-Z            -0.594236    0.0324276  -18.33    &lt;1e-64  -0.65787   -0.530602
-Z_times_D     1.93245     0.0787009   24.55    &lt;1e-99   1.77801    2.08689
-────────────────────────────────────────────────────────────────────────────
+───────────────────────────────────────────────────────────────────────────
+                  Coef.  Std. Error       t  Pr(&gt;|t|)  Lower 95%  Upper 95%
+───────────────────────────────────────────────────────────────────────────
+(Intercept)   0.0278515   0.0362395    0.77    0.4423  -0.043263   0.098966
+D             0.0471567   0.0926216    0.51    0.6108  -0.134599   0.228913
+Z            -1.01934     0.0350665  -29.07    &lt;1e-99  -1.08815   -0.950523
+Z_times_D     1.98389     0.0920421   21.55    &lt;1e-84   1.80327    2.16451
+───────────────────────────────────────────────────────────────────────────
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>StatsModels.TableRegressionModel{LinearModel{GLM.LmResp{Vector{Float64}}, GLM.DensePredChol{Float64, CholeskyPivoted{Float64, Matrix{Float64}}}}, Matrix{Float64}}
@@ -871,84 +709,115 @@ Z_times_D     1.93245     0.0787009   24.55    &lt;1e-99   1.77801    2.08689
 Y ~ 1 + D + Z + Z_times_D
 
 Coefficients:
-────────────────────────────────────────────────────────────────────────────
-                  Coef.  Std. Error       t  Pr(&gt;|t|)  Lower 95%   Upper 95%
-────────────────────────────────────────────────────────────────────────────
-(Intercept)  -0.0502996   0.0320825   -1.57    0.1172  -0.113257   0.0126575
-D             0.109863    0.0813693    1.35    0.1773  -0.049812   0.269538
-Z            -0.594236    0.0324276  -18.33    &lt;1e-64  -0.65787   -0.530602
-Z_times_D     1.93245     0.0787009   24.55    &lt;1e-99   1.77801    2.08689
-────────────────────────────────────────────────────────────────────────────
+───────────────────────────────────────────────────────────────────────────
+                  Coef.  Std. Error       t  Pr(&gt;|t|)  Lower 95%  Upper 95%
+───────────────────────────────────────────────────────────────────────────
+(Intercept)   0.0278515   0.0362395    0.77    0.4423  -0.043263   0.098966
+D             0.0471567   0.0926216    0.51    0.6108  -0.134599   0.228913
+Z            -1.01934     0.0350665  -29.07    &lt;1e-99  -1.08815   -0.950523
+Z_times_D     1.98389     0.0920421   21.55    &lt;1e-84   1.80327    2.16451
+───────────────────────────────────────────────────────────────────────────
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Comparing models</span>
+<span class="n">ftest</span><span class="p">(</span><span class="n">CL_model</span><span class="o">.</span><span class="n">model</span><span class="p">,</span><span class="w"> </span><span class="n">CRA_model</span><span class="o">.</span><span class="n">model</span><span class="p">,</span><span class="w"> </span><span class="n">IRA_model</span><span class="o">.</span><span class="n">model</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>F-test: 3 models fitted on 1000 observations
+───────────────────────────────────────────────────────────────────────
+     DOF  ΔDOF        SSR        ΔSSR      R²     ΔR²        F*   p(&gt;F)
+───────────────────────────────────────────────────────────────────────
+[1]    3        3084.9642              0.0002                          
+[2]    4     1  1917.2505  -1167.7137  0.3786  0.3785  607.2293  &lt;1e-99
+[3]    5     1  1307.4120   -609.8385  0.5763  0.1976  464.5813  &lt;1e-84
+───────────────────────────────────────────────────────────────────────
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="using-classical-standard-errors-non-robust-is-misleading-here">
+<h2><span class="section-number">5.3. </span>Using classical standard errors (non-robust) is misleading here.<a class="headerlink" href="#using-classical-standard-errors-non-robust-is-misleading-here" title="Permalink to this heading">#</a></h2>
+<p>We don’t teach non-robust standard errors in econometrics courses, but the default statistical inference for lm() procedure in R, summary.lm(), still uses 100-year old concepts, perhaps in part due to historical legacy.</p>
+<p>Here the non-robust standard errors suggest that there is not much difference between the different approaches, contrary to the conclusions reached using the robust standard errors.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@show</span><span class="w"> </span><span class="n">CL_model</span>
+<span class="nd">@show</span><span class="w"> </span><span class="n">CRA_model</span>
+<span class="nd">@show</span><span class="w"> </span><span class="n">IRA_model</span>
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="verify-asymptotic-approximations-hold-in-finite-sample-simulation-experiment">
-<h2><span class="section-number">5.4. </span>Verify Asymptotic Approximations Hold in Finite-Sample Simulation Experiment<a class="headerlink" href="#verify-asymptotic-approximations-hold-in-finite-sample-simulation-experiment" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">5.4. </span>Verify Asymptotic Approximations Hold in Finite-Sample Simulation Experiment<a class="headerlink" href="#verify-asymptotic-approximations-hold-in-finite-sample-simulation-experiment" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Random</span><span class="o">.</span><span class="n">seed!</span><span class="p">(</span><span class="mi">12345676</span><span class="p">)</span>     <span class="c"># set MC seed</span>
-<span class="n">n</span> <span class="o">=</span> <span class="mi">1000</span>
-<span class="n">B</span> <span class="o">=</span> <span class="mi">1000</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Random</span><span class="o">.</span><span class="n">seed!</span><span class="p">(</span><span class="mi">12345676</span><span class="p">)</span><span class="w">     </span><span class="c"># set MC seed</span>
+<span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1000</span>
+<span class="n">B</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1000</span>
 
 <span class="c"># format of data = float32</span>
-<span class="n">CLs</span> <span class="o">=</span> <span class="n">fill</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span>
-<span class="n">CRAs</span> <span class="o">=</span> <span class="n">fill</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span>
-<span class="n">IRAs</span> <span class="o">=</span> <span class="n">fill</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span>
+<span class="n">CLs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fill</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span><span class="w"> </span><span class="n">B</span><span class="p">)</span>
+<span class="n">CRAs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fill</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span><span class="w"> </span><span class="n">B</span><span class="p">)</span>
+<span class="n">IRAs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fill</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span><span class="w"> </span><span class="n">B</span><span class="p">)</span>
 
 
 <span class="c"># formulas for regressions</span>
-<span class="n">fm_1</span> <span class="o">=</span> <span class="nd">@formula</span><span class="p">(</span><span class="n">Y</span> <span class="o">~</span> <span class="n">D</span><span class="p">)</span>
-<span class="n">fm_2</span> <span class="o">=</span> <span class="nd">@formula</span><span class="p">(</span><span class="n">Y</span> <span class="o">~</span> <span class="n">D</span> <span class="o">+</span> <span class="n">Z</span><span class="p">)</span>
-<span class="n">fm_3</span> <span class="o">=</span> <span class="nd">@formula</span><span class="p">(</span><span class="n">Y</span> <span class="o">~</span> <span class="n">D</span> <span class="o">+</span> <span class="n">Z</span> <span class="o">+</span> <span class="n">Z_times_D</span><span class="p">)</span>
+<span class="n">fm_1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nd">@formula</span><span class="p">(</span><span class="n">Y</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">D</span><span class="p">)</span>
+<span class="n">fm_2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nd">@formula</span><span class="p">(</span><span class="n">Y</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">D</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Z</span><span class="p">)</span>
+<span class="n">fm_3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nd">@formula</span><span class="p">(</span><span class="n">Y</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">D</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Z</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Z_times_D</span><span class="p">)</span>
 
 <span class="c"># models</span>
-<span class="n">CL_model</span> <span class="o">=</span> <span class="n">lm</span><span class="p">(</span><span class="n">fm_1</span><span class="p">,</span> <span class="n">data_aux</span><span class="p">)</span>
-<span class="n">CRA_model</span> <span class="o">=</span> <span class="n">lm</span><span class="p">(</span><span class="n">fm_2</span><span class="p">,</span> <span class="n">data_aux</span><span class="p">)</span>  <span class="c">#classical</span>
-<span class="n">IRA_model</span> <span class="o">=</span> <span class="n">lm</span><span class="p">(</span><span class="n">fm_3</span><span class="p">,</span> <span class="n">data_aux</span><span class="p">)</span>  <span class="c">#interactive approach</span>
+<span class="n">CL_model</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lm</span><span class="p">(</span><span class="n">fm_1</span><span class="p">,</span><span class="w"> </span><span class="n">data_aux</span><span class="p">)</span>
+<span class="n">CRA_model</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lm</span><span class="p">(</span><span class="n">fm_2</span><span class="p">,</span><span class="w"> </span><span class="n">data_aux</span><span class="p">)</span><span class="w">  </span><span class="c">#classical</span>
+<span class="n">IRA_model</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lm</span><span class="p">(</span><span class="n">fm_3</span><span class="p">,</span><span class="w"> </span><span class="n">data_aux</span><span class="p">)</span><span class="w">  </span><span class="c">#interactive approach</span>
 
 
 <span class="c"># simulation</span>
-<span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="n">B</span>
-    <span class="n">Z</span> <span class="o">=</span> <span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>         <span class="c"># generate Z</span>
-    <span class="n">Y0</span> <span class="o">=</span> <span class="o">-</span><span class="n">Z</span> <span class="o">+</span> <span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>   <span class="c"># conditional average baseline response is -Z</span>
-    <span class="n">Y1</span> <span class="o">=</span> <span class="n">Z</span> <span class="o">+</span> <span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>    <span class="c"># conditional average treatment effect is +Z</span>
-    <span class="n">D</span> <span class="o">=</span> <span class="kt">Int</span><span class="o">.</span><span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="n">Uniform</span><span class="p">(),</span> <span class="n">n</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">.&lt;</span> <span class="mf">0.2</span><span class="p">)</span>   <span class="c"># treatment indicator; only 23% get treated</span>
+<span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">B</span>
+<span class="w">    </span><span class="n">Z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w">         </span><span class="c"># generate Z</span>
+<span class="w">    </span><span class="n">Y0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="n">Z</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w">   </span><span class="c"># conditional average baseline response is -Z</span>
+<span class="w">    </span><span class="n">Y1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Z</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w">    </span><span class="c"># conditional average treatment effect is +Z</span>
+<span class="w">    </span><span class="n">D</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">Int</span><span class="o">.</span><span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="n">Uniform</span><span class="p">(),</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">.&lt;</span><span class="w"> </span><span class="mf">0.2</span><span class="p">)</span><span class="w">   </span><span class="c"># treatment indicator; only 23% get treated</span>
 
-    <span class="n">Y</span> <span class="o">=</span> <span class="p">(</span><span class="n">Y1</span><span class="o">.*</span><span class="n">D</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">Y0</span><span class="o">.*</span><span class="p">(</span><span class="n">ones</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="n">D</span><span class="p">))</span>    <span class="c"># observed Y</span>
+<span class="w">    </span><span class="n">Y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">Y1</span><span class="o">.*</span><span class="n">D</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">Y0</span><span class="o">.*</span><span class="p">(</span><span class="n">ones</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="n">D</span><span class="p">))</span><span class="w">    </span><span class="c"># observed Y</span>
 
-    <span class="n">D</span> <span class="o">=</span> <span class="n">D</span> <span class="o">-</span> <span class="n">fill</span><span class="p">(</span><span class="n">mean</span><span class="p">(</span><span class="n">D</span><span class="p">),</span><span class="n">n</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>            <span class="c"># demean D</span>
-    <span class="n">Z</span> <span class="o">=</span> <span class="n">Z</span> <span class="o">-</span> <span class="n">fill</span><span class="p">(</span><span class="n">mean</span><span class="p">(</span><span class="n">Z</span><span class="p">),</span><span class="n">n</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>            <span class="c"># demean Z</span>
+<span class="w">    </span><span class="n">D</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">D</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">fill</span><span class="p">(</span><span class="n">mean</span><span class="p">(</span><span class="n">D</span><span class="p">),</span><span class="n">n</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="w">            </span><span class="c"># demean D</span>
+<span class="w">    </span><span class="n">Z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Z</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">fill</span><span class="p">(</span><span class="n">mean</span><span class="p">(</span><span class="n">Z</span><span class="p">),</span><span class="n">n</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="w">            </span><span class="c"># demean Z</span>
 
-    <span class="n">Z_times_D</span> <span class="o">=</span> <span class="n">Z</span><span class="o">.*</span><span class="n">D</span>
-    <span class="n">X</span> <span class="o">=</span> <span class="n">hcat</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">Z_times_D</span><span class="p">)</span>
-    <span class="n">data_aux</span> <span class="o">=</span> <span class="p">[</span><span class="n">Y</span> <span class="n">D</span> <span class="n">Z</span> <span class="n">Z_times_D</span><span class="p">]</span>
-    <span class="n">data_aux</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">(</span><span class="n">data_aux</span><span class="p">,</span> <span class="p">[</span><span class="ss">:Y</span><span class="p">,</span> <span class="ss">:D</span><span class="p">,</span> <span class="ss">:Z</span><span class="p">,</span> <span class="ss">:Z_times_D</span><span class="p">])</span>
-    
-    <span class="n">CLs</span><span class="p">[</span><span class="n">i</span><span class="p">,]</span> <span class="o">=</span> <span class="n">predict</span><span class="p">(</span><span class="n">CL_model</span><span class="p">)[</span><span class="n">i</span><span class="p">]</span>
-    <span class="n">CRAs</span><span class="p">[</span><span class="n">i</span><span class="p">,]</span> <span class="o">=</span> <span class="n">predict</span><span class="p">(</span><span class="n">CRA_model</span><span class="p">)[</span><span class="n">i</span><span class="p">]</span>
-    <span class="n">IRAs</span><span class="p">[</span><span class="n">i</span><span class="p">,]</span> <span class="o">=</span> <span class="n">predict</span><span class="p">(</span><span class="n">IRA_model</span><span class="p">)[</span><span class="n">i</span><span class="p">]</span>
+<span class="w">    </span><span class="n">Z_times_D</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Z</span><span class="o">.*</span><span class="n">D</span>
+<span class="w">    </span><span class="n">X</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hcat</span><span class="p">(</span><span class="n">D</span><span class="p">,</span><span class="w"> </span><span class="n">Z</span><span class="p">,</span><span class="w"> </span><span class="n">Z_times_D</span><span class="p">)</span>
+<span class="w">    </span><span class="n">data_aux</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">Y</span><span class="w"> </span><span class="n">D</span><span class="w"> </span><span class="n">Z</span><span class="w"> </span><span class="n">Z_times_D</span><span class="p">]</span>
+<span class="w">    </span><span class="n">data_aux</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data_aux</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="ss">:Y</span><span class="p">,</span><span class="w"> </span><span class="ss">:D</span><span class="p">,</span><span class="w"> </span><span class="ss">:Z</span><span class="p">,</span><span class="w"> </span><span class="ss">:Z_times_D</span><span class="p">])</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="n">CLs</span><span class="p">[</span><span class="n">i</span><span class="p">,]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">predict</span><span class="p">(</span><span class="n">CL_model</span><span class="p">)[</span><span class="n">i</span><span class="p">]</span>
+<span class="w">    </span><span class="n">CRAs</span><span class="p">[</span><span class="n">i</span><span class="p">,]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">predict</span><span class="p">(</span><span class="n">CRA_model</span><span class="p">)[</span><span class="n">i</span><span class="p">]</span>
+<span class="w">    </span><span class="n">IRAs</span><span class="p">[</span><span class="n">i</span><span class="p">,]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">predict</span><span class="p">(</span><span class="n">IRA_model</span><span class="p">)[</span><span class="n">i</span><span class="p">]</span>
 
 <span class="k">end</span>
 
 
 <span class="c"># check  standard deviations</span>
-<span class="n">println</span><span class="p">(</span><span class="s">&quot;Standard deviations for estimators&quot;</span><span class="p">)</span>  
-<span class="n">println</span><span class="p">(</span><span class="s">&quot;CL model: &quot;</span> <span class="p">,</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">sum</span><span class="p">((</span><span class="n">Y</span> <span class="o">-</span> <span class="n">predict</span><span class="p">(</span><span class="n">CL_model</span><span class="p">))</span><span class="o">.*</span><span class="p">(</span><span class="n">Y</span> <span class="o">-</span> <span class="n">predict</span><span class="p">(</span><span class="n">CL_model</span><span class="p">)))</span><span class="o">./</span><span class="n">length</span><span class="p">(</span><span class="n">Y</span><span class="p">)))</span>
-<span class="n">println</span><span class="p">(</span><span class="s">&quot;CRA model: &quot;</span> <span class="p">,</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">sum</span><span class="p">((</span><span class="n">Y</span> <span class="o">-</span> <span class="n">predict</span><span class="p">(</span><span class="n">CL_model</span><span class="p">))</span><span class="o">.*</span><span class="p">(</span><span class="n">Y</span> <span class="o">-</span> <span class="n">predict</span><span class="p">(</span><span class="n">CRA_model</span><span class="p">)))</span><span class="o">./</span><span class="n">length</span><span class="p">(</span><span class="n">Y</span><span class="p">)))</span>
-<span class="n">println</span><span class="p">(</span><span class="s">&quot;IRA model: &quot;</span> <span class="p">,</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">sum</span><span class="p">((</span><span class="n">Y</span> <span class="o">-</span> <span class="n">predict</span><span class="p">(</span><span class="n">CL_model</span><span class="p">))</span><span class="o">.*</span><span class="p">(</span><span class="n">Y</span> <span class="o">-</span> <span class="n">predict</span><span class="p">(</span><span class="n">IRA_model</span><span class="p">)))</span><span class="o">./</span><span class="n">length</span><span class="p">(</span><span class="n">Y</span><span class="p">)))</span>
+<span class="n">println</span><span class="p">(</span><span class="s">&quot;Standard deviations for estimators&quot;</span><span class="p">)</span><span class="w">  </span>
+<span class="n">println</span><span class="p">(</span><span class="s">&quot;CL model: &quot;</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">sqrt</span><span class="p">(</span><span class="n">sum</span><span class="p">((</span><span class="n">Y</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">predict</span><span class="p">(</span><span class="n">CL_model</span><span class="p">))</span><span class="o">.*</span><span class="p">(</span><span class="n">Y</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">predict</span><span class="p">(</span><span class="n">CL_model</span><span class="p">)))</span><span class="o">./</span><span class="n">length</span><span class="p">(</span><span class="n">Y</span><span class="p">)))</span>
+<span class="n">println</span><span class="p">(</span><span class="s">&quot;CRA model: &quot;</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">sqrt</span><span class="p">(</span><span class="n">sum</span><span class="p">((</span><span class="n">Y</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">predict</span><span class="p">(</span><span class="n">CL_model</span><span class="p">))</span><span class="o">.*</span><span class="p">(</span><span class="n">Y</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">predict</span><span class="p">(</span><span class="n">CRA_model</span><span class="p">)))</span><span class="o">./</span><span class="n">length</span><span class="p">(</span><span class="n">Y</span><span class="p">)))</span>
+<span class="n">println</span><span class="p">(</span><span class="s">&quot;IRA model: &quot;</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">sqrt</span><span class="p">(</span><span class="n">sum</span><span class="p">((</span><span class="n">Y</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">predict</span><span class="p">(</span><span class="n">CL_model</span><span class="p">))</span><span class="o">.*</span><span class="p">(</span><span class="n">Y</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">predict</span><span class="p">(</span><span class="n">IRA_model</span><span class="p">)))</span><span class="o">./</span><span class="n">length</span><span class="p">(</span><span class="n">Y</span><span class="p">)))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Standard deviations for estimators
-CL model: 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.3691676947738234
-CRA model: 1.3682762995772266
-IRA model: 1.3553039955737827
+CL model: 1.4545726198637772
+CRA model: 1.3097621564719322
+IRA model: 1.0235301183486727
 </pre></div>
 </div>
 </div>
@@ -968,7 +837,7 @@ IRA model: 1.3553039955737827
             mode: "julia-1.7"
         },
         kernelOptions: {
-            kernelName: "julia-1.7",
+            name: "julia-1.7",
             path: "./julia_notebooks"
         },
         predefinedOutput: true
@@ -976,49 +845,101 @@ IRA model: 1.3553039955737827
     </script>
     <script>kernelName = 'julia-1.7'</script>
 
-              </div>
+                </article>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="04_Juli_Notebook_RCT-polio.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">4. </span>Some RCT Examples</p>
-        </div>
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="04_Juli_Notebook_RCT-polio.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">4. </span>Some RCT Examples</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="06_RCT_Precision_Adjustment.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="06_RCT_Precision_Adjustment.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title"><span class="section-number">6. </span>Analyzing RCT reemployment experiment</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
-</div>
-            </footer>
-        </div>
-    </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
-  
-    By Victor Chernozhukov<br/>
-  
-</p>
-        </footer>
-    </div>
-    
-</div>
-
-
       </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jonathan-roth-s-dgp">5.1. Jonathan Roth’s DGP</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analyze-the-rct-data-with-precision-adjustment">5.2. Analyze the RCT data with Precision Adjustment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-classical-standard-errors-non-robust-is-misleading-here">5.3. Using classical standard errors (non-robust) is misleading here.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#verify-asymptotic-approximations-hold-in-finite-sample-simulation-experiment">5.4. Verify Asymptotic Approximations Hold in Finite-Sample Simulation Experiment</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Victor Chernozhukov & Jannis Kueck. Translated into Julia by Alexander Quispe
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
     </div>
+  </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
 
-
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>
